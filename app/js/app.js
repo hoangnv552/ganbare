@@ -3,9 +3,8 @@
 /* App Module */
 /*jslint node: true*/
 
-var phonecatApp = angular.module('phonecatApp', [
+var phonecatApp = angular.module('ganbareApp', [
   'ngRoute',
-  'phonecatAnimations',
 
   'phonecatControllers',
   'phonecatFilters',
