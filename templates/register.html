@@ -1,0 +1,87 @@
+<div class="container">
+	<!--HEADER-->
+	<div class="upper-container">
+		<div class="header">
+			<img class="logo" src="resources/img/logo/coffee.jpg" alt="Ganbare logo" width="100" height="100"></img>
+			<div><h1>現在るの総ガンバレ数　　	　０００００００００００００００００００００</h1></div>
+		</div>
+	</div>
+	<!--NAV & SECTION-->
+	<div class="lower-container">
+		<!--NAV-->
+		<div class="nav register-nav">
+			<div>
+				<h3>Register</h3>
+				<h3 class="arrow">&#8595;</h3>
+				<h3>Confirm</h3>
+				<h3 class="arrow">&#8595;</h3>
+				<h3>Complete</h3>
+				<h3 class="arrow">&#8595;</h3>
+				<h3>Tutorial</h3>
+				<h3 class="arrow">&#8595;</h3>
+				<h3>GANBARE!</h3>
+			</div>
+			<div style="margin: 60px 0 30px 0;">
+				<h3>&#8594;サイト利用方法</h3>
+				<h3>&#8594;お知らせ</h3>
+				<h3>&#8594;プライバシーポリシー</h3>
+				<h3>&#8594;運営会社について</h3>
+				<h3>&#8594;お間い合わせ</h3>
+				<div class="footer">
+					Copyright&#169; GANBARE All Rights Reserved.
+				</div>
+			</div>
+		</div>	
+		
+		<!--SECTION-->
+		<div class="section register-section">
+			<form name="registerForm" novalidate>
+				<!--USERNAME INPUT-->
+				<div class="form-block">
+					<label for="username">Username</label>
+					<input type="text" name="username" ng-model="user.username" required>
+					<div class="error" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">
+						<p>User name is required!</p>
+					</div>
+				</div>
+				<!--PASSWORD INPUT-->
+				<div class="form-block">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
+					<div class="error" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">
+						<p>Password is required!</p>
+					</div>
+					<div class="error" ng-show="registerForm.password.$error.minlength">
+						<p>Password is required to be at least 6 characters!</p>
+					</div>
+					<div class="error" ng-show="registerForm.password.$error.maxlength">
+						<p>Password cannot be longer than 30 characters!</p>
+					</div>
+				</div>
+				<!--EMAIL INPUT-->
+				<div class="form-block">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" ng-model="user.email" required>
+					<div class="error" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">
+						<p>Email is required!</p>
+					</div>
+					<div class="error" ng-show="registerForm.email.$error.email">
+						<p>Invalid email!</p>
+					</div>
+				</div>
+				<!--CONFIRM EMAIL INPUT-->
+				<div class="form-block">
+					<label for="confirm-email">Confirm Email</label>
+					<input type="email" id="confirmEmail" name="confirmEmail" ng-model="user.confirmEmail" match="user.email" required>
+					<div class="error" ng-show="registerForm.$error.mismatch">
+						<p>Emails do not match!</p>
+					</div>
+				</div>
+				<!--CONFIRM BUTTON-->
+				<div class="form-block form-btn-block">
+					<button ng-disabled="registerForm.$invalid" ng-click="goTo('/register/confirm')">Confirm</button>
+				</div>	
+			</form>	
+		</div>
+	</div>
+</div>
