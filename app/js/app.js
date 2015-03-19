@@ -3,26 +3,23 @@
 /* App Module */
 /*jslint node: true*/
 
-var phonecatApp = angular.module('ganbareApp', [
+var ganbareApp = angular.module('ganbareApp', [
   'ngRoute',
-
-  'phonecatControllers',
-  'phonecatFilters',
-  'phonecatServices'
+  'ganbareControllers'
 ]);
 
-phonecatApp.config(['$routeProvider',
+ganbareApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
+      when('/feedfv', {
+        templateUrl: 'partials/feed-for-visitors.html',
+        controller : 'feedVisitorCtrl'
       }).
-      when('/phones/:abc', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
+      when('/login',{
+        templateUrl: 'partials/login.html',
+        controller : 'loginCtrl'
       }).
       otherwise({
-        redirectTo: '/phones'
+        redirectTo: '/feedfv'
       });
   }]);

@@ -3,25 +3,16 @@
 /* Controllers */
 /* jshint node: true */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var ganbareControllers = angular.module('ganbareControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
-  function($scope, Phone) {
-    $scope.phones = Phone.query();
-    $scope.orderProp = 'age';
+// Controller Feed for visitors
+ganbareControllers.controller('feedVisitorCtrl', ['$scope',
+  function($scope) {
+    $scope.title = 'Feed For Visitors';
   }]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
-  function($scope, $routeParams, Phone) {
-
-    $scope.phone = Phone.get({
-        xyz: $routeParams.abc
-    }, function(phone) {
-        $scope.mainImageUrl = phone.images[0];
-    });
-
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
-    };
-
+// Controller Login
+ganbareControllers.controller('loginCtrl', ['$scope',
+  function($scope) {
+    $scope.title = 'Login';
   }]);

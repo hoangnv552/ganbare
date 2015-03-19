@@ -1,0 +1,61 @@
+/*.ng-invalid.ng-dirty{
+	border-color: #FA787E;
+}
+
+.ng-valid.ng-dirty{
+	border-color: #78FA89;
+}
+			
+.error{
+	margin-left: 234px;
+	color: #e60026;
+}*/
+
+.container{
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	border: 1px solid #000;
+	min-width: 529px;
+}
+
+.header{
+	margin: 20px 20px 0 20px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #000;
+	overflow: auto;
+}
+
+.logo{
+	border-radius: 5px;
+	float: left;
+}
+
+h1{
+	text-align: center;
+}
+
+.nav{
+	float: left;
+	width: 20%;
+	padding-left: 30px;
+}
+.lower-container{
+	overflow: auto;
+}
+
+.section{
+	margin-left: 244px;
+	
+}
+
+.footer{
+	font-size: x-small;
+	font-style: italic;
+}
+
+button, 
+input[type="button"],
+input[type="submit"]{
+	cursor: pointer;
+}
