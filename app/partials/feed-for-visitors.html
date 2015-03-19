@@ -1,99 +1,33 @@
-<div class="container">
-	<!--HEADER HERE-->
-	<div class="upper-container">
-		<div class="header">
-			<ganbare-logo></ganbare-logo>
-			<ganbare-sum></ganbare-sum>
-		</div>
-	</div>
-	<!--BODY HERE-->
-	<div class="lower-container">
-		<!--LEFT SIDE NAV HERE-->
-		<div class="nav">
-			<!--AVA-->
-			<div class="nav-part">
-				<div class="avatar-container">Avatar</div>
-				<div class="username-container"><h3>Username</h3></div>
-			</div>
-			<!--BUTTON-->
-			<div class="nav-part">
-				<div><button class="createnew-btn">Create new</button></div>
-				<div>
-					<button class="connect-btn">fB</button>
-					<button class="connect-btn">t</button>
-					<button class="connect-btn">g</button>
-				</div>
-			</div>
-			<!--GANBARE NUMBER-->
-			<div class="nav-part">
-				<small>Số ganbare bạn đã</small>
-				<p>00000000000000000</p>
-				<small>Số ganbare người</small>
-				<p>00000000000000000</p>
-			</div>
-			<!--FAVOURITE-->
-			<div class="nav-part">
-				<table>
-					<tr>
-						<th>Favorite</th>
-						<th>Favorited</th>
-					</tr>
-					<tr>
-						<td>000000000</td>
-						<td>000000000</td>
-					</tr>
-				</table>
-			</div>
-			<div class="nav-part" style="">
-				<h3>&#8594;サイト利用方法</h3>
-				<h3>&#8594;お知らせ</h3>
-				<h3>&#8594;プライバシーポリシー</h3>
-				<h3>&#8594;運営会社について</h3>
-				<h3>&#8594;お間い合わせ</h3>
-				<div class="footer">
-					Copyright&#169; GANBARE All Rights Reserved.
-				</div>
-			</div>
-		</div>
-		<!--SECTION HERE-->
-		<div class="section">
-			<!--FILTER TAB-->
-			<div class="tab-container">
-				<div class="tab">Favorite</div>
-				<div class="tab">Pinning</div>
-				<div class="tab" style="margin-right: 70px;">Tag</div>
-				<div class="tab">Hot</div>
-				<div class="tab">New</div>
-				<div class="tab">Expiring</div>
-			</div>
-			<!--List GANBARU-->
-			<div class="contentlist-container">
-				<div class="content-container"><!--This would be the repeated thing-->
-					<!--LIKE BTN, FOLLOW BTN, SUM GanBare-->
-					<div class="upper-content">
-						<button><img src="img/user/star.png" alt="add favorite" width="50" heigh="50"></button>
-						<button><img src="img/user/follow.png" alt="follow" width="50" heigh="50"></button>
-						<h2>{{post.ganbare_number}}</h2>
-					</div>
-					<!--THUMBNAIL, POST CONTENT, GANBARE BUTTON-->
-					<div class="lower-content">
-						<div class="thumbnail-container">Put your fucking image here!</div>
-						<div class="para-container">
-							<div>
-								<p>{{post.content}}</p>
-							</div>
-							<div>
-								<label>{{post.user}}</label>
-								<label>{{post.createdOn | date}}</label>
-								<label>Period</label>
-							</div>
-						</div>
-						<div class="ganbarebtn-container">
-							<button>＋ガンバレ</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="content">
+    <div class="top">
+        <div class="logo">
+            <p>Logo</p>
+        </div>
+        <div class="menu-top">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">MyPage</a></li>
+                <li><a href="#">Setting</a></li>
+            </ul>
+        </div>
+        <div class="totalNumberTop">
+            <h2>Total Number: 2000</h2>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-left">
+            <div class="avatarUser">
+                <img src="" />
+                <p>Username</p>
+            </div>
+        </div>
+        <div class="createNew">
+        </div>
+        <div class="main-right">
+            <div class="ganbaru-content">
+                
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -5,7 +5,8 @@
 
 var ganbareApp = angular.module('ganbareApp', [
   'ngRoute',
-  'ganbareControllers'
+  'ganbareControllers',
+  'ganbareServices'
 ]);
 
 ganbareApp.config(['$routeProvider',

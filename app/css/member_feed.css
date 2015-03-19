@@ -1,151 +1,93 @@
-/*nav properties*/
-.nav-part{
-	display: block;
-	margin-top: 30px;
-	margin-bottom: 50px;
-	overflow: auto;
+.content {
+    margin: 0 auto;
+    margin-top: 0;
+    width: 1000px;
+    height: 100%;
+    background: #DCDFE4;
 }
-
-.nav-part p{
-	margin-top: 5px;
+.top {
+    width: 100%;
+    height: 100px;
+    background: #C7CDDB;
 }
-
-.avatar-container{
-	float: left; 
-	width: 80px; 
-	height: 100px; 
-	border: 1px solid #000;
-	text-align: center;
+.content .logo {
+    width: 100px;
+    height: 50px;
+    background: #000080;
+    margin-top: 20px;
+    margin-left: 20px;
 }
-
-.username-container{
-	float: left; 
-	margin: 20px 0 20px 20px;
+.content .logo p{
+    text-align: center;
+    color: #DCDFE4;
 }
-
-.createnew-btn{
-	width: 85%;
-	padding: 10px 0;
+.menu-top ul{
+    float: left;
+    margin-top: 40px;
 }
-
-.connect-btn{
-	width: 25%;
-	margin: 10px 6px 0 0;
+.menu-top ul li{
+    float: left;
+    margin-left: 20px;
+    list-style: none;
+    background: rgb(180, 206, 42);
+    width: 80px;
+    height: 26px;
+    border-radius: 5px;
+    text-align: center;
 }
-
-
-/*section properties*/
-.section{
-	border-left: 1px solid #000;
-	padding: 30px 0;
-	min-height: 873px;
+.menu-top ul li a{
+    text-decoration: none;
+    margin-top: 4px;
+    float: left;
+    margin-left: 19px;
 }
-.tab-container{
-	margin-left: 50px;
+.totalNumberTop{
+    margin-top: 18px;
+    float: left;
+    margin-left: 179px;
 }
-
-.tab{
-	display: inline-block;
-	font-size: large;
-	font-weight: bold;
-	text-align: center;
-	border-top: 1px solid #000;
-	border-left: 1px solid #000;
-	border-right: 1px solid #000;
-	width: 8%;
-	padding: 10px 20px 10px 20px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	cursor: pointer;
+.main{
+    float:left;
+    background: #F5EEEE;
+    width: 100%;
+    height: 100%;
 }
-
-.contentlist-container{
-	border: 1px solid #000;
-	width: 90%;
-	margin: 0 auto;
+.main-left{
+    float:left;
+    background: #FFFFFF;
+    width: 25%;
+    height: 500px;
 }
-
-.tab:hover{
-	background-color: #46b1f9;
-	border-color: #46b1f9;
-	color: #fff;
+.avatarUser{
+    float: left;
+    width: 65px;
+    height: 65px;
+    background: #C45454;
+    margin-left: 20px;
+    margin-top: 20px; 
 }
-
-.content-container{
-	width: 95%;
-	margin: 10px auto;
-	background-color: #c6e2ff;
-	padding: 10px;
-	overflow: auto;
+.avatarUser p{
+    float: left;
+    margin-left: 108px;
+    margin-top: 25px;
 }
-
-.upper-content{
-	margin-bottom: 10px;
+.createNew{
+    width: 50px;
 }
-
-.upper-content, .lower-content{
-	display: block;
-	overflow: auto;
+.main-right{
+    width: 74%;
+    float: left;
+    height: 100%;
+    background: #E2E2E8;
+    border: 2px solid #353539;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-top: 16px;
 }
-
-.upper-content button, 
-.upper-content h2,
-.thumbnail-container, 
-.para-container, 
-.ganbarebtn-container{
-	float: left;
+.main-right .ganbaru-content{
+    width: 700px;
+    height: 611px;
+    background: #353539;
+    margin-top: 50px;
+    margin-left: 20px;
 }
-
-.upper-content button{
-	margin-right: 10px;
-}
-
-.upper-content h2{
-	width: 70%;
-	margin: 0;
-	padding: 14px 20px;
-	background-color: #fff;
-	border: 1px solid #000;
-	text-align: right;
-	border-radius: 5px;
-}
-
-.thumbnail-container{
-	width: 74px; 
-	height: 100px; 
-	margin-top: 16px;
-	background-color: white; 
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.para-container{
-	margin-left: 16px;
-	width: 70%;
-}
-
-.para-container > div, .nav-part > div{
-	display: block;
-}
-
-.para-container p{
-	font-weight: bold;
-}
-
-.para-container label{
-	display: inline-block; 
-	width: 30%; 
-	margin-right: 10px;
-}
-
-.ganbarebtn-container{
-	float: left; 
-	margin: 16px 0 0 16px;
-}
-
-.ganbarebtn-container button{
-	width: 100px; 
-	height: 100px; 
-	font-size: 16px;
-}
-

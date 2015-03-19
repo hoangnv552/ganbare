@@ -6,9 +6,12 @@
 var ganbareControllers = angular.module('ganbareControllers', []);
 
 // Controller Feed for visitors
-ganbareControllers.controller('feedVisitorCtrl', ['$scope',
-  function($scope) {
+ganbareControllers.controller('feedVisitorCtrl', ['$scope', 'listGanbaru',
+  function($scope, listGanbaru) {
+
+    $scope.ganbaru = listGanbaru.query();
     $scope.title = 'Feed For Visitors';
+
   }]);
 
 // Controller Login
