@@ -7,6 +7,9 @@ var path = 'http://133.242.53.250:8888/';
 
 var ganbareServices = angular.module('ganbareServices', ['ngResource']);
 
+/*
+* Service List Ganbaru
+*/
 ganbareServices.factory('listGanbaru', ['$resource',
   function($resource) {
     return $resource(
@@ -22,3 +25,15 @@ ganbareServices.factory('listGanbaru', ['$resource',
         isArray: true
       });
   }]);
+/*
+* Service Login
+*/
+ganbareServices.factory('loginGanbare', ['$resource',
+  function($resource) {
+  return $resource(
+    path + 'v1/sessions',
+    {},
+    {
+    login: {method: 'POST'}
+  });
+}]);

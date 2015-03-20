@@ -21,6 +21,6 @@ ganbareApp.config(['$routeProvider',
         controller : 'loginCtrl'
       }).
       otherwise({
-        redirectTo: '/feedfv'
+        redirectTo: '/login'
       });
   }]);

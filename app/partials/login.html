@@ -1,3 +1,35 @@
-<div>
-	<h1>{{title}}</h1>
+<div class="container">
+	<!--HEADER-->
+	<div class="upper-container">
+			<div class="header">
+				<img class="logo" src="img/logo/coffee.jpg" alt="Ganbare logo" width="100" height="100"></img>
+				<div><h1>Sum of Ganbare until now 0000000000000000</h1></div>
+			</div>
+	</div>
+
+	<div class="lower-container">
+		<!--NAV-->
+		<div class="nav">
+
+		</div>
+		<!--SECTION-->
+		<div class="section">
+			<form name="loginForm" ng-submit="login()" novalidate>
+				<div class="form-block">
+					<label for="email">Email</label>
+					<input type="email" ng-model="email">
+				</div>
+				<div class="form-block">
+					<label for="password">Password</label>
+					<input type="password" ng-model="password">
+				</div>
+				<div class="form-block button-block">
+					<input type="submit" value="Login">
+				</div>
+				<div class="form-block error-block">
+					{{message}}
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

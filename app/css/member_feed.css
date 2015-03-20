@@ -91,3 +91,10 @@
     margin-top: 50px;
     margin-left: 20px;
 }
+.main-search{
+    float: left;
+    width: 700px;
+    height: 68px;
+    background: #004080;
+    margin-left: 20px;
+}

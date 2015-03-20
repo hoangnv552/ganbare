@@ -1,0 +1,28 @@
+.form-container {
+	margin-top: 50px;
+}
+
+.form-block {
+	display: block;
+	margin: 50px 0;
+}
+
+.form-block > label {
+	float: left;
+	text-align: right;
+	width: 15%;
+	margin: 0 30px 0 60px;
+}
+
+.form-block > input[type="email"],
+.form-block > input[type="password"] {
+	width: 50%;
+}
+
+.button-block, .error-block {
+	text-align: center;
+}
+
+.error-block {
+	color: red;
+}
