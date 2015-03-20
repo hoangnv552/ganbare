@@ -17,7 +17,6 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', 'listGanbaru',
 // Controller Login
 ganbareControllers.controller('loginCtrl', ['$scope', '$location', 'md5','loginGanbare',
   function($scope, $location, md5, loginGanbare) {
-    $scope.title = 'Login';
     $scope.message = '';
 
     $scope.login = function(){

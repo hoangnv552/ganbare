@@ -87,7 +87,6 @@
 .main-right .ganbaru-content{
     width: 700px;
     height: 611px;
-    background: #353539;
     margin-top: 50px;
     margin-left: 20px;
 }
@@ -97,4 +96,79 @@
     height: 68px;
     background: #004080;
     margin-left: 20px;
+}
+.main-right .ganbaru-content ul li{
+    width: 700px;
+    margin-left: -40px;
+    height: 150px;
+    background: #D8E6F3;
+    float: left;
+    list-style: none;
+    margin-top: 10px;
+}
+.img img{
+    width: 75px;
+    height: 39px;
+    margin-left: 25px;
+    margin-top: 10px;
+    background: #004080;
+    float:left;
+}
+.img img{
+    width: 75px;
+    height: 39px;
+    margin-left: 25px;
+    margin-top: 10px;
+    background: #004080;
+    float:left;
+}
+.img p{
+    margin-top: 10px;
+    margin-left: 36px;
+    width: 423px;
+    height: 34px;
+    background: #fff;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    font-size: 32px;
+    border: 2px solid #000;
+}
+.thumbnail-img .thumbnail{
+    float: left;
+    background: #C45454;
+    width: 50px;
+    height: 50px;
+    margin-left: 38px;
+}
+.thumbnail-img .content{
+    float: left;
+    width: 400px;
+    height: 80px;
+    margin-top: -17px;
+    margin-left: 12px;
+}
+.thumbnail-img .detail{
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-top: -17px;
+    margin-left: 12px;
+}
+.content .content-top{
+    float: left;
+    height: 45px;
+    width: 400px;
+    background: #fff;
+}
+.thumbnail-img .ganbaru-dd{
+    float: left;
+    width: 88px;
+    height: 80px;
+    margin-top: -17px;
+    margin-left: 12px;
+}
+.content .content-bottom p{
+    display: inline-block;
+    margin-left: 23px;
 }

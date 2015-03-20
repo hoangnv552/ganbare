@@ -13,13 +13,13 @@ var ganbareServices = angular.module('ganbareServices', ['ngResource']);
 ganbareServices.factory('listGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/ganbaru?filterType=2&sortType=3&skip=0&take=10',
+      path + 'v1/ganbaru?filterType=2&sortType=2&skip=0&take=10',
       {},
       {
         query: {
           method: 'GET',
           headers: {
-            'Authorization': '429af4c5-fc7d-4ab5-816a-896dcffd1b27'
+            'Authorization': '891e25c2-fdc2-4232-b8c2-8aeec0f296ca'
           }
         },
         isArray: true
