@@ -64,7 +64,7 @@
     height: 65px;
     background: #C45454;
     margin-left: 20px;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 .avatarUser p{
     float: left;
@@ -159,7 +159,7 @@
     float: left;
     height: 45px;
     width: 400px;
-    background: #fff;
+    margin-left: 23px;
 }
 .thumbnail-img .ganbaru-dd{
     float: left;
@@ -171,4 +171,7 @@
 .content .content-bottom p{
     display: inline-block;
     margin-left: 23px;
+}
+.ganbaru-dd input{
+    height: 80px;
 }

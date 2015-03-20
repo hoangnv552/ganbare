@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jslint>
+	<file name="..\..\app\js\controllers.js">
+		<issue line="29" char="9" reason="Missing semicolon." evidence="      })" severity="W" />
+		<issue line="30" char="6" reason="Missing semicolon." evidence="    }" severity="W" />
+		<issue line="67" char="6" reason="Missing semicolon." evidence="    }" severity="W" />
+	</file>
 </jslint>
 

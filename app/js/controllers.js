@@ -3,22 +3,36 @@
 /* Controllers */
 /* jshint node: true */
 
-var ganbareControllers = angular.module('ganbareControllers', ['angular-md5']).run(['$rootScope', function($rootScope) {
-  $rootScope.token = null;
-}]);
+var ganbareControllers = angular.module('ganbareControllers', ['angular-md5', 'ngCookies']);
 
 // Controller Feed for visitors
-ganbareControllers.controller('feedVisitorCtrl', ['$rootScope', '$scope', 'listGanbaru',
-  function($rootScope, $scope, listGanbaru) {
+ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare',
+  function($scope, $cookieStore, listGanbaru, addGanbare) {
     $scope.ganbaru = listGanbaru.query();
-    $scope.title = 'Feed For Visitors';
 
+    $scope.addGanbare = function(item) {
+      var userId  = $cookieStore.get('userId');
+
+      addGanbare.add({userId: userId, ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: 2}, function(response){
+        var code = response.code;
+
+        if(code === 0){
+          $scope.ganbaru.extendedInfor.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
+
+          var log = [];
+          angular.forEach($scope.ganbaru.data, function(value, key) {
+            //this.push(key + ': ' + value);
+            console.log(value);
+          }, log);
+        }
+
+      })
+    }
   }]);
 
 // Controller Login
-ganbareControllers.controller('loginCtrl', ['$rootScope', '$scope', '$location', 'md5','loginGanbare',
-  function($rootScope, $scope, $location, md5, loginGanbare) {
-    $scope.title = 'Login';
+ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5','loginGanbare',
+  function($scope, $cookieStore, $location, md5, loginGanbare) {
     $scope.message = '';
 
     $scope.login = function(){
@@ -30,7 +44,8 @@ ganbareControllers.controller('loginCtrl', ['$rootScope', '$scope', '$location',
 
         code = response.code;
         if(code === 0) {
-          $rootScope.token = response.data.token;
+          $cookieStore.put('token', response.data.token);
+          $cookieStore.put('userId', response.data.userId);
           $location.path('/feedfv');
         }
         else {

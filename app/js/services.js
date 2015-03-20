@@ -18,13 +18,14 @@ ganbareServices.factory('listGanbaru', ['$resource',
       {
         query: {
           method: 'GET',
-          headers: {
-            'Authorization': '891e25c2-fdc2-4232-b8c2-8aeec0f296ca'
-          }
+          // headers: {
+          //   'Authorization': '891e25c2-fdc2-4232-b8c2-8aeec0f296ca'
+          // }
         },
         isArray: true
       });
   }]);
+
 /*
 * Service Login
 */
@@ -35,5 +36,18 @@ ganbareServices.factory('loginGanbare', ['$resource',
     {},
     {
     login: {method: 'POST'}
+  });
+}]);
+
+/*
+* Service Add Ganbare
+*/
+ganbareServices.factory('addGanbare', ['$resource',
+  function($resource) {
+  return $resource(
+    path + 'v1/users/:userId/ganbare',
+    {userId: '@userId'},
+    {
+    add: {method: 'PUT'}
   });
 }]);
