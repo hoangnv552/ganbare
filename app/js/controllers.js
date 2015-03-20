@@ -3,20 +3,22 @@
 /* Controllers */
 /* jshint node: true */
 
-var ganbareControllers = angular.module('ganbareControllers', ['angular-md5']);
+var ganbareControllers = angular.module('ganbareControllers', ['angular-md5']).run(['$rootScope', function($rootScope) {
+  $rootScope.token = null;
+}]);
 
 // Controller Feed for visitors
-ganbareControllers.controller('feedVisitorCtrl', ['$scope', 'listGanbaru',
-  function($scope, listGanbaru) {
-
+ganbareControllers.controller('feedVisitorCtrl', ['$rootScope', '$scope', 'listGanbaru',
+  function($rootScope, $scope, listGanbaru) {
     $scope.ganbaru = listGanbaru.query();
     $scope.title = 'Feed For Visitors';
 
   }]);
 
 // Controller Login
-ganbareControllers.controller('loginCtrl', ['$scope', '$location', 'md5','loginGanbare',
-  function($scope, $location, md5, loginGanbare) {
+ganbareControllers.controller('loginCtrl', ['$rootScope', '$scope', '$location', 'md5','loginGanbare',
+  function($rootScope, $scope, $location, md5, loginGanbare) {
+    $scope.title = 'Login';
     $scope.message = '';
 
     $scope.login = function(){
@@ -24,10 +26,11 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$location', 'md5','loginG
       var password = $scope.password;
       var encryptedPassword = md5.createHash(password);
       var code;
-      loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(res){
+      loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
 
-        code = res.code;
+        code = response.code;
         if(code === 0) {
+          $rootScope.token = response.data.token;
           $location.path('/feedfv');
         }
         else {

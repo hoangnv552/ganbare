@@ -1,10 +1,15 @@
+.nav {
+	min-height: 490px;
+	border-right: 1px solid #000;
+}
+
 .form-container {
 	margin-top: 50px;
 }
 
 .form-block {
 	display: block;
-	margin: 50px 0;
+	margin: 60px 0;
 }
 
 .form-block > label {
@@ -24,5 +29,5 @@
 }
 
 .error-block {
-	color: red;
+	color: #ff0000;
 }
