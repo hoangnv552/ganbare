@@ -1,6 +1,6 @@
 /*container style*/
 .container{
-	width: 80%;
+	width: 75%;
 	height: auto;
 	margin: 0 auto;
 	border: 1px solid #000;
@@ -11,7 +11,6 @@
 .header{
 	margin: 0 20px 0 20px;
 	padding: 20px 0 20px 0;
-	/*padding-bottom: 20px;*/
 	border-bottom: 1px solid #000;
 	overflow: auto;
 }
@@ -40,7 +39,7 @@
 }
 
 .section{
-	margin-left: 244px;
+	margin-left: 231px;
 
 }
 
