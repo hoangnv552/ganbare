@@ -69,7 +69,9 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
     }
   }]);
 
-// Controller Login
+/*
+* Controller Login
+*/ 
 ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5','loginGanbare',
   function($scope, $cookieStore, $location, md5, loginGanbare) {
     $scope.message = '';
