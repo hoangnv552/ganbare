@@ -6,27 +6,66 @@
 var ganbareControllers = angular.module('ganbareControllers', ['angular-md5', 'ngCookies']);
 
 // Controller Feed for visitors
-ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare',
-  function($scope, $cookieStore, listGanbaru, addGanbare) {
+ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval',
+  function($scope, $cookieStore, listGanbaru, addGanbare, $interval) {
     $scope.ganbaru = listGanbaru.query();
 
+    var ganbaruIdAndNumber = [];
+    $scope.totalNumber = 0;
+
+    /*
+    * Function add ganbare
+    */
     $scope.addGanbare = function(item) {
-      var userId  = $cookieStore.get('userId');
+      var count = 1;
+      var length = ganbaruIdAndNumber.length;
+      $scope.totalNumber++;
+      
+      if(length > 0){
+        var i;
+        var currentGanbaruId = item.ganbaru.ganbaruId;
 
-      addGanbare.add({userId: userId, ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: 2}, function(response){
-        var code = response.code;
-
-        if(code === 0){
-          $scope.ganbaru.extendedInfor.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
-
-          var log = [];
-          angular.forEach($scope.ganbaru.data, function(value, key) {
-            //this.push(key + ': ' + value);
-            console.log(value);
-          }, log);
+        for(i = 0; i < length; i++){
+          if(currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId){
+            ganbaruIdAndNumber[i].ganbareNumber++;
+          } else {
+            ganbaruIdAndNumber.push({ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count});
+          }
         }
+      } else {
+        ganbaruIdAndNumber.push({ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count});
+      }
+    }
 
-      })
+    // Set interval callIntervalAddGanbare function
+    $interval(callIntervalAddGanbare, 4000);
+
+    var userId  = $cookieStore.get('userId');
+
+    function callIntervalAddGanbare(){
+      var length = ganbaruIdAndNumber.length;
+
+      if(length > 0){
+        var i;
+
+        for(i = 0; i < length; i++){
+          var ganbaruId = ganbaruIdAndNumber[i].ganbaruId;
+          var ganbareNumber = ganbaruIdAndNumber[i].ganbareNumber;
+
+          addGanbare.add({userId: userId, ganbaruId: ganbaruId, ganbareNumber: ganbareNumber}, function(response){
+      
+            var code = response.code;
+
+            if(code === 0){
+              // $scope.ganbaru.extendedInfor.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
+              // $scope.ganbareNumberUpdate = response.data.ganbareNumber;
+              // $scope.ganbaruId = response.data.ganbaruId;
+              console.log(response.data);
+            }
+          });
+        }
+        ganbaruIdAndNumber = [];
+      }
     }
   }]);
 

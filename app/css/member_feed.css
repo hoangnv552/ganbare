@@ -54,7 +54,7 @@
 }
 .main-left{
     float:left;
-    background: #FFFFFF;
+    
     width: 25%;
     height: 500px;
 }
@@ -173,5 +173,6 @@
     margin-left: 23px;
 }
 .ganbaru-dd input{
+    border: none;
     height: 80px;
 }
