@@ -3,12 +3,53 @@
 /* Controllers */
 /* jshint node: true */
 
-var ganbareControllers = angular.module('ganbareControllers', ['angular-md5', 'ngCookies']);
+var ganbareControllers = angular.module('ganbareControllers', ['angular-md5', 'ngCookies', 'angularUtils.directives.dirPagination']);
 
 // Controller Feed for visitors
 ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval',
   function($scope, $cookieStore, listGanbaru, addGanbare, $interval) {
-    $scope.ganbaru = listGanbaru.query();
+    $scope.totalGanbaru = 100;
+    $scope.ganbaruPerPage = 5;
+    $scope.currentPage = 1;
+
+    // Defaul load page
+    paginViewGanbaru(0);
+
+    // Array pagination
+    var arrPagination = [{key: 1, value: 0}];
+    var i;
+    var valueSkip = 0;
+    var skip = $scope.totalGanbaru / $scope.ganbaruPerPage;
+
+    for(i = 2; i < skip; i++){
+      var valueSkip = valueSkip + $scope.ganbaruPerPage;
+      arrPagination.push({key: i, value: valueSkip});
+    }
+
+    // If pagination
+    $scope.pageChangeHandler = function(newPage) {
+      var skipNumber;
+      var i;
+      var length = arrPagination.length;
+
+      for(i = 0; i < length; i++){
+        if(newPage === arrPagination[i].key){
+          skipNumber = arrPagination[i].value;
+        }
+      }
+      paginViewGanbaru(skipNumber);
+    };
+
+    function paginViewGanbaru(skipNumber){
+
+      var ganbaruPromise = listGanbaru.query({filterType: 2, sortType: 2, skip: skipNumber, take: $scope.ganbaruPerPage});
+
+      ganbaruPromise.$promise.then(function(data){
+        $scope.ganbaru = data;
+      }, function(error){
+        $scope.getGanbaruError = 'Get Data Error.';
+      });
+    }
 
     var ganbaruIdAndNumber = [];
     $scope.totalNumber = 0;
@@ -53,15 +94,11 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
           var ganbareNumber = ganbaruIdAndNumber[i].ganbareNumber;
 
           addGanbare.add({userId: userId, ganbaruId: ganbaruId, ganbareNumber: ganbareNumber}, function(response){
-      
-            var code = response.code;
-
-            if(code === 0){
-              // $scope.ganbaru.extendedInfor.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
-              // $scope.ganbareNumberUpdate = response.data.ganbareNumber;
-              // $scope.ganbaruId = response.data.ganbaruId;
-              console.log(response.data);
-            }
+            response.$promise.then(function(data){
+              console.log(data.data);
+            }, function(error){
+              // Do something
+            });
           });
         }
         ganbaruIdAndNumber = [];

@@ -126,7 +126,7 @@
     margin-top: 10px;
     margin-left: 36px;
     width: 423px;
-    height: 34px;
+    height: 43px;
     background: #fff;
     float: left;
     text-align: right;
@@ -145,14 +145,12 @@
     float: left;
     width: 400px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .thumbnail-img .detail{
     float: left;
     width: 80px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .content .content-top{
@@ -165,7 +163,6 @@
     float: left;
     width: 88px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .content .content-bottom p{

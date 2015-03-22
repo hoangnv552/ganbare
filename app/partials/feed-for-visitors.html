@@ -28,8 +28,9 @@
 
             </div>
             <div class="ganbaru-content">
+                <h1>{{getGanbaruError}}</h1>
                 <ul>
-                    <li ng-repeat="item in ganbaru.data">
+                    <li dir-paginate="item in ganbaru.data | itemsPerPage:ganbaruPerPage" current-page="currentPage" total-items="totalGanbaru">
                         <div class="img">
                             <img src="" />
                             <img src="" />
@@ -61,6 +62,7 @@
                     </li>
                 </ul>
             </div>
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
     </div>
 </div>

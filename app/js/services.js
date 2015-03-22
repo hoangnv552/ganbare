@@ -13,8 +13,8 @@ var ganbareServices = angular.module('ganbareServices', ['ngResource']);
 ganbareServices.factory('listGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/ganbaru?filterType=2&sortType=2&skip=0&take=10',
-      {},
+      path + 'v1/ganbaru?filterType=:filterType&sortType=:sortType&skip=:skip&take=:take',
+      {filterType: '@filterType', sortType: '@sortType', skip: '@skip', take: '@take'},
       {
         query: {
           method: 'GET',
