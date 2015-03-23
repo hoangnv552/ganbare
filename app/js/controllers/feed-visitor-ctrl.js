@@ -8,48 +8,58 @@
 */
 ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval', '$location',
   function($scope, $cookieStore, listGanbaru, addGanbare, $interval, $location) {
-    $scope.totalGanbaru = 100;
-    $scope.ganbaruPerPage = 5;
-    $scope.currentPage = 1;
+    // $scope.totalGanbaru = 100;
+    // $scope.ganbaruPerPage = 5;
+    // $scope.currentPage = 1;
+    $scope.takeNumber = 5;
+    $scope.more = 'More...';
+    $scope.getFullData = '';
 
-    function paginViewGanbaru(skipNumber){
+    function paginViewGanbaru(takeNumber){
 
-      var ganbaruPromise = listGanbaru.query({filterType: 2, sortType: 2, skip: skipNumber, take: $scope.ganbaruPerPage});
+      var ganbaruPromise = listGanbaru.query({filterType: 2, sortType: 2, skip: 0, take: $scope.takeNumber});
 
       ganbaruPromise.$promise.then(function(data){
         $scope.ganbaru = data;
+        $scope.lengthData = data.data.length;
       }, function(error){
-        $scope.getGanbaruError = 'Get Data Error.';
+        $scope.getGanbaruError = 'Get Data Error';
       });
     }
 
     // Defaul load page
-    paginViewGanbaru(0);
+    paginViewGanbaru($scope.takeNumber);
 
-    // Array pagination
-    var arrPagination = [{key: 1, value: 0}];
-    var i;
-    var valueSkip = 0;
-    var skip = $scope.totalGanbaru / $scope.ganbaruPerPage;
-
-    for(i = 2; i < skip; i++){
-      valueSkip = valueSkip + $scope.ganbaruPerPage;
-      arrPagination.push({key: i, value: valueSkip});
+    // If list more ganbaru
+    $scope.listMoreGanbaru = function() {
+      $scope.takeNumber = $scope.takeNumber + 5;
+      paginViewGanbaru($scope.takeNumber);
     }
 
-    // If pagination
-    $scope.pageChangeHandler = function(newPage) {
-      var skipNumber;
-      var i;
-      var length = arrPagination.length;
+    // Array pagination
+    // var arrPagination = [{key: 1, value: 0}];
+    // var i;
+    // var valueSkip = 0;
+    // var skip = $scope.totalGanbaru / $scope.ganbaruPerPage;
 
-      for(i = 0; i < length; i++){
-        if(newPage === arrPagination[i].key){
-          skipNumber = arrPagination[i].value;
-        }
-      }
-      paginViewGanbaru(skipNumber);
-    };
+    // for(i = 2; i < skip; i++){
+    //   valueSkip = valueSkip + $scope.ganbaruPerPage;
+    //   arrPagination.push({key: i, value: valueSkip});
+    // }
+
+    // If pagination
+    // $scope.pageChangeHandler = function(newPage) {
+    //   var skipNumber;
+    //   var i;
+    //   var length = arrPagination.length;
+
+    //   for(i = 0; i < length; i++){
+    //     if(newPage === arrPagination[i].key){
+    //       skipNumber = arrPagination[i].value;
+    //     }
+    //   }
+    //   paginViewGanbaru(skipNumber);
+    // };
 
     var ganbaruIdAndNumber = [];
     $scope.totalNumber = 0;
@@ -69,8 +79,6 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
         for(i = 0; i < length; i++){
           if(currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId){
             ganbaruIdAndNumber[i].ganbareNumber++;
-          } else {
-            ganbaruIdAndNumber.push({ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count});
           }
         }
       } else {
