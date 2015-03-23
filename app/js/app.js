@@ -22,7 +22,7 @@ ganbareApp.config(['$routeProvider',
       }).
       when('/ganbaredt', {
         templateUrl: 'partials/view-ganbare-detail.html',
-        controller : 'viewGanbareCtrl'
+        controller : 'viewGanbareDetailCtrl'
       }).
       otherwise({
         redirectTo: '/login'

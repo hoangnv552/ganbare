@@ -9,12 +9,12 @@
 
 .ganbare-block {
 	display: block;
-	background-color: #dedede;
+	/*background-color: #dedede;*/
 	margin-bottom: 15px;
 }
 
 /*block of name, expired data, created date*/
-.first-block {
+.ganbare-block:nth-child(1) {
 	height: 150px;
 }
 
@@ -27,26 +27,30 @@
 	text-align: center;
 }
 
-.ganbare-information {
+.ganbare-information > div {
+	display: block;
+	margin-bottom: 20px;
 	margin-left: 150px;
 }
 
-.ganbare-information > div {
-	display: block;
-}
-
-.ganbare-information h3 {
+.ganbare-information h4 {
 	display: inline-block;
-  	margin-right: 50px;
+  	margin: 20px 100px 0 0;
+  	font-size: 20px;
 }
 
 /*block of ganbaru number, like button, pin button*/
-.second-block {
+.ganbare-block:nth-child(2) {
 	height: 80px;
 }
 
-.second-block > div {
+.ganbare-block:nth-child(2) > div {
 	display: inline-block;
+}
+
+.ganbare-block:nth-child(2) button {
+	float: right;
+	margin-left: 10px;
 }
 
 .ganbare-number {
@@ -54,19 +58,16 @@
 	border: 2px solid #000;
 	height: 80px;
 }
+
 .ganbare-number h3 {
 	font-size: 35px;
   	text-align: right;
   	margin: 20px 21px 0 0 ;
 }
 
-.second-block > button {
-	float: right;
-	margin-left: 10px;
-}
-
 /*block of ganbare content*/
-.third-block {
+.ganbare-block:nth-child(3) {
+	background-color: #dedede;
 	height: 250px;
 	padding: 20px;
 	font-size: 20px;
@@ -74,21 +75,23 @@
 }
 
 /*block of ganbare image*/
-.fourth-block {
+.ganbare-block:nth-child(4) {
+	background-color: #dedede;
 	height: 150px;
 }
 
 /*block of + ganbare button*/
-.fifth-block {
+.ganbare-block:nth-child(5) {
 	text-align: center;
 }
 
-.fifth-block > button {
+.ganbare-block:nth-child(5) button {
 	height: 50px;
 	width: 50%;
 }
 
 /*block of list*/
-.sixth-block {
+.ganbare-block:nth-child(6) {
+	background-color: #dedede;
 	height: 200px;
 }
