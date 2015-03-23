@@ -15,7 +15,25 @@
 			$scope.ganbaruContent = response.data.ganbaru.ganbaruContent;
 			$scope.username = response.data.user.username;
 
+			$scope.pinIcon = {};
+			$scope.pinIcon.state = response.data.ganbaru.isPinning;	
+
+			$scope.favorIcon = {};
+			$scope.favorIcon.state = response.data.user.isFavoristUser;
+
 			var clickNumber = 0;	//the number of user's ganbare clicks
+
+			//click to pin/unpin
+			$scope.togglePinning = function() {
+				$scope.pinIcon.state = !$scope.pinIcon.state;
+			};
+
+			//click to add favor/unfavor
+			$scope.toggleFavorite = function() {
+				$scope.favorIcon.state = !$scope.favorIcon.state;
+			}
+
+			//click to add ganbare
 			$scope.addGanbare = function() {
 				$scope.ganbareNumber++;
 				clickNumber++;
