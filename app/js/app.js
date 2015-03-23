@@ -1,3 +1,4 @@
+;(function() {
 'use strict';
 
 /* App Module **/
@@ -28,3 +29,4 @@ ganbareApp.config(['$routeProvider',
         redirectTo: '/login'
       });
   }]);
+}());
