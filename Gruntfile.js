@@ -37,8 +37,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			tmp: [
-				'build/.tmp/**',
-				'client/assets/stylus/_define.styl'
+				'build/.tmp/**'
 			],
 			build: [
 				'build/public'
@@ -116,7 +115,7 @@ module.exports = function(grunt) {
 		},
 		copy: {
 			index: {
-				src: 'app/index.html',
+				src: 'app/index-tmp.html',
 				dest: 'build/public/index.html',
 				options: {
 					processContent: rename
@@ -127,15 +126,6 @@ module.exports = function(grunt) {
 				dest: 'build/public/partials/',
 				cwd: 'app/partials/',
 				src: '**/*.html'
-			},
-			json: {
-				expand: true,
-				dest: 'build/public/phones/',
-				cwd: 'app/phones/',
-				src: '**/*.json',
-				options: {
-					processContent: rename
-				}
 			}
 		}
 	});
@@ -143,6 +133,8 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	grunt.registerTask('verify', [ 'jshint' ]);
-	grunt.registerTask('build', [ 'clean:build', 'filerev:img', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
+	// grunt.registerTask('build', [ 'clean:build', 'filerev:img', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
+	grunt.registerTask('build', [ 'clean:build', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('default', [ 'verify', 'build', 'copy' ]);
+	grunt.registerTask('test', [ 'clean:tmp' ]);
 };
