@@ -6,8 +6,8 @@
 /*
 * Controller Feed for visitors
 */
-ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval',
-  function($scope, $cookieStore, listGanbaru, addGanbare, $interval) {
+ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval', '$location',
+  function($scope, $cookieStore, listGanbaru, addGanbare, $interval, $location) {
     $scope.totalGanbaru = 100;
     $scope.ganbaruPerPage = 5;
     $scope.currentPage = 1;
@@ -103,5 +103,11 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
         }
         ganbaruIdAndNumber = [];
       }
+    }
+
+    // Create ganbaruId is cookies
+    $scope.detailGanbare = function(ganbaruId){
+      $cookieStore.put('ganbaruId', ganbaruId);
+      $location.path('/ganbaredt');
     }
   }]);
