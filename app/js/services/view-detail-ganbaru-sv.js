@@ -1,5 +1,5 @@
 (function() {
-	ganbareServices.factory('ganbareDetail', ['$resource', '$cookieStore',function($resource, $cookieStore) {
+	ganbareServices.factory('ganbareDetail', ['$resource', '$cookieStore', function($resource, $cookieStore) {
 		return $resource(
 			path + 'v1/ganbaru/:ganbaruId',
 			{ganbaruId: '@ganbaruId'},
