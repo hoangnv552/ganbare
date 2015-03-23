@@ -20,6 +20,10 @@ ganbareApp.config(['$routeProvider',
         templateUrl: 'partials/login.html',
         controller : 'loginCtrl'
       }).
+      when('/ganbaredt', {
+        templateUrl: 'partials/view-ganbare-detail.html',
+        controller : 'viewGanbareCtrl'
+      }).
       otherwise({
         redirectTo: '/login'
       });

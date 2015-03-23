@@ -1,0 +1,94 @@
+/*container style*/
+.ganbare-container {
+	width: 650px;
+	margin: 0 auto;
+	min-height: 650px;
+	border: 2px solid #000;
+	padding: 15px 15px 0 15px;
+}
+
+.ganbare-block {
+	display: block;
+	background-color: #ffffcc;
+	margin-bottom: 15px;
+}
+
+/*block of name, expired data, created date*/
+.first-block {
+	height: 150px;
+}
+
+.ganbare-user-logo {
+	width: 120px;
+	height: 150px;
+	background-color: #ff4252;
+	color: #fff;
+	float: left;
+	text-align: center;
+}
+
+.ganbare-information {
+	margin-left: 150px;
+}
+
+.ganbare-information > div {
+	display: block;
+}
+
+.ganbare-information h3 {
+	display: inline-block;
+  	margin-right: 70px;
+}
+
+/*block of ganbaru number, like button, pin button*/
+.second-block {
+	height: 80px;
+}
+
+.second-block > div {
+	display: inline-block;
+}
+
+.ganbare-number {
+	width: 400px;
+	border: 2px solid #000;
+	height: 76px;
+}
+.ganbare-number h3 {
+	font-size: 35px;
+  	text-align: right;
+  	margin: 20px 21px 0 0 ;
+}
+
+.second-block > button {
+	float: right;
+	margin-left: 10px;
+}
+
+/*block of ganbare content*/
+.third-block {
+	height: 250px;
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+}
+
+/*block of ganbare image*/
+.fourth-block {
+	height: 150px;
+}
+
+/*block of + ganbare button*/
+.fifth-block {
+	text-align: center;
+}
+
+.fifth-block > button {
+	height: 50px;
+	width: 50%;
+}
+
+/*block of list*/
+.sixth-block {
+	height: 200px;
+}
