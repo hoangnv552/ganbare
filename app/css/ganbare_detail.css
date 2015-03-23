@@ -1,6 +1,6 @@
 /*container style*/
 .ganbare-container {
-	width: 650px;
+	width: 750px;
 	margin: 0 auto;
 	min-height: 650px;
 	border: 2px solid #000;
@@ -9,7 +9,7 @@
 
 .ganbare-block {
 	display: block;
-	background-color: #ffffcc;
+	background-color: #dedede;
 	margin-bottom: 15px;
 }
 
@@ -37,7 +37,7 @@
 
 .ganbare-information h3 {
 	display: inline-block;
-  	margin-right: 70px;
+  	margin-right: 50px;
 }
 
 /*block of ganbaru number, like button, pin button*/
@@ -50,9 +50,9 @@
 }
 
 .ganbare-number {
-	width: 400px;
+	width: 480px;
 	border: 2px solid #000;
-	height: 76px;
+	height: 80px;
 }
 .ganbare-number h3 {
 	font-size: 35px;
