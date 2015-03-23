@@ -79,6 +79,8 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
         for(i = 0; i < length; i++){
           if(currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId){
             ganbaruIdAndNumber[i].ganbareNumber++;
+          } else {
+            ganbaruIdAndNumber.push({ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count});
           }
         }
       } else {
@@ -111,5 +113,5 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
     }
 
     // Set interval callIntervalAddGanbare function
-    $interval(callIntervalAddGanbare, 3000);
+    $interval(callIntervalAddGanbare, 2000);
   }]);
