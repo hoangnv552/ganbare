@@ -20,7 +20,7 @@ ganbareApp.config(['$routeProvider',
         templateUrl: 'partials/login.html',
         controller : 'loginCtrl'
       }).
-      when('/ganbaredt', {
+      when('/ganbaru/:ganbaruId', {
         templateUrl: 'partials/view-ganbare-detail.html',
         controller : 'viewGanbareDetailCtrl'
       }).
