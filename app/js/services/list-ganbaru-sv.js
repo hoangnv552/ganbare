@@ -21,3 +21,4 @@ ganbareServices.factory('listGanbaru', ['$resource',
         isArray: true
       });
   }]);
+
