@@ -6,14 +6,13 @@
 /*
 * Controller Feed for visitors
 */
-ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru', 'addGanbare', '$interval', '$location',
-  function($scope, $cookieStore, listGanbaru, addGanbare, $interval, $location) {
+ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru',
+  'addGanbare', '$interval', '$location', 'pinGanbaru',
+  function($scope, $cookieStore, listGanbaru, addGanbare, $interval, $location, pinGanbaru) {
     // $scope.totalGanbaru = 100;
     // $scope.ganbaruPerPage = 5;
     // $scope.currentPage = 1;
     $scope.takeNumber = 5;
-    $scope.more = 'More...';
-    $scope.getFullData = '';
 
     function paginViewGanbaru(takeNumber){
 
@@ -21,16 +20,21 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 
       ganbaruPromise.$promise.then(function(data){
         $scope.ganbaru = data;
+        console.log(data);
         $scope.lengthData = data.data.length;
       }, function(error){
         $scope.getGanbaruError = 'Get Data Error';
       });
     }
 
-    // Defaul load page
+    /*
+    * Defaul load page
+    */
     paginViewGanbaru($scope.takeNumber);
 
-    // If list more ganbaru
+    /*
+    * If list more ganbaru
+    */
     $scope.listMoreGanbaru = function() {
       $scope.takeNumber = $scope.takeNumber + 5;
       paginViewGanbaru($scope.takeNumber);
@@ -90,6 +94,9 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 
     var userId  = $cookieStore.get('userId');
 
+    /*
+    * Add ganbare
+    */
     function callIntervalAddGanbare(){
       var length = ganbaruIdAndNumber.length;
 
@@ -112,6 +119,23 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
       }
     }
 
-    // Set interval callIntervalAddGanbare function
-    $interval(callIntervalAddGanbare, 2000);
+    /*
+    * Set interval callIntervalAddGanbare function
+    */
+    $interval(callIntervalAddGanbare, 3000);
+
+    var token  = $cookieStore.get('token');
+    /*
+    * Set pin ganbaru
+    */
+    $scope.pinGanbaru = function(ganbaruId){
+      pinGanbaru.pin({userId: userId, ganbaruId: ganbaruId, token: token}, function(response){
+        response.$promise.then(function(data){
+          console.log(data);
+        }, function(error){
+          // Do something
+        });
+      });
+    }
+
   }]);
