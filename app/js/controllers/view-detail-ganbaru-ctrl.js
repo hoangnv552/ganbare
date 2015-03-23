@@ -25,7 +25,7 @@
 
 			//click to pin/unpin
 			$scope.togglePinning = function() {
-
+				$scope.pinIcon.state = !$scope.pinIcon.state;
 			};
 
 			//click to add favor/unfavor
