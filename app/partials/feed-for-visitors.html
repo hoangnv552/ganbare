@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="totalNumberTop">
-            <h2>Total Number: 2000{{ganbaru}}</h2>
+            <h2>Total Number: {{ganbaru.extendedInfor.totalGanbareNumber + totalNumber}}</h2>
         </div>
     </div>
     <div class="main">
@@ -28,38 +28,41 @@
 
             </div>
             <div class="ganbaru-content">
+                <h1>{{getGanbaruError}}</h1>
                 <ul>
-                    <li>
+                    <li dir-paginate="item in ganbaru.data | itemsPerPage:ganbaruPerPage" current-page="currentPage" total-items="totalGanbaru">
                         <div class="img">
                             <img src="" />
                             <img src="" />
-                            <p>1000000</p>
+                            <p ng-init="item.ganbaru.createDate = 0; totalNumber = 0">{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
                         </div>
                         <div class="thumbnail-img">
                             <div class="thumbnail">
                             </div>
                             <div class="content">
                                 <div class="content-top">
-                                    <p>Content</p>
+                                    <p>{{item.ganbaru.ganbaruContent}}</p>
                                 </div>
                                 <div class="content-bottom">
-                                    <p>UserName</p>
-                                    <p>UserName</p>
-                                    <p>UserName</p>
+                                    <p>{{item.user.username}}</p>
+                                    <p>{{item.ganbaru.createDate | date:'yyyy-MM-dd'}}</p>
+                                    <p>{{item.ganbaru.expiredDate | date:'yyyy-MM-dd'}}</p>
                                 </div>
                             </div>
                             <div class="ganbaru-dd">
-                                <input type="button" class="" value=" + Ganbaru">
+                                <button ng-click="item.ganbaru.createDate = item.ganbaru.createDate + 1">
+                                    <input type="button" class="" value=" + Ganbaru" data-ng-click="addGanbare(
+                                    item)">
+                                </button>
                             </div>
                             <div class="detail">
                                 <a href="#">Detail</a>
                             </div>
                         </div>
                     </li>
-                    <li>Ganbaru</li>
-                    <li>Ganbaru</li>
                 </ul>
             </div>
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
     </div>
 </div>

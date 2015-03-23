@@ -54,7 +54,7 @@
 }
 .main-left{
     float:left;
-    background: #FFFFFF;
+    
     width: 25%;
     height: 500px;
 }
@@ -64,7 +64,7 @@
     height: 65px;
     background: #C45454;
     margin-left: 20px;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 .avatarUser p{
     float: left;
@@ -126,7 +126,7 @@
     margin-top: 10px;
     margin-left: 36px;
     width: 423px;
-    height: 34px;
+    height: 43px;
     background: #fff;
     float: left;
     text-align: right;
@@ -145,30 +145,31 @@
     float: left;
     width: 400px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .thumbnail-img .detail{
     float: left;
     width: 80px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .content .content-top{
     float: left;
     height: 45px;
     width: 400px;
-    background: #fff;
+    margin-left: 23px;
 }
 .thumbnail-img .ganbaru-dd{
     float: left;
     width: 88px;
     height: 80px;
-    margin-top: -17px;
     margin-left: 12px;
 }
 .content .content-bottom p{
     display: inline-block;
     margin-left: 23px;
+}
+.ganbaru-dd input{
+    border: none;
+    height: 80px;
 }

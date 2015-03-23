@@ -1,6 +1,6 @@
 'use strict';
 
-/* App Module */
+/* App Module **/
 /*jslint node: true*/
 
 var ganbareApp = angular.module('ganbareApp', [
