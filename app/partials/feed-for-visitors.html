@@ -51,12 +51,12 @@
                             </div>
                             <div class="ganbaru-dd">
                                 <button ng-click="item.ganbaru.createDate = item.ganbaru.createDate + 1">
-                                    <input type="button" class="" value=" + Ganbaru" data-ng-click="addGanbare(
+                                    <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
                                     item)">
                                 </button>
                             </div>
                             <div class="detail">
-                                <a href="#">Detail</a>
+                                <button ng-click="detailGanbare(item.ganbaru.ganbaruId)">Detail</button>
                             </div>
                         </div>
                     </li>
