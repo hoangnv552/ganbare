@@ -13,7 +13,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
     $scope.login = function(){
       var email = $scope.email;
       var password = $scope.password;
-      var encryptedPassword = md5.createHash(password);
+      var encryptedPassword = md5.createHash(password || '');
       var code;
       loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
 
