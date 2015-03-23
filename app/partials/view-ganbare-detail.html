@@ -5,31 +5,29 @@
 		</div>
 		<div class="ganbare-information">
 			<div>
-				<h4>Created Date-----</h4>
-				<h4>Expired Date-----</h4>
+				<h4><b>Created Date</b>: {{createdDate | date:'yyyy-MM-dd'}}</h4>
+				<h4><b>Expired Date</b>: {{expiredDate | date:'yyyy-MM-dd'}}</h4>
 			</div>
 			<div>
-				<h4>Username</h4>
+				<h4><b>User</b>: {{username}}</h4>
 			</div>
 		</div>
 	</div>
 	<div class="ganbare-block">
 		<div class="ganbare-number">
-			<h3>0000000000000000000</h3>
+			<h3>{{ganbareNumber}}</h3>
 		</div>
-		<!-- <div class="ganbare-button"> -->
-			<button><img src="./img/user/star.png" height="74"></button>
-			<button><img src="./img/user/follow.png" height="74"></button>
-		<!-- </div> -->
+		<button><img src="./img/user/star.png" height="74"></button>
+		<button><img src="./img/user/follow.png" height="74"></button>
 	</div>
 	<div class="ganbare-block">
-		<p>This is the content</p>
+		<p>{{ganbaruContent}}</p>
 		<small>Location info</small>
 	</div>
 	<div class="ganbare-block">
 	</div>
 	<div class="ganbare-block">
-		<button>+ Ganbare</button>
+		<button ng-click="addGanbare()">+ Ganbare</button>
 	</div>
 	<div class="ganbare-block">
 	</div>

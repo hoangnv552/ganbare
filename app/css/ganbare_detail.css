@@ -30,12 +30,12 @@
 .ganbare-information > div {
 	display: block;
 	margin-bottom: 20px;
-	margin-left: 150px;
+	margin-left: 140px;
 }
 
 .ganbare-information h4 {
 	display: inline-block;
-  	margin: 20px 100px 0 0;
+  	margin: 20px 40px 0 0;
   	font-size: 20px;
 }
 
@@ -77,7 +77,7 @@
 /*block of ganbare image*/
 .ganbare-block:nth-child(4) {
 	background-color: #dedede;
-	height: 150px;
+	height: 100px;
 }
 
 /*block of + ganbare button*/
