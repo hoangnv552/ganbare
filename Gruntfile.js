@@ -136,5 +136,4 @@ module.exports = function(grunt) {
 	// grunt.registerTask('build', [ 'clean:build', 'filerev:img', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('build', [ 'clean:build', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('default', [ 'verify', 'build', 'copy' ]);
-	grunt.registerTask('test', [ 'clean:tmp' ]);
 };
