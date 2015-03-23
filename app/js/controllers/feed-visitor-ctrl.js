@@ -12,6 +12,17 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
     $scope.ganbaruPerPage = 5;
     $scope.currentPage = 1;
 
+    function paginViewGanbaru(skipNumber){
+
+      var ganbaruPromise = listGanbaru.query({filterType: 2, sortType: 2, skip: skipNumber, take: $scope.ganbaruPerPage});
+
+      ganbaruPromise.$promise.then(function(data){
+        $scope.ganbaru = data;
+      }, function(error){
+        $scope.getGanbaruError = 'Get Data Error.';
+      });
+    }
+
     // Defaul load page
     paginViewGanbaru(0);
 
@@ -22,7 +33,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
     var skip = $scope.totalGanbaru / $scope.ganbaruPerPage;
 
     for(i = 2; i < skip; i++){
-      var valueSkip = valueSkip + $scope.ganbaruPerPage;
+      valueSkip = valueSkip + $scope.ganbaruPerPage;
       arrPagination.push({key: i, value: valueSkip});
     }
 
@@ -39,17 +50,6 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
       }
       paginViewGanbaru(skipNumber);
     };
-
-    function paginViewGanbaru(skipNumber){
-
-      var ganbaruPromise = listGanbaru.query({filterType: 2, sortType: 2, skip: skipNumber, take: $scope.ganbaruPerPage});
-
-      ganbaruPromise.$promise.then(function(data){
-        $scope.ganbaru = data;
-      }, function(error){
-        $scope.getGanbaruError = 'Get Data Error.';
-      });
-    }
 
     var ganbaruIdAndNumber = [];
     $scope.totalNumber = 0;
@@ -76,10 +76,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
       } else {
         ganbaruIdAndNumber.push({ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count});
       }
-    }
-
-    // Set interval callIntervalAddGanbare function
-    $interval(callIntervalAddGanbare, 4000);
+    };
 
     var userId  = $cookieStore.get('userId');
 
@@ -105,9 +102,6 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
       }
     }
 
-    // Create ganbaruId is cookies
-    $scope.detailGanbare = function(ganbaruId){
-      $cookieStore.put('ganbaruId', ganbaruId);
-      $location.path('/ganbaredt');
-    }
+    // Set interval callIntervalAddGanbare function
+    $interval(callIntervalAddGanbare, 3000);
   }]);

@@ -39,5 +39,5 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
         $scope.message = 'Cannot connect to server. Please try again later!';
         $location.path('/login');
       });
-    }
+    };
   }]);

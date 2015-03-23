@@ -1,23 +1,32 @@
 {
 	"js": {
-		"build/.tmp/jsmin/home.js": [
-			"app/bower_components/jquery/dist/jquery.js",
+		"build/.tmp/jsmin/ganbaru.js": [
 			"app/bower_components/angular/angular.js",
-			"app/bower_components/angular-animate/angular-animate.js",
 			"app/bower_components/angular-route/angular-route.js",
 			"app/bower_components/angular-resource/angular-resource.js",
+			"app/bower_components/angular-md5/angular-md5.js",
+			"app/bower_components/angular-cookies/angular-cookies.js",
+			"app/bower_components/angular-utils-pagination/dirPagination.js",
+
 			"app/js/app.js",
-			"app/js/animations.js",
+
 			"app/js/controllers.js",
-			"app/js/filters.js",
-			"app/js/services.js"
+			"app/js/controllers/feed-visitor-ctrl.js",
+			"app/js/controllers/login-ctrl.js",
+
+			"app/js/services.js",
+			"app/js/services/add-ganbaru-sv.js",
+			"app/js/services/list-ganbaru-sv.js",
+			"app/js/services/login-ganbaru-sv.js"
 		]
 	},
 	"css": {
-		"build/.tmp/cssmin/home.css": [
+		"build/.tmp/cssmin/ganbaru.css": [
 			"app/bower_components/bootstrap/dist/css/bootstrap.css",
-			"app/css/app.css",
-			"app/css/animations.css"
+			"app/css/common.css",
+			"app/css/member_feed.css",
+			"app/css/login.css",
+			"app/css/ganbare_detail.css"
 		]
 	}
 }
