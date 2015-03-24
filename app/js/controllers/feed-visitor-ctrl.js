@@ -20,6 +20,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 
       ganbaruPromise.$promise.then(function(data){
         $scope.ganbaru = data;
+        console.log(data.data);
         $scope.lengthData = data.data.length;
       }, function(error){
         $scope.getGanbaruError = 'Get Data Error';
@@ -124,13 +125,18 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
     $interval(callIntervalAddGanbare, 3000);
 
     var token  = $cookieStore.get('token');
+    console.log(token);
+    console.log(userId);
     /*
     * Set pin ganbaru
     */
-    $scope.pinGanbaru = function(ganbaruId){
-      pinGanbaru.pin({userId: userId, ganbaruId: ganbaruId, token: token}, function(response){
+    $scope.pinGanbaru = function(state, ganbaruId){
+      $scope.pinState = !state;
+      $scope.ganbaruIdPin = ganbaruId;
+
+      pinGanbaru.pin({userId: userId, ganbaruId: ganbaruId}, function(response){
         response.$promise.then(function(data){
-          // console.log(data);
+          console.log(data);
         }, function(error){
           // Do something
         });
