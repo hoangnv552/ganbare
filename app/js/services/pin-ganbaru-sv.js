@@ -15,3 +15,4 @@ ganbareServices.factory('pinGanbaru', ['$resource',
     pin: {method: 'POST'}
   });
 }]);
+

@@ -10,13 +10,13 @@
 		);
 	}]);
 
-	ganbareServices.factory('pinGanbare', ['$resource', '$cookieStore', function($resource, $cookieStore) {
-		return $resource(
-			path + 'v1/users/:userId/pins',
-			{userId: '@userId'},
-			{
-				save: {method: 'POST'}
-			}
-		);
-	}]);
+	// ganbareServices.factory('pinGanbare', ['$resource', '$cookieStore', function($resource, $cookieStore) {
+	// 	return $resource(
+	// 		path + 'v1/users/:userId/pins',
+	// 		{userId: '@userId'},
+	// 		{
+	// 			save: {method: 'POST'}
+	// 		}
+	// 	);
+	// }]);
 })();
