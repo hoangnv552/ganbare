@@ -50,7 +50,8 @@
 
 .ganbare-block:nth-child(2) button {
 	float: right;
-	margin-left: 10px;
+	margin-left: 20px;
+	padding: 0;
 }
 
 .ganbare-number {
