@@ -15,3 +15,16 @@ ganbareServices.factory('pinGanbaru', ['$resource',
     pin: {method: 'POST'}
   });
 }]);
+
+/*
+* Service unpin Ganbaru
+*/
+ganbareServices.factory('unPinGanbaru', ['$resource',
+  function($resource) {
+  return $resource(
+    path + 'v1/users/:userId/pins/:ganbaruId',
+    {userId: '@userId', ganbaruId: '@ganbaruId'},
+    {
+    pin: {method: 'DELETE'}
+  });
+}]);
