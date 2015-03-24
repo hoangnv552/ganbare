@@ -93,9 +93,11 @@
 .main-search{
     float: left;
     width: 700px;
-    height: 68px;
-    background: #004080;
+    height: 130px;
+    background: #18AF6D;
     margin-left: 20px;
+    font-weight: bold;
+    padding-left: 25px;
 }
 .main-right .ganbaru-content ul li{
     width: 700px;
@@ -202,4 +204,14 @@
     margin-top: 15px;
     margin-bottom: 22px;
     height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.main-search button{
+    width: 160px;
+    margin-top: 10px;
+}
+.main-search input{
+    width: 434px;
+    margin-top: 10px;
 }
