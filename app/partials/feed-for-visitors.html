@@ -32,8 +32,18 @@
                 <ul>
                     <li ng-repeat="item in ganbaru.data">
                         <div class="img">
-                            <img src="" />
-                            <img src="" />
+                            <span ng-if="item.ganbaru.isPinning == false">
+                                <p class="pin" ng-click="pinGanbaru(item.ganbaru.isPinning, item.ganbaru.ganbaruId)">Pin</p>
+                            </span>
+                            <span ng-if="item.ganbaru.isPinning == true">
+                                <p class="pin" ng-click="unPinGanbaru(item.ganbaru.isPinning, item.ganbaru.ganbaruId)">UnPin</p>
+                            </span>
+                            <span ng-if="item.user.isFavoristUser == false">
+                                <p class="favorite" ng-click="addFavorite(item.user.isFavoristUser, item.user.userId)">Favorite</p>
+                            </span>
+                            <span ng-if="item.user.isFavoristUser == true">
+                                <p class="favorite" ng-click="removeFavorite(item.user.isFavoristUser, item.user.userId)">Remove Favorite</p>
+                            </span>
                             <p ng-init="item.ganbaru.createDate = 0; totalNumber = 0">{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
                         </div>
                         <div class="thumbnail-img">
@@ -62,7 +72,7 @@
                     </li>
                 </ul>
             </div>
-            <button ng-click="listMoreGanbaru()">{{lengthData >= takeNumber ? more : getFullData}}</button>
+            <button class="more-ganpare" ng-if="lengthData >= takeNumber " ng-click="listMoreGanbaru()">More...</button>
         </div>
     </div>
 </div>
