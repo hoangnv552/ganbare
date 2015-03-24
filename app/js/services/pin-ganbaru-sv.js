@@ -25,6 +25,6 @@ ganbareServices.factory('unPinGanbaru', ['$resource',
     path + 'v1/users/:userId/pins/:ganbaruId',
     {userId: '@userId', ganbaruId: '@ganbaruId'},
     {
-    pin: {method: 'DELETE'}
+    unPin: {method: 'DELETE'}
   });
 }]);
