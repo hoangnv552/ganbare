@@ -77,7 +77,7 @@
 }
 
 .is-not-pinning {
-	background-image: url('../img/user/unpin.png')
+	background-image: url('../img/user/unpin.png');
 }
 
 .is-favor {

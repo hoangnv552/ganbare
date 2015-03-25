@@ -9,8 +9,8 @@
 ganbareServices.factory('listGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/ganbaru?filterType=:filterType&sortType=:sortType&skip=:skip&take=:take',
-      {filterType: '@filterType', sortType: '@sortType', skip: '@skip', take: '@take'},
+      path + 'v1/ganbaru?filterType=:filterType&sortType=:sortType&tags=:tags&skip=:skip&take=:take',
+      {filterType: '@filterType', sortType: '@sortType', tags: '@tags', skip: '@skip', take: '@take'},
       {
         query: {
           method: 'GET'
