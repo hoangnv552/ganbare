@@ -1,50 +1,76 @@
 <div class="content">
-    <div class="top">
-        <div class="logo">
-            <p>Logo</p>
-        </div>
-        <div class="menu-top">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">MyPage</a></li>
-                <li><a href="#">Setting</a></li>
-            </ul>
-        </div>
-        <div class="totalNumberTop">
-            <h2>Total Number: {{ganbaru.extendedInfor.totalGanbareNumber + totalNumber}}</h2>
-        </div>
-    </div>
+    <ng-include src="'partials/includes/header.html'"></ng-include>
     <div class="main">
         <div class="main-left">
             <div class="avatarUser">
                 <img src="" />
-                <p>Username</p>
+                <p>{{user.data.username}}</p>
+            </div>
+            <div class="newGanbaru">
+                <a ng-href="#/creategb">
+                    <button>New Ganbaru</button>
+                </a>
+            </div>
+            <div class="areaGanbaru">
+                <h3>Sent ganbare number: </h3>
+                <h3>{{user.data.sentGanbareNumber + totalNumber}}</h3>
+                <h3>Received ganbare number: </h3>
+                <h3>{{user.data.receivedGanbareNumber}}</h3>
+                <h3>Favorite: </h3>
+                <h3>{{user.data.favoriteNumber}}</h3>
+                <h3>Favorited: </h3>
+                <h3>{{user.data.favoritedNumber}}</h3>
             </div>
         </div>
         <div class="createNew">
         </div>
         <div class="main-right">
             <div class="main-search">
-
+                <button ng-click="listGanbaru()">LIST GANBARU</button>
+                <button ng-click="listPinGanbaru()">LIST PINNING</button>
+                <button ng-click="listOfFavoriteGanbaru()">LIST OF FAVORITE</button>
+                <button ng-click="listByUserGanbaru()">LIST BY USER</button>
+                <button ng-click="listTagGanbaru()">TAG</button>
+                <button ng-click="listHotGanbaru()">HOT</button>
+                <button ng-click="listGanbaru()">NEW</button>
+                <button ng-click="listExpireGanbaru()">EXPIRING</button><br>
+                <span ng-if="!showTags">
+                    <form class="searchForm" ng-submit="searchGanbaru()">
+                        Search:
+                        <input type="text" class="inputSearch" ng-model="contentSearch" />
+                        <input type="submit" class="search" value="Search" />
+                    </form>
+                </span>
+                <span ng-if="showTags">
+                    <form class="searchTag" ng-submit="searchTagGanbaru()">
+                        Select Tags:
+                        <label ng-repeat="tag in checkboxesListTag">
+                          <input type="checkbox" value="{{tag}}" ng-checked="selectTag.indexOf(tag) > -1" ng-click="toggleSelection(tag)"> {{tag}}
+                        </label>
+                        <input type="submit" class="search" value="Search" />
+                    </form>
+                </span>
             </div>
             <div class="ganbaru-content">
                 <h1>{{getGanbaruError}}</h1>
+                <div date-picker="start" min-view="date"></div>
                 <ul>
                     <li ng-repeat="item in ganbaru.data">
+                        <span ng-init="item.ganbaru.createDate = 0; totalNumber = 0"></span>
                         <div class="img">
                             <span ng-if="item.ganbaru.isPinning == false">
-                                <p class="pin" ng-click="pinGanbaru(item.ganbaru.isPinning, item.ganbaru.ganbaruId)">Pin</p>
+                                <p class="pin" ng-click="pinGanbaru(item.ganbaru.ganbaruId)"></p>
                             </span>
                             <span ng-if="item.ganbaru.isPinning == true">
-                                <p class="pin" ng-click="unPinGanbaru(item.ganbaru.isPinning, item.ganbaru.ganbaruId)">UnPin</p>
+                                <p class="unpin" ng-click="unPinGanbaru(item.ganbaru.ganbaruId)"></p>
                             </span>
                             <span ng-if="item.user.isFavoristUser == false">
-                                <p class="favorite" ng-click="addFavorite(item.user.isFavoristUser, item.user.userId)">Favorite</p>
+                                <p class="favorite" ng-click="addFavorite(item.user.userId)"></p>
                             </span>
                             <span ng-if="item.user.isFavoristUser == true">
-                                <p class="favorite" ng-click="removeFavorite(item.user.isFavoristUser, item.user.userId)">Remove Favorite</p>
+                                <p class="removefavorite" ng-click="removeFavorite(item.user.userId)"></p>
                             </span>
-                            <p ng-init="item.ganbaru.createDate = 0; totalNumber = 0">{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
+                            <p>{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
                         </div>
                         <div class="thumbnail-img">
                             <div class="thumbnail">
