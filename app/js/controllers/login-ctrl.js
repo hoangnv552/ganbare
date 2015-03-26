@@ -1,7 +1,7 @@
+;(function(){
 'use strict';
 
 /* Controllers */
-/* jshint node: true */
 
 /*
 * Controller Login
@@ -38,3 +38,4 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
       });
     };
   }]);
+})();

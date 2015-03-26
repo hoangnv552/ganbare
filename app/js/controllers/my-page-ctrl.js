@@ -2,7 +2,6 @@
 'use strict';
 
 /* Controllers */
-/* jshint node: true */
 
 /*
 * Controller my page
@@ -15,12 +14,11 @@ ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'getUserInfo', '$c
 	/*
     * Get user infor
     */
-    getUserInfo.getUser({id: userId}, function( response ) {
-      $scope.user = response;
-    }, function( error ){
-      // Do something
+    getUserInfo.getUser({
+        id: userId
+    }).$promise.then(function getDone(data) {
+        $scope.user = data;
     });
-
 
 	}]);
 })();

@@ -2,23 +2,22 @@
 'use strict';
 
 /* Controllers */
-/* jshint node: true */
 
 /*
 * Controller Feed for visitors
 */
 ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'listGanbaru',
-	'addGanbare', '$interval', '$location', 'pinGanbaru', 'unPinGanbaru', 'favoriteGanbaru',
-	'removeFavoriteGanbaru', 'getUserInfo', 'getListGanbaru',
+	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
+	'getUserInfo', 'getListGanbaru',
 	function($scope, $cookieStore, listGanbaru, addGanbare, $interval, $location, pinGanbaru,
-		unPinGanbaru, favoriteGanbaru, removeFavoriteGanbaru, getUserInfo, getListGanbaru) {
+		favoriteGanbaru, getUserInfo, getListGanbaru) {
 
 		var types = {
 	  		listTypePin: 1,
 			listTypeFavorite: 2,
 			listTypeUser: 3,
 			listTypeHot: 4,
-			listTypeExpri: 5,
+			listTypeExpire: 5,
 			listTypeTag: 6,
 			listTypeSearch: 7
 		},
@@ -155,7 +154,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 		* Set unpin ganbaru
 		*/
 		$scope.unPinGanbaru = function(item) {
-			return unPinGanbaru.unPin({
+			return pinGanbaru.unpin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function unPinDone(data) {
@@ -171,7 +170,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 		$scope.addFavorite = function (item) {
 			return favoriteGanbaru.add({
 				id: userId,
-				friendId: friendId
+				friendId: item.user.userId
 			}).$promise.then(function addDone(data) {
 				if (data.code === 0) {
 					item.user.isFavoristUser = true;
@@ -183,9 +182,9 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 		* Set remove favorite ganbaru
 		*/
 		$scope.removeFavorite = function( item ) {
-			return removeFavoriteGanbaru.remove({
+			return favoriteGanbaru.remove({
 				id: userId,
-				friendId: friendId
+				friendId: item.user.userId
 			}).$promise.then(function unFavorite(data) {
 				if (data.code === 0) {
 					item.user.isFavoristUser = false;
@@ -253,8 +252,8 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore', 'lis
 		*/
 		$scope.listExpireGanbaru = function() {
 			$scope.showTags = false;
-			$scope.listType = types.listTypeExpri;
-			getListGanbaru( skip, $scope.take, types.listTypeExpri ).then(function(data) {
+			$scope.listType = types.listTypeExpire;
+			getListGanbaru( skip, $scope.take, types.listTypeExpire ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
