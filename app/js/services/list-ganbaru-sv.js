@@ -9,8 +9,8 @@
 ganbareServices.factory('listGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/ganbaru?filterType=:filterType&sortType=:sortType&tags=:tags&skip=:skip&take=:take',
-      {filterType: '@filterType', sortType: '@sortType', tags: '@tags', skip: '@skip', take: '@take'},
+      path + 'v1/ganbaru',
+      {},
       {
         query: {
           method: 'GET'
@@ -25,8 +25,8 @@ ganbareServices.factory('listGanbaru', ['$resource',
 ganbareServices.factory('listPinGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/users/:userId/pins?skip=:skip&take=:take',
-      {userId: '@userId', skip: '@skip', take: '@take'},
+      path + 'v1/users/:userId/pins',
+      {},
       {
         query: {
           method: 'GET'
@@ -41,8 +41,8 @@ ganbareServices.factory('listPinGanbaru', ['$resource',
 ganbareServices.factory('listOfFavoriteGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/users/:userId/favorites/ganbaru?timestamp=:timestamp&take=:take',
-      {userId: '@userId', timestamp: '@timestamp', take: '@take'},
+      path + 'v1/users/:userId/favorites/ganbaru',
+      {},
       {
         query: {
           method: 'GET'
@@ -57,8 +57,8 @@ ganbareServices.factory('listOfFavoriteGanbaru', ['$resource',
 ganbareServices.factory('listByUserGanbaru', ['$resource',
   function($resource) {
     return $resource(
-      path + 'v1/users/:userId/ganbaru?skip=:skip&take=:take',
-      {userId: '@userId', skip: '@skip', take: '@take'},
+      path + 'v1/users/:userId/ganbaru',
+      {},
       {
         query: {
           method: 'GET'

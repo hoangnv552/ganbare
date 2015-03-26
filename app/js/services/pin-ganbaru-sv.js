@@ -1,3 +1,4 @@
+;(function(){
 'use strict';
 
 /* Services */
@@ -28,3 +29,4 @@ ganbareServices.factory('unPinGanbaru', ['$resource',
     unPin: {method: 'DELETE'}
   });
 }]);
+})();

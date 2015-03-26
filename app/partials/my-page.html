@@ -1,0 +1,85 @@
+<div class="content">
+    <div class="top">
+    <div class="logo">
+	        <p>Logo</p>
+	    </div>
+	    <div class="menu-top">
+	        <ul>
+	            <li><a href="#/feedfv">Home</a></li>
+	            <li><a href="#/mypage">MyPage</a></li>
+	            <li><a href="#">Setting</a></li>
+	        </ul>
+	    </div>
+	    <div class="totalNumberTop">
+	        <h2>Total Number: {{user.extendedInfor.totalGanbareNumber}}</h2>
+	    </div>
+	</div>
+    <div class="main">
+        <div class="main-left">
+		    <div class="avatarUser">
+		        <img src="" />
+		        <p>{{user.data.username}}</p>
+		    </div>
+		    <div class="newGanbaru">
+		        <a ng-href="#/creategb">
+		            <button>New Ganbaru</button>
+		        </a>
+		    </div>
+		    <div class="areaGanbaru">
+		        <h3>Sent ganbare number: </h3>
+		        <h2>{{user.data.sentGanbareNumber}}</h2>
+		        <h3>Received ganbare number: </h3>
+		        <h2>{{user.data.receivedGanbareNumber}}</h2>
+		        <h3>Favorite: </h3>
+		        <h2>{{user.data.favoriteNumber}}</h2>
+		        <h3>Favorited: </h3>
+		        <h2>{{user.data.favoritedNumber}}</h2>
+		    </div>
+		</div>
+        <div class="createNew">
+        </div>
+        <div class="main-right">
+            <div class="main-search">
+                <h2>My Ganbaru List</h2>
+                <div class="newGanbaru">
+			        <a ng-href="#/creategb">
+			            <button>New Ganbaru</button>
+			        </a>
+			    </div>
+            </div>
+            <div class="ganbaru-content">
+                <h1>{{getGanbaruError}}</h1>
+                <div date-picker="start" min-view="date"></div>
+                <ul>
+                    <li ng-repeat="item in ganbaru.data">
+                        <div class="thumbnail-img">
+                            <div class="thumbnail">
+                            </div>
+                            <div class="content">
+                                <div class="content-top">
+                                    <p>{{item.ganbaru.ganbaruContent}}</p>
+                                </div>
+                                <div class="content-bottom">
+                                    <p>{{item.user.username}}</p>
+                                    <p>{{item.ganbaru.createDate | date:'yyyy-MM-dd'}}</p>
+                                    <p>{{item.ganbaru.expiredDate | date:'yyyy-MM-dd'}}</p>
+                                </div>
+                            </div>
+                            <div class="ganbaru-dd">
+                                <a ng-click="item.ganbaru.createDate = item.ganbaru.createDate + 1">
+                                    <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
+                                    item)">
+                                </a>
+                            </div>
+                            <div class="detail">
+                                <a href="#/ganbaru/{{item.ganbaru.ganbaruId}}">Detail</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button class="more-ganpare" ng-if="lengthData >= takeNumber " ng-click="listMoreGanbaru()">More...</button>
+        </div>
+    </div>
+</div>
+

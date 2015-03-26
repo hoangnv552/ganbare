@@ -29,6 +29,10 @@ ganbareApp.config(['$routeProvider',
         templateUrl: 'partials/create-ganbaru.html',
         controller: 'createGanbaruCtrl'
       }).
+      when('/mypage', {
+        templateUrl: 'partials/my-page.html',
+        controller: 'myPageGanbaruCtrl'
+      }).
       otherwise({
         redirectTo: '/login'
       });
