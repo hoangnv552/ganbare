@@ -1,0 +1,34 @@
+<div class="container create-gb-container">
+	<div class="header-gb-part">
+		<div><h3>Create new Ganbaru</h3></div>
+		<div>
+			<input class="float-left" type="text" ng-value="createdDate | date:'yyyy/MM/dd'" readonly>
+		</div>
+		<div>
+			<datepicker date-format="yyyy/MM/dd"><input placeholder="Click to choose expired Date" ng-model="expiredDate" type="text" readonly /></datepicker>
+		</div>
+	</div>
+
+	<div class="section-gb-part">
+		<div class="block">
+			<div class="ava-container float-left inline-block">
+				<div class="ava"></div>
+				<div class='upload-btn-container'><button>Upload</button></div>
+			</div>
+			<div class="content-container inline-block">
+				<div><input type="text" ng-model="ganbaruTitle" placeholder="Title:"></div>
+				<div><textarea ng-model="ganbaruContent"></textarea></div>
+				<div><input type="text" placeholder="Tags:"></div>
+			</div>
+		</div>
+		<div class="block">
+			<div>
+				<div class="tag-option">Tag option area</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="confirm-btn-part">
+		<button ng-click="createGanbaru()">Confirm</button>
+	</div>
+</div>

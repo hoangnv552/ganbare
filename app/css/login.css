@@ -1,6 +1,39 @@
-.nav {
+.login-container {
+	width: 1000px;
+}
+
+.login-container > div:nth-child(2) {
+	overflow: auto;
+}
+
+/*login-header style*/
+.login-header{
+	margin: 0 20px 0 20px;
+	padding: 20px 0 20px 0;
+	border-bottom: 2px solid #000;
+}
+
+.login-header h2 {
+	text-align: center;
+	border: 2px solid #000;
+	margin: 0 0 0 120px;
+	padding: 32px 0;
+}
+
+.logo{
+	float: left;
+}
+
+/*navigation style*/
+.login-nav{
+	padding-left: 30px;
 	min-height: 490px;
-	border-right: 1px solid #000;
+	border-right: 2px solid #000;
+}
+
+/*section style*/
+.login-section{
+	margin-left: 231px;
 }
 
 .form-container {
