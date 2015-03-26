@@ -1,0 +1,86 @@
+/*common style*/
+.float-left {
+	float: left;
+}
+
+.block {
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+/*container*/
+.create-gb-container {
+	width: 650px;
+}
+
+.create-gb-container > div {
+	margin: 10px 0 10px 0;
+}
+
+/*header style*/
+.header-gb-part > div{
+	display: inline-block;
+	padding-top: 20px;
+}
+
+.header-gb-part h3 {
+	margin: 0;
+	padding-right: 30px;
+}
+
+.header-gb-part input {
+	font-family: Helvetica Neue;
+}
+/*section style*/
+.section-gb-part {
+	padding: 30px;
+	background-color: #fdf498;
+}
+
+.ava-container .ava {
+	width: 180px;
+	height: 200px;
+	background-color: #ee4035;
+	border-radius: 10px;
+}
+
+.upload-btn-container {
+	text-align: center;
+	padding: 20px 0;
+}
+
+.content-container > div {
+	padding: 0 0 20px 25px;
+}
+
+.content-container input,
+.content-container textarea {
+	width: 350px;
+}
+
+.content-container textarea {
+	height: 150px;
+	resize: none;
+}
+
+.tag-option {
+	width: 100%;
+	background-color: #7bc043;
+	height: 250px;
+}
+
+
+/*confirm button part*/
+.confirm-btn-part {
+	text-align: center;
+}
+
+.confirm-btn-part button {
+	width: 40%;
+	height: 40px;
+	font-size: large;
+	font-weight: bold;
+}

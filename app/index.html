@@ -5,11 +5,12 @@
 	<title>Ganbare</title>
 
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/member_feed.css">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<link rel="stylesheet" type="text/css" href="css/ganbare_detail.css">
-
+	<link rel="stylesheet" type="text/css" href="css/create_ganbaru.css">
 
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
@@ -17,7 +18,8 @@
 	<script src="bower_components/angular-md5/angular-md5.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
-
+	<script src="bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+	<script src="bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
 
 	<script src="js/app.js"></script>
 
@@ -25,7 +27,7 @@
 	<script src="js/controllers/feed-visitor-ctrl.js"></script>
 	<script src="js/controllers/login-ctrl.js"></script>
 	<script src="js/controllers/view-detail-ganbaru-ctrl.js"></script>
-
+	<script src="js/controllers/create-ganbaru-ctrl.js"></script>
 
 	<script src="js/services.js"></script>
 	<script src="js/services/add-ganbaru-sv.js"></script>
@@ -34,15 +36,13 @@
 	<script src="js/services/view-detail-ganbaru-sv.js"></script>
 	<script src="js/services/pin-ganbaru-sv.js"></script>
 	<script src="js/services/favorite-ganbaru-sv.js"></script>
+	<script src="js/services/create-ganbaru-sv.js"></script>
 	<script src="js/services/search-ganbaru-sv.js"></script>
 	<script src="js/services/get-user-info-sv.js"></script>
-
-
 </head>
 <body>
 	<div class="view-container">
 	<div ng-view class="view-frame"></div>
 	</div>
-
 </body>
 </html>

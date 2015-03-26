@@ -22,15 +22,12 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
           $cookieStore.put('token', response.data.token);
           $cookieStore.put('userId', response.data.userId);
           $location.path('/feedfv');
-        }
-        else {
+        } else {
           if(code === 12) {
             $scope.message = 'Email not found!';
-          }
-          else if(code === 20) {
+          } else if(code === 20) {
             $scope.message = 'Invalid password!';
-          }
-          else if(code === 21) {
+          } else if(code === 21) {
             $scope.message = 'Incorrect password!';
           }
           $location.path('/login');

@@ -4,74 +4,107 @@
 /* jshint node: true */
 
 (function() {
-	ganbareControllers.controller('viewGanbareDetailCtrl', ['$scope', '$cookieStore', '$routeParams', '$interval',
-		'ganbareDetail', 'addGanbare', 'pinGanbare', 
-		function($scope, $cookieStore, $routeParams, $interval, ganbareDetail, addGanbare, pinGanbare) {
+	ganbareControllers.controller('viewGanbareDetailCtrl', 
+		['$scope', '$cookieStore', '$routeParams', '$interval', 
+		'ganbareDetail', 'addGanbare', 'pinGanbaru', 'unPinGanbaru', 
+		'favoriteGanbaru', 'removeFavoriteGanbaru',
+		function($scope, $cookieStore, $routeParams, $interval, ganbareDetail, addGanbare, pinGanbaru, unPinGanbaru, 
+			favoriteGanbaru, removeFavoriteGanbaru) {
 
-		ganbareDetail.query({ganbaruId: $routeParams.ganbaruId}, function(response) {
-			//binding data get from server
-			console.log('userId = ' + $cookieStore.get('userId'));
-			console.log('ganbaruId = ' + $routeParams.ganbaruId);
-			console.log('token = ' + $cookieStore.get('token'));
-			console.log(response);
-			$scope.createdDate = response.data.ganbaru.createDate;
-			$scope.expiredDate = response.data.ganbaru.expiredDate;
-			$scope.ganbareNumber = response.data.ganbaru.ganbareNumber;
-			$scope.ganbaruContent = response.data.ganbaru.ganbaruContent;
-			$scope.username = response.data.user.username;
+			var userId = $cookieStore.get('userId');
+			var token = $cookieStore.get('token');
+			var ganbaruId = $routeParams.ganbaruId;	
 
-			$scope.pinIcon = {};
-			$scope.pinIcon.state = response.data.ganbaru.isPinning;	
+			/*send request to server*/
+			ganbareDetail.query({ganbaruId: ganbaruId}, function(response) {
+				console.log(response);
 
-			$scope.favorIcon = {};
-			$scope.favorIcon.state = response.data.user.isFavoristUser;
+				var ganbaru = response.data.ganbaru;	//store ganbaru information
+				var ganbaruUser = response.data.user;	//store user information of ganbaru
 
-			var clickNumber = 0;	//the number of user's ganbare clicks
+				//binding data get from server, present on HTML
+				$scope.createdDate = ganbaru.createDate;
+				$scope.expiredDate = ganbaru.expiredDate;
+				$scope.ganbareNumber = ganbaru.ganbareNumber;
+				$scope.ganbaruContent = ganbaru.ganbaruContent;
+				$scope.username = ganbaruUser.username;
+				var friendId = ganbaruUser.userId;
+				//icon of pinning button
+				$scope.pinIcon = {};
+				$scope.pinIcon.state = ganbaru.isPinning;	
 
-			//click to pin/unpin
-			$scope.togglePinning = function() {
-				$scope.pinIcon.state = !$scope.pinIcon.state;
-				console.log($cookieStore.get('token'));
-				if($scope.pinIcon.state) {
-					pinGanbare.save({userId: $cookieStore.get('userId'), ganbaruId: $routeParams.ganbaruId}, function(response) {
-						console.log(response);
-					}, function() {
-						console.log('Fail to pin!');
-					});					
-				}
-			};
+				//icon of add favorites button
+				$scope.favorIcon = {};
+				$scope.favorIcon.state = ganbaruUser.isFavoristUser;
 
-			//click to add favor/unfavor
-			$scope.toggleFavorite = function() {
-				$scope.favorIcon.state = !$scope.favorIcon.state;
-			}
-
-			//click to add ganbare
-			$scope.addGanbare = function() {
-				$scope.ganbareNumber++;
-				clickNumber++;
-			};
-
-			function sendAddGanbareRequest() {
-				//if user click, then do this
-				if(clickNumber > 0) {
-					addGanbare.add({userId: $cookieStore.get('userId'), ganbareNumber: clickNumber, ganbaruId: $routeParams.ganbaruId}, 
-						function(response) {
+				/*pin/unpin*/
+				$scope.togglePinning = function() {
+					//reverse icon state
+					$scope.pinIcon.state = !$scope.pinIcon.state;
+					if($scope.pinIcon.state) {
+						pinGanbaru.pin({userId: userId, ganbaruId: ganbaruId}, function(response) {
 							console.log(response);
 						}, function() {
 							//Handle error here
-							console.log('Failed add ganbare number!');
-					});
-					clickNumber = 0;
+							console.log('Failed to pin!');
+						});					
+					} else {
+						unPinGanbaru.unPin({userId: userId, ganbaruId: ganbaruId}, function(response) {
+							console.log(response);
+						}, function() {
+							//Handle error here
+							console.log('Failed to unpin');
+						});
+					}
+				};
+
+				//click to add favor/unfavor
+				$scope.toggleFavorite = function() {
+					//reverse icon state
+					$scope.favorIcon.state = !$scope.favorIcon.state;
+					if($scope.favorIcon.state) {
+						favoriteGanbaru.add({id: userId, friendId: friendId}, function(response) {
+							console.log(response);
+						}, function() {
+							console.log('Failed to add favorite!');
+						});
+					} else {
+						removeFavoriteGanbaru.remove({id: userId, friendId: friendId}, function(response) {
+							console.log(response);
+						}, function() {
+							console.log('Failed to remove favorite');
+						});
+					}
 				}
-			};
 
-			//send Add Ganbare request to server each 3s
-			$interval(sendAddGanbareRequest, 3000);	
+				/*Add Ganbare*/
+				var clickNumber = 0;	//the number of user's ganbare clicks
+				$scope.addGanbare = function() {
+					$scope.ganbareNumber++;
+					clickNumber++;
+				};
 
-		}, function() {
-			//Handle error here
-			console.log('Failed get ganbare detail!');
-		})
+				function sendAddGanbareRequest() {
+					//if user click, then do this
+					if(clickNumber > 0) {
+						addGanbare.add({userId: userId, ganbareNumber: clickNumber, ganbaruId: ganbaruId}, 
+							function(response) {
+								console.log(response);
+							}, function() {
+								//Handle error here
+								console.log('Failed add ganbare!');
+						});
+						clickNumber = 0;
+					}
+				};
+
+				//send Add Ganbare request to server every 3s
+				$interval(sendAddGanbareRequest, 3000);	
+
+			}, function() {
+				//Handle error here
+				console.log('Failed get ganbare detail!');
+			}
+		)
 	}]);
 })();

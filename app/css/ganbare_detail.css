@@ -1,15 +1,11 @@
 /*container style*/
-.ganbare-container {
+.ganbare-dtl-container {
 	width: 750px;
-	margin: 0 auto;
-	min-height: 650px;
-	border: 2px solid #000;
 	padding: 15px 15px 0 15px;
 }
 
 .ganbare-block {
 	display: block;
-	/*background-color: #dedede;*/
 	margin-bottom: 15px;
 }
 
