@@ -17,18 +17,22 @@
 		<div class="ganbare-number">
 			<h3>{{ganbareNumber}}</h3>
 		</div>
+
 		<button ng-click="togglePinning()"><div ng-model="pinIcon" ng-class="{'is-pinning':pinIcon.state===true, 'is-not-pinning':pinIcon.state===false}"></div></button>
 		<button ng-click="toggleFavorite()"><div ng-model="favorIcon" ng-class="{'is-favor':favorIcon.state===true, 'is-unfavor':favorIcon.state===false}"></div></button>
+		<button ng-click="addGanbare()"><div>+ GANBARE</div></button>
 	</div>
 	<div class="ganbare-block">
 		<p>{{ganbaruContent}}</p>
-		<small>Location info</small>
 	</div>
 	<div class="ganbare-block">
+		<ul>
+			<li ng-repeat="tag in ganbaruTags">{{tag}}</li>
+		</ul>
 	</div>
 	<div class="ganbare-block">
-		<button ng-click="addGanbare()">+ Ganbare</button>
-	</div>
-	<div class="ganbare-block">
+		<map center="{{latitude}}, {{longitude}}">
+			<marker coords="{{latitude}}, {{longitude}}"></marker>
+		</map>
 	</div>
 </div>

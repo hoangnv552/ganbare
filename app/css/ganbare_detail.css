@@ -2,6 +2,7 @@
 .ganbare-dtl-container {
 	width: 750px;
 	padding: 15px 15px 0 15px;
+	background-color: #f4ffd6;
 }
 
 .ganbare-block {
@@ -17,10 +18,10 @@
 .ganbare-user-logo {
 	width: 120px;
 	height: 150px;
-	background-color: #ff4252;
+	background-color: #ff4e50;
 	color: #fff;
 	float: left;
-	text-align: center;
+	border-radius: 10px;
 }
 
 .ganbare-information > div {
@@ -42,6 +43,7 @@
 
 .ganbare-block:nth-child(2) > div {
 	display: inline-block;
+	background-color: #ccec75;
 }
 
 .ganbare-block:nth-child(2) button {
@@ -51,7 +53,7 @@
 }
 
 .ganbare-number {
-	width: 480px;
+	width: 400px;
 	border: 2px solid #000;
 	height: 80px;
 }
@@ -86,7 +88,7 @@
 
 /*block of ganbare content*/
 .ganbare-block:nth-child(3) {
-	background-color: #dedede;
+	background-color: #dff79e;
 	height: 250px;
 	padding: 20px;
 	font-size: 20px;
@@ -95,22 +97,22 @@
 
 /*block of ganbare image*/
 .ganbare-block:nth-child(4) {
-	background-color: #dedede;
+	background-color: #dff79e;
 	height: 100px;
 }
 
 /*block of + ganbare button*/
-.ganbare-block:nth-child(5) {
+/*.ganbare-block:nth-child(5) {
 	text-align: center;
-}
+}*/
 
-.ganbare-block:nth-child(5) button {
+/*.ganbare-block:nth-child(5) button {
 	height: 50px;
 	width: 50%;
-}
+}*/
 
 /*block of list*/
-.ganbare-block:nth-child(6) {
-	background-color: #dedede;
-	height: 200px;
+.ganbare-block:nth-child(5) {
+	background-color: #dff79e;
+	/*height: 200px;*/
 }
