@@ -3,17 +3,17 @@
 		<div class="ganbare-user-logo"></div>
 		<div class="ganbare-information">
 			<div>
-				<h4><b>Created Date</b>: {{createdDate | date:'yyyy-MM-dd'}}</h4>
-				<h4><b>Expired Date</b>: {{expiredDate | date:'yyyy-MM-dd'}}</h4>
+				<h4><b>Created Date</b>: {{getTime(ganbaru.createDate) | date:'yyyy-MM-dd'}}</h4>
+				<h4><b>Expired Date</b>: {{getTime(ganbaru.expiredDate) | date:'yyyy-MM-dd'}}</h4>
 			</div>
 			<div>
-				<h4><b>User</b>: {{username}}</h4>
+				<h4><b>User</b>: {{ganbaruUser.username}}</h4>
 			</div>
 		</div>
 	</div>
 	<div class="ganbare-block ganbare-button-block">
 		<div class="ganbare-number">
-			<h3>{{ganbareNumber}}</h3>
+			<h3>{{ganbaru.ganbareNumber}}</h3>
 		</div>
 
 		<button ng-click="togglePinning()"><div ng-model="pinIcon" ng-class="{'is-pinning':pinIcon.state===true, 'is-not-pinning':pinIcon.state===false}"></div></button>
@@ -21,16 +21,16 @@
 		<button ng-click="addGanbare()"><div class="ganbareIcon"></div></button>
 	</div>
 	<div class="ganbare-block ganbare-content-block">
-		<p>{{ganbaruContent}}</p>
+		<p>{{ganbaru.ganbaruContent}}</p>
 	</div>
 	<div class="ganbare-block ganbare-tags-block">
 		<ul>
-			<li ng-repeat="tag in ganbaruTags"><label>{{tag}}<label></li>
+			<li ng-repeat="tag in ganbaru.ganbaruTags"><label>{{tag}}<label></li>
 		</ul>
 	</div>
 	<div class="ganbare-block ganbare-map-block">
-		<map center="{{latitude}}, {{longitude}}">
-			<marker coords="{{latitude}}, {{longitude}}"></marker>
+		<map center="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}">
+			<marker coords="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}"></marker>
 		</map>
 	</div>
 </div>

@@ -18,19 +18,24 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
       loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
 
         code = response.code;
-        if(code === 0) {
-          $cookieStore.put('token', response.data.token);
-          $cookieStore.put('userId', response.data.userId);
-          $location.path('/feedmb');
-        } else {
-          if(code === 12) {
+
+        switch(code) {
+          case 12: {
             $scope.message = 'Email not found!';
-          } else if(code === 20) {
-            $scope.message = 'Invalid password!';
-          } else if(code === 21) {
-            $scope.message = 'Incorrect password!';
           }
-          $location.path('/login');
+          case 20: {
+            $scope.message = 'Invalid password!';
+          }
+          case 21: {
+            $scope.message = 'Incorrect password!';
+            $location.path('/login');
+            break;
+          }
+          case 0: {
+            $cookieStore.put('token', response.data.token);
+            $cookieStore.put('userId', response.data.userId);
+            $location.path('/feedfv');
+          }
         }
       }, function(error) {
         $scope.message = 'Cannot connect to server. Please try again later!';
