@@ -51,34 +51,33 @@
                 <h1>{{getGanbaruError}}</h1>
                 <div date-picker="start" min-view="date"></div>
                 <ul>
-                    <li ng-repeat="item in ganbaru.data">
-                        <div class="thumbnail-img">
-                            <div class="thumbnail">
+                    <li ng-repeat="item in ganbaru">
+                        <div class="list-my-page">
+                            <div class="page-left">
+                                <div class="date">
+                                    <p>Create date: {{item.ganbaru.createDate}}</p>
+                                    <p>Time: {{item.ganbaru.expiredDate}}</p>
+                                </div>
+                                <div class="totalnumber">
+                                    <p>{{item.ganbaru.ganbareNumber}}</p>
+                                </div>
                             </div>
-                            <div class="content">
-                                <div class="content-top">
+                            <div class="page-right">
+                                <div class="avatar">
+
+                                </div>
+                                <div class="content-mypage">
                                     <p>{{item.ganbaru.ganbaruContent}}</p>
+                                    <div class="detail-mypage">
+                                        <a href="#/ganbaru/{{item.ganbaru.ganbaruId}}">Detail</a>
+                                    </div>
                                 </div>
-                                <div class="content-bottom">
-                                    <p>{{item.user.username}}</p>
-                                    <p>{{item.ganbaru.createDate | date:'yyyy-MM-dd'}}</p>
-                                    <p>{{item.ganbaru.expiredDate | date:'yyyy-MM-dd'}}</p>
-                                </div>
-                            </div>
-                            <div class="ganbaru-dd">
-                                <a ng-click="item.ganbaru.createDate = item.ganbaru.createDate + 1">
-                                    <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
-                                    item)">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <a href="#/ganbaru/{{item.ganbaru.ganbaruId}}">Detail</a>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <button class="more-ganpare" ng-if="lengthData >= takeNumber " ng-click="listMoreGanbaru()">More...</button>
+            <button class="more-ganpare" ng-if="length >= skip" ng-click="listMoreGanbaru()">More...</button>
         </div>
     </div>
 </div>
