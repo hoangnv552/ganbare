@@ -5,9 +5,9 @@
 (function() {
 	ganbareControllers.controller('viewGanbareDetailCtrl', 
 		['$scope', '$cookieStore', '$routeParams', '$interval', 
-		'ganbareDetail', 'addGanbare', 'pinGanbaru', 'unPinGanbaru', 
-		'favoriteGanbaru', 'removeFavoriteGanbaru',
-		function($scope, $cookieStore, $routeParams, $interval, ganbareDetail, addGanbare, pinGanbaru, unPinGanbaru, 
+		'ganbareDetail', 'addGanbare', 'pinGanbaru', 
+		'favoriteGanbaru',
+		function($scope, $cookieStore, $routeParams, $interval, ganbareDetail, addGanbare, pinGanbaru, 
 			favoriteGanbaru, removeFavoriteGanbaru) {
 
 			var userId = $cookieStore.get('userId');
@@ -69,7 +69,7 @@
 							console.log('Failed to pin!');
 						});					
 					} else {
-						unPinGanbaru.unPin({userId: userId, ganbaruId: ganbaruId}, function(response) {
+						pinGanbaru.unpin({userId: userId, ganbaruId: ganbaruId}, function(response) {
 							console.log(response);
 						}, function() {
 							//Handle error here
@@ -89,7 +89,7 @@
 							console.log('Failed to add favorite!');
 						});
 					} else {
-						removeFavoriteGanbaru.remove({id: userId, friendId: friendId}, function(response) {
+						favoriteGanbaru.remove({id: userId, friendId: friendId}, function(response) {
 							console.log(response);
 						}, function() {
 							console.log('Failed to remove favorite');

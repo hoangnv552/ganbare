@@ -17,7 +17,7 @@ ganbareServices.factory('pinGanbaru', ['$resource',
             method: 'POST'
         },
         unpin: {
-            method: 'POST',
+            method: 'DELETE',
             url: path + 'v1/users/:userId/pins/:ganbaruId'
         }
     });
