@@ -16,7 +16,7 @@ ganbareServices.factory('favoriteGanbaru', ['$resource',
             method: 'POST'
         },
         remove: {
-            method: 'POST',
+            method: 'DELETE',
             url: path + 'v1/users/:id/favorites/:friendId'
         }
     });

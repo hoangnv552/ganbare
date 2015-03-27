@@ -1,31 +1,48 @@
 'use strict';
 
-ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$cookieStore', 'geolocation', 'createGanbaru', 
-	function($scope, $cookieStore, geolocation, createGanbaru) {
+ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru', 
+	function($scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
 	$scope.createdDate = new Date();
-	console.log($cookieStore.get('token'));
+	console.log('ganbaruTitle = ' + $scope.ganbaruTitle);
+	$scope.createGanbaru = function() {
 
-	var coords;
-	geolocation.getLocation().then(function(response) {
-		coords = {'lat': response.coords.latitude, 'long': response.coords.longitude}; 
-		console.log(coords);
+		//bind data from user input
+		var ganbaruTitle = $scope.ganbaruTitle;
+		var ganbaruContent = $scope.ganbaruContent;
+		var expiredDate = ($scope.expiredDate.replace(/\//g, '') + '000000'); //format: yyyymmddhhmmss
+		console.log(expiredDate);
 
-		$scope.createGanbaru = function() {
-			var ganbaruTitle = $scope.ganbaruTitle;
-			var ganbaruContent = $scope.ganbaruContent;
-			var expiredDate = $scope.expiredDate.replace(/\//g, '') + '000000';
-			var ganbaruLocation = [];
+		//get latitude & longitude of location coordinates
+		var ganbaruLocation = [];
+		geolocation.getLocation().then(function(response) {
+			var coords = {lat: response.coords.latitude, long: response.coords.longitude};
 			ganbaruLocation.push(coords.lat);
 			ganbaruLocation.push(coords.long);
+			console.log(ganbaruLocation);
 
-			var create = createGanbaru.save({ganbaruTitle: ganbaruTitle, ganbaruContent: ganbaruContent, expiredDate: expiredDate, ganbaruLocation: ganbaruLocation}, function(response) {
-				console.log(response);
-			}, function() {
-				console.log('Failed create ganbaru');
+			//get arrays of tag string from user input
+			var tags = $scope.tags;
+			var ganbaruTags = [];
+			angular.forEach(tags, function(obj, objKey) {
+				angular.forEach(obj, function(value, key) {
+					ganbaruTags.push(value);
+				});
 			});
-			console.log(create);
-		}
-	}, function() {
-		//Error loading location data;
-	});
+
+			//send request to server
+			createGanbaru.save({ganbaruTitle: ganbaruTitle, ganbaruContent: ganbaruContent, ganbaruLocation: ganbaruLocation,
+				ganbaruTags: ganbaruTags, expiredDate: expiredDate}, function(response) {
+				console.log(response);
+				if(response.code === 0) {
+					$location.path('/feedfv');
+				}
+			}, function() {
+				console.log('Failed to create ganbaru');
+				//Handling error here
+			});
+		}, function() {
+			console.log('Failed to get location!');
+			//Handling error here
+		});
+	};
 }]);
