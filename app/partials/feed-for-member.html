@@ -1,34 +1,15 @@
 <div class="content">
-    <div class="top">
-        <div class="logo">
-            <p>Logo</p>
-        </div>
-        <div class="menu-top">
-            <ul>
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a></li>
-            </ul>
-        </div>
-        <div class="totalNumberTop">
-            <h2>Total Number: {{totalGanbareNumber + totalNumber}}</h2>
-        </div>
-    </div>
+    <ng-include src="'partials/includes/header.html'"></ng-include>
     <div class="main">
-        <div class="main-left">
-            <div class="newGanbaru">
-                <a ng-href="#/register">
-                    <button>Register</button>
-                </a>
-            </div>
-            <div class="areaGanbaru">
-                <h2>Total ganbaru of visitor: {{totalNumber}}</h2>
-            </div>
-        </div>
+        <ng-include src="'partials/includes/main-left.html'"></ng-include>
         <div class="createNew">
         </div>
         <div class="main-right">
             <div class="main-search">
                 <button ng-click="listGanbaru()">LIST GANBARU</button>
+                <button ng-click="listPinGanbaru()">LIST PINNING</button>
+                <button ng-click="listOfFavoriteGanbaru()">LIST OF FAVORITE</button>
+                <button ng-click="listByUserGanbaru()">LIST BY USER</button>
                 <button ng-click="listTagGanbaru()">TAG</button>
                 <button ng-click="listHotGanbaru()">HOT</button>
                 <button ng-click="listGanbaru()">NEW</button>
@@ -71,6 +52,8 @@
                             <p>{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
                         </div>
                         <div class="thumbnail-img">
+                            <div class="thumbnail">
+                            </div>
                             <div class="content">
                                 <div class="content-top">
                                     <p>{{item.ganbaru.ganbaruContent}}</p>
@@ -86,6 +69,9 @@
                                     <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
                                     item)">
                                 </a>
+                            </div>
+                            <div class="detail">
+                                <a href="#/ganbaru/{{item.ganbaru.ganbaruId}}">Detail</a>
                             </div>
                         </div>
                     </li>

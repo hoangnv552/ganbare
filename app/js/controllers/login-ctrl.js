@@ -21,7 +21,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
         if(code === 0) {
           $cookieStore.put('token', response.data.token);
           $cookieStore.put('userId', response.data.userId);
-          $location.path('/feedfv');
+          $location.path('/feedmb');
         } else {
           if(code === 12) {
             $scope.message = 'Email not found!';

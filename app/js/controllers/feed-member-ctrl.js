@@ -6,7 +6,7 @@
 /*
 * Controller Feed for visitors
 */
-ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
+ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
 	'getUserInfo', 'getListGanbaru',
 	function($scope, $cookieStore, addGanbare, $interval, $location, pinGanbaru,
@@ -33,12 +33,13 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 		$scope.listType = '';
 		$scope.ganbaru = [];
 		$scope.length = 0;
+		$scope.totalGanbareNumber = 0;
+		$scope.countNumber = 0;
 
-		// var now = new Date();
-		// console.log(now.toISOString());
-
-		// console.log(now.toISOString().slice(0, 10).replace(/-/g, "")
-		// + now.toISOString().slice(11, 19).replace(/:/g, "") + now.toISOString().slice(20, 23));
+		// If user logout
+		if(!userId){
+			userId = 'none';
+		}
 
 		/*
 		* Selection texbox
@@ -69,6 +70,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 		*/
 		getListGanbaru( $scope.skip, take, '' ).then(function(data) {
 			$scope.ganbaru = data.data;
+			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
 
 		/*
@@ -85,46 +87,53 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 		/*
 		* Function add ganbare
 		*/
-		$scope.addGanbare = function( item ) {
-			var count = 1;
-			var length = ganbaruIdAndNumber.length;
+		$scope.addGanbare = function(item) {
+			var count = 1,
+			length = ganbaruIdAndNumber.length,
+			flgCheck = false;
+			// Caculator total ganbaru number for view
 			$scope.totalNumber++;
+			// Caculator total ganbaru number for function addGanbare
+			$scope.countNumber++;
 
-			if ( length > 0 ) {
+			if (length > 0) {
 				var i;
 				var currentGanbaruId = item.ganbaru.ganbaruId;
 
-				for ( i = 0; i < length; i++ ) {
-					if ( currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId ) {
-						ganbaruIdAndNumber[i].ganbareNumber++;
-					} else {
-						ganbaruIdAndNumber.push({ ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count });
+				for (i = 0; i < length; i++) {
+					if (currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId) {
+						ganbaruIdAndNumber[i].ganbareNumber = $scope.countNumber;
+						flgCheck = true;
 					}
+				}
+				if (flgCheck === false) {
+					$scope.countNumber = 1;
+					ganbaruIdAndNumber.push({ ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count });
 				}
 			} else {
 				ganbaruIdAndNumber.push({ ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count });
 			}
 		};
 
-
-
 		/*
 		* Add ganbare
 		*/
 		function callIntervalAddGanbare() {
 			var length = ganbaruIdAndNumber.length;
+			//Set back countNumber = 0
+			$scope.countNumber = 0;
 
-			if ( length > 0 ) {
+			if (length > 0) {
 				for (var i = 0; i < length; i++ ) {
 					var ganbaruId = ganbaruIdAndNumber[i].ganbaruId;
 					var ganbareNumber = ganbaruIdAndNumber[i].ganbareNumber;
 
-					addGanbare.add({ userId: userId, ganbaruId: ganbaruId, ganbareNumber: ganbareNumber }, function( response ) {
-						response.$promise.then( function( data ) {
-							console.log( data.data );
-						}, function( error ) {
-							// Do something
-						});
+					addGanbare.add({
+						userId: userId,
+						ganbaruId: ganbaruId,
+						ganbareNumber: ganbareNumber
+					}).$promise.then(function addDone(data) {
+						console.log(data.data);
 					});
 				}
 				ganbaruIdAndNumber = [];
@@ -134,7 +143,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 		/*
 		* Set interval callIntervalAddGanbare function
 		*/
-		$interval( callIntervalAddGanbare, 3000 );
+		$interval(callIntervalAddGanbare, 3000);
 
 		/*
 		* Set pin ganbaru
@@ -219,6 +228,7 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 			$scope.listType = types.listTypePin;
 			getListGanbaru( $scope.skip, take, types.listTypePin ).then(function(data) {
 				$scope.ganbaru = data.data;
+
 			});
 		};
 
@@ -325,6 +335,16 @@ ganbareControllers.controller('feedVisitorCtrl', ['$scope', '$cookieStore',
 			getListGanbaru( $scope.skip, take, types.listTypeTag,'' , $scope.selectTag ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
+		};
+
+		/*
+		* Logout
+		*/
+		$scope.logout = function() {
+			var token = $cookieStore.get('token');
+			$cookieStore.remove('token');
+			$cookieStore.remove('userId');
+			$location.path('/login');
 		};
 	}]);
 })();
