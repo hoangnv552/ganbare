@@ -15,7 +15,11 @@ ganbareApp.config(['$routeProvider',
         $routeProvider.
                 when('/feedfv', {
                     templateUrl: 'partials/feed-for-visitors.html',
-                    controller : 'feedVisitorCtrl'
+                    controller : 'feedMemberCtrl'
+                }).
+                when('/feedmb', {
+                    templateUrl: 'partials/feed-for-member.html',
+                    controller: 'feedMemberCtrl'
                 }).
                 when('/login',{
                     templateUrl: 'partials/login.html',
@@ -25,10 +29,10 @@ ganbareApp.config(['$routeProvider',
                     templateUrl: 'partials/view-ganbaru-detail.html',
                     controller: 'viewGanbareDetailCtrl'
                 }).
-                when('/ganbaru/:ganbaruId/edit', {
-                    templateUrl: 'partials/edit-ganbaru.html',
-                    controller: 'editGanbaruCtrl'
-                }).
+                // when('/ganbaru/:ganbaruId/edit', {
+                //     templateUrl: 'partials/edit-ganbaru.html',
+                //     controller: 'editGanbaruCtrl'
+                // }).
                 when('/creategb', {
                     templateUrl: 'partials/create-ganbaru.html',
                     controller: 'createGanbaruCtrl'
@@ -38,7 +42,7 @@ ganbareApp.config(['$routeProvider',
                     controller: 'myPageGanbaruCtrl'
                 }).
                 otherwise({
-                    redirectTo: '/login'
+                    redirectTo: '/feedfv'
                 });
         }]);
 }());

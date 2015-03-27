@@ -18,6 +18,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
       loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
 
         code = response.code;
+
         switch(code) {
           case 12: {
             $scope.message = 'Email not found!';

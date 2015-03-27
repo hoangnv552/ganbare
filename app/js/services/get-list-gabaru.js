@@ -48,11 +48,11 @@ ganbareServices.factory('getListGanbaru', ['listGanbaru', '$cookieStore',
 			break;
 
 	    case types.listTypeTag:
-	      	ganbaruPromise = listGanbaru.default({ filterType: 4, sortType: 1, tags: selectTag, skip: skip, take: takeNumber });
+	      	ganbaruPromise = listGanbaru.default({ filterType: 4, sortType: 1, tags: [selectTag], skip: skip, take: takeNumber });
 	      	break;
 
 	    case types.listTypeSearch:
-			ganbaruPromise = listGanbaru.query({ searchContent: contentSearch, skip: skip, take: takeNumber });
+			ganbaruPromise = listGanbaru.default({ searchContent: contentSearch, skip: skip, take: takeNumber });
 			break;
 
 	    default:
