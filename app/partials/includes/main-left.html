@@ -1,0 +1,21 @@
+<div class="main-left">
+    <div class="avatarUser">
+        <img src="" />
+        <p>{{user.data.username}}</p>
+    </div>
+    <div class="newGanbaru">
+        <a ng-href="#/creategb">
+            <button>New Ganbaru</button>
+        </a>
+    </div>
+    <div class="areaGanbaru">
+        <h3>Sent ganbare number: </h3>
+        <h2>{{user.data.sentGanbareNumber + totalNumber}}</h2>
+        <h3>Received ganbare number: </h3>
+        <h2>{{user.data.receivedGanbareNumber}}</h2>
+        <h3>Favorite: </h3>
+        <h2>{{user.data.favoriteNumber}}</h2>
+        <h3>Favorited: </h3>
+        <h2>{{user.data.favoritedNumber}}</h2>
+    </div>
+</div>

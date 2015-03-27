@@ -1,7 +1,7 @@
+
 'use strict';
 
 /* Services */
-/* jshint node: true */
 
 /*
 * Service Add Ganbare
