@@ -2,6 +2,7 @@
 .ganbare-dtl-container {
 	width: 750px;
 	padding: 15px 15px 0 15px;
+	background-color: #f4ffd6;
 }
 
 .ganbare-block {
@@ -10,17 +11,17 @@
 }
 
 /*block of name, expired data, created date*/
-.ganbare-block:nth-child(1) {
+.ganbare-avatar-block {
 	height: 150px;
 }
 
 .ganbare-user-logo {
 	width: 120px;
 	height: 150px;
-	background-color: #ff4252;
+	background-color: #ff4e50;
 	color: #fff;
 	float: left;
-	text-align: center;
+	border-radius: 10px;
 }
 
 .ganbare-information > div {
@@ -36,33 +37,22 @@
 }
 
 /*block of ganbaru number, like button, pin button*/
-.ganbare-block:nth-child(2) {
+.ganbare-button-block {
 	height: 80px;
 }
 
-.ganbare-block:nth-child(2) > div {
+.ganbare-button-block > div {
 	display: inline-block;
+	background-color: #ccec75;
 }
 
-.ganbare-block:nth-child(2) button {
+.ganbare-button-block button {
 	float: right;
 	margin-left: 20px;
 	padding: 0;
 }
 
-.ganbare-number {
-	width: 480px;
-	border: 2px solid #000;
-	height: 80px;
-}
-
-.ganbare-number h3 {
-	font-size: 35px;
-  	text-align: right;
-  	margin: 20px 21px 0 0 ;
-}
-
-.ganbare-block:nth-child(2) button > div {
+.ganbare-button-block button > div {
 	background-size: cover;
 	width: 74px;
 	height: 74px;
@@ -84,33 +74,59 @@
 	background-image: url('../img/user/unfavor.png');
 }
 
+.ganbareIcon {
+	background-image: url('../img/user/ganbare.png');
+}
+
+.ganbare-number {
+	width: 400px;
+	border: 2px solid #000;
+	height: 80px;
+}
+
+.ganbare-number h3 {
+	font-size: 35px;
+  	text-align: right;
+  	margin: 20px 21px 0 0 ;
+}
+
 /*block of ganbare content*/
-.ganbare-block:nth-child(3) {
-	background-color: #dedede;
+.ganbare-content-block {
 	height: 250px;
 	padding: 20px;
 	font-size: 20px;
 	text-align: center;
 }
 
-/*block of ganbare image*/
-.ganbare-block:nth-child(4) {
-	background-color: #dedede;
+/*block of ganbare tags*/
+.ganbare-tags-block {
 	height: 100px;
+	padding: 15px;
 }
 
-/*block of + ganbare button*/
-.ganbare-block:nth-child(5) {
-	text-align: center;
+.ganbare-tags-block ul {
+	padding: 0;
 }
 
-.ganbare-block:nth-child(5) button {
-	height: 50px;
-	width: 50%;
+.ganbare-tags-block li {
+	display: inline-block;
+	text-decoration: none;
+	padding: 3px 5px 3px 5px;
+	margin-right: 5px;
+	border-radius: 5px;
+	background: -moz-linear-gradient(top, #a0db8e, #6dc066);
+	background: -webkit-linear-gradient(top, #a0db8e, #6dc066);
+	background: -o-linear-gradient(top, #a0db8e, #6dc066);
+	background: linear-gradient(to top, #a0db8e, #6dc066);
 }
 
-/*block of list*/
-.ganbare-block:nth-child(6) {
-	background-color: #dedede;
-	height: 200px;
+.ganbare-tags-block li > label {
+	margin: 0;
+}
+
+/*block of ganbare location*/
+.ganbare-content-block,
+.ganbare-tags-block,
+.ganbare-map-block {
+	background-color: #dff79e;
 }
