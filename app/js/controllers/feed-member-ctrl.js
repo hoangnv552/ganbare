@@ -8,9 +8,9 @@
 */
 ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
-	'getUserInfo', 'getListGanbaru',
+	'getUserInfo', 'getListGanbaru', 'getUtilities',
 	function($scope, $cookieStore, addGanbare, $interval, $location, pinGanbaru,
-		favoriteGanbaru, getUserInfo, getListGanbaru) {
+		favoriteGanbaru, getUserInfo, getListGanbaru, getUtilities) {
 
 		var types = {
 	  		listTypePin: 1,
@@ -96,23 +96,9 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 			// Caculator total ganbaru number for function addGanbare
 			$scope.countNumber++;
 
-			if (length > 0) {
-				var i;
-				var currentGanbaruId = item.ganbaru.ganbaruId;
-
-				for (i = 0; i < length; i++) {
-					if (currentGanbaruId === ganbaruIdAndNumber[i].ganbaruId) {
-						ganbaruIdAndNumber[i].ganbareNumber = $scope.countNumber;
-						flgCheck = true;
-					}
-				}
-				if (flgCheck === false) {
-					$scope.countNumber = 1;
-					ganbaruIdAndNumber.push({ ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count });
-				}
-			} else {
-				ganbaruIdAndNumber.push({ ganbaruId: item.ganbaru.ganbaruId, ganbareNumber: count });
-			}
+			getUtilities.caculatorArrNumberClicked($scope, item, ganbaruIdAndNumber).then(function(response){
+				ganbaruIdAndNumber = response;
+			});
 		};
 
 		/*
@@ -176,13 +162,17 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		/*
 		* Set favorite ganbaru
 		*/
-		$scope.addFavorite = function (item) {
+		$scope.addFavorite = function (item, ganbaru) {
 			return favoriteGanbaru.add({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function addDone(data) {
 				if (data.code === 0) {
-					item.user.isFavoristUser = true;
+					angular.forEach(ganbaru, function(value, key) {
+						if (item.user.userId === value.user.userId) {
+							value.user.isFavoristUser = true;
+						}
+					});
 				}
 			});
 		};
@@ -190,13 +180,17 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		/*
 		* Set remove favorite ganbaru
 		*/
-		$scope.removeFavorite = function( item ) {
+		$scope.removeFavorite = function(item, ganbaru) {
 			return favoriteGanbaru.remove({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function unFavorite(data) {
 				if (data.code === 0) {
-					item.user.isFavoristUser = false;
+					angular.forEach(ganbaru, function(value, key) {
+						if (item.user.userId === value.user.userId) {
+							value.user.isFavoristUser = false;
+						}
+					});
 				}
 			});
 		};

@@ -44,10 +44,10 @@
                                 <p class="unpin" ng-click="unPinGanbaru(item)"></p>
                             </span>
                             <span ng-if="item.user.isFavoristUser == false">
-                                <p class="favorite" ng-click="addFavorite(item)"></p>
+                                <p class="favorite" ng-click="addFavorite(item, ganbaru)"></p>
                             </span>
                             <span ng-if="item.user.isFavoristUser == true">
-                                <p class="removefavorite" ng-click="removeFavorite(item)"></p>
+                                <p class="removefavorite" ng-click="removeFavorite(item, ganbaru)"></p>
                             </span>
                             <p>{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
                         </div>
@@ -61,7 +61,7 @@
                                 <div class="content-bottom">
                                     <p>{{item.user.username}}</p>
                                     <p>{{item.ganbaru.createDate | date:'yyyy-MM-dd'}}</p>
-                                    <p>{{item.ganbaru.expiredDate }}</p>
+                                    <p>{{item.ganbaru.expiredDate | dateFilter}}</p>
                                 </div>
                             </div>
                             <div class="ganbaru-dd">

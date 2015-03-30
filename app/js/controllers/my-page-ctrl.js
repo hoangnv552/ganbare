@@ -15,6 +15,7 @@ ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'getUserInfo', '$c
     $scope.skip = 0;
     $scope.ganbaru = [];
     $scope.length = 0;
+    $scope.totalGanbareNumber = 0;
 
     /*
     * Get user infor
@@ -30,6 +31,7 @@ ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'getUserInfo', '$c
     */
     getListGanbaru( $scope.skip, take, listTypeUser ).then(function(data) {
         $scope.ganbaru = data.data;
+        $scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
     });
 
     /*
