@@ -1,7 +1,7 @@
 'use strict';
 
-ganbareControllers.controller('editGanbaruCtrl', ['$scope', '$cookieStore', '$routeParams','ganbaruDetail', 'editGanbaru',
-	function($scope, $cookieStore, $routeParams, ganbaruDetail, editGanbaru) {
+ganbareControllers.controller('editGanbaruCtrl', ['$scope', '$cookieStore', '$routeParams','ganbaruDetail', 'editGanbaru', 'getUtilities',
+	function($scope, $cookieStore, $routeParams, ganbaruDetail, editGanbaru, getUtilities) {
 		var userId = $cookieStore.get('userId');
 		var token = $cookieStore.get('token');
 		var ganbaruId = $routeParams.ganbaruId;	
@@ -23,8 +23,6 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope', '$cookieStore', '$ro
 				tags.push({text: obj}); 
 			});
 			$scope.ganbaru.ganbaruTags = tags;
-
-
 
 			/*Send edit request*/
 			$scope.editGanbaru = function() {

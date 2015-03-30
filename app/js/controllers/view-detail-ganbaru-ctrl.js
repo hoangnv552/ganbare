@@ -6,15 +6,15 @@
 	ganbareControllers.controller('viewGanbareDetailCtrl', 
 		['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 
 		'ganbaruDetail', 'addGanbare', 'pinGanbaru', 
-		'favoriteGanbaru',
+		'favoriteGanbaru', 'getUtilities',
 		function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru, 
-			favoriteGanbaru, removeFavoriteGanbaru) {
+			favoriteGanbaru, getUtilities) {
 
 			var userId = $cookieStore.get('userId');
 			var token = $cookieStore.get('token');
 			var ganbaruId = $routeParams.ganbaruId;	
 
-			ganbaruDetail.query({ganbaruId: ganbaruId}, function(response) {
+			getUtilities.sendRequestGetGanbareDetail(ganbaruId).then(function(response) {
 				console.log(response);
 				$scope.ganbaru = response.data.ganbaru;
 				$scope.ganbaruUser = response.data.user;
@@ -50,8 +50,7 @@
 					}
 				};
 
-
-				/*Add/remove favorite Event*/
+				// Add/remove favorite Event
 				$scope.toggleFavorite = function() {
 					var friendId = $scope.ganbaruUser.userId;
 					//reverse icon state
@@ -72,33 +71,31 @@
 				}
 
 				/*Add Ganbare*/
-				var clickNumber = 0;	//the number of user's ganbare clicks
+				$scope.clickNumber = 0;	//the number of user's ganbare clicks
 				$scope.addGanbare = function() {
 					$scope.ganbaru.ganbareNumber++;
-					clickNumber++;
-				};
-
-				function sendAddGanbareRequest() {
-					//if user click, then do this
-					if(clickNumber > 0) {
-						addGanbare.add({userId: userId, ganbareNumber: clickNumber, ganbaruId: ganbaruId}, function(response) {
-							console.log(response.data);
-						}, function() {
-							//Handle error here
-							console.log('Failed add ganbare!');
-						});
-						clickNumber = 0;
-					}
+					$scope.clickNumber++;
 				};
 
 				//send Add Ganbare request to server every 3s
-				$interval(sendAddGanbareRequest, 3000);	
+				var sendRequest = function() { 
+					getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
+						console.log(response);
+					}, function() {
+						//Handling error here
+					});
+					$scope.clickNumber = 0;
+				}
 
+				$interval(sendRequest, 3000);
+
+				/*go to Edit page*/
 				$scope.goToEditPage = function() {
 					$location.path('/ganbaru/' + ganbaruId +'/edit');
 				};
-			}, function() {
-				console.log('Failed to get gabare detail');
+
+			}, function(response) {
+				//Handling error here
 			});
 	}]);
 })();

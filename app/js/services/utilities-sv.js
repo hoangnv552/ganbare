@@ -4,8 +4,8 @@
 /*
 * Service utilites
 */
-ganbareServices.factory('getUtilities', ['$q',
-	function($q){
+ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
+	function($q, addGanbare, ganbaruDetail){
 		return {
 			/*
 			* Caculator array same [{ ganbaruId: sddf234sf, ganbareNumber: 2 }]
@@ -41,7 +41,34 @@ ganbareServices.factory('getUtilities', ['$q',
 				deferred.resolve(ganbaruIdAndNumber);
 
 				return deferred.promise;
-			}
+			},
+
+			/*Add ganbare in view Ganbaru Detail Page & Edit Ganbaru Detail Page*/
+			sendRequestAddGanbare: function($scope, userId, ganbaruId) {
+				var deferred = $q.defer();
+				if($scope.clickNumber > 0) {
+					addGanbare.add({
+						userId: userId,
+						ganbaruId: ganbaruId,
+						ganbareNumber: $scope.clickNumber
+					}, function(response) {
+						deferred.resolve(response.data);
+					}, function() {
+						deferred.reject('Failed To Add Ganbare!');
+					});
+				}
+				return deferred.promise;
+			},
+
+			sendRequestGetGanbareDetail: function(ganbaruId) {
+				var deferred = $q.defer();
+				ganbaruDetail.query({ganbaruId: ganbaruId}, function(response) {
+					deferred.resolve(response);
+				}, function() {
+					deferred.reject('Failed To Get Ganbaru Detail!');
+				});
+				return deferred.promise;
+			}	
 		}
 	}]);
 })()
