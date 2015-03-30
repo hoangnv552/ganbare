@@ -8,14 +8,15 @@
 */
 ganbareServices.factory('getListGanbaru', ['listGanbaru', '$cookieStore',
   function(listGanbaru, $cookieStore ) {
+
   	var types = {
-  		listTypePin: 1,
+  		listTypePin:      1,
 		listTypeFavorite: 2,
-		listTypeUser: 3,
-		listTypeHot: 4,
-		listTypeExpire: 5,
-		listTypeTag: 6,
-		listTypeSearch: 7
+		listTypeUser:     3,
+		listTypeHot:      4,
+		listTypeExpire:   5,
+		listTypeTag:      6,
+		listTypeSearch:   7
 	};
 
 	var userId  = $cookieStore.get('userId'),
