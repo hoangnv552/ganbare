@@ -21,8 +21,8 @@
                         <div class="list-my-page">
                             <div class="page-left">
                                 <div class="date">
-                                    <p>Create date: {{item.ganbaru.createDate}}</p>
-                                    <p>Time: {{item.ganbaru.expiredDate}}</p>
+                                    <p>Create date: {{item.ganbaru.createDate | dateFilter}}</p>
+                                    <p>Time: {{item.ganbaru.expiredDate | dateFilter}}</p>
                                 </div>
                                 <div class="totalnumber">
                                     <p>{{item.ganbaru.ganbareNumber}}</p>
