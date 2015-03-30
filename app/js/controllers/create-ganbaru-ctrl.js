@@ -29,7 +29,7 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 				ganbaruTags: ganbaruTags, expiredDate: expiredDate}, function(response) {
 				console.log(response);
 				if(response.code === 0) {
-					$location.path('/feedfv');
+					$location.path('/feedmb');
 				}
 			}, function() {
 				console.log('Failed to create ganbaru');
