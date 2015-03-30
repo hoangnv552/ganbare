@@ -34,7 +34,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
           case 0: {
             $cookieStore.put('token', response.data.token);
             $cookieStore.put('userId', response.data.userId);
-            $location.path('/feedfv');
+            $location.path('/feedmb');
           }
         }
       }, function(error) {
