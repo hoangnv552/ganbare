@@ -1,0 +1,145 @@
+/*common*/
+.block {
+	display: block;
+	/*overflow: auto;*/
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.edit-container h2 {
+	margin: 0;
+}
+
+.edit-container label {
+	font-weight: normal;
+}
+
+.edit-container button,
+.edit-container label,
+.edit-container input,
+.edit-container textarea {
+	font-size: 16px;
+}
+
+/*container*/
+.edit-container {
+	width: 750px;
+	padding: 20px;
+	font-size: 20px;
+}
+
+/*header style*/
+.edit-container .header {
+	min-height: 182px;
+}
+
+.edit-container .avatar {
+	background-color: red;
+	width: 120px;
+	height: 150px;
+}
+
+.edit-container .username-container {
+	text-align: center;
+	padding: 5px 0;
+	font-size: 16px;
+}
+
+.edit-container .date-container {
+	padding: 15px 0 0 30px;
+}
+
+.edit-container .created-date {
+	margin-right: 80px;
+}
+
+.edit-container .datepickerbox {
+	padding: 0 3px;
+	font-size: 18px;
+	width: 170px;
+}
+
+.edit-container .ganbare {
+	padding-top: 22px;
+}
+
+.edit-container .ganbare-number {
+	border: 2px solid #000;
+	padding: 20px;
+	width: 430px;
+	text-align: right;
+}
+
+.edit-container .ganbare-button-container{
+	margin-left: 35px;
+}
+
+.edit-container .ganbare-button,
+.edit-container .ganbare-button > div {
+	width: 80px;
+	height: 80px;
+}
+
+.edit-container .ganbare-button > div {
+	background-size: cover; 
+	background-image: url('../img/user/ganbare.png');;
+}
+
+/*section style*/
+.edit-container .section {
+	margin: 20px 0;
+	padding: 20px;
+	background-color : gray;
+}
+
+.edit-container .ganbaru-avatar {
+	width: 180px;
+	height: 180px;
+	background-color: navy;
+}
+
+.edit-container .upload-button-container {
+	padding: 20px 0;
+	text-align: center;
+}
+
+.edit-container .ganbaru-content {
+	margin-left: 30px;
+}
+
+.edit-container .ganbaru-content .block {
+	margin-bottom: 22px;
+}
+
+.edit-container .ganbaru-content label {
+	width: 80px;
+	line-height: 25px;
+}
+
+.edit-container .ganbaru-content input,
+.edit-container .ganbaru-content textarea {
+	width: 370px;
+}
+
+/*confirm button block*/
+
+.edit-container .confirm-button-container {
+	padding: 30px;
+	text-align: center;
+}
+
+.edit-container .confirm-button {
+	width: 300px;
+	height: 50px;
+	font-size: 20px;
+}

@@ -4,10 +4,10 @@
 
 (function() {
 	ganbareControllers.controller('viewGanbareDetailCtrl', 
-		['$scope', '$cookieStore', '$routeParams', '$interval', 
+		['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 
 		'ganbaruDetail', 'addGanbare', 'pinGanbaru', 
 		'favoriteGanbaru',
-		function($scope, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru, 
+		function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru, 
 			favoriteGanbaru, removeFavoriteGanbaru) {
 
 			var userId = $cookieStore.get('userId');
@@ -93,6 +93,10 @@
 
 				//send Add Ganbare request to server every 3s
 				$interval(sendAddGanbareRequest, 3000);	
+
+				$scope.goToEditPage = function() {
+					$location.path('/ganbaru/' + ganbaruId +'/edit');
+				};
 			}, function() {
 				console.log('Failed to get gabare detail');
 			});
