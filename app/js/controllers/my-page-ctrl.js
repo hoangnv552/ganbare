@@ -6,8 +6,8 @@
 /*
 * Controller my page
 */
-ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'getUserInfo', '$cookieStore', 'getListGanbaru',
-	function( $scope, getUserInfo, $cookieStore, getListGanbaru ) {
+ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'user', '$cookieStore', 'getListGanbaru',
+	function( $scope, user, $cookieStore, getListGanbaru ) {
 
 	var userId  = $cookieStore.get('userId'),
     listTypeUser = 3,
@@ -20,7 +20,7 @@ ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'getUserInfo', '$c
     /*
     * Get user infor
     */
-    getUserInfo.getUser({
+    user.getUser({
         id: userId
     }).$promise.then(function getDone(data) {
         $scope.user = data;

@@ -8,9 +8,9 @@
 */
 ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
-	'getUserInfo', 'getListGanbaru', 'getUtilities',
+	'getListGanbaru', 'getUtilities',
 	function($scope, $cookieStore, addGanbare, $interval, $location, pinGanbaru,
-		favoriteGanbaru, getUserInfo, getListGanbaru, getUtilities) {
+		favoriteGanbaru, getListGanbaru, getUtilities) {
 
 		var types = {
 	  		listTypePin: 1,
@@ -55,15 +55,6 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 				$scope.selectTag.push(tag);
 			}
 		};
-
-		/*
-		* Get user infor
-		*/
-		getUserInfo.getUser({
-			id: userId
-		}).$promise.then(function getDone(data) {
-			$scope.user = data;
-		});
 
 		/*
 		* Defaul load page
@@ -331,14 +322,5 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 			});
 		};
 
-		/*
-		* Logout
-		*/
-		$scope.logout = function() {
-			var token = $cookieStore.get('token');
-			$cookieStore.remove('token');
-			$cookieStore.remove('userId');
-			$location.path('/feedfv');
-		};
 	}]);
 })();

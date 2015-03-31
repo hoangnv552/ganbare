@@ -8,7 +8,8 @@ var ganbareApp = angular.module('ganbareApp', [
     'ngRoute',
     'ganbareControllers',
     'ganbareServices',
-    'ganbareFilters'
+    'ganbareFilters',
+    'ganbareDirective'
 ]);
 
 ganbareApp.config(['$routeProvider',
@@ -41,6 +42,10 @@ ganbareApp.config(['$routeProvider',
                 when('/mypage', {
                     templateUrl: 'partials/my-page.html',
                     controller: 'myPageGanbaruCtrl'
+                }).
+                when('/edit-my-page', {
+                    templateUrl: 'partials/edit-my-page.html',
+                    controller : 'editMyPageCtrl'
                 }).
                 otherwise({
                     redirectTo: '/feedfv'
