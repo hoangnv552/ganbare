@@ -14,7 +14,7 @@
 			var token = $cookieStore.get('token');
 			var ganbaruId = $routeParams.ganbaruId;	
 
-			getUtilities.sendRequestGetGanbareDetail(ganbaruId).then(function(response) {
+			getUtilities.sendRequestGetGanbaruDetail(ganbaruId).then(function(response) {
 				console.log(response);
 				$scope.ganbaru = response.data.ganbaru;
 				$scope.ganbaruUser = response.data.user;
