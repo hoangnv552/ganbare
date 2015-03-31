@@ -338,7 +338,7 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 			var token = $cookieStore.get('token');
 			$cookieStore.remove('token');
 			$cookieStore.remove('userId');
-			$location.path('/login');
+			$location.path('/feedfv');
 		};
 	}]);
 })();

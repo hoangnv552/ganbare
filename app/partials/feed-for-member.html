@@ -35,7 +35,7 @@
                 <h1>{{getGanbaruError}}</h1>
                 <ul>
                     <li ng-repeat="item in ganbaru">
-                        <span ng-init="item.ganbaru.createDate = 0; totalNumber = 0"></span>
+                        <span ng-init="$index = 0; totalNumber = 0"></span>
                         <div class="img">
                             <span ng-if="item.ganbaru.isPinning == false">
                                 <p class="pin" ng-click="pinGanbaru(item)"></p>
@@ -49,7 +49,7 @@
                             <span ng-if="item.user.isFavoristUser == true">
                                 <p class="removefavorite" ng-click="removeFavorite(item, ganbaru)"></p>
                             </span>
-                            <p>{{item.ganbaru.ganbareNumber + item.ganbaru.createDate}}</p>
+                            <p>{{item.ganbaru.ganbareNumber + $index}}</p>
                         </div>
                         <div class="thumbnail-img">
                             <div class="thumbnail">
@@ -60,12 +60,12 @@
                                 </div>
                                 <div class="content-bottom">
                                     <p>{{item.user.username}}</p>
-                                    <p>{{item.ganbaru.createDate | date:'yyyy-MM-dd'}}</p>
+                                    <p>{{item.ganbaru.createDate | dateFilter}}</p>
                                     <p>{{item.ganbaru.expiredDate | dateFilter}}</p>
                                 </div>
                             </div>
                             <div class="ganbaru-dd">
-                                <a ng-click="item.ganbaru.createDate = item.ganbaru.createDate + 1">
+                                <a ng-click="$index = $index + 1">
                                     <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
                                     item)">
                                 </a>
