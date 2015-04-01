@@ -29,6 +29,7 @@
     "checklist-model": "~0.2.4",
     "angular-bootstrap-datetimepicker": "~0.3.12",
     "ng-tags-input": "~2.3.0",
-    "ngmap": "~1.4.2"
+    "ngmap": "~1.4.2",
+    "angular-validation-match": "~1.4.1"
   }
 }

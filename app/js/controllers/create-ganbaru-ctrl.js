@@ -10,27 +10,29 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 
 	$scope.createGanbaru = function() {
 		//bind data from user input: title, content, expired date,tags
-		var ganbaruTitle = $scope.ganbaruTitle;
-		var ganbaruContent = $scope.ganbaruContent;
-		var expiredDate = ($scope.expiredDate.replace(/\//g, '') + '000000'); //format: yyyymmddhhmmss
+		$scope.ganbaru.ganbaruTags = [];
+		$scope.ganbaru.ganbaruLocation = [];
 
-		var tags = $scope.tags;
-		var ganbaruTags = [];
-		angular.forEach(tags, function(obj, objKey) {
+		//get array of tags from input 
+		angular.forEach($scope.tagsInput, function(obj, objKey) {
 			angular.forEach(obj, function(value, key) {
-				ganbaruTags.push(value);
+				$scope.ganbaru.ganbaruTags.push(value);
 			});
 		});
 
 		//get latitude & longitude of location coordinates
-		var ganbaruLocation = [];
 		geolocation.getLocation().then(function(response) {
-			ganbaruLocation.push(response.coords.latitude);
-			ganbaruLocation.push(response.coords.longitude);
+			$scope.ganbaru.ganbaruLocation.push(response.coords.latitude);
+			$scope.ganbaru.ganbaruLocation.push(response.coords.longitude);
 
 			//send request to server
-			createGanbaru.save({ganbaruTitle: ganbaruTitle, ganbaruContent: ganbaruContent, ganbaruLocation: ganbaruLocation,
-				ganbaruTags: ganbaruTags, expiredDate: expiredDate}, function(response) {
+			createGanbaru.save({
+				ganbaruTitle: $scope.ganbaru.ganbaruTitle, 
+				ganbaruContent: $scope.ganbaru.ganbaruContent, 
+				ganbaruLocation: $scope.ganbaru.ganbaruLocation,
+				ganbaruTags: $scope.ganbaru.ganbaruTags, 
+				expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmssSSS')
+			}, function(response) {
 				console.log(response);
 				if(response.code === 0) {
 					$location.path('/feedmb');

@@ -1,67 +1,67 @@
-.login-container {
+.login {
 	width: 1000px;
 }
 
-.login-container > div:nth-child(2) {
+.login > div:nth-child(2) {
 	overflow: auto;
 }
 
 /*login-header style*/
-.login-header{
+.login .login-header{
 	margin: 0 20px 0 20px;
 	padding: 20px 0 20px 0;
 	border-bottom: 2px solid #000;
 }
 
-.login-header h2 {
+.login .login-header h2 {
 	text-align: center;
 	border: 2px solid #000;
 	margin: 0 0 0 120px;
 	padding: 32px 0;
 }
 
-.logo{
+.login .logo{
 	float: left;
 }
 
 /*navigation style*/
-.login-nav{
+.login .login-nav{
 	padding-left: 30px;
 	min-height: 490px;
 	border-right: 2px solid #000;
 }
 
 /*section style*/
-.login-section{
+.login .login-section{
 	margin-left: 231px;
 }
 
-.form-container {
+.login .form-container {
 	margin-top: 50px;
 }
 
-.form-block {
+.login .form-block {
 	display: block;
 	margin: 60px 0;
 }
 
-.form-block > label {
+.login .form-block > label {
 	float: left;
 	text-align: right;
 	width: 15%;
 	margin: 0 30px 0 60px;
 }
 
-.form-block > input[type="email"],
-.form-block > input[type="password"] {
+.login .form-block > input[type="email"],
+.login .form-block > input[type="password"] {
 	width: 50%;
 }
 
-.login-container .button-block, 
-.login-container .error-block {
+.login .button-block, 
+.login .error-block {
 	text-align: center;
 }
 
-.error-block {
+.login .error-block {
 	color: #ff0000;
 }

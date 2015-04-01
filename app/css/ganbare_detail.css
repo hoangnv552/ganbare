@@ -90,6 +90,12 @@
 	font-size: 18px;
 }
 
+.ganbaru-detail .content-block h3 {
+	text-align: center;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
 /*block of ganbare tags*/
 .ganbaru-detail .tags-block {
 	height: 100px;

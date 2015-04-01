@@ -23,7 +23,7 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 				angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
 					tags.push(obj.text);
 				});
-				$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYYMMDDHHMMSS");
+				$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYYMMDDHHmmssSSS");
 
 				editGanbaru.put({
 					ganbaruId: ganbaruId,
