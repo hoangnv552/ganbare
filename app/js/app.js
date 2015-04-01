@@ -8,7 +8,8 @@ var ganbareApp = angular.module('ganbareApp', [
     'ngRoute',
     'ganbareControllers',
     'ganbareServices',
-    'ganbareFilters'
+    'ganbareFilters',
+    'ganbareDirective'
 ]);
 
 ganbareApp.config(['$routeProvider',
@@ -49,7 +50,15 @@ ganbareApp.config(['$routeProvider',
                 when('/register/:userId/verify', {
                     templateUrl: 'partials/verify-register.html',
                     controller: 'registerCtrl'
-                })
+                }).
+                when('/edit-my-page', {
+                    templateUrl: 'partials/edit-my-page.html',
+                    controller : 'editMyPageCtrl'
+                }).
+                when('/users/:userId/ganbaru', {
+                    templateUrl: 'partials/list-by-user.html',
+                    controller : 'listByUser'
+                }).
                 otherwise({
                     redirectTo: '/feedfv'
                 });

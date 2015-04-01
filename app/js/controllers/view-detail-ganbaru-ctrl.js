@@ -3,16 +3,16 @@
 /* Controllers */
 
 (function() {
-	ganbareControllers.controller('viewGanbareDetailCtrl', 
-		['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 
-		'ganbaruDetail', 'addGanbare', 'pinGanbaru', 
-		'favoriteGanbaru', 'getUserInfo', 'getUtilities',
-		function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru, 
-			favoriteGanbaru, getUserInfo,getUtilities) {
+	ganbareControllers.controller('viewGanbareDetailCtrl',
+		['$scope', '$location', '$cookieStore', '$routeParams', '$interval',
+		'ganbaruDetail', 'addGanbare', 'pinGanbaru',
+		'favoriteGanbaru', 'user', 'getUtilities',
+		function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru,
+			favoriteGanbaru, user, getUtilities) {
 
 			var userId = $cookieStore.get('userId');
 			var token = $cookieStore.get('token');
-			var ganbaruId = $routeParams.ganbaruId;	
+			var ganbaruId = $routeParams.ganbaruId;
 
 			$scope.goTo = function(url) {
 				$location.path(url);
@@ -40,7 +40,7 @@
 							}, function() {
 								//Handle error here
 								console.log('Failed to pin!');
-							});					
+							});
 						} else {
 							pinGanbaru.unpin({userId: userId, ganbaruId: ganbaruId}, function(response) {
 								console.log(response);
@@ -79,9 +79,9 @@
 					$scope.addGanbare = function() {
 						$scope.ganbaru.ganbareNumber++;
 						$scope.clickNumber++;
-						
+
 						if(userId !== 'none') {
-							getUserInfo.getUser({id: userId}, function(response) {
+							user.getUser({id: userId}, function(response) {
 								var userInfo = {userId: userId, userName: response.data.username};
 								var found = false;
 								angular.forEach($scope.ganbaru.listGanbare, function(obj, key) {
@@ -104,8 +104,12 @@
 					};
 
 					//send Add Ganbare request to server every 3s
+<<<<<<< HEAD
 					var sendRequest = function() { 
 						// console.log('userId here = ' + userId);
+=======
+					var sendRequest = function() {
+>>>>>>> 34915a0b6bd4788b352aa25c343aa94bb1b5708c
 						getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
 							console.log(response);
 						}, function() {

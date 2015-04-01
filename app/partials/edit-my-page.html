@@ -1,0 +1,33 @@
+<div class="content">
+    <header-directive></header-directive>
+    <div class="main">
+        <left-directive></left-directive>
+        <div class="createNew">
+        </div>
+        <div class="main-right">
+            <div class="main-search">
+            	<h2>Edit My Page</h2>
+            </div>
+            <div class="ganbaru-content">
+                <div class="edit-my-page">
+                    <form enctype="multipart/form-data" ng-submit="updateProfile()">
+                        Username :</br>
+                        <input type="text" ng-model="user.data.username" /></br>
+                        Profile :</br>
+                        <textarea rows="4" cols="50"
+                          ng-model="user.data.userProfile">
+                        </textarea><br>
+                        Profile Photo :</br>
+                        <input type="file" file-model="avatar"></br>
+                        Background :</br>
+                        <input type="file" file-model="background"></br>
+                        <button ng-click="uploadFile()">upload</button></br>
+                        </br>
+                        <input type="submit" value="Confirm">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

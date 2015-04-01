@@ -1,7 +1,7 @@
 <div class="content">
-    <ng-include src="'partials/includes/header.html'"></ng-include>
+    <header-directive></header-directive>
     <div class="main">
-        <ng-include src="'partials/includes/main-left.html'"></ng-include>
+        <left-directive></left-directive>
         <div class="createNew">
         </div>
         <div class="main-right">
@@ -11,6 +11,9 @@
 			        <a ng-href="#/creategb">
 			            <button>New Ganbaru</button>
 			        </a>
+                    <a ng-href="#/edit-my-page">
+                        <button>Edit My Page</button>
+                    </a>
 			    </div>
             </div>
             <div class="ganbaru-content">

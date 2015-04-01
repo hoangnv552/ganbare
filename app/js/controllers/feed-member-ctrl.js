@@ -8,9 +8,9 @@
 */
 ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
-	'getUserInfo', 'getListGanbaru', 'getUtilities',
+	'getListGanbaru', 'getUtilities',
 	function($scope, $cookieStore, addGanbare, $interval, $location, pinGanbaru,
-		favoriteGanbaru, getUserInfo, getListGanbaru, getUtilities) {
+		favoriteGanbaru, getListGanbaru, getUtilities) {
 
 		var types = {
 	  		listTypePin: 1,
@@ -37,33 +37,9 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		$scope.countNumber = 0;
 
 		// If user logout
-		if(!userId){
+		if (!userId) {
 			userId = 'none';
 		}
-
-		/*
-		* Selection texbox
-		*/
-		$scope.toggleSelection = function(tag) {
-			var idx = $scope.selectTag.indexOf(tag);
-			// is currently selected
-			if (idx > -1) {
-				$scope.selectTag.splice(idx, 1);
-			}
-			// is newly selected
-			else {
-				$scope.selectTag.push(tag);
-			}
-		};
-
-		/*
-		* Get user infor
-		*/
-		getUserInfo.getUser({
-			id: userId
-		}).$promise.then(function getDone(data) {
-			$scope.user = data;
-		});
 
 		/*
 		* Defaul load page
@@ -332,13 +308,19 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		};
 
 		/*
-		* Logout
+		* Selection texbox
 		*/
-		$scope.logout = function() {
-			var token = $cookieStore.get('token');
-			$cookieStore.remove('token');
-			$cookieStore.remove('userId');
-			$location.path('/feedfv');
+		$scope.toggleSelection = function(tag) {
+			var idx = $scope.selectTag.indexOf(tag);
+			// is currently selected
+			if (idx > -1) {
+				$scope.selectTag.splice(idx, 1);
+			}
+			// is newly selected
+			else {
+				$scope.selectTag.push(tag);
+			}
 		};
+
 	}]);
 })();
