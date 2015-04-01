@@ -20,13 +20,18 @@ ganbareServices.factory('getListGanbaru', ['listGanbaru', '$cookieStore',
 	};
 
 	var userId  = $cookieStore.get('userId'),
-	timestamp = '20150318143906000';
+	timestamp = moment().format("YYYYMMDDHHmmssSSS");
 
   	/*
 	* View data with list Ganbaru
 	*/
-	return function(skip, takeNumber, listType, contentSearch, selectTag) {
+	return function(skip, takeNumber, listType, contentSearch, selectTag, userIdParam) {
 	  var ganbaruPromise;
+
+	  if (!userIdParam) {
+	  	userIdParam = userId;
+	  }
+
 	  switch(listType){
 	    case types.listTypePin:
 	      	ganbaruPromise = listGanbaru.pins({ userId: userId, skip: skip, take: takeNumber });
@@ -37,7 +42,7 @@ ganbareServices.factory('getListGanbaru', ['listGanbaru', '$cookieStore',
 	      	break;
 
 	    case types.listTypeUser:
-		    ganbaruPromise = listGanbaru.user({ userId: userId, skip: skip, take: takeNumber });
+		    ganbaruPromise = listGanbaru.user({ userId: userIdParam, skip: skip, take: takeNumber });
 		    break;
 
 	    case types.listTypeHot:

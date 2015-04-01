@@ -6,8 +6,8 @@
 /*
 * Controller Login
 */
-ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5','loginGanbare',
-  function($scope, $cookieStore, $location, md5, loginGanbare) {
+ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5','user',
+  function($scope, $cookieStore, $location, md5, user) {
     $scope.message = '';
 
     $scope.login = function(){
@@ -15,7 +15,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
       var password = $scope.password;
       var encryptedPassword = md5.createHash(password || '');
       var code;
-      loginGanbare.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
+      user.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
 
         code = response.code;
 

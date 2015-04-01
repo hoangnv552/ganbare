@@ -47,6 +47,10 @@ ganbareApp.config(['$routeProvider',
                     templateUrl: 'partials/edit-my-page.html',
                     controller : 'editMyPageCtrl'
                 }).
+                when('/users/:userId/ganbaru', {
+                    templateUrl: 'partials/list-by-user.html',
+                    controller : 'listByUser'
+                }).
                 otherwise({
                     redirectTo: '/feedfv'
                 });

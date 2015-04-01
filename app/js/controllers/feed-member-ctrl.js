@@ -37,24 +37,9 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		$scope.countNumber = 0;
 
 		// If user logout
-		if(!userId){
+		if (!userId) {
 			userId = 'none';
 		}
-
-		/*
-		* Selection texbox
-		*/
-		$scope.toggleSelection = function(tag) {
-			var idx = $scope.selectTag.indexOf(tag);
-			// is currently selected
-			if (idx > -1) {
-				$scope.selectTag.splice(idx, 1);
-			}
-			// is newly selected
-			else {
-				$scope.selectTag.push(tag);
-			}
-		};
 
 		/*
 		* Defaul load page
@@ -320,6 +305,21 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 			getListGanbaru( $scope.skip, take, types.listTypeTag,'' , $scope.selectTag ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
+		};
+
+		/*
+		* Selection texbox
+		*/
+		$scope.toggleSelection = function(tag) {
+			var idx = $scope.selectTag.indexOf(tag);
+			// is currently selected
+			if (idx > -1) {
+				$scope.selectTag.splice(idx, 1);
+			}
+			// is newly selected
+			else {
+				$scope.selectTag.push(tag);
+			}
 		};
 
 	}]);

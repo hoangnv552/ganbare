@@ -6,30 +6,7 @@
         </div>
         <div class="main-right">
             <div class="main-search">
-                <button ng-click="listGanbaru()">LIST GANBARU</button>
-                <button ng-click="listPinGanbaru()">LIST PINNING</button>
-                <button ng-click="listOfFavoriteGanbaru()">LIST OF FAVORITE</button>
-                <button ng-click="listByUserGanbaru()">LIST BY USER</button>
-                <button ng-click="listTagGanbaru()">TAG</button>
-                <button ng-click="listHotGanbaru()">HOT</button>
-                <button ng-click="listGanbaru()">NEW</button>
-                <button ng-click="listExpireGanbaru()">EXPIRING</button><br>
-                <span ng-if="!showTags">
-                    <form class="searchForm" ng-submit="searchGanbaru(contentSearch)">
-                        Search:
-                        <input type="text" class="inputSearch" ng-model="contentSearch" />
-                        <input type="submit" class="search" value="Search" />
-                    </form>
-                </span>
-                <span ng-if="showTags">
-                    <form class="searchTag" ng-submit="searchTagGanbaru()">
-                        Select Tags:
-                        <label ng-repeat="tag in checkboxesListTag">
-                          <input type="checkbox" value="{{tag}}" ng-checked="selectTag.indexOf(tag) > -1" ng-click="toggleSelection(tag)"> {{tag}}
-                        </label>
-                        <input type="submit" class="search" value="Search" />
-                    </form>
-                </span>
+            	<h2>List gabaru by user</h2>
             </div>
             <div class="ganbaru-content">
                 <h1>{{getGanbaruError}}</h1>

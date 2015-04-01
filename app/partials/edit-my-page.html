@@ -10,12 +10,12 @@
             </div>
             <div class="ganbaru-content">
                 <div class="edit-my-page">
-                    <form enctype="multipart/form-data" ng-submit="uploadFile()">
+                    <form enctype="multipart/form-data" ng-submit="updateProfile()">
                         Username :</br>
                         <input type="text" ng-model="user.data.username" /></br>
                         Profile :</br>
                         <textarea rows="4" cols="50"
-                          ng-model="user.data.profile">
+                          ng-model="user.data.userProfile">
                         </textarea><br>
                         Profile Photo :</br>
                         <input type="file" file-model="avatar"></br>
