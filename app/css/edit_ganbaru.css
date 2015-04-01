@@ -45,6 +45,7 @@
 
 .edit-container .avatar {
 	background-color: red;
+	border-radius: 10px;
 	width: 120px;
 	height: 150px;
 }
@@ -75,7 +76,7 @@
 
 .edit-container .ganbare-number {
 	border: 2px solid #000;
-	padding: 20px;
+	padding: 23px;
 	width: 430px;
 	text-align: right;
 }
@@ -84,13 +85,13 @@
 	margin-left: 35px;
 }
 
-.edit-container .ganbare-button,
-.edit-container .ganbare-button > div {
-	width: 80px;
-	height: 80px;
+.edit-container .ganbare-button {
+	padding: 0;
 }
 
 .edit-container .ganbare-button > div {
+	width: 80px;
+	height: 80px;
 	background-size: cover; 
 	background-image: url('../img/user/ganbare.png');;
 }
@@ -103,6 +104,7 @@
 }
 
 .edit-container .ganbaru-avatar {
+	border-radius: 10px;
 	width: 180px;
 	height: 180px;
 	background-color: navy;
@@ -134,7 +136,7 @@
 /*confirm button block*/
 
 .edit-container .confirm-button-container {
-	padding: 30px;
+	padding: 30px 30px 10px 30px;
 	text-align: center;
 }
 

@@ -1,114 +1,106 @@
 /*container style*/
-.ganbare-dtl-container {
+.ganbaru-detail {
 	width: 750px;
 	padding: 15px 15px 0 15px;
 	background-color: #f4ffd6;
 }
 
-.ganbare-block {
-	display: block;
+.ganbaru-detail .block {
 	margin-bottom: 15px;
 }
 
 /*block of name, expired data, created date*/
-.ganbare-avatar-block {
+.ganbaru-detail .avatar-block {
 	height: 150px;
 }
 
-.ganbare-user-logo {
+.ganbaru-detail .user-avatar{
 	width: 120px;
 	height: 150px;
 	background-color: #ff4e50;
-	color: #fff;
-	float: left;
 	border-radius: 10px;
 }
 
-.ganbare-information > div {
-	display: block;
-	margin-bottom: 20px;
-	margin-left: 140px;
+.ganbaru-detail .information > div {
+	margin: 0 0 20px 20px;
 }
 
-.ganbare-information h4 {
-	display: inline-block;
+.ganbaru-detail .information h4 {
   	margin: 20px 40px 0 0;
   	font-size: 20px;
 }
 
 /*block of ganbaru number, like button, pin button*/
-.ganbare-button-block {
+.ganbaru-detail .button-block {
 	height: 80px;
 }
 
-.ganbare-button-block > div {
-	display: inline-block;
+.ganbaru-detail .button-block > div {
 	background-color: #ccec75;
 }
 
-.ganbare-button-block button {
-	float: right;
+.ganbaru-detail .button-block button {
 	margin-left: 20px;
 	padding: 0;
 }
 
-.ganbare-button-block button > div {
+.ganbaru-detail .button-block button > div {
 	background-size: cover;
 	width: 74px;
 	height: 74px;
 }
 
-.is-pinning {
+.ganbaru-detail .is-pinning {
 	background-image: url('../img/user/pin.png');
 }
 
-.is-not-pinning {
+.ganbaru-detail .is-not-pinning {
 	background-image: url('../img/user/unpin.png');
 }
 
-.is-favor {
+.ganbaru-detail .is-favor {
 	background-image: url('../img/user/favor.png');
 }
 
-.is-unfavor {
+.ganbaru-detail .is-unfavor {
 	background-image: url('../img/user/unfavor.png');
 }
 
-.ganbareIcon {
+.ganbaru-detail .ganbareIcon {
 	background-image: url('../img/user/ganbare.png');
 }
 
-.ganbare-number {
+.ganbaru-detail .number {
 	width: 400px;
 	border: 2px solid #000;
 	height: 80px;
 }
 
-.ganbare-number h3 {
+.ganbaru-detail .number h3 {
 	font-size: 35px;
   	text-align: right;
   	margin: 20px 21px 0 0 ;
 }
 
 /*block of ganbare content*/
-.ganbare-content-block {
-	height: 250px;
+.ganbaru-detail .content-block {
+	min-height: 250px;
+	overflow: auto;
 	padding: 20px;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 /*block of ganbare tags*/
-.ganbare-tags-block {
+.ganbaru-detail .tags-block {
 	height: 100px;
 	padding: 15px;
 }
 
-.ganbare-tags-block ul {
+.ganbaru-detail .tags-block ul {
 	padding: 0;
 }
 
-.ganbare-tags-block li {
-	display: inline-block;
+.ganbaru-detail .tags-block li {
 	text-decoration: none;
 	padding: 3px 5px 3px 5px;
 	margin-right: 5px;
@@ -119,24 +111,66 @@
 	background: linear-gradient(to top, #a0db8e, #6dc066);
 }
 
-.ganbare-tags-block li > label {
+.ganbaru-detail .tags-block li > label {
 	margin: 0;
 }
 
 /*block of ganbare location*/
-.ganbare-content-block,
-.ganbare-tags-block,
-.ganbare-map-block {
+.ganbaru-detail .content-block,
+.ganbaru-detail .tags-block,
+.ganbaru-detail .map-block {
 	background-color: #dff79e;
 }
 
+/*List people ganbare style */
+.ganbaru-detail .ppl-block {
+	height: 250px;
+	background-color: #fff;
+}
 
-.ganbare-confirm-button-block {
+.ganbaru-detail .ppl-block h3 {
+	margin: 0;
+	padding: 20px 0;
+	text-align: center;
+	background-color: #f37736;
+}
+
+.thumbnail-list {
+	overflow: scroll; 
+	height: 183px;
+	padding-left: 0;
+	margin: 0;
+}
+
+.thumbnail-list > li 	{
+	list-style: none;
+	padding: 10px 10px 10px 30px;	
+	overflow: auto;
+}
+
+.thumbnail-list > li:hover {
+	background: #a4d3ee;
+}
+
+.thumbnail-list .user-icon {
+	width: 60px;
+	height: 60px;
+	background-size: cover;
+	background-image: url('../img/user/user.png');
+}
+
+.thumbnail-list .username {
+	padding: 10px 0;
+}
+
+.ganbaru-detail .nav-button-block  {
 	text-align: center;
 	padding: 20px 0;
 }
 
-.ganbare-confirm-button-block > button {
-	width: 200px;
+.ganbaru-detail .nav-button-block button {
+	width: 230px;
 	height: 50px;
+	font-size: 16px;
+	margin: 0 30px 0 30px;
 }

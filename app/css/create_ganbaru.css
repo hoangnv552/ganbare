@@ -12,75 +12,78 @@
 }
 
 /*container*/
-.create-gb-container {
+.create-ganbaru {
 	width: 650px;
 }
 
-.create-gb-container > div {
+.create-ganbaru > .block {
 	margin: 10px 0 10px 0;
 }
 
 /*header style*/
-.header-gb-part > div{
+.create-ganbaru .header {
+	padding-bottom: 10px;
+}
+
+.create-ganbaru .header > div{
 	display: inline-block;
 	padding-top: 20px;
 }
 
-.header-gb-part h3 {
+.create-ganbaru .header h3 {
 	margin: 0;
 	padding-right: 30px;
 }
 
-.header-gb-part input {
+.create-ganbaru .date-input {
 	font-family: Helvetica Neue;
+	width: 177px;
+	padding: 0 5px;
 }
 /*section style*/
-.section-gb-part {
+.create-ganbaru .section {
 	padding: 30px;
 	background-color: #fdf498;
 }
 
-.ava-container .ava {
+.create-ganbaru .avatar {
 	width: 180px;
 	height: 200px;
 	background-color: #ee4035;
 	border-radius: 10px;
 }
 
-.upload-btn-container {
+.create-ganbaru .upload-button{
 	text-align: center;
 	padding: 30px 0;
 }
 
-.content-container > div {
+.create-ganbaru .gb-content > div {
 	padding: 0 0 20px 25px;
 }
 
-.content-container input,
-.content-container textarea {
+.create-ganbaru .gb-content input,
+.create-ganbaru .gb-content textarea {
 	width: 350px;
 }
 
-.content-container textarea {
+.create-ganbaru .gb-content textarea {
 	height: 150px;
 	resize: none;
 }
 
-.tag-option {
-	width: 100%;
+.create-ganbaru .tag-option {
 	background-color: #7bc043;
 	height: 250px;
 }
 
-
-/*confirm button part*/
-.confirm-btn-part {
+.create-ganbaru .button-block {
 	text-align: center;
+	padding: 15px 0;
 }
 
-.confirm-btn-part button {
-	width: 40%;
+.create-ganbaru .button-block button{
+	width: 150px;
 	height: 40px;
-	font-size: large;
-	font-weight: bold;
+	margin: 0 30px 0 30px;
 }
