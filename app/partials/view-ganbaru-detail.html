@@ -1,39 +1,77 @@
-<div class="container ganbare-dtl-container">
-	<div class="ganbare-block ganbare-avatar-block">
-		<div class="ganbare-user-logo"></div>
-		<div class="ganbare-information">
-			<div>
-				<h4><b>Created Date</b>: {{getTime(ganbaru.createDate) | date:'yyyy-MM-dd'}}</h4>
-				<h4><b>Expired Date</b>: {{getTime(ganbaru.expiredDate) | date:'yyyy-MM-dd'}}</h4>
+<!--WHOLE CONTAINER-->
+<div class="container ganbaru-detail">
+
+	<!--AVATAR, DATE-->
+	<div class="block avatar-block">
+		<div class="user-avatar float-left inline-block"></div>
+		<div class="information inline-block">
+			<div class="block">
+				<h4 class="inline-block"><b>Created Date</b>: {{ganbaru.createDate | dateFilter}}</h4>
+				<h4 class="inline-block"><b>Expired Date</b>: {{ganbaru.expiredDate | dateFilter}}</h4>
 			</div>
-			<div>
-				<h4><b>User</b>: {{ganbaruUser.username}}</h4>
+			<div class="block">
+				<h4 class="inline-block"><b>User</b>: {{ganbaruUser.username}}</h4>
 			</div>
 		</div>
 	</div>
-	<div class="ganbare-block ganbare-button-block">
-		<div class="ganbare-number">
+
+	<!--GANBARE, PIN/UNPIN, ADD/REMOVE FAVOR-->
+	<div class="block button-block">
+		<div class="inline-block number">
 			<h3>{{ganbaru.ganbareNumber}}</h3>
 		</div>
-
-		<button ng-click="togglePinning()"><div ng-model="pinIcon" ng-class="{'is-pinning':pinIcon.state===true, 'is-not-pinning':pinIcon.state===false}"></div></button>
-		<button ng-click="toggleFavorite()"><div ng-model="favorIcon" ng-class="{'is-favor':favorIcon.state===true, 'is-unfavor':favorIcon.state===false}"></div></button>
-		<button ng-click="addGanbare()"><div class="ganbareIcon"></div></button>
+		
+		<button ng-disabled="!authorized" class="float-right" ng-click="togglePinning()">
+			<div ng-model="pinIcon" ng-class="{'is-pinning':pinIcon.state===true, 'is-not-pinning':pinIcon.state===false}"></div>
+		</button>
+		<button ng-disabled="!authorized" class="float-right" ng-click="toggleFavorite()">
+			<div ng-model="favorIcon" ng-class="{'is-favor':favorIcon.state===true, 'is-unfavor':favorIcon.state===false}"></div>
+		</button>
+		<button class="float-right" ng-click="addGanbare()">
+			<div class="ganbareIcon"></div>
+		</button>
 	</div>
-	<div class="ganbare-block ganbare-content-block">
+
+	<!--CONTENT-->
+	<div class="block content-block">
 		<p>{{ganbaru.ganbaruContent}}</p>
 	</div>
-	<div class="ganbare-block ganbare-tags-block">
-		<ul>
-			<li ng-repeat="tag in ganbaru.ganbaruTags"><label>{{tag}}<label></li>
+	
+	<!--LIST OF PEOPLE GANBARE-->
+	<div class="block ppl-block">
+		<h3>List Ganbare</h3>
+		<ul class="thumbnail-list">
+			<li ng-repeat="user in ganbaru.listGanbare">
+				<div class="inline-block float-left user-icon"></div>
+				<div class="inline-block username"><h4>{{user.userName}}</h4></div>
+			</li>
 		</ul>
 	</div>
-	<div class="ganbare-block ganbare-map-block">
+
+	<!--LIST OF TAGS-->
+	<div class="block tags-block">
+		<ul>
+			<li class="inline-block" ng-repeat="tag in ganbaru.ganbaruTags"><label>{{tag}}<label></li>
+		</ul>
+	</div>
+
+	<!--MAP-->
+	<div class="block map-block">
 		<map center="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}">
 			<marker coords="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}"></marker>
 		</map>
 	</div>
-	<div class="ganbare-block ganbare-confirm-button-block">
-		<button ng-click="goToEditPage()">Edit this ganbaru</button>
+
+	<!--BUTTON NAVIGATOR FOR MEMBERS-->
+	<div class="block nav-button-block authorized" ng-show="authorized">
+		<div>
+			<button class="inline-block" ng-disabled="!authorized || !modifiable" ng-show="authorized && modifiable" ng-click="goTo('/ganbaru/' + ganbaru.ganbaruId + '/edit')">Edit this ganbaru</button>
+			<button class="inline-block" ng-disabled="!authorized" ng-click="goTo('/feedmb')">Back To Member Feeds</button>
+		</div>
+	</div>	
+
+	<!--BUTTON NAVIGATOR FOR VISITORS-->
+	<div class="block nav-button-block unauthorized" ng-hide="authorized">
+		<button ng-disabled="authorized" ng-click="goTo('/feedfv')">Back to Visitors Feed</button>
 	</div>
 </div>

@@ -1,39 +1,52 @@
-<div class="container create-gb-container">
-	<div class="header-gb-part">
+<!--WHOLE CONTAINER-->
+<div class="container create-ganbaru">
+	<!--HEADER-->
+	<div class="block header">
 		<div><h3>Create new Ganbaru</h3></div>
 		<div>
-			<input class="float-left" type="text" ng-value="createdDate | date:'yyyy/MM/dd'" readonly>
+			<input class="float-left date-input" type="text" ng-value="createdDate | date:'yyyy/MM/dd'" readonly>
 		</div>
+		<!--date picker box-->
 		<div>
-			<datepicker date-format="yyyy/MM/dd"><input placeholder="Click to choose expired Date" ng-model="expiredDate" type="text" readonly/></datepicker>
+			<datepicker date-format="yyyy/MM/dd">
+				<input class="date-input" placeholder="Click to choose expired Date" ng-model="expiredDate" type="text" readonly/>
+			</datepicker>
 		</div>
 	</div>
-
-	<div class="section-gb-part">
+	
+	<!--SECTION CONTENT-->
+	<div class="block section">
 		<div class="block">
-			<div class="ava-container float-left inline-block">
-				<div class="ava"></div>
-				<div class='upload-btn-container'><button>Upload</button></div>
+			<!--AVATAR-->
+			<div class="float-left inline-block">
+				<div class="avatar"></div>
+				<div class='upload-button'><button>Upload</button></div>
 			</div>
-			<div class="content-container inline-block">
+			<!--TITLE, CONTENT, TAGS-->
+			<div class="gb-content inline-block">
 				<div><input type="text" ng-model="ganbaruTitle" placeholder="Title:"></div>
 				<div><textarea ng-model="ganbaruContent"></textarea></div>
-				<!--Tags-->
+				<!--tags-->
 				<div>
-					<tags-input ng-model="tags">
-						<!-- <auto-complete source="loadTags($query)"></auto-complete> -->
-					</tags-input>
+					<tags-input ng-model="tags"></tags-input>
 				</div>
 			</div>
 		</div>
 		<div class="block">
 			<div>
-				<div class="tag-option">Tag option area</div>
+				<div class="tag-option"></div>
 			</div>
 		</div>
 	</div>
 
-	<div class="confirm-btn-part">
-		<button ng-click="createGanbaru()">Confirm</button>
+	<div class="block button-block">
+		<div>
+			<div class="inline-block">
+				<button ng-click="createGanbaru()">Confirm</button>
+			</div>
+			<div class="inline-block">
+				<button ng-click="goToFeed()">Back To Feed</button>
+			</div>
+		</div>
 	</div>
 </div>

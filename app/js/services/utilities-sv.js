@@ -60,7 +60,8 @@ ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
 				return deferred.promise;
 			},
 
-			sendRequestGetGanbareDetail: function(ganbaruId) {
+			/*Get Ganbaru Detail in view Ganbaru Detail Page & Edit Ganbaru Detail Page*/
+			sendRequestGetGanbaruDetail: function(ganbaruId) {
 				var deferred = $q.defer();
 				ganbaruDetail.query({ganbaruId: ganbaruId}, function(response) {
 					deferred.resolve(response);

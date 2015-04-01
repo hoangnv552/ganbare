@@ -22,9 +22,13 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
         switch(code) {
           case 12: {
             $scope.message = 'Email not found!';
+            $location.path('/login');
+            break;
           }
           case 20: {
             $scope.message = 'Invalid password!';
+            $location.path('/login');
+            break;
           }
           case 21: {
             $scope.message = 'Incorrect password!';

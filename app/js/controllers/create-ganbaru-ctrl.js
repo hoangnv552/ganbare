@@ -4,6 +4,10 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 	function($scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
 	$scope.createdDate = new Date();
 
+	$scope.goToFeed = function() {
+		$location.path('/feedmb');
+	};
+
 	$scope.createGanbaru = function() {
 		//bind data from user input: title, content, expired date,tags
 		var ganbaruTitle = $scope.ganbaruTitle;

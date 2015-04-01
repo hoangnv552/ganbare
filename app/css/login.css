@@ -57,7 +57,8 @@
 	width: 50%;
 }
 
-.button-block, .error-block {
+.login-container .button-block, 
+.login-container .error-block {
 	text-align: center;
 }
 
