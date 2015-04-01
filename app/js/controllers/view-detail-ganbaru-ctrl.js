@@ -104,12 +104,7 @@
 					};
 
 					//send Add Ganbare request to server every 3s
-<<<<<<< HEAD
-					var sendRequest = function() { 
-						// console.log('userId here = ' + userId);
-=======
 					var sendRequest = function() {
->>>>>>> 34915a0b6bd4788b352aa25c343aa94bb1b5708c
 						getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
 							console.log(response);
 						}, function() {
