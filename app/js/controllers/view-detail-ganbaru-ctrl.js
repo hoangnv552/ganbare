@@ -26,11 +26,9 @@
 					$scope.ganbaruUser = response.data.user;
 
 					//give permission of editing ganbaru
-					$scope.authorized = (userId != null && userId !== 'none')
+					$scope.authorized = (userId !== 'none')
 					$scope.modifiable = (userId === $scope.ganbaruUser.userId);
-					console.log('userId = ' + userId);
-					console.log('authorized = ' + $scope.authorized);
-					console.log('modifiable = ' + $scope.modifiable);
+
 					/*Pin/Unpin Event*/
 					$scope.pinIcon = {state: $scope.ganbaru.isPinning};
 					$scope.togglePinning = function() {
@@ -82,7 +80,7 @@
 						$scope.ganbaru.ganbareNumber++;
 						$scope.clickNumber++;
 
-						if(userId && userId !== 'none') {
+						if(userId !== 'none') {
 							user.getUser({id: userId}, function(response) {
 								var userInfo = {userId: userId, userName: response.data.username};
 								var found = false;
@@ -106,7 +104,12 @@
 					};
 
 					//send Add Ganbare request to server every 3s
+<<<<<<< HEAD
+					var sendRequest = function() { 
+						// console.log('userId here = ' + userId);
+=======
 					var sendRequest = function() {
+>>>>>>> 34915a0b6bd4788b352aa25c343aa94bb1b5708c
 						getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
 							console.log(response);
 						}, function() {

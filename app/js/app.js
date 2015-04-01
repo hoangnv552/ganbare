@@ -43,6 +43,14 @@ ganbareApp.config(['$routeProvider',
                     templateUrl: 'partials/my-page.html',
                     controller: 'myPageGanbaruCtrl'
                 }).
+                when('/register', {
+                    templateUrl: 'partials/register.html',
+                    controller: 'registerCtrl'
+                }).
+                when('/register/:userId/verify', {
+                    templateUrl: 'partials/verify-register.html',
+                    controller: 'registerCtrl'
+                }).
                 when('/edit-my-page', {
                     templateUrl: 'partials/edit-my-page.html',
                     controller : 'editMyPageCtrl'

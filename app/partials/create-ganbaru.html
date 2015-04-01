@@ -9,7 +9,7 @@
 		<!--date picker box-->
 		<div>
 			<datepicker date-format="yyyy/MM/dd">
-				<input class="date-input" placeholder="Click to choose expired Date" ng-model="expiredDate" type="text" readonly/>
+				<input class="date-input" placeholder="Click to choose expired Date" ng-model="ganbaru.expiredDate" type="text" readonly/>
 			</datepicker>
 		</div>
 	</div>
@@ -24,11 +24,11 @@
 			</div>
 			<!--TITLE, CONTENT, TAGS-->
 			<div class="gb-content inline-block">
-				<div><input type="text" ng-model="ganbaruTitle" placeholder="Title:"></div>
-				<div><textarea ng-model="ganbaruContent"></textarea></div>
+				<div><input type="text" ng-model="ganbaru.ganbaruTitle" placeholder="Title:"></div>
+				<div><textarea ng-model="ganbaru.ganbaruContent"></textarea></div>
 				<!--tags-->
 				<div>
-					<tags-input ng-model="tags"></tags-input>
+					<tags-input ng-model="tagsInput"></tags-input>
 				</div>
 			</div>
 		</div>
