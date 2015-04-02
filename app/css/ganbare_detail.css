@@ -96,25 +96,34 @@
 	margin: 10px 0;
 }
 
+.ganbaru-detail .content-block .error {
+	color: red;
+}
+
 /*block of ganbare tags*/
 .ganbaru-detail .tags-block {
-	height: 100px;
-	padding: 15px;
+	/*height: 100px;*/
+	background-color: #fff;
+	border: 1px solid #dddddd;
+	padding: 10px;
 }
 
 .ganbaru-detail .tags-block ul {
 	padding: 0;
+	margin: 0;
 }
 
 .ganbaru-detail .tags-block li {
+	border: 1px solid #000;
+	min-width: 50px;
+	text-align: center;
 	text-decoration: none;
+	/*font-family: Helvetica Neue;*/
+	color: #fff;
 	padding: 3px 5px 3px 5px;
-	margin-right: 5px;
+	margin: 0 5px 0 5px;
 	border-radius: 5px;
-	background: -moz-linear-gradient(top, #a0db8e, #6dc066);
-	background: -webkit-linear-gradient(top, #a0db8e, #6dc066);
-	background: -o-linear-gradient(top, #a0db8e, #6dc066);
-	background: linear-gradient(to top, #a0db8e, #6dc066);
+	background-color: #4099ff;
 }
 
 .ganbaru-detail .tags-block li > label {
@@ -123,7 +132,6 @@
 
 /*block of ganbare location*/
 .ganbaru-detail .content-block,
-.ganbaru-detail .tags-block,
 .ganbaru-detail .map-block {
 	background-color: #dff79e;
 }

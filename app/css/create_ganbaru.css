@@ -1,19 +1,6 @@
-/*common style*/
-.float-left {
-	float: left;
-}
-
-.block {
-	display: block;
-}
-
-.inline-block {
-	display: inline-block;
-}
-
 /*container*/
 .create-ganbaru {
-	width: 650px;
+	width: 750px;
 }
 
 .create-ganbaru > .block {
@@ -25,20 +12,21 @@
 	padding-bottom: 10px;
 }
 
-.create-ganbaru .header > div{
-	display: inline-block;
+.create-ganbaru .header > .inline-block{
 	padding-top: 20px;
 }
 
-.create-ganbaru .header h3 {
+.create-ganbaru .header h2 {
 	margin: 0;
-	padding-right: 30px;
+	padding-right: 28px;
 }
 
 .create-ganbaru .date-input {
 	font-family: Helvetica Neue;
-	width: 177px;
-	padding: 0 5px;
+	font-size: 16px;
+	width: 200px;
+	/*height: 30px;*/
+	padding: 3px;
 }
 /*section style*/
 .create-ganbaru .section {
@@ -53,18 +41,22 @@
 	border-radius: 10px;
 }
 
-.create-ganbaru .upload-button{
+.create-ganbaru .upload-button {
 	text-align: center;
 	padding: 30px 0;
 }
 
-.create-ganbaru .gb-content > div {
-	padding: 0 0 20px 25px;
+.create-ganbaru .gb-content > .block {
+	margin: 0 0 20px 30px;
+}
+
+.create-ganbaru .gb-content .title {
+	height: 30px;
 }
 
 .create-ganbaru .gb-content input,
 .create-ganbaru .gb-content textarea {
-	width: 350px;
+	width: 445px;
 }
 
 .create-ganbaru .gb-content textarea {
@@ -75,6 +67,9 @@
 .create-ganbaru .tag-option {
 	background-color: #7bc043;
 	height: 250px;
+	margin-top: 30px;
+	padding: 20px;
+	text-align: center;
 }
 
 .create-ganbaru .button-block {

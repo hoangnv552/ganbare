@@ -6,49 +6,102 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 		var userId = $cookieStore.get('userId');
 		var token = $cookieStore.get('token');
 		var ganbaruId = $routeParams.ganbaruId;	
+		$scope.error = '';
 
+		//for storing object tags: {text: tagName}
+		var tags = [];
+
+		//navigation
+		$scope.goTo = function(url) {
+			$location.path(url);
+		}
+
+		/*get Ganbaru detail and present on HTML*/
 		getUtilities.sendRequestGetGanbaruDetail(ganbaruId).then(function(response) {
 			console.log(response);
-			$scope.ganbaru = response.data.ganbaru;
-			$scope.ganbaruUser = response.data.ganbaruUser;
-			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYY/MM/DD");
 
-			var tags = [];
-			angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
-				tags.push({text: obj});
-			});
+			switch(response.code) {
+				case 0: {
+					$scope.ganbaru = response.data.ganbaru;
+					$scope.ganbaruUser = response.data.user;
 
-			$scope.editGanbaru = function() {
-				tags = [];
-				angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
-					tags.push(obj.text);
-				});
-				$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYYMMDDHHmmssSSS");
+					//format date
+					$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYY/MM/DD");
 
-				editGanbaru.put({
-					ganbaruId: ganbaruId,
-					ganbaruTitle: $scope.ganbaru.ganbaruTitle,
-					ganbaruContent: $scope.ganbaru.ganbaruContent,
-					ganbaruTags: tags,
-					expiredDate: $scope.ganbaru.expiredDate
-				}, function(response) {
-					if(response.code === 0) {
-						$location.path('ganbaru/' + ganbaruId);
-					}
-				}, function() {
-					console.log('Edit ganbaru detail failed');
-				});
-			};
-
+					//convert array of tags string --> array of tags object
+					angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
+						tags.push({text: obj});
+					});
+					break;
+				}
+				case 1: {
+					$scope.error = 'Unknown error!';
+					break;
+				}
+				case 2: {
+					$scope.error = 'Currently no message for this error!';
+					break;
+				}
+				case 3: {
+					$scope.error = 'Session outdated. Please log in again!';
+					break;
+				}
+			}
 		}, function() {
-			//Handling error here
+			$scope.error = 'Cannot establish connection to server!';
 		});
 
+
+		/*Edit Ganbare Event*/
+		$scope.editGanbaru = function() {
+			//convert array of tags objects --> array of tags string
+			tags = [];
+			angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
+				tags.push(obj.text);
+			});
+
+			//format date
+			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYYMMDDHHmmss");
+			
+			//call service
+			editGanbaru.put({
+				ganbaruId: ganbaruId,
+				ganbaruTitle: $scope.ganbaru.ganbaruTitle,
+				ganbaruContent: $scope.ganbaru.ganbaruContent,
+				ganbaruTags: tags,
+				expiredDate: $scope.ganbaru.expiredDate
+			}, function(response) {
+				console.log(response.code);
+				switch(response.code) {
+					case 0: {
+						$location.path('ganbaru/' + ganbaruId);
+						break;
+					}
+					//Discuss with server later
+					case 1: {
+						
+						break;
+					}
+					case 2: {
+						
+						break;
+					}
+					case 3: {
+						
+						break;
+					}
+				}
+
+			}, function() {
+				$scope.error = 'Cannot establish connection to server!';
+			});
+		};
+
+		/*Add Ganbare event*/
 		$scope.addGanbare = function() {
 			$scope.ganbaru.ganbareNumber++;
 			$scope.clickNumber++;
-		}
-						
+		}			
 
 		//send Add Ganbare request to server every 3s
 		var sendRequest = function() { 
@@ -59,6 +112,5 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 			});
 			$scope.clickNumber = 0;
 		}
-
 		$interval(sendRequest, 3000);
 }]);	

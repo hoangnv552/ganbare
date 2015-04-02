@@ -1,6 +1,5 @@
 /*container style*/
 .container{
-	/*width: 1012px;*/
 	height: auto;
 	margin: 0 auto;
 	border: 2px solid #000;
@@ -11,13 +10,24 @@
 	width: 20%;
 }
 
-.footer{
-	font-size: x-small;
-	font-style: italic;
-}
-
 button,
 input[type="button"],
 input[type="submit"]{
 	cursor: pointer;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.block {
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
 }

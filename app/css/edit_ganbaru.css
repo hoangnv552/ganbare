@@ -1,95 +1,77 @@
-/*common*/
-.block {
-	display: block;
-	/*overflow: auto;*/
+.edit-ganbaru label {
+	font-weight: normal;
 }
-
-.inline-block {
-	display: inline-block;
-}
-
-.float-left {
-	float: left;
-}
-
-.float-right {
-	float: right;
-}
-
-.edit-container h2 {
+.edit-ganbaru h2 {
 	margin: 0;
 }
 
-.edit-container label {
-	font-weight: normal;
-}
-
-.edit-container button,
-.edit-container label,
-.edit-container input,
-.edit-container textarea {
+.edit-ganbaru button,
+.edit-ganbaru label,
+.edit-ganbaru input,
+.edit-ganbaru textarea {
 	font-size: 16px;
 }
 
 /*container*/
-.edit-container {
+.edit-ganbaru {
 	width: 750px;
 	padding: 20px;
 	font-size: 20px;
 }
 
 /*header style*/
-.edit-container .header {
+.edit-ganbaru .header {
 	min-height: 182px;
 }
 
-.edit-container .avatar {
-	background-color: red;
+.edit-ganbaru .avatar {
+	background-color: #ee4035;
 	border-radius: 10px;
 	width: 120px;
 	height: 150px;
 }
 
-.edit-container .username-container {
+.edit-ganbaru .username-container {
 	text-align: center;
 	padding: 5px 0;
 	font-size: 16px;
+	font-weight: bold;
 }
 
-.edit-container .date-container {
+.edit-ganbaru .date-container {
 	padding: 15px 0 0 30px;
 }
 
-.edit-container .created-date {
+.edit-ganbaru .created-date {
 	margin-right: 80px;
 }
 
-.edit-container .datepickerbox {
+.edit-ganbaru .datepickerbox {
 	padding: 0 3px;
 	font-size: 18px;
 	width: 170px;
 }
 
-.edit-container .ganbare {
+.edit-ganbaru .ganbare {
 	padding-top: 22px;
 }
 
-.edit-container .ganbare-number {
+.edit-ganbaru .ganbare-number {
 	border: 2px solid #000;
 	padding: 23px;
 	width: 430px;
 	text-align: right;
 }
 
-.edit-container .ganbare-button-container{
+.edit-ganbaru .ganbare-button-container{
 	margin-left: 35px;
 }
 
-.edit-container .ganbare-button {
+.edit-ganbaru .ganbare-button {
 	padding: 0;
 }
 
-.edit-container .ganbare-button > div {
+.edit-ganbaru .ganbare-button > div {
 	width: 80px;
 	height: 80px;
 	background-size: cover; 
@@ -97,51 +79,60 @@
 }
 
 /*section style*/
-.edit-container .section {
+.edit-ganbaru .section {
 	margin: 20px 0;
 	padding: 20px;
-	background-color : gray;
+	background-color: #fdf498;
 }
 
-.edit-container .ganbaru-avatar {
+.edit-ganbaru .ganbaru-avatar {
 	border-radius: 10px;
 	width: 180px;
 	height: 180px;
-	background-color: navy;
+	background-color: #7bc043;
 }
 
-.edit-container .upload-button-container {
+.edit-ganbaru .upload-button-container {
 	padding: 20px 0;
 	text-align: center;
 }
 
-.edit-container .ganbaru-content {
+.edit-ganbaru .ganbaru-content {
 	margin-left: 30px;
 }
 
-.edit-container .ganbaru-content .block {
+.edit-ganbaru .ganbaru-content .block {
 	margin-bottom: 22px;
 }
 
-.edit-container .ganbaru-content label {
+.edit-ganbaru .ganbaru-content label {
+	font-weight: bold;
 	width: 80px;
 	line-height: 25px;
 }
 
-.edit-container .ganbaru-content input,
-.edit-container .ganbaru-content textarea {
+.edit-ganbaru .ganbaru-content input,
+.edit-ganbaru .ganbaru-content textarea {
 	width: 370px;
+	padding: 3px;
 }
 
 /*confirm button block*/
-
-.edit-container .confirm-button-container {
+.edit-ganbaru .confirm-button-container {
 	padding: 30px 30px 10px 30px;
 	text-align: center;
 }
 
-.edit-container .confirm-button {
-	width: 300px;
+.edit-ganbaru .error {
+	padding-top: 10px;
+	text-align: center;
+	color: red;
+}
+
+.edit-ganbaru .confirm-button {
+	width: 200px;
 	height: 50px;
-	font-size: 20px;
+	font-size: 18px;
+	margin-left: 20px;
+	margin-right: 20px;
 }

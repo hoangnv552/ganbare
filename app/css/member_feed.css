@@ -16,6 +16,7 @@
     background: #000080;
     margin-top: 20px;
     margin-left: 20px;
+    float: left;
 }
 .content .logo p{
     text-align: center;

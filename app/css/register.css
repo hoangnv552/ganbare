@@ -1,8 +1,18 @@
+/*container*/
 .register {
 	width: 1000px;
 }
 
-/*for header*/
+.register button, 
+.register input[type="button"],
+.register input[type="submit"]{
+	cursor: pointer;
+	width: 80px;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+/*header style*/
 .register .header {
 	margin: 20px 20px 0 20px;
 	padding-bottom: 20px;
@@ -23,12 +33,17 @@
 	margin-top: 25px;
 }
 
-/*for body*/
+/*body style*/
+/*left menu style*/
 .register .nav{
 	width: 25%;
 	padding-left: 30px;
 	padding-top: 20px;
 	border-right: 2px solid #000;
+}
+
+.register .arrow{
+	margin-left: 20px;
 }
 
 .register .nav .notification {
@@ -39,28 +54,16 @@
 	font-weight: bold;
 }
 
-.register .section{
-	margin-left: 244px;
-	padding-top: 20px;
-}
-
 .register .footer{
 	font-size: x-small;
 	font-style: italic;
 	padding: 10px 0;
 }
 
-.register button, 
-.register input[type="button"],
-.register input[type="submit"]{
-	cursor: pointer;
-	width: 80px;
-	margin-left: 30px;
-	margin-right: 30px;
-}
-
-.register .arrow{
-	margin-left: 20px;
+/*section style*/
+.register .section{
+	margin-left: 244px;
+	padding-top: 20px;
 }
 
 /*for register section*/
@@ -103,7 +106,42 @@
 }
 		
 .register .error{
+	color: #e60026;
+}
+
+.register .register-panel .error {
 	margin-top: 15px;
 	margin-left: 202px;
-	color: #e60026;
+}
+
+.register .confirm-panel .error {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+/*confirm panel style*/
+.register .confirm-panel .block {
+	overflow: auto;
+}
+
+.register .confirm-panel p {
+	font-size: 16px; 
+	line-height: 30px;
+}
+
+/*verify-panel-style*/
+.register .verify-panel {
+	text-align: center;
+}
+
+.register .verify-panel .notification {
+	width: 80%;
+	margin: 30px auto;
+	font-size: 18px;
+}
+
+.register .verify-panel .verify-button button{
+	width: 25%;
+	height: 80px;
 }

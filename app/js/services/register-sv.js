@@ -9,10 +9,12 @@
 				password: '@password',
 				encryptedPassword: '@password',
 				username: '@userName',
-				loginType: '@loginType'
+				loginType: '@loginType',
+				registeringId: '@registeringId'
 			}, 
 			{
-				register: {method: 'POST'}
+				register: {method: 'POST'},
+				verify: {method: 'PUT'}
 			});
 	}]);
 })();
