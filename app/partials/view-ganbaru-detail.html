@@ -50,9 +50,9 @@
 	<div class="block ppl-block">
 		<h3>List Ganbare</h3>
 		<ul class="thumbnail-list">
-			<li ng-repeat="user in ganbaru.listGanbare">
-				<div class="inline-block float-left user-icon"></div>
-				<div class="inline-block username"><h4>{{user.userName}}</h4></div>
+			<li ng-repeat="user in ganbaru.listGanbare" ng-click="goTo('/users/' + user.userId + '/ganbaru')">
+				<div class="inline-block float-left user-icon" ng-click="goTo('/users/' + user.userId + '/ganbaru')"></div>
+				<div class="inline-block username" ng-click="goTo('/users/' + user.userId + '/ganbaru')"><h4>{{user.userName}}</h4></div>
 			</li>
 		</ul>
 	</div>
