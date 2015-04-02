@@ -34,6 +34,14 @@ ganbareServices.factory('user', ['$resource',
         changePassword: {
             method: 'PUT',
             url: path + 'v1/users/:id/password'
+        },
+        register: {
+            method: 'POST',
+            url: path + 'v1/users'
+        },
+        verify: {
+            method: 'PUT',
+            url: path + 'v1/users'
         }
   	});
 }]);
