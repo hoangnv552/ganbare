@@ -118,7 +118,6 @@
 	min-width: 50px;
 	text-align: center;
 	text-decoration: none;
-	/*font-family: Helvetica Neue;*/
 	color: #fff;
 	padding: 3px 5px 3px 5px;
 	margin: 0 5px 0 5px;
@@ -160,6 +159,7 @@
 	list-style: none;
 	padding: 10px 10px 10px 30px;	
 	overflow: auto;
+	cursor: pointer;
 }
 
 .thumbnail-list > li:hover {

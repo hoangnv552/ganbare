@@ -1,6 +1,7 @@
 /*container*/
 .create-ganbaru {
 	width: 750px;
+	background-color: #f4ffd6;
 }
 
 .create-ganbaru > .block {
@@ -25,13 +26,12 @@
 	font-family: Helvetica Neue;
 	font-size: 16px;
 	width: 200px;
-	/*height: 30px;*/
 	padding: 3px;
 }
 /*section style*/
 .create-ganbaru .section {
 	padding: 30px;
-	background-color: #fdf498;
+  	background-color: #dff79e;
 }
 
 .create-ganbaru .avatar {
