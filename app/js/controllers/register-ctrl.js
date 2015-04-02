@@ -1,14 +1,16 @@
-ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'user', 
+;(function() {
+'use strict';
+ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'user',
 	function($scope, $location, md5, user) {
 		$scope.panel = 1;
 
 		$scope.setPanel = function(setPanel) {
 			$scope.panel = setPanel;
-		}
+		};
 
 		$scope.isPanel = function(checkPanel) {
 			return $scope.panel === checkPanel;
-		}
+		};
 
 		$scope.submitForm = function() {
 			user.register({
@@ -34,7 +36,7 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 						break;
 					}
 					case 2: {
-						$scope.error = "Register unsuccessful. Please re-check your information!";
+						$scope.error = 'Register unsuccessful. Please re-check your information!';
 						break;
 					}
 					case 10: {
@@ -69,7 +71,7 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 						break;
 					}
 					case 2: {
-						$scope.error = "Register unsuccessful. Please re-check your information!";
+						$scope.error = 'Register unsuccessful. Please re-check your information!';
 						$scope.setPanel(4);
 						break;
 					}
@@ -85,3 +87,4 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 			$location.path(url);
 		};
 }]);
+})();

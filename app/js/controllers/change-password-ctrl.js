@@ -7,10 +7,11 @@
 ganbareControllers.controller('changePass', ['$scope', 'md5', 'user', '$cookieStore', '$location',
 	function($scope, md5, user, $cookieStore, $location) {
 		$scope.changePassword = function() {
-			var userId  = $cookieStore.get('userId');
+			var userId  = $cookieStore.get('userId'),
+			encryptedNewPassword;
 
 			if ($scope.user.newPassword) {
-				var encryptedNewPassword = 	md5.createHash($scope.user.newPassword);
+				encryptedNewPassword = 	md5.createHash($scope.user.newPassword);
 			} else {
 				$scope.message = 'New password is empty';
 			}
@@ -27,7 +28,7 @@ ganbareControllers.controller('changePass', ['$scope', 'md5', 'user', '$cookieSt
 				} else {
 					$scope.message = 'Change password error';
 				}
-			})
+			});
 		};
 	}]);
 })();

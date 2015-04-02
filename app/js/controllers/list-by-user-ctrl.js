@@ -12,7 +12,6 @@ ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListG
 		var ganbaruIdAndNumber = [],
 		userIdParam = $routeParams.userId,
 		userId  = $cookieStore.get('userId'),
-		token  = $cookieStore.get('token'),
 		take = 5;
 		$scope.skip = 0;
 		$scope.length = 0;
@@ -47,9 +46,6 @@ ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListG
 		* Function add ganbare
 		*/
 		$scope.addGanbare = function(item) {
-			var count = 1,
-			length = ganbaruIdAndNumber.length,
-			flgCheck = false;
 			// Caculator total ganbaru number for view
 			$scope.totalNumber++;
 			// Caculator total ganbaru number for function addGanbare
@@ -83,7 +79,7 @@ ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListG
 				}
 				ganbaruIdAndNumber = [];
 			}
-		};
+		}
 
 		/*
 		* Set interval callIntervalAddGanbare function

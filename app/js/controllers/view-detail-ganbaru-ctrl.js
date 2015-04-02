@@ -1,8 +1,8 @@
-'use strict';
-
-/* Controllers */
 
 (function() {
+	'use strict';
+
+	/* Controllers */
 	ganbareControllers.controller('viewGanbareDetailCtrl',
 		['$scope', '$location', '$cookieStore', '$routeParams', '$interval',
 		'ganbaruDetail', 'addGanbare', 'pinGanbaru',
@@ -17,19 +17,19 @@
 			//navigation
 			$scope.goTo = function(url) {
 				$location.path(url);
-			}
+			};
 
 			/*Get Ganbaru detail to*/
 			getUtilities.sendRequestGetGanbaruDetail(ganbaruId).then(function(response) {
 				console.log(response);
-					
+
 				switch(response.code) {
 					case 0: {
 						$scope.ganbaru = response.data.ganbaru;
 						$scope.ganbaruUser = response.data.user;
 
 						//give permission of editing ganbaru
-						$scope.authorized = (userId != null && userId !== 'none')
+						$scope.authorized = (userId != null && userId !== 'none');
 						$scope.modifiable = (userId === $scope.ganbaruUser.userId);
 
 						//pinning & favorite button icon state
@@ -61,7 +61,7 @@
 				//reverse icon state
 				$scope.pinIcon.state = !$scope.pinIcon.state;
 				if($scope.pinIcon.state) {
-					var pin = pinGanbaru.pin(
+					pinGanbaru.pin(
 						{userId: userId, ganbaruId: ganbaruId}, function(response) {
 						console.log(response);
 					}, function() {
@@ -96,7 +96,7 @@
 						console.log('Failed to remove favorite');
 					});
 				}
-			}
+			};
 
 			/*Add Ganbare*/
 			$scope.clickNumber = 0;	//the number of user's ganbare clicks
@@ -119,7 +119,7 @@
 							}
 						});
 
-						//after searching all, found = false, then push 
+						//after searching all, found = false, then push
 						if(!found) {
 							$scope.ganbaru.listGanbare.push(userInfo);
 						}
@@ -140,7 +140,7 @@
 					//Handling error here
 				});
 				$scope.clickNumber = 0;
-			}
+			};
 			$interval(sendRequest, 3000);
 	}]);
 })();

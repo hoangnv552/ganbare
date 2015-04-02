@@ -14,7 +14,7 @@ ganbareDirective.directive('headerDirective', ['$cookieStore', '$location', 'use
 					$cookieStore.remove('token');
 					$cookieStore.remove('userId');
 					$location.path('/feedfv');
-				})
+				});
 			};
 		},
 		templateUrl: 'partials/includes/header.html'

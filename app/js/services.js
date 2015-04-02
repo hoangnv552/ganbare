@@ -1,4 +1,3 @@
-'use strict';
 
 /* Services */
 
@@ -7,6 +6,7 @@ var path = 'http://133.242.53.250:8888/';
 var ganbareServices = angular.module('ganbareServices', ['ngResource']);
 
 ganbareServices.factory('tokenInjector', ['$cookieStore', function($cookieStore) {
+	'use strict';
 	var tokenInjector = {
 		request: function(config) {
 			if($cookieStore.get('token')) {
@@ -19,5 +19,6 @@ ganbareServices.factory('tokenInjector', ['$cookieStore', function($cookieStore)
 }]);
 
 ganbareServices.config(['$httpProvider', function($httpProvider) {
+	'use strict';
 	$httpProvider.interceptors.push('tokenInjector');
 }]);

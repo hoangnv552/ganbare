@@ -1,11 +1,11 @@
+;(function() {
 'use strict';
 
-ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$interval','$location', '$routeParams','ganbaruDetail', 'editGanbaru', 
+ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$interval','$location', '$routeParams','ganbaruDetail', 'editGanbaru',
 	'getUtilities',
 	function($scope, $cookieStore, $interval, $location, $routeParams, ganbaruDetail, editGanbaru, getUtilities) {
 		var userId = $cookieStore.get('userId');
-		var token = $cookieStore.get('token');
-		var ganbaruId = $routeParams.ganbaruId;	
+		var ganbaruId = $routeParams.ganbaruId;
 		$scope.error = '';
 
 		//for storing object tags: {text: tagName}
@@ -14,7 +14,7 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 		//navigation
 		$scope.goTo = function(url) {
 			$location.path(url);
-		}
+		};
 
 		/*get Ganbaru detail and present on HTML*/
 		getUtilities.sendRequestGetGanbaruDetail(ganbaruId).then(function(response) {
@@ -26,7 +26,7 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 					$scope.ganbaruUser = response.data.user;
 
 					//format date
-					$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYY/MM/DD");
+					$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYY/MM/DD');
 
 					//convert array of tags string --> array of tags object
 					angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
@@ -61,8 +61,8 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 			});
 
 			//format date
-			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, "YYYY-MM-DD").format("YYYYMMDDHHmmss");
-			
+			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
+
 			//call service
 			editGanbaru.put({
 				ganbaruId: ganbaruId,
@@ -79,15 +79,15 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 					}
 					//Discuss with server later
 					case 1: {
-						
+
 						break;
 					}
 					case 2: {
-						
+
 						break;
 					}
 					case 3: {
-						
+
 						break;
 					}
 				}
@@ -101,16 +101,17 @@ ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$int
 		$scope.addGanbare = function() {
 			$scope.ganbaru.ganbareNumber++;
 			$scope.clickNumber++;
-		}			
+		};
 
 		//send Add Ganbare request to server every 3s
-		var sendRequest = function() { 
+		var sendRequest = function() {
 			getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
 				console.log(response);
 			}, function() {
 				//Handling error here
 			});
 			$scope.clickNumber = 0;
-		}
+		};
 		$interval(sendRequest, 3000);
-}]);	
+}]);
+})();

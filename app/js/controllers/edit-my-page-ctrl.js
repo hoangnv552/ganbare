@@ -38,7 +38,7 @@ ganbareControllers.controller('editMyPageCtrl', ['$scope', '$cookieStore', 'user
 				}).$promise.then(function postDone(data) {
 					console.log(data);
 				});
-			}
+			};
 			r.readAsBinaryString(f);
 		};
 
@@ -52,7 +52,7 @@ ganbareControllers.controller('editMyPageCtrl', ['$scope', '$cookieStore', 'user
 				profile: $scope.user.data.userProfile
 			}).$promise.then(function updateDone(response) {
 				console.log(response);
-			})
-		}
+			});
+		};
 	}]);
 })();

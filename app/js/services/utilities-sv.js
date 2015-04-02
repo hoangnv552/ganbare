@@ -69,7 +69,7 @@ ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
 					deferred.reject('Failed To Get Ganbaru Detail!');
 				});
 				return deferred.promise;
-			}	
-		}
+			}
+		};
 	}]);
-})()
+})();

@@ -33,7 +33,7 @@ ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location'
             break;
           }
           case 2: {
-            $scope.error = "Login unsuccessful. Please re-check your information!";
+            $scope.error = 'Login unsuccessful. Please re-check your information!';
             break;
           }
           case 12: {

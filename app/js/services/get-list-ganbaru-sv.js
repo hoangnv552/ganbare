@@ -20,7 +20,7 @@ ganbareServices.factory('getListGanbaru', ['listGanbaru', '$cookieStore',
 	};
 
 	var userId  = $cookieStore.get('userId'),
-	timestamp = moment().format("YYYYMMDDHHmmssSSS");
+	timestamp = moment().format('YYYYMMDDHHmmssSSS');
 
   	/*
 	* View data with list Ganbaru

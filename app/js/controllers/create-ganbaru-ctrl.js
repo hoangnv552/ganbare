@@ -1,10 +1,9 @@
-'use strict';
-
-ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru', 
+ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru',
 	function($scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
+	'use strict';
 	$scope.createdDate = new Date();
 	$scope.ganbaru = {};
-	$scope.error = '*Note: According to design, this container is not originally for showing message!'
+	$scope.error = '*Note: According to design, this container is not originally for showing message!';
 
 	$scope.goToFeed = function() {
 		$location.path('/feedmb');
@@ -15,7 +14,7 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 		$scope.ganbaru.ganbaruTags = [];
 		$scope.ganbaru.ganbaruLocation = [];
 
-		//get array of tags from input 
+		//get array of tags from input
 		angular.forEach($scope.tagsInput, function(obj, objKey) {
 			angular.forEach(obj, function(value, key) {
 				$scope.ganbaru.ganbaruTags.push(value);
@@ -29,18 +28,19 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 
 			//send request to server
 			createGanbaru.save({
-				ganbaruTitle: $scope.ganbaru.ganbaruTitle, 
-				ganbaruContent: $scope.ganbaru.ganbaruContent, 
+				ganbaruTitle: $scope.ganbaru.ganbaruTitle,
+				ganbaruContent: $scope.ganbaru.ganbaruContent,
 				ganbaruLocation: $scope.ganbaru.ganbaruLocation,
-				ganbaruTags: $scope.ganbaru.ganbaruTags, 
+				ganbaruTags: $scope.ganbaru.ganbaruTags,
 				expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
 			}, function(response) {
 				switch(response.code) {
 					case 0: {
 						$location.path('/feedmb');
+						break;
 					}
 					case 1: {
-						$scope.error = 'Unknown error.'
+						$scope.error = 'Unknown error.';
 						break;
 					}
 					case 2: {
@@ -56,7 +56,7 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 				$scope.error = 'Failed to establish connection to server. Please try again later!';
 			});
 		}, function() {
-			$scope.error = 'Failed to get your current location coordinates!'
+			$scope.error = 'Failed to get your current location coordinates!';
 		});
 	};
 }]);
