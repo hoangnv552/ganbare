@@ -6,8 +6,8 @@
 /*
 * Controller my page
 */
-ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'user', '$cookieStore', 'getListGanbaru',
-	function( $scope, user, $cookieStore, getListGanbaru ) {
+ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'user', '$cookieStore', 'getListGanbaru', 'addGanbare',
+	function( $scope, user, $cookieStore, getListGanbaru, addGanbare ) {
 
 	var userId  = $cookieStore.get('userId'),
     listTypeUser = 3,
@@ -43,7 +43,19 @@ ganbareControllers.controller('myPageGanbaruCtrl', ['$scope', 'user', '$cookieSt
             $scope.ganbaru = $scope.ganbaru.concat(data.data);
             $scope.length = $scope.ganbaru.length;
         });
-    }
+    };
+
+    /*
+    * Delete ganbaru
+    */
+    $scope.deleteGanbaru = function(ganbaru) {
+        console.log(ganbaru);
+        addGanbare.deleteGanbaru({
+            ganbaruId: ganbaru.ganbaru.ganbaruId
+        }).$promise.then(function deleteDone(response) {
+            console.log(response);
+        });
+    };
 
 	}]);
 })();

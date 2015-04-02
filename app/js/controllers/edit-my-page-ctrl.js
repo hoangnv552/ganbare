@@ -23,14 +23,23 @@ ganbareControllers.controller('editMyPageCtrl', ['$scope', '$cookieStore', 'user
 		* Upload file
 		*/
 		$scope.uploadFile = function() {
-			var file = $scope.avatar;
-			console.log(file);
-			user.uploadAvatar({
-				id: userId,
-				file: file
-			}).$promise.then(function postDone(data) {
-				console.log(data);
-			});
+			$scope.data = 'none';
+
+			var f = document.getElementById('avatar').files[0],
+			r = new FileReader();
+			r.onloadend = function(e) {
+				$scope.data = e.target.result;
+
+				console.log($scope.data);
+				/////////////////
+				user.uploadAvatar({
+					id: userId,
+					image: $scope.data
+				}).$promise.then(function postDone(data) {
+					console.log(data);
+				});
+			}
+			r.readAsBinaryString(f);
 		};
 
 		/*

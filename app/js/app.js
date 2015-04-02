@@ -47,7 +47,7 @@ ganbareApp.config(['$routeProvider',
                 templateUrl: 'partials/register.html',
                 controller: 'registerCtrl'
             }).
-            when('/register/verify', {
+            when('/register/:userId/verify', {
                 templateUrl: 'partials/verify-register.html',
                 controller: 'registerCtrl'
             }).
@@ -58,6 +58,10 @@ ganbareApp.config(['$routeProvider',
             when('/users/:userId/ganbaru', {
                 templateUrl: 'partials/list-by-user.html',
                 controller : 'listByUser'
+            }).
+            when('/password/change', {
+                templateUrl: 'partials/change-password.html',
+                controller : 'changePass'
             }).
             otherwise({
                 redirectTo: '/feedfv'
