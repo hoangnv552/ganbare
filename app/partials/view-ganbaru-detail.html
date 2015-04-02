@@ -36,6 +36,14 @@
 	<div class="block content-block">
 		<h3>{{ganbaru.ganbaruTitle}}</h3>
 		<p>{{ganbaru.ganbaruContent}}</p>
+		<h3 class="error" ng-show="error !== ''">{{error}}</h3>
+	</div>
+
+	<!--LIST OF TAGS-->
+	<div class="block tags-block">
+		<ul>
+			<li class="inline-block" ng-repeat="tag in ganbaru.ganbaruTags"><label>{{tag}}<label></li>
+		</ul>
 	</div>
 	
 	<!--LIST OF PEOPLE GANBARE-->
@@ -46,13 +54,6 @@
 				<div class="inline-block float-left user-icon"></div>
 				<div class="inline-block username"><h4>{{user.userName}}</h4></div>
 			</li>
-		</ul>
-	</div>
-
-	<!--LIST OF TAGS-->
-	<div class="block tags-block">
-		<ul>
-			<li class="inline-block" ng-repeat="tag in ganbaru.ganbaruTags"><label>{{tag}}<label></li>
 		</ul>
 	</div>
 

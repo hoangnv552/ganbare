@@ -3,6 +3,8 @@
 ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru', 
 	function($scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
 	$scope.createdDate = new Date();
+	$scope.ganbaru = {};
+	$scope.error = '*Note: According to design, this container is not originally for showing message!'
 
 	$scope.goToFeed = function() {
 		$location.path('/feedmb');
@@ -31,19 +33,30 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 				ganbaruContent: $scope.ganbaru.ganbaruContent, 
 				ganbaruLocation: $scope.ganbaru.ganbaruLocation,
 				ganbaruTags: $scope.ganbaru.ganbaruTags, 
-				expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmssSSS')
+				expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
 			}, function(response) {
-				console.log(response);
-				if(response.code === 0) {
-					$location.path('/feedmb');
+				switch(response.code) {
+					case 0: {
+						$location.path('/feedmb');
+					}
+					case 1: {
+						$scope.error = 'Unknown error.'
+						break;
+					}
+					case 2: {
+						$scope.error = 'Create ganbaru unsuccessful. Please check information again!';
+						break;
+					}
+					case 3: {
+						$scope.error = 'Session outdated. Please log in again!';
+						break;
+					}
 				}
 			}, function() {
-				console.log('Failed to create ganbaru');
-				//Handling error here
+				$scope.error = 'Failed to establish connection to server. Please try again later!';
 			});
 		}, function() {
-			console.log('Failed to get location!');
-			//Handling error here
+			$scope.error = 'Failed to get your current location coordinates!'
 		});
 	};
 }]);

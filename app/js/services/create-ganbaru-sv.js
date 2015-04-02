@@ -4,7 +4,7 @@
 	ganbareServices.factory('createGanbaru', ['$resource', function($resource) {
 		return $resource(
 			path + 'v1/ganbaru',
-			{ganbaruTitle: '@ganbaruTitle', ganbaruContent: '@ganbaruContent', expiredDate: '@expiredDate', ganbaruLocation: '@ganbaruLocation', ganbaruTags: '@ganbaruTags'},
+			{},
 			{save: {method: 'POST'}}
 		);
 	}]);

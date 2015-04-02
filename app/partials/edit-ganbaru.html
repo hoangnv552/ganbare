@@ -1,18 +1,24 @@
-<div class="container edit-container">
+<div class="container edit-ganbaru">
+
 	<!--Header block-->
 	<div class="block header">
+
 		<!--Avatar and username-->
 		<div class="inline-block float-left">
 			<div class="block avatar"></div>
 			<div class="username-container">{{ganbaruUser.username}}</div>
 		</div>
+
 		<!--Date and Ganbare number-->
 		<div class="inline-block date-container">
+
 			<!--Date-->
 			<div class="block">
 				<div class="inline-block created-date"><label><b>Created Date</b>: 2014/02/15</label></div>
 				<div class="inline-block">
-					<div class="inline-block"><label><b>Expired Date</b>: </label></div>
+					<div class="inline-block">
+						<label><b>Expired Date</b>: </label>
+					</div>
 					<div class="inline-block float-right">
 						<datepicker date-format="yyyy/MM/dd">
 							<input class="datepickerbox" ng-model="ganbaru.expiredDate" type="text" readonly/>
@@ -20,6 +26,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!--Ganbare-->
 			<div class="block ganbare">
 				<div class="inline-block ganbare-number float-left"><h2>{{ganbaru.ganbareNumber}}</h2></div>
@@ -32,6 +39,7 @@
 
 	<!--Section block-->
 	<div class="block section">
+
 		<!--Ganbaru Image-->
 		<div class="inline-block float-left">
 			<div class="ganbaru-avatar block"></div>
@@ -39,6 +47,7 @@
 				<button>Upload</button>
 			</div>
 		</div>
+
 		<!--Ganbu title, content and tags-->
 		<div class="inline-block ganbaru-content">
 			<div class="block">
@@ -52,13 +61,22 @@
 			</div>
 		</div>
 	</div>
+
 	<!--Map block-->
 	<div class="block map-container">
 		<map center="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}">
 			<marker coords="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}"></marker>
 		</map>
 	</div>
+
+	<!--Error message block-->
+	<div class="block error" ng-show="error !== ''">
+		<h4>{{error}}</h4>
+	</div>
+
+	<!--Button block for navigation-->
 	<div class="confirm-button-container">
 		<button class="confirm-button" ng-click="editGanbaru()">Confirm</button>
+		<button class="confirm-button" ng-click="goTo('/ganbaru/' + ganbaru.ganbaruId)">Back</button>
 	</div>
 </div>

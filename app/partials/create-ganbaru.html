@@ -2,12 +2,12 @@
 <div class="container create-ganbaru">
 	<!--HEADER-->
 	<div class="block header">
-		<div><h3>Create new Ganbaru</h3></div>
-		<div>
+		<div class="inline-block"><h2>Create new Ganbaru</h2></div>
+		<div class="inline-block">
 			<input class="float-left date-input" type="text" ng-value="createdDate | date:'yyyy/MM/dd'" readonly>
 		</div>
 		<!--date picker box-->
-		<div>
+		<div class="inline-block">
 			<datepicker date-format="yyyy/MM/dd">
 				<input class="date-input" placeholder="Click to choose expired Date" ng-model="ganbaru.expiredDate" type="text" readonly/>
 			</datepicker>
@@ -24,18 +24,16 @@
 			</div>
 			<!--TITLE, CONTENT, TAGS-->
 			<div class="gb-content inline-block">
-				<div><input type="text" ng-model="ganbaru.ganbaruTitle" placeholder="Title:"></div>
-				<div><textarea ng-model="ganbaru.ganbaruContent"></textarea></div>
+				<div class="block"><input class="title" type="text" ng-model="ganbaru.ganbaruTitle" placeholder="Title:"></div>
+				<div class="block"><textarea ng-model="ganbaru.ganbaruContent"></textarea></div>
 				<!--tags-->
-				<div>
+				<div class="block">
 					<tags-input ng-model="tagsInput"></tags-input>
 				</div>
 			</div>
 		</div>
-		<div class="block">
-			<div>
-				<div class="tag-option"></div>
-			</div>
+		<div class="block tag-option">
+			<h3>{{error}}</h3>
 		</div>
 	</div>
 
