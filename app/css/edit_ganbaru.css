@@ -1,3 +1,11 @@
+/*container*/
+.edit-ganbaru {
+	width: 750px;
+	padding: 20px;
+	font-size: 20px;
+	background-color: #f4ffd6;
+}
+
 .edit-ganbaru label {
 	font-weight: normal;
 }
@@ -10,13 +18,6 @@
 .edit-ganbaru input,
 .edit-ganbaru textarea {
 	font-size: 16px;
-}
-
-/*container*/
-.edit-ganbaru {
-	width: 750px;
-	padding: 20px;
-	font-size: 20px;
 }
 
 /*header style*/
@@ -50,6 +51,7 @@
 	padding: 0 3px;
 	font-size: 18px;
 	width: 170px;
+	border: 1px solid #dddddd;
 }
 
 .edit-ganbaru .ganbare {
@@ -57,6 +59,7 @@
 }
 
 .edit-ganbaru .ganbare-number {
+	background-color: #ccec75;
 	border: 2px solid #000;
 	padding: 23px;
 	width: 430px;
@@ -82,7 +85,7 @@
 .edit-ganbaru .section {
 	margin: 20px 0;
 	padding: 20px;
-	background-color: #fdf498;
+	background-color: #dff79e;
 }
 
 .edit-ganbaru .ganbaru-avatar {
