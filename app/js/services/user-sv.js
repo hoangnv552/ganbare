@@ -17,7 +17,8 @@ ganbareServices.factory('user', ['$resource',
     	},
     	uploadAvatar: {
     		method: 'POST',
-            url: path + 'v1/users/:id/avatars'
+            url: path + 'v1/users/:id/avatars',
+            headers:{'Content-Type':'multipart/form-data'}
     	},
         updateUser: {
             method: 'PUT'
@@ -29,6 +30,10 @@ ganbareServices.factory('user', ['$resource',
         logout: {
             method: 'DELETE',
             url: path + 'v1/sessions/:token'
+        },
+        changePassword: {
+            method: 'PUT',
+            url: path + 'v1/users/:id/password'
         }
   	});
 }]);

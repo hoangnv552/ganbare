@@ -59,6 +59,10 @@ ganbareApp.config(['$routeProvider',
                     templateUrl: 'partials/list-by-user.html',
                     controller : 'listByUser'
                 }).
+                when('/password/change', {
+                    templateUrl: 'partials/change-password.html',
+                    controller : 'changePass'
+                }).
                 otherwise({
                     redirectTo: '/feedfv'
                 });

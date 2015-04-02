@@ -14,6 +14,10 @@ ganbareServices.factory('addGanbare', ['$resource',
 		{
 			add: {
 				method: 'PUT'
+			},
+			deleteGanbaru: {
+				method: 'DELETE',
+				url: path + 'v1/ganbaru/:ganbaruId'
 			}
 		});
 	}]);

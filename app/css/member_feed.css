@@ -208,6 +208,7 @@
     height: 45px;
     width: 400px;
     margin-left: 23px;
+    overflow: hidden;
 }
 .thumbnail-img .ganbaru-dd{
     float: left;
@@ -280,4 +281,7 @@
     background: #fff;
     float: left;
     margin-left: 100px;
+}
+.detail-mypage button{
+    margin-left: 20px;
 }
