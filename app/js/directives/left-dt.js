@@ -1,21 +1,21 @@
 ;(function() {
-'use strict';
-/* global ganbareDirective:true */
-ganbareDirective.directive('leftDirective', ['User', '$cookieStore',
-	function(User, $cookieStore) {
-	return {
-		restrict: 'E',
-		controller: function($scope) {
-			//Get user infor
-			var user = new User(),
-			userId  = $cookieStore.get('userId');
+	'use strict';
 
-			user.id = userId;
-			user.$getUser().then(function getDone(data) {
-				$scope.user = data;
-			});
-		},
-		templateUrl: 'partials/includes/main-left.html'
-	};
-}]);
+	angular.module('ganbareDirective').directive('leftDirective', ['User',
+		function(User) {
+		return {
+			restrict: 'E',
+			controller: function($scope) {
+				//Get user infor
+				var user = new User({
+					id: User.getCurrentUserId()
+				});
+
+				user.$getUser().then(function getDone(data) {
+					$scope.user = data;
+				});
+			},
+			templateUrl: 'partials/includes/main-left.html'
+		};
+	}]);
 })();

@@ -1,9 +1,8 @@
 ;(function() {
-'use strict';
+	'use strict';
 
-/*global ganbareControllers:true */
-ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'User',
-	function($scope, $location, md5, User) {
+	angular.module('ganbareControllers').controller('registerCtrl', ['$scope', '$location', 'md5', 'User', function($scope, $location, md5, User)
+	{
 		$scope.panel = 1;
 
 		$scope.setPanel = function(setPanel) {
@@ -88,5 +87,5 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'Us
 		$scope.goTo = function(url) {
 			$location.path(url);
 		};
-}]);
+	}]);
 })();

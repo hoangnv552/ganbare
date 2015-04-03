@@ -1,15 +1,12 @@
 (function() {
-'use strict';
+	'use strict';
 
-/* global ganbareServices:true */
-/* global path:true */
-ganbareServices.factory('ganbaruDetail', ['$resource', function($resource) {
-	return $resource(
-		path + 'v1/ganbaru/:ganbaruId',
-		{},
-		{
-			query: {method: 'GET'},
-		}
-	);
-}]);
+	angular.module('ganbareServices').factory('ganbaruDetail', ['ApiRootPath', '$resource', function(ApiRootPath, $resource)
+	{
+		return $resource(ApiRootPath + 'v1/ganbaru/:ganbaruId', {},
+			{
+				query: {method: 'GET'},
+			}
+		);
+	}]);
 })();

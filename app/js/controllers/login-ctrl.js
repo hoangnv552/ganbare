@@ -1,22 +1,20 @@
 ;(function(){
-'use strict';
-/*global ganbareControllers:true */
-/* Controllers */
+    'use strict';
 
-/*
-* Controller Login
-*/
-var MESSAGE = {
-    1: 'Unknown error. We are sorry for the convenience...',
-    2: 'Login unsuccessful. Please re-check your information!',
-    12: 'Email not found!',
-    21: 'Incorrect password!'
-}
+    /*
+    * Controller Login
+    */
+    var MESSAGE = {
+        1: 'Unknown error. We are sorry for the convenience...',
+        2: 'Login unsuccessful. Please re-check your information!',
+        12: 'Email not found!',
+        21: 'Incorrect password!'
+    }
 
-ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'User',
-    function($scope, $cookieStore, $location, md5, User) {
+    angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', function($scope, $cookieStore, $location, md5, Session)
+    {
         $scope.error = '';
-        $scope.user = new User();
+        $scope.user = new Session();
 
         $scope.login = function(){
 

@@ -1,30 +1,16 @@
 ;(function(){
-'use strict';
+	'use strict';
 
-/* global ganbareControllers:true */
-/* Controllers */
+	/*
+	* Controller Feed for visitors
+	*/
+	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru', 'getListGanbaru', 'getUtilities', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, pinGanbaru, favoriteGanbaru, getListGanbaru, getUtilities)
+	{
 
-/*
-* Controller Feed for visitors
-*/
-ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
-	'addGanbare', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru',
-	'getListGanbaru', 'getUtilities',
-	function($scope, $cookieStore, addGanbare, $interval, $location, pinGanbaru,
-		favoriteGanbaru, getListGanbaru, getUtilities) {
+		var userId = $cookieStore.get('userId');
+		var ganbaruIdAndNumber = [];
+		var take = 5;
 
-		var types = {
-	  		listTypePin: 1,
-			listTypeFavorite: 2,
-			listTypeUser: 3,
-			listTypeHot: 4,
-			listTypeExpire: 5,
-			listTypeTag: 6,
-			listTypeSearch: 7
-		},
-		userId  = $cookieStore.get('userId'),
-		ganbaruIdAndNumber = [],
-		take = 5;
 		$scope.skip = 0;
 
 		$scope.totalNumber = 0;
@@ -44,7 +30,7 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		/*
 		* Defaul load page
 		*/
-		getListGanbaru($scope.skip, take, '').then(function(data) {
+		getListGanbaru($scope.skip, take).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -54,7 +40,8 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listMoreGanbaru = function() {
 			$scope.skip = $scope.skip + 5;
-			getListGanbaru( $scope.skip, take, $scope.listType).then(function(data) {
+
+			return getListGanbaru($scope.skip, take, $scope.listType).then(function(data) {
 				$scope.ganbaru = $scope.ganbaru.concat(data.data);
 				$scope.length = $scope.ganbaru.length;
 			});
@@ -69,7 +56,7 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 			// Caculator total ganbaru number for function addGanbare
 			$scope.countNumber++;
 
-			getUtilities.caculatorArrNumberClicked($scope, item, ganbaruIdAndNumber).then(function(response){
+			return getUtilities.caculatorArrNumberClicked($scope, item, ganbaruIdAndNumber).then(function(response){
 				ganbaruIdAndNumber = response;
 			});
 		};
@@ -84,17 +71,18 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 
 			if (length > 0) {
 				for (var i = 0; i < length; i++ ) {
-					var ganbaruId = ganbaruIdAndNumber[i].ganbaruId;
-					var ganbareNumber = ganbaruIdAndNumber[i].ganbareNumber;
 
-					addGanbare.add({
+					Ganbaru.add({
 						userId: userId,
-						ganbaruId: ganbaruId,
-						ganbareNumber: ganbareNumber
+						ganbaruId: ganbaruIdAndNumber[i].ganbaruId,
+						ganbareNumber: ganbaruIdAndNumber[i].ganbareNumber
 					}).$promise.then(function addDone(data) {
 						console.log(data.data);
 					});
 				}
+
+				// clear array
+				// hien tai: new array
 				ganbaruIdAndNumber = [];
 			}
 		}
@@ -178,7 +166,7 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 				$scope.skip = 0;
 			}
 			$scope.listType = '';
-			getListGanbaru( $scope.skip, take, '' ).then(function(data) {
+			getListGanbaru($scope.skip, take).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -188,12 +176,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listPinGanbaru = function() {
 			$scope.showTags = false;
-			if ($scope.listType !== types.listTypePin) {
+			if ($scope.listType !== TYPES.listTypePin) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypePin;
-			getListGanbaru( $scope.skip, take, types.listTypePin ).then(function(data) {
+			$scope.listType = TYPES.listTypePin;
+			getListGanbaru( $scope.skip, take, TYPES.listTypePin ).then(function(data) {
 				$scope.ganbaru = data.data;
 
 			});
@@ -204,12 +192,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listOfFavoriteGanbaru = function() {
 			$scope.showTags = false;
-			if ($scope.listType !== types.listTypeFavorite) {
+			if ($scope.listType !== TYPES.listTypeFavorite) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypeFavorite;
-			getListGanbaru( $scope.skip, take, types.listTypeFavorite ).then(function(data) {
+			$scope.listType = TYPES.listTypeFavorite;
+			getListGanbaru( $scope.skip, take, TYPES.listTypeFavorite ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -219,12 +207,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listByUserGanbaru = function() {
 			$scope.showTags = false;
-			if ($scope.listType !== types.listTypeUser) {
+			if ($scope.listType !== TYPES.listTypeUser) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypeUser;
-			getListGanbaru( $scope.skip, take, types.listTypeUser ).then(function(data) {
+			$scope.listType = TYPES.listTypeUser;
+			getListGanbaru( $scope.skip, take, TYPES.listTypeUser ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -234,12 +222,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listHotGanbaru = function() {
 			$scope.showTags = false;
-			if ($scope.listType !== types.listTypeHot) {
+			if ($scope.listType !== TYPES.listTypeHot) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypeHot;
-			getListGanbaru( $scope.skip, take, types.listTypeHot ).then(function(data) {
+			$scope.listType = TYPES.listTypeHot;
+			getListGanbaru( $scope.skip, take, TYPES.listTypeHot ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -249,12 +237,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.listExpireGanbaru = function() {
 			$scope.showTags = false;
-			if ($scope.listType !== types.listTypeExpire) {
+			if ($scope.listType !== TYPES.listTypeExpire) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypeExpire;
-			getListGanbaru( $scope.skip, take, types.listTypeExpire ).then(function(data) {
+			$scope.listType = TYPES.listTypeExpire;
+			getListGanbaru( $scope.skip, take, TYPES.listTypeExpire ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -271,12 +259,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		*/
 		$scope.searchGanbaru = function(contentSearch) {
 			if (contentSearch) {
-				if ($scope.listType !== types.listTypeSearch) {
+				if ($scope.listType !== TYPES.listTypeSearch) {
 					$scope.ganbaru = [];
 					$scope.skip = 0;
 				}
-				$scope.listType = types.listTypeSearch;
-				getListGanbaru( $scope.skip, take, types.listTypeSearch, contentSearch ).then(function(data) {
+				$scope.listType = TYPES.listTypeSearch;
+				getListGanbaru( $scope.skip, take, TYPES.listTypeSearch, contentSearch ).then(function(data) {
 					$scope.ganbaru = data.data;
 				});
 			} else {
@@ -294,12 +282,12 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		* Search tag ganbaru
 		*/
 		$scope.searchTagGanbaru = function() {
-			if ($scope.listType !== types.listTypeTag) {
+			if ($scope.listType !== TYPES.listTypeTag) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = types.listTypeTag;
-			getListGanbaru( $scope.skip, take, types.listTypeTag,'' , $scope.selectTag ).then(function(data) {
+			$scope.listType = TYPES.listTypeTag;
+			getListGanbaru( $scope.skip, take, TYPES.listTypeTag,'' , $scope.selectTag ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};

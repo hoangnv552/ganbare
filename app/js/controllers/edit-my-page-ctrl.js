@@ -1,13 +1,11 @@
 ;(function() {
-'use strict';
+	'use strict';
 
-/* global ganbareControllers:true */
-
-/*
-* Controller edit my page
-*/
-ganbareControllers.controller('editMyPageCtrl', ['$scope', '$cookieStore', 'User',
-	function($scope, $cookieStore, User){
+	/*
+	* Controller edit my page
+	*/
+	angular.module('ganbareControllers').controller('editMyPageCtrl', ['$scope', '$cookieStore', 'User', function($scope, $cookieStore, User)
+	{
 		var userId  = $cookieStore.get('userId');
 		$scope.totalGanbareNumber = 0;
 

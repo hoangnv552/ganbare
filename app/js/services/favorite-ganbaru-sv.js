@@ -1,25 +1,23 @@
 ;(function(){
-'use strict';
+    'use strict';
 
-/* global ganbareServices:true */
-/* global path:true */
-
-/*
-* Service favorite
-*/
-ganbareServices.factory('favoriteGanbaru', ['$resource',
-    function($resource) {
-    return $resource(
-        path + 'v1/users/:id/favorites',
-        {id: '@id'},
-        {
-        add: {
-            method: 'POST'
-        },
-        remove: {
-            method: 'DELETE',
-            url: path + 'v1/users/:id/favorites/:friendId'
-        }
-    });
+    /*
+    * Service favorite
+    */
+    angular.module('ganbareServices').factory('favoriteGanbaru', ['ApiRootPath', '$resource', function(ApiRootPath, $resource)
+    {
+        return $resource(ApiRootPath + 'v1/users/:id/favorites', {
+                id: '@id'
+            },
+            {
+                add: {
+                    method: 'POST'
+                },
+                remove: {
+                    method: 'DELETE',
+                    url: ApiRootPath + 'v1/users/:id/favorites/:friendId'
+                }
+            }
+        );
     }]);
 })();
