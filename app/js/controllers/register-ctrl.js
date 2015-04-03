@@ -1,7 +1,7 @@
 ;(function() {
 'use strict';
-ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'user',
-	function($scope, $location, md5, user) {
+ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'User',
+	function($scope, $location, md5, User) {
 		$scope.panel = 1;
 
 		$scope.setPanel = function(setPanel) {
@@ -13,7 +13,7 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 		};
 
 		$scope.submitForm = function() {
-			user.register({
+			User.register({
 				email: $scope.email,
 				password: $scope.password,
 				encryptedPassword: md5.createHash($scope.password || ''),
@@ -59,7 +59,7 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 
 		$scope.verifyUser = function() {
 			console.log($scope.userId);
-			user.verify({registeringId: $scope.registeringId}, function(response) {
+			User.verify({registeringId: $scope.registeringId}, function(response) {
 				switch(response.code) {
 					case 0: {
 						$location.path('/login');

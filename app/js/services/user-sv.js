@@ -6,7 +6,7 @@
 /*
 * Service pin Ganbaru
 */
-ganbareServices.factory('user', ['$resource',
+ganbareServices.factory('User', ['$resource',
   	function($resource) {
   	return $resource(
     	path + 'v1/users/:id',

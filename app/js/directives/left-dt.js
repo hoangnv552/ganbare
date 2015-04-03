@@ -1,16 +1,16 @@
 ;(function() {
 'use strict';
-ganbareDirective.directive('leftDirective', ['user', '$cookieStore',
-	function(user, $cookieStore) {
+ganbareDirective.directive('leftDirective', ['User', '$cookieStore',
+	function(User, $cookieStore) {
 	return {
 		restrict: 'E',
 		controller: function($scope) {
 			//Get user infor
-			var userId  = $cookieStore.get('userId');
+			var user = new User(),
+			userId  = $cookieStore.get('userId');
 
-			user.getUser({
-				id: userId
-			}).$promise.then(function getDone(data) {
+			user.id = userId;
+			user.$getUser().then(function getDone(data) {
 				$scope.user = data;
 			});
 		},

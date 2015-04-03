@@ -4,8 +4,10 @@
 /*
 * Change password
 */
-ganbareControllers.controller('changePass', ['$scope', 'md5', 'user', '$cookieStore', '$location',
-	function($scope, md5, user, $cookieStore, $location) {
+ganbareControllers.controller('changePass', ['$scope', 'md5', 'User', '$cookieStore', '$location',
+	function($scope, md5, User, $cookieStore, $location) {
+		$scope.user = new User();
+
 		$scope.changePassword = function() {
 			var userId  = $cookieStore.get('userId'),
 			encryptedNewPassword;
@@ -16,12 +18,11 @@ ganbareControllers.controller('changePass', ['$scope', 'md5', 'user', '$cookieSt
 				$scope.message = 'New password is empty';
 			}
 
-			user.changePassword({
-				id: userId,
-				oldPassword: $scope.user.oldPassword,
-				newPassword: $scope.user.newPassword,
-				encryptedNewPassword: encryptedNewPassword
-			}).$promise.then(function doneChangePass(response) {
+			$scope.user.encryptedNewPassword = encryptedNewPassword;
+			$scope.user.id = userId;
+
+			//Change password
+			$scope.user.$changePassword().then(function doneChangePass(response) {
 				console.log(response);
 				if (response.code === 0) {
 					$location.path('/login');

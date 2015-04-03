@@ -43,7 +43,7 @@ ganbareControllers.controller('feedMemberCtrl', ['$scope', '$cookieStore',
 		/*
 		* Defaul load page
 		*/
-		getListGanbaru( $scope.skip, take, '' ).then(function(data) {
+		getListGanbaru($scope.skip, take, '').then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});

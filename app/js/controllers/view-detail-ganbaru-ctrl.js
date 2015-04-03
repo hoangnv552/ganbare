@@ -6,9 +6,9 @@
 	ganbareControllers.controller('viewGanbareDetailCtrl',
 		['$scope', '$location', '$cookieStore', '$routeParams', '$interval',
 		'ganbaruDetail', 'addGanbare', 'pinGanbaru',
-		'favoriteGanbaru', 'user', 'getUtilities',
+		'favoriteGanbaru', 'User', 'getUtilities',
 		function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, addGanbare, pinGanbaru,
-			favoriteGanbaru, user, getUtilities) {
+			favoriteGanbaru, User, getUtilities) {
 
 			var userId = $cookieStore.get('userId');
 			var token = $cookieStore.get('token');
@@ -107,7 +107,7 @@
 				$scope.clickNumber++;
 
 				if(userId != null && userId !== 'none') {
-					user.getUser({id: userId}, function(response) {
+					User.getUser({id: userId}, function(response) {
 						var userInfo = {userId: userId, userName: response.data.username};
 						var found = false;
 						angular.forEach($scope.ganbaru.listGanbare, function(obj, key) {

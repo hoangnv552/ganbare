@@ -1,9 +1,24 @@
-ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru',
-	function($scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
+var MESSAGES = {
+	1: 'Unknown error.',
+	2: 'Create ganbaru unsuccessful. Please check information again!',
+	3: 'Session outdated. Please log in again!'
+};
+
+ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'Ganbaru',
+	function($scope, $http, $cookieStore, $location, geolocation, Ganbaru) {
 	'use strict';
 	$scope.createdDate = new Date();
-	$scope.ganbaru = {};
+	$scope.ganbaru = new Ganbaru();
 	$scope.error = '*Note: According to design, this container is not originally for showing message!';
+
+	function saveGanbaru() {
+		// set 1 so property ko dc data-bind
+		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
+
+		return $scope.ganbaru.$save();
+	}
+
+
 
 	$scope.goToFeed = function() {
 		$location.path('/feedmb');
@@ -22,41 +37,29 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 		});
 
 		//get latitude & longitude of location coordinates
-		geolocation.getLocation().then(function(response) {
+		return geolocation.getLocation().then(function(response) {
 			$scope.ganbaru.ganbaruLocation.push(response.coords.latitude);
 			$scope.ganbaru.ganbaruLocation.push(response.coords.longitude);
 
 			//send request to server
-			createGanbaru.save({
-				ganbaruTitle: $scope.ganbaru.ganbaruTitle,
-				ganbaruContent: $scope.ganbaru.ganbaruContent,
-				ganbaruLocation: $scope.ganbaru.ganbaruLocation,
-				ganbaruTags: $scope.ganbaru.ganbaruTags,
-				expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
-			}, function(response) {
-				switch(response.code) {
-					case 0: {
-						$location.path('/feedmb');
-						break;
-					}
-					case 1: {
-						$scope.error = 'Unknown error.';
-						break;
-					}
-					case 2: {
-						$scope.error = 'Create ganbaru unsuccessful. Please check information again!';
-						break;
-					}
-					case 3: {
-						$scope.error = 'Session outdated. Please log in again!';
-						break;
-					}
-				}
-			}, function() {
-				$scope.error = 'Failed to establish connection to server. Please try again later!';
-			});
+			return saveGanbaru($scope.ganbaru);
 		}, function() {
 			$scope.error = 'Failed to get your current location coordinates!';
+
+			return $q.reject();
+		}).then(function(response) {
+			switch(response.code) {
+				case 0: {
+					$location.path('/feedmb');
+					break;
+				}
+				default: {
+					$scope.error = MESSAGES[response.code];
+					break;
+				}
+			}
+		}, function() {
+			$scope.error = 'Failed to establish connection to server. Please try again later!';
 		});
 	};
 }]);
