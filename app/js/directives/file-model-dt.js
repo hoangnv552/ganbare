@@ -1,5 +1,6 @@
 ;(function() {
 'use strict';
+/* global ganbareDirective:true */
 ganbareDirective.directive('fileModel', ['$parse',
 	function($parse) {
 	return {

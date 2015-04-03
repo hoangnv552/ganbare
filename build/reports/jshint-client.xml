@@ -1,51 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jslint>
-	<file name="..\..\app\js\controllers\change-password-ctrl.js">
-		<issue line="7" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;changePass&apos;, [&apos;$scope&apos;, &apos;md5&apos;, &apos;user&apos;, &apos;$cookieStore&apos;, &apos;$location&apos;," severity="W" />
+	<file name="..\..\app\js\controllers.js">
+		<issue line="4" char="5" reason="&apos;ganbareControllers&apos; is defined but never used." evidence="var ganbareControllers = angular.module(&apos;ganbareControllers&apos;," severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\create-ganbaru-ctrl.js">
-		<issue line="1" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;createGanbaruCtrl&apos;, [&apos;$scope&apos;, &apos;$http&apos;, &apos;$cookieStore&apos;, &apos;$location&apos;,&apos;geolocation&apos;, &apos;createGanbaru&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\controllers\edit-ganbaru-ctrl.js">
-		<issue line="4" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;editGanbaruCtrl&apos;, [&apos;$scope&apos;,&apos;$cookieStore&apos;, &apos;$interval&apos;,&apos;$location&apos;, &apos;$routeParams&apos;,&apos;ganbaruDetail&apos;, &apos;editGanbaru&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\controllers\edit-my-page-ctrl.js">
-		<issue line="7" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;editMyPageCtrl&apos;, [&apos;$scope&apos;, &apos;$cookieStore&apos;, &apos;user&apos;," severity="W" />
+		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="var MESSAGES = {" severity="E" />
+		<issue line="19" char="45" reason="&apos;ganbaru&apos; is not defined." evidence="		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, &apos;YYYY-MM-DD&apos;).format(&apos;YYYYMMDDHHmmss&apos;);" severity="W" />
+		<issue line="52" char="20" reason="&apos;$q&apos; is not defined." evidence="			return $q.reject();" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\feed-member-ctrl.js">
-		<issue line="95" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
-		<issue line="9" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;feedMemberCtrl&apos;, [&apos;$scope&apos;, &apos;$cookieStore&apos;," severity="W" />
+		<issue line="96" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\list-by-user-ctrl.js">
-		<issue line="78" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
-		<issue line="7" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;listByUser&apos;, [&apos;$scope&apos;, &apos;$routeParams&apos;, &apos;getListGanbaru&apos;, &apos;$interval&apos;," severity="W" />
+		<issue line="79" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\login-ctrl.js">
-		<issue line="9" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;loginCtrl&apos;, [&apos;$scope&apos;, &apos;$cookieStore&apos;,&apos;$location&apos;, &apos;md5&apos;,&apos;user&apos;," severity="W" />
+		<issue line="14" char="2" reason="Missing semicolon." evidence="}" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\my-page-ctrl.js">
-		<issue line="9" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;myPageGanbaruCtrl&apos;, [&apos;$scope&apos;, &apos;user&apos;, &apos;$cookieStore&apos;, &apos;getListGanbaru&apos;, &apos;addGanbare&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\controllers\register-ctrl.js">
-		<issue line="3" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;registerCtrl&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;md5&apos;, &apos;user&apos;," severity="W" />
+		<issue line="12" char="9" reason="&apos;userId&apos; is defined but never used." evidence="	var userId  = $cookieStore.get(&apos;userId&apos;)," severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\view-detail-ganbaru-ctrl.js">
 		<issue line="32" char="55" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="						$scope.authorized = (userId != null &amp;&amp; userId !== &apos;none&apos;);" severity="W" />
 		<issue line="109" char="29" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="				if(userId != null &amp;&amp; userId !== &apos;none&apos;) {" severity="W" />
-		<issue line="6" char="5" reason="&apos;ganbareControllers&apos; is not defined." evidence="	ganbareControllers.controller(&apos;viewGanbareDetailCtrl&apos;," severity="W" />
 		<issue line="14" char="17" reason="&apos;token&apos; is defined but never used." evidence="			var token = $cookieStore.get(&apos;token&apos;);" severity="W" />
 	</file>
 	<file name="..\..\app\js\directives.js">
 		<issue line="4" char="5" reason="&apos;ganbareDirective&apos; is defined but never used." evidence="var ganbareDirective = angular.module(&apos;ganbareDirective&apos;, []);" severity="W" />
 	</file>
-	<file name="..\..\app\js\directives\file-model-dt.js">
-		<issue line="3" char="1" reason="&apos;ganbareDirective&apos; is not defined." evidence="ganbareDirective.directive(&apos;fileModel&apos;, [&apos;$parse&apos;," severity="W" />
-	</file>
 	<file name="..\..\app\js\directives\header-dt.js">
-		<issue line="3" char="1" reason="&apos;ganbareDirective&apos; is not defined." evidence="ganbareDirective.directive(&apos;headerDirective&apos;, [&apos;$cookieStore&apos;, &apos;$location&apos;, &apos;user&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\directives\left-dt.js">
-		<issue line="3" char="1" reason="&apos;ganbareDirective&apos; is not defined." evidence="ganbareDirective.directive(&apos;leftDirective&apos;, [&apos;user&apos;, &apos;$cookieStore&apos;," severity="W" />
+		<issue line="21" char="28" reason="Empty block." evidence="					} else {" severity="W" />
 	</file>
 	<file name="..\..\app\js\filters\date-filters.js">
 		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="angular.module(&apos;ganbareFilters&apos;, []).filter(&apos;dateFilter&apos;," severity="E" />
@@ -53,57 +37,14 @@
 	<file name="..\..\app\js\services.js">
 		<issue line="4" char="5" reason="&apos;path&apos; is defined but never used." evidence="var path = &apos;http://133.242.53.250:8888/&apos;;" severity="W" />
 	</file>
-	<file name="..\..\app\js\services\add-ganbare-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;addGanbare&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="9" reason="&apos;path&apos; is not defined." evidence="		path + &apos;v1/users/:userId/ganbare&apos;," severity="W" />
-		<issue line="20" char="22" reason="&apos;path&apos; is not defined." evidence="				url: path + &apos;v1/ganbaru/:ganbaruId&apos;" severity="W" />
-	</file>
-	<file name="..\..\app\js\services\create-ganbaru-sv.js">
-		<issue line="4" char="5" reason="&apos;ganbareServices&apos; is not defined." evidence="	ganbareServices.factory(&apos;createGanbaru&apos;, [&apos;$resource&apos;, function($resource) {" severity="W" />
-		<issue line="6" char="13" reason="&apos;path&apos; is not defined." evidence="			path + &apos;v1/ganbaru&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\services\edit-ganbaru-sv.js">
-		<issue line="1" char="1" reason="Use the function form of &quot;use strict&quot;." evidence="&apos;use strict&apos;;" severity="W" />
-		<issue line="3" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;editGanbaru&apos;, [&apos;$resource&apos;, function($resource) {" severity="W" />
-		<issue line="5" char="9" reason="&apos;path&apos; is not defined." evidence="		path + &apos;v1/ganbaru/:ganbaruId&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\services\favorite-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;favoriteGanbaru&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="9" reason="&apos;path&apos; is not defined." evidence="        path + &apos;v1/users/:id/favorites&apos;," severity="W" />
-		<issue line="20" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:id/favorites/:friendId&apos;" severity="W" />
-	</file>
 	<file name="..\..\app\js\services\get-list-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;getListGanbaru&apos;, [&apos;listGanbaru&apos;, &apos;$cookieStore&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\services\list-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;listGanbaru&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="9" reason="&apos;path&apos; is not defined." evidence="        path + &apos;v1/ganbaru&apos;," severity="W" />
-		<issue line="20" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:userId/pins&apos;" severity="W" />
-		<issue line="24" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:userId/favorites/ganbaru&apos;" severity="W" />
-		<issue line="28" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:userId/ganbaru&apos;" severity="W" />
-	</file>
-	<file name="..\..\app\js\services\pin-ganbaru-sv.js">
-		<issue line="10" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;pinGanbaru&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="13" char="9" reason="&apos;path&apos; is not defined." evidence="        path + &apos;v1/users/:userId/pins&apos;," severity="W" />
-		<issue line="21" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:userId/pins/:ganbaruId&apos;" severity="W" />
+		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
 	</file>
 	<file name="..\..\app\js\services\user-sv.js">
-		<issue line="13" char="19" reason="Strings must use singlequote." evidence="    	{id: &quot;@id&quot;}," severity="W" />
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;user&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="9" reason="&apos;path&apos; is not defined." evidence="    	path + &apos;v1/users/:id&apos;," severity="W" />
-		<issue line="20" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:id/avatars&apos;," severity="W" />
-		<issue line="28" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/sessions&apos;" severity="W" />
-		<issue line="32" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/sessions/:token&apos;" severity="W" />
-		<issue line="36" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users/:id/password&apos;" severity="W" />
-		<issue line="40" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users&apos;" severity="W" />
-		<issue line="44" char="18" reason="&apos;path&apos; is not defined." evidence="            url: path + &apos;v1/users&apos;" severity="W" />
+		<issue line="14" char="19" reason="Strings must use singlequote." evidence="    	{id: &quot;@id&quot;}," severity="W" />
 	</file>
 	<file name="..\..\app\js\services\utilities-sv.js">
-		<issue line="7" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;getUtilities&apos;, [&apos;$q&apos;, &apos;addGanbare&apos;, &apos;ganbaruDetail&apos;," severity="W" />
-	</file>
-	<file name="..\..\app\js\services\view-detail-ganbaru-sv.js">
-		<issue line="3" char="5" reason="&apos;ganbareServices&apos; is not defined." evidence="	ganbareServices.factory(&apos;ganbaruDetail&apos;, [&apos;$resource&apos;, function($resource) {" severity="W" />
-		<issue line="5" char="13" reason="&apos;path&apos; is not defined." evidence="			path + &apos;v1/ganbaru/:ganbaruId&apos;," severity="W" />
+		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
 	</file>
 </jslint>
 

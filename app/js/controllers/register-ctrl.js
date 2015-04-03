@@ -1,5 +1,7 @@
 ;(function() {
 'use strict';
+
+/*global ganbareControllers:true */
 ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'User',
 	function($scope, $location, md5, User) {
 		$scope.panel = 1;

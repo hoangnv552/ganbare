@@ -1,6 +1,8 @@
 ;(function() {
 'use strict';
 
+/* global ganbareControllers:true */
+
 ganbareControllers.controller('editGanbaruCtrl', ['$scope','$cookieStore', '$interval','$location', '$routeParams','ganbaruDetail', 'editGanbaru',
 	'getUtilities',
 	function($scope, $cookieStore, $interval, $location, $routeParams, ganbaruDetail, editGanbaru, getUtilities) {

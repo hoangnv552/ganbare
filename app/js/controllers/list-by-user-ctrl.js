@@ -1,9 +1,10 @@
 ;(function(){
 'use strict';
-
+/* global ganbareControllers:true */
 /*
 * Controller list by user
 */
+
 ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListGanbaru', '$interval',
 	'addGanbare', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru',
 	function($scope, $routeParams, getListGanbaru, $interval, addGanbare, getUtilities,

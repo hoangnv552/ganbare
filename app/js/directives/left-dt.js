@@ -1,5 +1,6 @@
 ;(function() {
 'use strict';
+/* global ganbareDirective:true */
 ganbareDirective.directive('leftDirective', ['User', '$cookieStore',
 	function(User, $cookieStore) {
 	return {

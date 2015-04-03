@@ -1,3 +1,6 @@
+;(function() {
+'user strict';
+/* global ganbareControllers:true */
 var MESSAGES = {
 	1: 'Unknown error.',
 	2: 'Create ganbaru unsuccessful. Please check information again!',
@@ -13,7 +16,7 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 
 	function saveGanbaru() {
 		// set 1 so property ko dc data-bind
-		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
+		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
 
 		return $scope.ganbaru.$save();
 	}
@@ -63,3 +66,4 @@ ganbareControllers.controller('createGanbaruCtrl', ['$scope', '$http', '$cookieS
 		});
 	};
 }]);
+})();

@@ -1,6 +1,6 @@
 ;(function() {
 'use strict';
-
+/* global ganbareControllers:true */
 /*
 * Change password
 */

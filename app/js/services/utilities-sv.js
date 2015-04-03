@@ -1,6 +1,9 @@
 ;(function(){
 'use strict';
 
+/* global ganbareServices:true */
+/* global path:true */
+
 /*
 * Service utilites
 */

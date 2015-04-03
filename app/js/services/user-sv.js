@@ -1,7 +1,8 @@
 ;(function(){
 'use strict';
 
-/* Services */
+/* global ganbareServices:true */
+/* global path:true */
 
 /*
 * Service pin Ganbaru

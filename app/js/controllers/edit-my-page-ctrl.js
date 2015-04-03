@@ -1,6 +1,8 @@
 ;(function() {
 'use strict';
 
+/* global ganbareControllers:true */
+
 /*
 * Controller edit my page
 */

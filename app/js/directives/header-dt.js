@@ -1,5 +1,6 @@
 ;(function() {
 'use strict';
+/* global ganbareDirective:true */
 ganbareDirective.directive('headerDirective', ['$cookieStore', '$location', 'User',
 	function($cookieStore, $location, User) {
 	return {

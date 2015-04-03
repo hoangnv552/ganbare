@@ -1,7 +1,7 @@
 
 (function() {
 	'use strict';
-
+	/* global ganbareControllers:true */
 	/* Controllers */
 	ganbareControllers.controller('viewGanbareDetailCtrl',
 		['$scope', '$location', '$cookieStore', '$routeParams', '$interval',

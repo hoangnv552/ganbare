@@ -1,4 +1,7 @@
+;(function() {
 'use strict';
+/* global ganbareServices:true */
+/* global path:true */
 
 ganbareServices.factory('editGanbaru', ['$resource', function($resource) {
 	return $resource(
@@ -9,3 +12,4 @@ ganbareServices.factory('editGanbaru', ['$resource', function($resource) {
 		{put: {method: 'PUT'}}
 	);
 }]);
+})();
