@@ -1,58 +1,40 @@
 ;(function() {
-'use strict';
+	'use strict';
 
-/*
-* Controller edit my page
-*/
-ganbareControllers.controller('editMyPageCtrl', ['$scope', '$cookieStore', 'user',
-	function($scope, $cookieStore, user){
+	/*
+	* Controller edit my page
+	*/
+	angular.module('ganbareControllers').controller('editMyPageCtrl', ['$scope', '$cookieStore', 'User', function($scope, $cookieStore, User)
+	{
 		var userId  = $cookieStore.get('userId');
 		$scope.totalGanbareNumber = 0;
 
+		$scope.user = new User();
+
+		$scope.user.id = userId;
 		/*
 		* Get user infor
 		*/
-		user.getUser({
-			id: userId
-		}).$promise.then(function getDone(data) {
+		$scope.user.$getUser().then(function getDone(data) {
 			$scope.user = data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
 
 		/*
-		* Upload file
-		*/
-		$scope.uploadFile = function() {
-			$scope.data = 'none';
-
-			var f = document.getElementById('avatar').files[0],
-			r = new FileReader();
-			r.onloadend = function(e) {
-				$scope.data = e.target.result;
-
-				console.log($scope.data);
-				/////////////////
-				user.uploadAvatar({
-					id: userId,
-					image: $scope.data
-				}).$promise.then(function postDone(data) {
-					console.log(data);
-				});
-			}
-			r.readAsBinaryString(f);
-		};
-
-		/*
 		* Update profile
 		*/
 		$scope.updateProfile = function() {
-			user.updateUser({
-				id: userId,
-				username: $scope.user.data.username,
-				profile: $scope.user.data.userProfile
-			}).$promise.then(function updateDone(response) {
+			$scope.user.username = $scope.user.data.username;
+			$scope.user.profile = $scope.user.data.userProfile;
+			$scope.user.id = userId;
+
+			delete $scope.user.extendedInfor;
+			delete $scope.user.data;
+			delete $scope.user.code;
+
+			$scope.user.$updateUser().then(function updateDone(response) {
 				console.log(response);
-			})
-		}
+			});
+		};
 	}]);
 })();

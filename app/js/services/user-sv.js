@@ -1,48 +1,51 @@
 ;(function(){
-'use strict';
+    'use strict';
 
-/* Services */
+    /*
+    * Service pin Ganbaru
+    */
+    angular.module('ganbareServices').factory('User', ['ApiRootPath', '$resource', '$cookieStore', function(ApiRootPath, $resource, $cookieStore)
+    {
+        var User = $resource(ApiRootPath + 'v1/users/:id', {
+            id: "@id"
+        }, {
+            getUser: {
+                method: 'GET'
+            },
+            uploadAvatar: {
+                method: 'POST',
+                url: ApiRootPath + 'v1/users/:id/avatars',
+                headers:{
+                    'Content-Type':'multipart/form-data'
+                }
+            },
+            updateUser: {
+                method: 'PUT'
+            },
+            changePassword: {
+                method: 'PUT',
+                url: ApiRootPath + 'v1/users/:id/password'
+                // transformResponse: function(response, headers) {
+                //      response = {
+                //         code: Number,
+                //         data: user
+                //     }
 
-/*
-* Service pin Ganbaru
-*/
-ganbareServices.factory('user', ['$resource',
-  	function($resource) {
-  	return $resource(
-    	path + 'v1/users/:id',
-    	{id: "@id"},
-    	{
-    	getUser: {
-    		method: 'GET'
-    	},
-    	uploadAvatar: {
-    		method: 'POST',
-            url: path + 'v1/users/:id/avatars',
-            headers:{'Content-Type':'multipart/form-data'}
-    	},
-        updateUser: {
-            method: 'PUT'
-        },
-        login: {
-            method: 'POST',
-            url: path + 'v1/sessions'
-        },
-        logout: {
-            method: 'DELETE',
-            url: path + 'v1/sessions/:token'
-        },
-        changePassword: {
-            method: 'PUT',
-            url: path + 'v1/users/:id/password'
-        },
-        register: {
-            method: 'POST',
-            url: path + 'v1/users'
-        },
-        verify: {
-            method: 'PUT',
-            url: path + 'v1/users'
-        }
-  	});
-}]);
+                //     return response.data;
+                // }
+            },
+            register: {
+                method: 'POST'
+            },
+            verify: {
+                method: 'PUT'
+            }
+        });
+
+        User.getCurrentUserId = function() {
+            return $cookieStore.get('userId');
+        };
+
+        return User;
+    }]);
 })();

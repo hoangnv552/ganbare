@@ -1,18 +1,16 @@
 ;(function(){
-'use strict';
+	'use strict';
 
-/*
-* Controller list by user
-*/
-ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListGanbaru', '$interval',
-	'addGanbare', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru',
-	function($scope, $routeParams, getListGanbaru, $interval, addGanbare, getUtilities,
-		pinGanbaru, $cookieStore, favoriteGanbaru) {
+	/*
+	* Controller list by user
+	*/
+
+	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'getListGanbaru', '$interval', 'Ganbaru', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru', function($scope, $routeParams, getListGanbaru, $interval, Ganbaru, getUtilities, pinGanbaru, $cookieStore, favoriteGanbaru)
+	{
 
 		var ganbaruIdAndNumber = [],
 		userIdParam = $routeParams.userId,
 		userId  = $cookieStore.get('userId'),
-		token  = $cookieStore.get('token'),
 		take = 5;
 		$scope.skip = 0;
 		$scope.length = 0;
@@ -47,9 +45,6 @@ ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListG
 		* Function add ganbare
 		*/
 		$scope.addGanbare = function(item) {
-			var count = 1,
-			length = ganbaruIdAndNumber.length,
-			flgCheck = false;
 			// Caculator total ganbaru number for view
 			$scope.totalNumber++;
 			// Caculator total ganbaru number for function addGanbare
@@ -70,20 +65,18 @@ ganbareControllers.controller('listByUser', ['$scope', '$routeParams', 'getListG
 
 			if (length > 0) {
 				for (var i = 0; i < length; i++ ) {
-					var ganbaruId = ganbaruIdAndNumber[i].ganbaruId;
-					var ganbareNumber = ganbaruIdAndNumber[i].ganbareNumber;
 
-					addGanbare.add({
+					Ganbaru.add({
 						userId: userId,
-						ganbaruId: ganbaruId,
-						ganbareNumber: ganbareNumber
+						ganbaruId: ganbaruIdAndNumber[i].ganbaruId,
+						ganbareNumber: ganbaruIdAndNumber[i].ganbareNumber
 					}).$promise.then(function addDone(data) {
 						console.log(data.data);
 					});
 				}
 				ganbaruIdAndNumber = [];
 			}
-		};
+		}
 
 		/*
 		* Set interval callIntervalAddGanbare function

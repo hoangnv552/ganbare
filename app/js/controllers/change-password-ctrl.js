@@ -1,33 +1,32 @@
 ;(function() {
-'use strict';
+	'use strict';
 
-/*
-* Change password
-*/
-ganbareControllers.controller('changePass', ['$scope', 'md5', 'user', '$cookieStore', '$location',
-	function($scope, md5, user, $cookieStore, $location) {
+	/*
+	* Change password
+	*/
+	angular.module('ganbareControllers').controller('changePass', ['$scope', 'md5', 'User', '$location', function($scope, md5, User, $location)
+	{
+		var user = $scope.user = new User({
+			id: User.getCurrentUserId()
+		});
+
 		$scope.changePassword = function() {
-			var userId  = $cookieStore.get('userId');
 
-			if ($scope.user.newPassword) {
-				var encryptedNewPassword = 	md5.createHash($scope.user.newPassword);
+			if (user.newPassword) {
+				user.encryptedNewPassword = md5.createHash(user.newPassword);
+
+				user.$changePassword().then(function doneChangePass(response) {
+					console.log(response);
+					if (response.code === 0) {
+						$location.path('/login');
+					} else {
+						$scope.message = 'Change password error';
+					}
+				});
 			} else {
 				$scope.message = 'New password is empty';
-			}
 
-			user.changePassword({
-				id: userId,
-				oldPassword: $scope.user.oldPassword,
-				newPassword: $scope.user.newPassword,
-				encryptedNewPassword: encryptedNewPassword
-			}).$promise.then(function doneChangePass(response) {
-				console.log(response);
-				if (response.code === 0) {
-					$location.path('/login');
-				} else {
-					$scope.message = 'Change password error';
-				}
-			})
+			}
 		};
 	}]);
 })();

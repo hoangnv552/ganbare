@@ -1,11 +1,11 @@
 ;(function(){
-'use strict';
+	'use strict';
 
-/*
-* Service utilites
-*/
-ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
-	function($q, addGanbare, ganbaruDetail){
+	/*
+	* Service utilites
+	*/
+	angular.module('ganbareServices').factory('getUtilities', ['$q', 'Ganbaru', 'ganbaruDetail', function($q, Ganbaru, ganbaruDetail)
+	{
 		return {
 			/*
 			* Caculator array same [{ ganbaruId: sddf234sf, ganbareNumber: 2 }]
@@ -47,7 +47,7 @@ ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
 			sendRequestAddGanbare: function($scope, userId, ganbaruId) {
 				var deferred = $q.defer();
 				if($scope.clickNumber > 0) {
-					addGanbare.add({
+					Ganbaru.add({
 						userId: userId,
 						ganbaruId: ganbaruId,
 						ganbareNumber: $scope.clickNumber
@@ -69,7 +69,7 @@ ganbareServices.factory('getUtilities', ['$q', 'addGanbare', 'ganbaruDetail',
 					deferred.reject('Failed To Get Ganbaru Detail!');
 				});
 				return deferred.promise;
-			}	
-		}
+			}
+		};
 	}]);
-})()
+})();

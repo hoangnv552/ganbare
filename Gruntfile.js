@@ -3,10 +3,10 @@ var assetDef = require('./build/assets.json'),
 	arrName;
 
 function getFileName(){
-	if(!arrName) {
+	if (!arrName) {
 		arrName = {};
 		var fileName = require('./build/rev.json');
-		for( var i in fileName ) {
+		for ( var i in fileName ) {
 			if (fileName.hasOwnProperty(i)){
 				var key = i.match(/\/([^/]*)$/)[1];
 				var val = fileName[i];
@@ -136,4 +136,5 @@ module.exports = function(grunt) {
 	// grunt.registerTask('build', [ 'clean:build', 'filerev:img', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('build', [ 'clean:build', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('default', [ 'verify', 'build', 'copy' ]);
+	grunt.registerTask('test', ['jshint']);
 };

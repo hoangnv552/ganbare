@@ -17,11 +17,11 @@
 			<form name="loginForm" ng-submit="login()" novalidate>
 				<div class="form-block">
 					<label for="email">Email</label>
-					<input type="email" ng-model="email">
+					<input type="email" ng-model="user.email">
 				</div>
 				<div class="form-block">
 					<label for="password">Password</label>
-					<input type="password" ng-model="password">
+					<input type="password" ng-model="user.unencryptedPassword">
 				</div>
 				<div class="form-block button-block">
 					<input type="submit" value="Login">

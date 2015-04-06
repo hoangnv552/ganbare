@@ -41,7 +41,7 @@
 				<div class="register-panel" ng-show="isPanel('registerPanel')">
 					<div class="block">
 						<label class="float-left" for="username">Username</label>
-						<input type="text" name="username" ng-model="username" required>
+						<input type="text" name="username" ng-model="user.username" required>
 						<div class="error" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">
 							<p>User name is required!</p>
 						</div>
@@ -49,7 +49,7 @@
 					<!--PASSWORD INPUT-->
 					<div class="block">
 						<label class="float-left" for="password">Password</label>
-						<input type="password" id="password" name="password" ng-model="password" ng-minlength="6" ng-maxlength="30" required>
+						<input type="password" id="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
 						<div class="error" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">
 							<p>Password is required!</p>
 						</div>
@@ -63,7 +63,7 @@
 					<!--EMAIL INPUT-->
 					<div class="block">
 						<label class="float-left" for="email">Email</label>
-						<input type="email" id="email" name="email" ng-model="email" required>
+						<input type="email" id="email" name="email" ng-model="user.email" required>
 						<div class="error" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">
 							<p>Email is required!</p>
 						</div>
@@ -74,7 +74,7 @@
 					<!--CONFIRM EMAIL INPUT-->
 					<div class="block">
 						<label class="float-left" for="confirm-email">Confirm Email</label>
-						<input type="email" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail" match="email" required>
+						<input type="email" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail" match="user.email" required>
 						<div class="error" ng-show="registerForm.confirmEmail.$error.match">
 							<p>Emails do not match!</p>
 						</div>
@@ -90,7 +90,7 @@
 			<div class="confirm-panel" ng-show="isPanel('confirmPanel')">
 				<div class="block">
 					<label class="float-left inline-block">Username:</label>
-					<p>{{username}}   </p>
+					<p>{{user.username}}   </p>
 				</div>
 				<div class="block">
 					<label class="float-left inline-block">Email:</label>

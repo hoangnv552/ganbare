@@ -1,23 +1,38 @@
-'use strict';
+;(function() {
+	'use strict';
 
-/* Services */
+	/* Services */
+	angular.module('ganbareServices', ['ngResource']);
 
-var path = 'http://133.242.53.250:8888/';
+	angular.module('ganbareServices').factory('tokenInjector', ['$cookieStore', function($cookieStore) {
+		return {
+			request: function(config) {
+				var token = $cookieStore.get('token');
 
-var ganbareServices = angular.module('ganbareServices', ['ngResource']);
+				if (token) {
+					config.headers.Authorization = token;
+				}
 
-ganbareServices.factory('tokenInjector', ['$cookieStore', function($cookieStore) {
-	var tokenInjector = {
-		request: function(config) {
-			if($cookieStore.get('token')) {
-				config.headers.Authorization = $cookieStore.get('token');
+				return config;
 			}
-			return config;
-		}
-	};
-	return tokenInjector;
-}]);
+		};
+	}]);
 
-ganbareServices.config(['$httpProvider', function($httpProvider) {
-	$httpProvider.interceptors.push('tokenInjector');
-}]);
+	angular.module('ganbareServices').config(['$httpProvider', function($httpProvider) {
+
+		$httpProvider.interceptors.push('tokenInjector');
+	}]);
+
+	angular.module('ganbareServices').constant('ApiRootPath', 'http://133.242.53.250:8888/');
+
+	// list types ganbaru
+	angular.module('ganbareServices').constant('TYPES', {
+		listTypePin:      1,
+		listTypeFavorite: 2,
+		listTypeUser:     3,
+		listTypeHot:      4,
+		listTypeExpire:   5,
+		listTypeTag:      6,
+		listTypeSearch:   7
+	});
+})();

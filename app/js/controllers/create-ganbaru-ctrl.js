@@ -1,20 +1,31 @@
-(function() {
+;(function() {
 	'use strict';
 
-	ganbareControllers.controller('createGanbaruCtrl', ['$rootScope','$scope', '$http', '$cookieStore', '$location','geolocation', 'createGanbaru', 
-		function($rootScope, $scope, $http, $cookieStore, $location, geolocation, createGanbaru) {
+	angular.module('ganbareControllers').controller('createGanbaruCtrl', ['$rootScope','$scope', '$http', '$cookieStore', '$location','geolocation', 'Ganbaru', 
+		function($rootScope, $scope, $http, $cookieStore, $location, geolocation, Ganbaru) {
 		$scope.createdDate = new Date();
-		$scope.ganbaru = {};
+		$scope.ganbaru = new Ganbaru();
 		$scope.error = '*Note: According to design, this container is not originally for showing message!'
 
-		$scope.goToFeed = function() {
-			$location.path('/feedmb');
+		function saveGanbaru() {
+			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
+
+			return $scope.ganbaru.$save().then(function(response) {
+				var code = response.code;
+				switch(code) {
+					case 0: {
+						$location.path('/feedmb');
+					}
+					default: {
+						$scope.error = $rootScope.errorMsg[code];
+					}
+				}
+			});
 		};
 
 		$scope.createGanbaru = function() {
 			//bind data from user input: title, content, expired date,tags
 			$scope.ganbaru.ganbaruTags = [];
-			$scope.ganbaru.ganbaruLocation = [];
 
 			//get array of tags from input 
 			angular.forEach($scope.tagsInput, function(obj, objKey) {
@@ -23,35 +34,20 @@
 				});
 			});
 
-			//get latitude & longitude of location coordinates
 			geolocation.getLocation().then(function(response) {
 				var coords = response.coords;
-				$scope.ganbaru.ganbaruLocation = [coords.latitudem, coords.longitude];
+				$scope.ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
+				
+				return saveGanbaru();
 			}, function() {
-				$scope.error = $scope.errorMsg[40];
-			}).
-			then(function() {
-				//send request to server
-				createGanbaru.save({
-					ganbaruTitle: $scope.ganbaru.ganbaruTitle, 
-					ganbaruContent: $scope.ganbaru.ganbaruContent, 
-					ganbaruLocation: $scope.ganbaru.ganbaruLocation,
-					ganbaruTags: $scope.ganbaru.ganbaruTags, 
-					expiredDate: moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss')
-				}, function(response) {
-					var code = response.code;
-					switch(code) {
-						case 0: {
-							$location.path('/feedmb');
-						}
-						default: {
-							$scope.error = $rootScope.errorMsg[code];
-						}
-					}
-				}, function() {
-					$scope.error = $rootScope.errorMsg[50];
-				});
+				$scope.error = $rootScope.errorMsg[40];
 			});
-		};
+    	};
+
+    	$scope.goTo = function(url) {
+    		$location.path(url);
+    	};
 	}]);
 })();
+
+

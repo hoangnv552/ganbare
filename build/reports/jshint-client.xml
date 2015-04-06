@@ -1,26 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jslint>
-	<file name="..\..\app\js\controllers\feed-visitor-ctrl.js">
-		<issue line="9" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;feedVisitorCtrl&apos;, [&apos;$scope&apos;, &apos;$cookieStore&apos;, &apos;listGanbaru&apos;, &apos;addGanbare&apos;, &apos;$interval&apos;, &apos;$location&apos;," severity="W" />
+	<file name="..\..\app\js\controllers.js">
+		<issue line="4" char="5" reason="&apos;ganbareControllers&apos; is defined but never used." evidence="var ganbareControllers = angular.module(&apos;ganbareControllers&apos;," severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\create-ganbaru-ctrl.js">
+		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="var MESSAGES = {" severity="E" />
+		<issue line="19" char="45" reason="&apos;ganbaru&apos; is not defined." evidence="		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, &apos;YYYY-MM-DD&apos;).format(&apos;YYYYMMDDHHmmss&apos;);" severity="W" />
+		<issue line="52" char="20" reason="&apos;$q&apos; is not defined." evidence="			return $q.reject();" severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\feed-member-ctrl.js">
+		<issue line="96" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\list-by-user-ctrl.js">
+		<issue line="79" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\login-ctrl.js">
-		<issue line="9" char="1" reason="&apos;ganbareControllers&apos; is not defined." evidence="ganbareControllers.controller(&apos;loginCtrl&apos;, [&apos;$scope&apos;, &apos;$cookieStore&apos;,&apos;$location&apos;, &apos;md5&apos;,&apos;loginGanbare&apos;," severity="W" />
+		<issue line="14" char="2" reason="Missing semicolon." evidence="}" severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\my-page-ctrl.js">
+		<issue line="12" char="9" reason="&apos;userId&apos; is defined but never used." evidence="	var userId  = $cookieStore.get(&apos;userId&apos;)," severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\view-detail-ganbaru-ctrl.js">
+		<issue line="32" char="55" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="						$scope.authorized = (userId != null &amp;&amp; userId !== &apos;none&apos;);" severity="W" />
+		<issue line="109" char="29" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="				if(userId != null &amp;&amp; userId !== &apos;none&apos;) {" severity="W" />
+		<issue line="14" char="17" reason="&apos;token&apos; is defined but never used." evidence="			var token = $cookieStore.get(&apos;token&apos;);" severity="W" />
+	</file>
+	<file name="..\..\app\js\directives.js">
+		<issue line="4" char="5" reason="&apos;ganbareDirective&apos; is defined but never used." evidence="var ganbareDirective = angular.module(&apos;ganbareDirective&apos;, []);" severity="W" />
+	</file>
+	<file name="..\..\app\js\directives\header-dt.js">
+		<issue line="21" char="28" reason="Empty block." evidence="					} else {" severity="W" />
+	</file>
+	<file name="..\..\app\js\filters\date-filters.js">
+		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="angular.module(&apos;ganbareFilters&apos;, []).filter(&apos;dateFilter&apos;," severity="E" />
 	</file>
 	<file name="..\..\app\js\services.js">
-		<issue line="6" char="5" reason="&apos;path&apos; is defined but never used." evidence="var path = &apos;http://133.242.53.250:8888/&apos;;" severity="W" />
-		<issue line="8" char="5" reason="&apos;ganbareServices&apos; is defined but never used." evidence="var ganbareServices = angular.module(&apos;ganbareServices&apos;, [&apos;ngResource&apos;]);" severity="W" />
+		<issue line="4" char="5" reason="&apos;path&apos; is defined but never used." evidence="var path = &apos;http://133.242.53.250:8888/&apos;;" severity="W" />
 	</file>
-	<file name="..\..\app\js\services\add-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;addGanbare&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="5" reason="&apos;path&apos; is not defined." evidence="    path + &apos;v1/users/:userId/ganbare&apos;," severity="W" />
+	<file name="..\..\app\js\services\get-list-ganbaru-sv.js">
+		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
 	</file>
-	<file name="..\..\app\js\services\list-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;listGanbaru&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="7" reason="&apos;path&apos; is not defined." evidence="      path + &apos;v1/ganbaru?filterType=:filterType&amp;sortType=:sortType&amp;skip=:skip&amp;take=:take&apos;," severity="W" />
+	<file name="..\..\app\js\services\user-sv.js">
+		<issue line="14" char="19" reason="Strings must use singlequote." evidence="    	{id: &quot;@id&quot;}," severity="W" />
 	</file>
-	<file name="..\..\app\js\services\login-ganbaru-sv.js">
-		<issue line="9" char="1" reason="&apos;ganbareServices&apos; is not defined." evidence="ganbareServices.factory(&apos;loginGanbare&apos;, [&apos;$resource&apos;," severity="W" />
-		<issue line="12" char="5" reason="&apos;path&apos; is not defined." evidence="    path + &apos;v1/sessions&apos;," severity="W" />
+	<file name="..\..\app\js\services\utilities-sv.js">
+		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
 	</file>
 </jslint>
 

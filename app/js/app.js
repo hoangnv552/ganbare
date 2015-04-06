@@ -1,8 +1,9 @@
 ;(function() {
     'use strict';
-
     /* App Module **/
     /*jslint node: true*/
+
+/* App Module **/
 
     var ganbareApp = angular.module('ganbareApp', [
         'ngRoute',

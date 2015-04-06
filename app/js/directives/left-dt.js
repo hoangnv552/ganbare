@@ -1,20 +1,21 @@
 ;(function() {
-'use strict';
-ganbareDirective.directive('leftDirective', ['user', '$cookieStore',
-	function(user, $cookieStore) {
-	return {
-		restrict: 'E',
-		controller: function($scope) {
-			//Get user infor
-			var userId  = $cookieStore.get('userId');
+	'use strict';
 
-			user.getUser({
-				id: userId
-			}).$promise.then(function getDone(data) {
-				$scope.user = data;
-			});
-		},
-		templateUrl: 'partials/includes/main-left.html'
-	};
-}]);
+	angular.module('ganbareDirective').directive('leftDirective', ['User',
+		function(User) {
+		return {
+			restrict: 'E',
+			controller: function($scope) {
+				//Get user infor
+				var user = new User({
+					id: User.getCurrentUserId()
+				});
+
+				user.$getUser().then(function getDone(data) {
+					$scope.user = data;
+				});
+			},
+			templateUrl: 'partials/includes/main-left.html'
+		};
+	}]);
 })();
