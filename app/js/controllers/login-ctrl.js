@@ -6,50 +6,36 @@
 /*
 * Controller Login
 */
-ganbareControllers.controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5','user',
-  function($scope, $cookieStore, $location, md5, user) {
+ganbareControllers.controller('loginCtrl', ['$rootScope', '$scope', '$cookieStore','$location', 'md5','user', 
+  function($rootScope, $scope, $cookieStore, $location, md5, user) {
     $scope.error = '';
 
-    $scope.login = function(){
-      var email = $scope.email;
-      var password = $scope.password;
-      var encryptedPassword = md5.createHash(password || ''); //in case user leaves blank
-      var code;
-      /*call service*/
-      user.login({email: email, password: encryptedPassword, loginType: 1}, function(response){
+    $scope.login = function() {
 
-        code = response.code;
-
+      $scope.user = new user();
+      $scope.user.email = $scope.email;
+      $scope.user.password = md5.createHash($scope.password || ''); //in case user leaves blank
+      $scope.user.loginType = 1;
+      
+      return $scope.user.$login().then(function(response) {
+        var code = response.code;
+       
         switch(code) {
           case 0: {
-            $cookieStore.put('token', response.data.token);
-            $cookieStore.put('userId', response.data.userId);
+            var data = response.data;
+            $cookieStore.put('token', data.token);
+            $cookieStore.put('userId', data.userId);
             $location.path('/feedmb');
             break;
           }
-          case 1: {
-            $scope.error = 'Unknown error. We are sorry for the convenience...';
+          default: {
+            $scope.error = $rootScope.errorMsg[code]
             $location.path('/login');
-            break;
-          }
-          case 2: {
-            $scope.error = "Login unsuccessful. Please re-check your information!";
-            break;
-          }
-          case 12: {
-            $scope.error = 'Email not found!';
-            $location.path('/login');
-            break;
-          }
-          case 21: {
-            $scope.error = 'Incorrect password!';
-            $location.path('/login');
-            break;
           }
         }
       }, function() {
-        $scope.error = 'Cannot establish connection to server!';
-        $location.path('/login');
+         $scope.error = $rootScope.errorMsg[50];
+         $location.path('/login');
       });
     };
   }]);

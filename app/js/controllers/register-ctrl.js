@@ -1,6 +1,6 @@
-ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'user', 
-	function($scope, $location, md5, user) {
-		$scope.panel = 1;
+ganbareControllers.controller('registerCtrl', ['$rootScope', '$scope', '$location', 'md5', 'user', 
+	function($rootScope, $scope, $location, md5, user) {
+		$scope.panel = 'registerPanel';
 
 		$scope.setPanel = function(setPanel) {
 			$scope.panel = setPanel;
@@ -11,73 +11,47 @@ ganbareControllers.controller('registerCtrl', ['$scope', '$location', 'md5', 'us
 		}
 
 		$scope.submitForm = function() {
-			user.register({
+			return user.register({
 				email: $scope.email,
 				password: $scope.password,
 				encryptedPassword: md5.createHash($scope.password || ''),
 				username: $scope.username,
-				loginType: 1
-			}, function(response) {
-				console.log(response);
-				if(response.code === 0) {
-					$scope.registeringId = response.data.userId;
-					$scope.setPanel(3);
+				loginType: 1}).
+				$promise.then(function(response) {
+					var code = response.code;
+					var data = response.data;
+					switch(code) {
+						case 0: {
+							$scope.registeringId = data.userId;
+							$scope.setPanel('verifyPanel');
+							break;
+						}
+						default: {
+							$scope.error = $rootScope.errorMsg[code];
+						}
+					}
+				}, function() {
+					$scope.error = $rootScope.errorMsg[50];
 				}
-				switch(response.code) {
-					case 0: {
-						$scope.registeringId = response.data.userId;
-						$scope.setPanel(3);
-						break;
-					}
-					case 1: {
-						$scope.error = 'Unknown error. We are sorry for the convenience...';
-						break;
-					}
-					case 2: {
-						$scope.error = "Register unsuccessful. Please re-check your information!";
-						break;
-					}
-					case 10: {
-						$scope.error = 'Your email is invalid!';
-						break;
-					}
-					case 11: {
-						$scope.error = 'This email has been registered before!';
-						break;
-					}
-					case 20: {
-						$scope.error = 'Your password is invalid!';
-						break;
-					}
-				}
-			}, function() {
-				$scope.error = 'Cannot establish connection to server. Please try again later!';
-			});
+			);
 		};
 
 		$scope.verifyUser = function() {
-			console.log($scope.userId);
-			user.verify({registeringId: $scope.registeringId}, function(response) {
-				switch(response.code) {
-					case 0: {
-						$location.path('/login');
-						break;
+			return user.verify({
+				registeringId: $scope.registeringId}).
+				$promise.then(function(response) {
+					switch(response.code) {
+						case 0: {
+							$location.path('/login');
+							break;
+						}
+						default: {
+							$scope.error = $rootScope.errorMsg[code];
+						}
 					}
-					case 1: {
-						$scope.error = 'Unknown error. We are sorry for the convenience...';
-						$scope.setPanel(4);
-						break;
-					}
-					case 2: {
-						$scope.error = "Register unsuccessful. Please re-check your information!";
-						$scope.setPanel(4);
-						break;
-					}
-				}
 			}, function() {
-				console.log('Failed to verify user!');
-				$scope.error = 'Cannot establish connection to server. Please try again later!';
-				$scope.setPanel(4);
+				$scope.error = $rootScope.errorMsg[50];
+				$scope.setPanel('errorPanel');
 			});
 		};
 
