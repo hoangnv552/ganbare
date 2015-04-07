@@ -4,7 +4,7 @@
 	/*
 	* Controller Feed for visitors
 	*/
-	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru', 'dataGanbaru', 'getUtilities', 'ngDialog', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, pinGanbaru, favoriteGanbaru, dataGanbaru, getUtilities, ngDialog)
+	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'dataGanbaru', 'getUtilities', 'ngDialog', 'User', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, dataGanbaru, getUtilities, ngDialog, User)
 	{
 
 		var userId = $cookieStore.get('userId');
@@ -21,6 +21,7 @@
 		$scope.length = 0;
 		$scope.totalGanbareNumber = 0;
 		$scope.countNumber = 0;
+		$scope.contentSearch;
 
 		// If user logout
 		if (!userId) {
@@ -96,7 +97,7 @@
 		* Set pin ganbaru
 		*/
 		$scope.pinGanbaru = function(item) {
-			return pinGanbaru.pin({
+			return Ganbaru.pin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function pinDone(data) {
@@ -110,7 +111,7 @@
 		* Set unpin ganbaru
 		*/
 		$scope.unPinGanbaru = function(item) {
-			return pinGanbaru.unpin({
+			return Ganbaru.unpin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function unPinDone(data) {
@@ -124,7 +125,7 @@
 		* Set favorite ganbaru
 		*/
 		$scope.addFavorite = function (item, ganbaru) {
-			return favoriteGanbaru.add({
+			return User.addFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function addDone(data) {
@@ -142,7 +143,7 @@
 		* Set remove favorite ganbaru
 		*/
 		$scope.removeFavorite = function(item, ganbaru) {
-			return favoriteGanbaru.remove({
+			return User.removeFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function unFavorite(data) {
@@ -254,28 +255,36 @@
 			$scope.showTags = true;
 		};
 
+		$scope.keyPress = function(keyCode){
+      		if (keyCode === 13) {
+      			if ($scope.contentSearch) {
+					if ($scope.listType !== TYPES.listTypeSearch) {
+						$scope.ganbaru = [];
+						$scope.skip = 0;
+					}
+					$scope.listType = TYPES.listTypeSearch;
+					dataGanbaru( $scope.skip, take, TYPES.listTypeSearch, $scope.contentSearch ).then(function(data) {
+						$scope.ganbaru = data.data;
+					});
+				} else {
+					if ($scope.listType !== '') {
+						$scope.ganbaru = [];
+						$scope.skip = 0;
+					}
+					dataGanbaru( $scope.skip, take, '' ).then(function(data) {
+						$scope.ganbaru = data.data;
+					});
+				}
+      		}
+     	};
+
+
+
 		/*
 		* Search ganbaru
 		*/
 		$scope.searchGanbaru = function(contentSearch) {
-			if (contentSearch) {
-				if ($scope.listType !== TYPES.listTypeSearch) {
-					$scope.ganbaru = [];
-					$scope.skip = 0;
-				}
-				$scope.listType = TYPES.listTypeSearch;
-				dataGanbaru( $scope.skip, take, TYPES.listTypeSearch, contentSearch ).then(function(data) {
-					$scope.ganbaru = data.data;
-				});
-			} else {
-				if ($scope.listType !== '') {
-					$scope.ganbaru = [];
-					$scope.skip = 0;
-				}
-				dataGanbaru( $scope.skip, take, '' ).then(function(data) {
-					$scope.ganbaru = data.data;
-				});
-			}
+
 		};
 
 		/*

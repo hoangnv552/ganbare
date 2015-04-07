@@ -58,7 +58,7 @@
 						<li><a href="">期限近い</a></li>
 					</ul>
 				</li>
-				<li ng-submit="searchGanbaru(contentSearch)" class="search"><input type="text" ng-model="contentSearch"></li>
+				<li class="search"><input type="text" ng-keyup="keyPress($event.keyCode)" ng-model="contentSearch"></li>
 			</ul>
 		</div>
 	</div>
@@ -67,11 +67,11 @@
 		<div class="date">
 			<p class="txt1"><span>登録日</span>{{item.ganbaru.createDate | dateFilter}}</p>
 			<p class="txt2"><span>期限日</span>{{item.ganbaru.expiredDate | dateFilter}}</p>
-			<p class="txt3">残り日数 1日</p>
+			<p class="txt3">残り日数 {{item.ganbaru.createDate | caculatorDate:item.ganbaru.expiredDate}}日</p>
 		</div>
 		<div class="tit">
 			<h2>{{item.user.username}}</h2>
-			<p class="counter"><span>{{(item.ganbaru.ganbareNumber + $index | numberFilter:15)}}<span>GB</span></span></p>
+			<p class="counter"><span>{{(item.ganbaru.ganbareNumber + $index) | numberFilter:15}}<span>GB</span></span></p>
 		</div>
 		<p class="profIcon"><img src="./img/user2.png" alt=""></p>
 		<div class="ganbareVoice">
