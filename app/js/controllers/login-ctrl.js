@@ -6,9 +6,7 @@
 /*
 * Controller Login
 */
-    angular.module('ganbareControllers').controller('loginCtrl', ['$rootScope', '$scope', '$cookieStore','$location', 'md5', 'Session',
-      function($rootScope, $scope, $cookieStore, $location, md5, Session) {
-        $scope.error = '';
+    angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', 'ERROR_MSG', function($scope, $cookieStore, $location, md5, Session, ERROR_MSG) {
         $scope.user = new Session();
 
         $scope.login = function(){
@@ -29,12 +27,12 @@
                         break;
                     }
                     default: {
-                        $scope.error = $rootScope.errorMsg[code];
+                        $scope.error = ERROR_MSG[code];
                         $location.path('/login');
                     }
                 }
             }, function() {
-                $scope.error = $rootScope.errorMsg[50];
+                $scope.error = ERROR_MSG[50];
                 $location.path('/login');
             });
         };

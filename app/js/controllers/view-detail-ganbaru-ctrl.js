@@ -2,9 +2,8 @@
 	'use strict';
 
 	/* Controllers */
-	angular.module('ganbareControllers').controller('viewGanbareDetailCtrl', ['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 'ganbaruDetail', 'Ganbaru', 'pinGanbaru', 'favoriteGanbaru', 'User', 'getUtilities', function($scope, $location, $cookieStore, $routeParams, $interval, ganbaruDetail, Ganbaru, pinGanbaru, favoriteGanbaru, User, getUtilities)
-	{
-
+	angular.module('ganbareControllers').controller('viewGanbareDetailCtrl', ['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 'Ganbaru', 'User','ERROR_MSG', function($scope, $location, $cookieStore, $routeParams, $interval, Ganbaru, User, ERROR_MSG) {
+		
 		var userId = $cookieStore.get('userId');
 		var token = $cookieStore.get('token');
 		var ganbaruId = $routeParams.ganbaruId;
@@ -14,110 +13,114 @@
 			$location.path(url);
 		};
 
-		/*Get Ganbaru detail to*/
-		getUtilities.sendRequestGetGanbaruDetail(ganbaruId).then(function(response) {
-			console.log(response);
+		function getGanbaruDetail() {
+			//call to service get ganbaru detail
+			return Ganbaru.getDetail({
+				ganbaruId: ganbaruId
+			}).$promise.then(function(response) {
+				var code = response.code;
+				var data = response.data;
 
-			switch(response.code) {
-				case 0: {
-					$scope.ganbaru = response.data.ganbaru;
-					$scope.ganbaruUser = response.data.user;
+				switch(code) {
+					case 0: {
+						$scope.ganbaru = data.ganbaru;
+						$scope.ganbaruUser = data.user;
 
-					//give permission of editing ganbaru
-					$scope.authorized = (userId != null && userId !== 'none');
-					$scope.modifiable = (userId === $scope.ganbaruUser.userId);
+						//authorization 
+						$scope.authorized = (userId != null && userId !== 'none');
+						
+						//permission to edit ganbaru
+						$scope.modifiable = (userId === $scope.ganbaruUser.userId);
 
-					//pinning & favorite button icon state
-					$scope.pinIcon = {state: $scope.ganbaru.isPinning};
-					$scope.favorIcon = {state: $scope.ganbaruUser.isFavoristUser};
-					break;
+						//button state
+						$scope.pinIcon = {state: $scope.ganbaru.isPinning};
+						$scope.favorIcon = {state: $scope.ganbaruUser.isFavoristUser};
+						break;
+					}
+					default: {
+						$scope.error = ERROR_MSG[code];
+					}
 				}
-				case 1: {
-					$scope.error = 'Unknown error!';
-					break;
-				}
-				case 2: {
-					$scope.error = 'Currently no message for this error!';
-					break;
-				}
-				case 3: {
-					$scope.error = 'Session outdated. Please login again!';
-					break;
-				}
-			}
-
-		}, function(response) {
-			//Handling error here
-			$scope.error = 'Error: Cannot establish connection to server. Please try again later!';
-		});
+			}, function() {
+				$scope.error = ERROR_MSG[50];
+			});
+		};
+		getGanbaruDetail();
 
 		/*Event click to pin/unpin*/
 		$scope.togglePinning = function() {
+			var logic;
 			//reverse icon state
 			$scope.pinIcon.state = !$scope.pinIcon.state;
+
 			if($scope.pinIcon.state) {
-				pinGanbaru.pin(
-					{userId: userId, ganbaruId: ganbaruId}, function(response) {
-					console.log(response);
-				}, function() {
-					//Handle error here
-					console.log('Failed to pin!');
-				});
+				logic = Ganbaru.pin;
 			} else {
-				pinGanbaru.unpin({userId: userId, ganbaruId: ganbaruId}, function(response) {
-					console.log(response);
-				}, function() {
-					//Handle error here
-					console.log('Failed to unpin');
-				});
+				logic = Ganbaru.unpin;
 			}
+			return logic({
+				userId: userId, 
+				ganbaruId: ganbaruId
+			}).$promise.then(function(response) {
+				console.log(response);
+			}, function() {
+				//Handling error here
+			});
 		};
 
 		/*Event click to add/remove favor*/
 		$scope.toggleFavorite = function() {
+			var logic;
 			var friendId = $scope.ganbaruUser.userId;
 			//reverse icon state
 			$scope.favorIcon.state = !$scope.favorIcon.state;
+
 			if($scope.favorIcon.state) {
-				favoriteGanbaru.add({id: userId, friendId: $scope.ganbaruUser.userId}, function(response) {
-					console.log(response);
-				}, function() {
-					console.log('Failed to add favorite!');
-				});
+				logic = User.addFavorite;
 			} else {
-				favoriteGanbaru.remove({id: userId, friendId: friendId}, function(response) {
-					console.log(response);
-				}, function() {
-					console.log('Failed to remove favorite');
-				});
+				logic = User.removeFavorite;
 			}
+			return logic({
+				id: userId, 
+				friendId: friendId
+			}).$promise.then(function(response) {
+				console.log(response);
+			}, function() {
+				//Handling error
+			});
 		};
 
-		/*Add Ganbare*/
-		$scope.clickNumber = 0;	//the number of user's ganbare clicks
-		$scope.firstTimeGanbare = true;
+		//function handling add user to list Ganbare after click 'add Ganbare'
+		function addPeopleToListGanbare(user) {
+			var found = false;
+			angular.forEach($scope.ganbaru.listGanbare, function(element, key) {
+				if(!found) {
+					if(element.userId === user.userId) {
+						found = true;
+					}
+				}
+			});
 
+			if(!found) {
+				$scope.ganbaru.listGanbare.push(user);
+			}
+		}
+
+		/*Add Ganbare event click*/
+		$scope.clickNumber = 0;	//the number of user's ganbare clicks
 		$scope.addGanbare = function() {
 			$scope.ganbaru.ganbareNumber++;
 			$scope.clickNumber++;
 
 			if(userId != null && userId !== 'none') {
-				User.getUser({id: userId}, function(response) {
-					var userInfo = {userId: userId, userName: response.data.username};
-					var found = false;
-					angular.forEach($scope.ganbaru.listGanbare, function(obj, key) {
-						//if found === false, continue searching
-						if(!found) {
-							if(obj.userName === userInfo.userName) {
-								found = true;
-							}
-						}
-					});
-
-					//after searching all, found = false, then push
-					if(!found) {
-						$scope.ganbaru.listGanbare.push(userInfo);
-					}
+				User.getUser({
+					id: userId
+				}, function(response) {
+					var user = {
+						userId: userId, 
+						userName: response.data.username
+					};
+					addPeopleToListGanbare(user);
 				}, function() {
 					//Handling error here
 				});
@@ -127,15 +130,23 @@
 			}
 		};
 
-		//send Add Ganbare request to server every 3s
-		var sendRequest = function() {
-			getUtilities.sendRequestAddGanbare($scope, userId, ganbaruId).then(function(response) {
-				console.log(response);
-			}, function() {
-				//Handling error here
-			});
+		function sendRequestAddGanbare() {
+			if($scope.clickNumber > 0) {
+				//call service add ganbare
+				Ganbaru.add({
+					ganbaruId: ganbaruId, 
+					userId: ganbaruId, 
+					ganbareNumber: $scope.clickNumber
+				}).$promise.then(function(response) {
+					console.log(response.data);
+				}, function() {
+					//Handling error
+				})
+			}
 			$scope.clickNumber = 0;
 		};
-		$interval(sendRequest, 3000);
+
+		//send request to add ganbare every 3sec
+		$interval(sendRequestAddGanbare, 3000);
 	}]);
 })();

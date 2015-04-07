@@ -1,15 +1,12 @@
 ;(function() {
 	'use strict';
 
-	angular.module('ganbareControllers').controller('createGanbaruCtrl', ['$rootScope','$scope', '$http', '$cookieStore', '$location','geolocation', 'Ganbaru', 
-		function($rootScope, $scope, $http, $cookieStore, $location, geolocation, Ganbaru) {
+	angular.module('ganbareControllers').controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'ERROR_MSG', 'Ganbaru', function($scope, $http, $cookieStore, $location, geolocation, ERROR_MSG, Ganbaru) {
 		$scope.createdDate = new Date();
 		$scope.ganbaru = new Ganbaru();
 		$scope.error = '*Note: According to design, this container is not originally for showing message!'
 
 		function saveGanbaru() {
-			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
-
 			return $scope.ganbaru.$save().then(function(response) {
 				var code = response.code;
 				switch(code) {
@@ -17,9 +14,11 @@
 						$location.path('/feedmb');
 					}
 					default: {
-						$scope.error = $rootScope.errorMsg[code];
+						$scope.error = ERROR_MSG[code];
 					}
 				}
+			}, function() {
+				$scope.error = ERROR_MSG[50];
 			});
 		};
 
@@ -34,13 +33,16 @@
 				});
 			});
 
+			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
+
+			//get Locatio service
 			geolocation.getLocation().then(function(response) {
 				var coords = response.coords;
 				$scope.ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
 				
 				return saveGanbaru();
 			}, function() {
-				$scope.error = $rootScope.errorMsg[40];
+				$scope.error = ERROR_MSG[40];
 			});
     	};
 

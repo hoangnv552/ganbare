@@ -39,6 +39,14 @@
             },
             verify: {
                 method: 'PUT'
+            }, 
+            addFavorite: {
+                method: 'POST',
+                url: ApiRootPath + 'v1/users/:id/favorites'
+            },
+            removeFavorite: {
+                method: 'DELETE',
+                url: ApiRootPath + 'v1/users/:id/favorites/:friendId'
             }
         });
 
