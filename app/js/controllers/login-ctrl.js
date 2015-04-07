@@ -1,46 +1,40 @@
 ;(function(){
     'use strict';
-
     /*
     * Controller Login
     */
-    var MESSAGE = {
-        1: 'Unknown error. We are sorry for the convenience...',
-        2: 'Login unsuccessful. Please re-check your information!',
-        12: 'Email not found!',
-        21: 'Incorrect password!'
-    }
-
-    angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', function($scope, $cookieStore, $location, md5, Session)
-    {
+/*
+* Controller Login
+*/
+    angular.module('ganbareControllers').controller('loginCtrl', ['$rootScope', '$scope', '$cookieStore','$location', 'md5', 'Session', 
+      function($rootScope, $scope, $cookieStore, $location, md5, Session) {
         $scope.error = '';
         $scope.user = new Session();
 
         $scope.login = function(){
 
-            var encryptedPassword = md5.createHash($scope.user.password || ''); //in case user leaves blank
-            $scope.user.password = encryptedPassword;
+            $scope.user.password = md5.createHash($scope.user.unencryptedPassword || ''); //in case user leaves blank
             $scope.user.loginType = 1;
 
             /*call service*/
             $scope.user.$login().then(function(response) {
                 var code = response.code;
+                var data = response.data;
 
                 switch(code) {
                     case 0: {
-                        $cookieStore.put('token', response.data.token);
-                        $cookieStore.put('userId', response.data.userId);
+                        $cookieStore.put('token', data.token);
+                        $cookieStore.put('userId', data.userId);
                         $location.path('/feedmb');
                         break;
                     }
                     default: {
-                        $scope.error = MESSAGE[response.code];
+                        $scope.error = $rootScope.errorMsg[code];
                         $location.path('/login');
-                        break;
                     }
                 }
             }, function() {
-                $scope.error = 'Cannot establish connection to server!';
+                $scope.error = $rootScope.errorMsg[50];
                 $location.path('/login');
             });
         };

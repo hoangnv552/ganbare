@@ -38,10 +38,10 @@
 			<!--REGISTER PANEL-->
 			<form name="registerForm" novalidate>
 				<!--USERNAME INPUT-->
-				<div class="register-panel" ng-show="isPanel(1)">
+				<div class="register-panel" ng-show="isPanel('registerPanel')">
 					<div class="block">
 						<label class="float-left" for="username">Username</label>
-						<input type="text" name="username" ng-model="username" required>
+						<input type="text" name="username" ng-model="user.username" required>
 						<div class="error" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">
 							<p>User name is required!</p>
 						</div>
@@ -49,7 +49,7 @@
 					<!--PASSWORD INPUT-->
 					<div class="block">
 						<label class="float-left" for="password">Password</label>
-						<input type="password" id="password" name="password" ng-model="password" ng-minlength="6" ng-maxlength="30" required>
+						<input type="password" id="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
 						<div class="error" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">
 							<p>Password is required!</p>
 						</div>
@@ -63,7 +63,7 @@
 					<!--EMAIL INPUT-->
 					<div class="block">
 						<label class="float-left" for="email">Email</label>
-						<input type="email" id="email" name="email" ng-model="email" required>
+						<input type="email" id="email" name="email" ng-model="user.email" required>
 						<div class="error" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">
 							<p>Email is required!</p>
 						</div>
@@ -74,30 +74,30 @@
 					<!--CONFIRM EMAIL INPUT-->
 					<div class="block">
 						<label class="float-left" for="confirm-email">Confirm Email</label>
-						<input type="email" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail" match="email" required>
+						<input type="email" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail" match="user.email" required>
 						<div class="error" ng-show="registerForm.confirmEmail.$error.match">
 							<p>Emails do not match!</p>
 						</div>
 					</div>
 					<!--CONFIRM BUTTON-->
 					<div class="form-block button-block">
-						<button ng-click="setPanel(2)">Confirm</button>
+						<button ng-click="setPanel('confirmPanel')">Confirm</button>
 					</div>	
 				</div>
 			</form>	
 			
 			<!--CONFIRM PANEL-->
-			<div class="confirm-panel" ng-show="isPanel(2)">
+			<div class="confirm-panel" ng-show="isPanel('confirmPanel')">
 				<div class="block">
 					<label class="float-left inline-block">Username:</label>
-					<p>{{username}}   </p>
+					<p>{{user.username}}   </p>
 				</div>
 				<div class="block">
 					<label class="float-left inline-block">Email:</label>
 					<p>{{confirmEmail}}    </p>
 				</div>
 				<div class="block button-block">
-					<button ng-click="setPanel(1)">Back</button>
+					<button ng-click="setPanel('registerPanel')">Back</button>
 					<button ng-click="submitForm()">Register</button>
 				</div>	
 				<div class="error">
@@ -108,7 +108,7 @@
 			
 			<!--VERIFY PANEL-->
 			<div class="verify-panel">
-				<div class="block notification" ng-show="isPanel(3)">
+				<div class="block notification" ng-show="isPanel('verifyPanel')">
 					<p>
 						まだ登録は完了しておりません。
 						登録メールアドレスまで自動返信にてメールをお送りいたしました。
@@ -118,13 +118,13 @@
 						Cái trên nghĩa là "Chưa hoàn thành đăng ký. Vui lòng kích hoạt tài khoản qua link đính kèm trong mail vừa gửi đến". Nhưng thôi để cho nhanh, phiền bạn trẻ bấm luôn vào button dưới. 
 					</p>
 				</div>
-				<div class="block error" ng-show="isPanel(4)">
+				<div class="block error" ng-show="isPanel('errorPanel')">
 					<p>{{error}}</p>
 				</div>
 				<div class="block verify-button">
-					<button ng-show="isPanel(3)" ng-click="verifyUser()">Verify Register</button>
-					<button ng-show="isPanel(4)" ng-click="goTo('/register')">Back to Register</button>
-					<button ng-show="isPanel(4)" ng-click="goTo('/feedfv')">Back to Feed</button>
+					<button ng-show="isPanel('verifyPanel')" ng-click="verifyUser()">Verify Register</button>
+					<button ng-show="isPanel('errorPanel')" ng-click="goTo('/register')">Back to Register</button>
+					<button ng-show="isPanel('errorPanel')" ng-click="goTo('/feedfv')">Back to Feed</button>
 				</div>
 				
 			</div>

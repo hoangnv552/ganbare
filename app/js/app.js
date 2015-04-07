@@ -1,18 +1,19 @@
 ;(function() {
-'use strict';
+    'use strict';
+    /* App Module **/
+    /*jslint node: true*/
 
 /* App Module **/
 
-var ganbareApp = angular.module('ganbareApp', [
-    'ngRoute',
-    'ganbareControllers',
-    'ganbareServices',
-    'ganbareFilters',
-    'ganbareDirective'
-]);
+    var ganbareApp = angular.module('ganbareApp', [
+        'ngRoute',
+        'ganbareControllers',
+        'ganbareServices',
+        'ganbareFilters',
+        'ganbareDirective'
+    ]);
 
-ganbareApp.config(['$routeProvider',
-    function($routeProvider) {
+    ganbareApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when('/feedfv', {
                 templateUrl: 'partials/feed-for-visitors.html',
@@ -66,4 +67,19 @@ ganbareApp.config(['$routeProvider',
                 redirectTo: '/feedfv'
             });
         }]);
+    
+    ganbareApp.run(function($rootScope) {
+        $rootScope.errorMsg = {
+            1: 'Unknown error!',
+            2: 'Invalid information!',
+            11: 'Email has been registered before!',
+            12: 'Email not found!',
+            20: 'Invalid password!',
+            21: 'Incorrect password!',
+            40: 'Failed to get current location coordinates',
+            50: 'Cannot establish connection to server!'
+        };
+    });
 }());
+
+
