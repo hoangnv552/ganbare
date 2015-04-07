@@ -6,7 +6,7 @@
 /*
 * Controller Login
 */
-    angular.module('ganbareControllers').controller('loginCtrl', ['$rootScope', '$scope', '$cookieStore','$location', 'md5', 'Session', 
+    angular.module('ganbareControllers').controller('loginCtrl', ['$rootScope', '$scope', '$cookieStore','$location', 'md5', 'Session',
       function($rootScope, $scope, $cookieStore, $location, md5, Session) {
         $scope.error = '';
         $scope.user = new Session();

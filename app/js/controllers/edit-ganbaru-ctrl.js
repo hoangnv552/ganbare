@@ -3,15 +3,15 @@
 
 	/* global ganbareControllers:true */
 
-	angular.module('ganbareControllers').controller('editGanbaruCtrl', 
-		['$scope','$cookieStore', '$interval','$location', '$routeParams','Ganbaru', 
+	angular.module('ganbareControllers').controller('editGanbaruCtrl',
+		['$scope','$cookieStore', '$interval','$location', '$routeParams','Ganbaru',
 		function($scope, $cookieStore, $interval, $location, $routeParams, Ganbaru)
 		{
 			var userId = $cookieStore.get('userId');
 			// var ganbaruId = $routeParams.ganbaruId;
 			var ganbaru = new Ganbaru();
 			ganbaru.ganbaruId = $routeParams.ganbaruId;
-			
+
 			$scope.inputTags = [];
 
 			ganbaru.$getDetail().then(function(response) {

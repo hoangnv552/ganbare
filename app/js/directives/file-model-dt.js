@@ -9,10 +9,16 @@
 				var model = $parse(attrs.fileModel);
 				var modelSetter = model.assign;
 
-				element.bind('change', function() {
+				var handleChange = function() {
 					scope.$apply(function() {
 						modelSetter(scope, element[0].files[0]);
 					});
+				};
+
+				element.on('change', handleChange);
+
+				scope.$on('$destroy', function() {
+					element.off('change', handleChange);
 				});
 			}
 		};

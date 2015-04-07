@@ -5,7 +5,7 @@
 	* Controller list by user
 	*/
 
-	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'getListGanbaru', '$interval', 'Ganbaru', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru', function($scope, $routeParams, getListGanbaru, $interval, Ganbaru, getUtilities, pinGanbaru, $cookieStore, favoriteGanbaru)
+	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'dataGanbaru', '$interval', 'Ganbaru', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru', function($scope, $routeParams, dataGanbaru, $interval, Ganbaru, getUtilities, pinGanbaru, $cookieStore, favoriteGanbaru)
 	{
 
 		var ganbaruIdAndNumber = [],
@@ -25,7 +25,7 @@
 		/*
 		* Defaul load page
 		*/
-		getListGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
+		dataGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -35,7 +35,7 @@
 		*/
 		$scope.listMoreGanbaru = function() {
 			$scope.skip = $scope.skip + 5;
-			getListGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
+			dataGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
 				$scope.ganbaru = $scope.ganbaru.concat(data.data);
 				$scope.length = $scope.ganbaru.length;
 			});

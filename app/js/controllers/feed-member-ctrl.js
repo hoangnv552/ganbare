@@ -4,7 +4,7 @@
 	/*
 	* Controller Feed for visitors
 	*/
-	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru', 'getListGanbaru', 'getUtilities', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, pinGanbaru, favoriteGanbaru, getListGanbaru, getUtilities)
+	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru', 'dataGanbaru', 'getUtilities', 'ngDialog', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, pinGanbaru, favoriteGanbaru, dataGanbaru, getUtilities, ngDialog)
 	{
 
 		var userId = $cookieStore.get('userId');
@@ -30,7 +30,7 @@
 		/*
 		* Defaul load page
 		*/
-		getListGanbaru($scope.skip, take).then(function(data) {
+		dataGanbaru($scope.skip, take).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -41,7 +41,7 @@
 		$scope.listMoreGanbaru = function() {
 			$scope.skip = $scope.skip + 5;
 
-			return getListGanbaru($scope.skip, take, $scope.listType).then(function(data) {
+			return dataGanbaru($scope.skip, take, $scope.listType).then(function(data) {
 				$scope.ganbaru = $scope.ganbaru.concat(data.data);
 				$scope.length = $scope.ganbaru.length;
 			});
@@ -166,7 +166,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = '';
-			getListGanbaru($scope.skip, take).then(function(data) {
+			dataGanbaru($scope.skip, take).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -181,7 +181,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypePin;
-			getListGanbaru( $scope.skip, take, TYPES.listTypePin ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypePin ).then(function(data) {
 				$scope.ganbaru = data.data;
 
 			});
@@ -197,7 +197,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypeFavorite;
-			getListGanbaru( $scope.skip, take, TYPES.listTypeFavorite ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypeFavorite ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -212,7 +212,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypeUser;
-			getListGanbaru( $scope.skip, take, TYPES.listTypeUser ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypeUser ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -227,7 +227,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypeHot;
-			getListGanbaru( $scope.skip, take, TYPES.listTypeHot ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypeHot ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -242,7 +242,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypeExpire;
-			getListGanbaru( $scope.skip, take, TYPES.listTypeExpire ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypeExpire ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -264,7 +264,7 @@
 					$scope.skip = 0;
 				}
 				$scope.listType = TYPES.listTypeSearch;
-				getListGanbaru( $scope.skip, take, TYPES.listTypeSearch, contentSearch ).then(function(data) {
+				dataGanbaru( $scope.skip, take, TYPES.listTypeSearch, contentSearch ).then(function(data) {
 					$scope.ganbaru = data.data;
 				});
 			} else {
@@ -272,7 +272,7 @@
 					$scope.ganbaru = [];
 					$scope.skip = 0;
 				}
-				getListGanbaru( $scope.skip, take, '' ).then(function(data) {
+				dataGanbaru( $scope.skip, take, '' ).then(function(data) {
 					$scope.ganbaru = data.data;
 				});
 			}
@@ -287,7 +287,7 @@
 				$scope.skip = 0;
 			}
 			$scope.listType = TYPES.listTypeTag;
-			getListGanbaru( $scope.skip, take, TYPES.listTypeTag,'' , $scope.selectTag ).then(function(data) {
+			dataGanbaru( $scope.skip, take, TYPES.listTypeTag,'' , $scope.selectTag ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -306,6 +306,22 @@
 				$scope.selectTag.push(tag);
 			}
 		};
+
+		/*
+		* Show dialog detail
+		*/
+		$scope.ganbaruDialog = function(ganbaru) {
+			ngDialog.open({
+				template: 'partials/includes/detail.html',
+
+				// Controller Detail
+				controller: ['$scope', function($scope) {
+					$scope.ganbaru = ganbaru;
+				}],
+				className: 'ngdialog-theme-plain',
+				showClose: false
+			});
+		}
 
 	}]);
 })();
