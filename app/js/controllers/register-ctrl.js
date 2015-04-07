@@ -1,8 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('ganbareControllers').controller('registerCtrl', ['$rootScope', '$scope', '$location', 'md5', 'User', 
-		function($rootScope, $scope, $location, md5, User) {
+	angular.module('ganbareControllers').controller('registerCtrl', ['$scope', '$location', 'md5', 'User', 'ERROR_MSG', function($rootScope, $scope, $location, md5, User, ERROR_MSG) {
 		$scope.panel = 'registerPanel';
 		$scope.user = new User();
 
@@ -32,7 +31,7 @@
 					}
 				}
 			}, function() {
-				$scope.error = $rootScope.errorMsg[50];
+				$scope.error = ERROR_MSG[50];
 				$scope.setPanel('errorPanel');
 			});
 		}
@@ -45,10 +44,12 @@
 						break;
 					}
 					default: {
-						$scope.error = $rootScope.errorMsg[code];
+						$scope.error = ERROR_MSG[code];
 						$scope.setPanel('errorPanel');
 					}
 				}
+			}, function() {
+				$scope.error = ERROR_MSG[50];
 			});
 		};
 

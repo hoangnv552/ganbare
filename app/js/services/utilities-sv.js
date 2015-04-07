@@ -4,7 +4,7 @@
 	/*
 	* Service utilites
 	*/
-	angular.module('ganbareServices').factory('getUtilities', ['$q', 'Ganbaru', 'ganbaruDetail', function($q, Ganbaru, ganbaruDetail)
+	angular.module('ganbareServices').factory('getUtilities', ['$q', 'Ganbaru', function($q, Ganbaru)
 	{
 		return {
 			/*
@@ -40,34 +40,6 @@
 
 				deferred.resolve(ganbaruIdAndNumber);
 
-				return deferred.promise;
-			},
-
-			/*Add ganbare in view Ganbaru Detail Page & Edit Ganbaru Detail Page*/
-			sendRequestAddGanbare: function($scope, userId, ganbaruId) {
-				var deferred = $q.defer();
-				if($scope.clickNumber > 0) {
-					Ganbaru.add({
-						userId: userId,
-						ganbaruId: ganbaruId,
-						ganbareNumber: $scope.clickNumber
-					}, function(response) {
-						deferred.resolve(response.data);
-					}, function() {
-						deferred.reject('Failed To Add Ganbare!');
-					});
-				}
-				return deferred.promise;
-			},
-
-			/*Get Ganbaru Detail in view Ganbaru Detail Page & Edit Ganbaru Detail Page*/
-			sendRequestGetGanbaruDetail: function(ganbaruId) {
-				var deferred = $q.defer();
-				ganbaruDetail.query({ganbaruId: ganbaruId}, function(response) {
-					deferred.resolve(response);
-				}, function() {
-					deferred.reject('Failed To Get Ganbaru Detail!');
-				});
 				return deferred.promise;
 			}
 		};

@@ -62,15 +62,8 @@
 		</div>
 	</div>
 
-	<!--Map block-->
-	<div class="block map-container">
-		<map center="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}">
-			<marker coords="{{ganbaru.ganbaruLocation[0]}}, {{ganbaru.ganbaruLocation[1]}}"></marker>
-		</map>
-	</div>
-
 	<!--Error message block-->
-	<div class="block error" ng-show="error !== ''">
+	<div class="block error" ng-show="error">
 		<h4>{{error}}</h4>
 	</div>
 

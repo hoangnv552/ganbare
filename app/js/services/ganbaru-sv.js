@@ -30,7 +30,15 @@
 			update: {
 				method: 'PUT',
 				url: ApiRootPath + 'v1/ganbaru/:ganbaruId'
-			}
+			},
+			pin: {
+            	method: 'POST',
+            	url: ApiRootPath + 'v1/users/:userId/pins'
+            },
+            unpin: {
+                method: 'DELETE',
+                url: ApiRootPath + 'v1/users/:userId/pins/:ganbaruId'
+            }
 		});
 
 		return Ganbaru;
