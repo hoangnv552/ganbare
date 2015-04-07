@@ -10,7 +10,8 @@
         'ganbareControllers',
         'ganbareServices',
         'ganbareFilters',
-        'ganbareDirective'
+        'ganbareDirective',
+        'ngDialog'
     ]);
 
     ganbareApp.config(['$routeProvider', function($routeProvider) {
@@ -67,7 +68,7 @@
                 redirectTo: '/feedfv'
             });
         }]);
-    
+
     ganbareApp.run(function($rootScope) {
         $rootScope.errorMsg = {
             1: 'Unknown error!',

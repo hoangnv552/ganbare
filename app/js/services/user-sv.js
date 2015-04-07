@@ -7,7 +7,7 @@
     angular.module('ganbareServices').factory('User', ['ApiRootPath', '$resource', '$cookieStore', function(ApiRootPath, $resource, $cookieStore)
     {
         var User = $resource(ApiRootPath + 'v1/users/:id', {
-            id: "@id"
+            id: '@id'
         }, {
             getUser: {
                 method: 'GET'

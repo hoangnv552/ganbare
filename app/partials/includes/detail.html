@@ -1,0 +1,34 @@
+<div id="ganbareModal">
+	<div class="inner">
+		<p class="profIcon"><img src="./img/user2.png" alt=""></p>
+		<div class="titBox">
+			<div class="date">
+				<p class="txt1"><span>登録日</span>{{ganbaru.ganbaru.createDate | dateFilter}}</p>
+				<p class="txt2"><span>期限日</span>{{ganbaru.ganbaru.expiredDate | dateFilter}}</p>
+			</div>
+			<p class="tit">{{ganbaru.ganbaru.ganbaruTitle}}</p>
+			<p class="counter"><span>{{ganbaru.ganbaru.ganbareNumber | numberFilter:15}}</span></p>
+		</div>
+		<div class="btClose"><a href=""><img src="./img/bt_close2.png" alt=""></a></div>
+		<div class="ganbareMain"><p>{{ganbaru.ganbaru.ganbaruContent}}</p></div>
+		<div class="btGanbare"><a href=""><img src="./img/bt_ganbare3.png" alt=""></a></div>
+		<div class="time"><div><span class="timeleft">残り時間</span><span class="count">5日＋23:23:53</span></div></div>
+		<div class="time"><div><span class="timeleft">期限を設定する</span></div></div>
+	</div>
+	<div class="underBox">
+		<ul class="snsBox">
+			<li><a href=""><img src="./img/icon_twitter.png" alt=""></a></li>
+			<li><a href=""><img src="./img/icon_facebook.png" alt=""></a></li>
+			<li><a href=""><img src="./img/icon_google.png" alt=""></a></li>
+			<li class="txt">現状をシェア</li>
+		</ul>
+		<ul class="editBox">
+			<li class="delete"><a href="">削除</a></li>
+			<li class="edit"><a href="">編集</a></li>
+		</ul>
+	</div>
+	<img src="./img/img_ganbare_fukidashi2.png" class="f1">
+	<img src="./img/img_ganbare_fukidashi3.png" class="f2">
+	<img src="./img/img_ganbare_fukidashi4.png" class="f3">
+	<img src="./img/img_ganbare_fukidashi2.png" class="f4">
+</div>

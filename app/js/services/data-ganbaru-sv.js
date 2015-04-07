@@ -4,7 +4,7 @@
 	/*
 	* Service Add Ganbare
 	*/
-	angular.module('ganbareServices').factory('getListGanbaru', ['TYPES', 'listGanbaru', '$cookieStore', function(TYPES, listGanbaru, $cookieStore )
+	angular.module('ganbareServices').factory('dataGanbaru', ['TYPES', 'listGanbaru', '$cookieStore', function(TYPES, listGanbaru, $cookieStore )
 	{
 		var userId  = $cookieStore.get('userId');
 		var timestamp = moment().format('YYYYMMDDHHmmssSSS');
