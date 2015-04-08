@@ -33,9 +33,18 @@
 				});
 			});
 
-			$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDDHHmmss');
+			//bind hours, minutes, seconds
+			var now = moment(),
+				expiredDay = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDD'),
+				expiredHour = moment({
+				h: now.hours(),
+				m: now.minutes(),
+				s: now.seconds()
+			}).format('HHmmss');
 
-			//get Locatio service
+			$scope.ganbaru.expiredDate = expiredDay.concat(expiredHour);
+			
+			//get Location service
 			geolocation.getLocation().then(function(response) {
 				var coords = response.coords;
 				$scope.ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
