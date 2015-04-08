@@ -42,7 +42,7 @@
             }).
             when('/mypage', {
                 templateUrl: 'partials/my-page.html',
-                controller: 'myPageGanbaruCtrl'
+                controller: 'feedMemberCtrl'
             }).
             when('/register', {
                 templateUrl: 'partials/register.html',

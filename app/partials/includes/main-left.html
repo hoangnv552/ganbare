@@ -1,6 +1,7 @@
 <div id="sideMenu">
     <div class="userBox">
-        <p><img src="./img/user.png" alt=""><span>あすか文明</span><br><a href="">プロフィールを編集</a></p>
+        <p><img src="./img/user.png" alt=""><span>あすか文明</span><br><a href="#/edit-my-page">プロフィールを編集</a></p>
+        <p class="txt">{{user.data.username}}</p>
     </div>
     <p class="btNew"><a href="#/register"><span>新規登録</span></a></p>
     <ul class="snsLink">
@@ -9,6 +10,14 @@
         <li><a href=""><img src="./img/icon_google4.png" alt=""></a></li>
     </ul>
     <p class="btAbout"><a href="">GANBAREとは？</a></p>
+    <dl class="ganbareCounter">
+        <dt>あすか文明さんがガンバレした数</dt>
+        <dd><div>000,024,138,641<span>GB</span></div></dd>
+    </dl>
+    <dl class="ganbareCounter2">
+        <dt>あすか文明さんがガンバレされた数</dt>
+        <dd><div>000,024,138,641<span>GB</span></div></dd>
+    </dl>
     <ul class="sideNav">
         <li class="nav1"><span class="tit">お気に入りユーザー</span><span class="num">{{user.data.favoriteNumber}}</span></li>
         <li class="nav2"><span class="tit">気に入られユーザー</span><span class="num">{{user.data.favoritedNumber}}</span></li>
