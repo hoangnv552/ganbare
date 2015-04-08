@@ -3,16 +3,16 @@
 		<p class="profIcon"><img src="./img/user2.png" alt=""></p>
 		<div class="titBox">
 			<div class="date">
-				<p class="txt1"><span>登録日</span>{{ganbaru.ganbaru.createDate | dateFilter}}</p>
-				<p class="txt2"><span>期限日</span>{{ganbaru.ganbaru.expiredDate | dateFilter}}</p>
+				<p class="txt1"><span>登録日</span>{{ganbaruDetail.ganbaru.createDate | dateFilter}}</p>
+				<p class="txt2"><span>期限日</span>{{ganbaruDetail.ganbaru.expiredDate | dateFilter}}</p>
 			</div>
-			<p class="tit">{{ganbaru.ganbaru.ganbaruTitle}}</p>
-			<p class="counter"><span>{{ganbaru.ganbaru.ganbareNumber | numberFilter:15}}</span></p>
+			<p class="tit">{{ganbaruDetail.ganbaru.ganbaruTitle}}</p>
+			<p class="counter"><span>{{ganbaruDetail.ganbaru.ganbareNumber | numberFilter:15}}</span></p>
 		</div>
 		<div class="btClose"><a href=""><img src="./img/bt_close2.png" alt=""></a></div>
-		<div class="ganbareMain"><p>{{ganbaru.ganbaru.ganbaruContent}}</p></div>
-		<div class="btGanbare"><a href=""><img src="./img/bt_ganbare3.png" alt=""></a></div>
-		<div class="time"><div><span class="timeleft">残り時間</span><span class="count">5日＋23:23:53</span></div></div>
+		<div class="ganbareMain"><p>{{ganbaruDetail.ganbaru.ganbaruContent}}</p></div>
+		<div class="btGanbare" ng-click="addGanbare()"><a href=""><img src="./img/bt_ganbare3.png" alt=""></a></div>
+		<div class="time"><div><span class="timeleft">残り時間</span><span class="count">{{ganbaruDetail.ganbaru.expiredDuration}}</span></div></div>
 		<div class="time"><div><span class="timeleft">期限を設定する</span></div></div>
 	</div>
 	<div class="underBox">

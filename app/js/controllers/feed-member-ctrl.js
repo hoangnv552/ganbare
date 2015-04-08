@@ -1,12 +1,12 @@
 ;(function(){
 	'use strict';
 
+
 	/*
 	* Controller Feed for visitors
 	*/
 	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'dataGanbaru', 'getUtilities', 'ngDialog', 'User', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, dataGanbaru, getUtilities, ngDialog, User)
 	{
-
 		var userId = $cookieStore.get('userId');
 		var ganbaruIdAndNumber = [];
 		var take = 5;
@@ -265,8 +265,58 @@
 				template: 'partials/includes/detail.html',
 
 				// Controller Detail
-				controller: ['$scope', function($scope) {
+				controller: ['$scope', '$interval', 'Ganbaru', function($scope, $interval, Ganbaru) {
 					$scope.ganbaru = ganbaru;
+					$scope.mouseClickNumber = 0;
+					getGanbaruDetail();
+					$interval(calculateExpiredDuration, 1000);
+					$interval(sendRequestAddGanbare, 3000);
+
+					function getGanbaruDetail() {
+						Ganbaru.getDetail({
+							ganbaruId: ganbaru.ganbaru.ganbaruId
+						}).$promise.then(function(response) {
+							switch(response.code) {
+								case 0: {
+									$scope.ganbaruDetail = response.data;
+									break;
+								}
+								default: {
+
+								}
+							}
+						}, function() {
+							//Handling error here
+						});
+					}
+
+					$scope.addGanbare = function() {
+						$scope.ganbaruDetail.ganbaru.ganbareNumber++;
+						$scope.mouseClickNumber++;
+						ganbaru.ganbaru.ganbareNumber++;
+					}
+
+					function sendRequestAddGanbare() {
+						if($scope.mouseClickNumber > 0) {
+							Ganbaru.add({
+								ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId,
+								ganbareNumber: $scope.mouseClickNumber,
+								userId: userId
+							}).$promise.then(function(response) {
+								console.log(response.data);
+
+							}, function() {
+								//Handling error
+							});
+						}
+						$scope.mouseClickNumber = 0;
+					}
+
+					function calculateExpiredDuration() {
+						var now = moment();
+						var expiredDate = moment($scope.ganbaruDetail.ganbaru.expiredDate, 'YYYYMMDDhhmmss');
+						$scope.ganbaruDetail.ganbaru.expiredDuration = moment.duration(expiredDate.diff(now)).format('D日 ＋ hh:mm:ss');
+					};
 				}],
 				className: 'ngdialog-theme-plain',
 				showClose: false
