@@ -4,11 +4,12 @@
 	angular.module('ganbareFilters', []).filter('dateFilter', function()
 	{
 		return function(input) {
-			return moment(input, 'YYYY/MM/DD').format('YYYY/MM/DD h:mm:ss');
+			return moment(input, 'YYYY/MM/DD H:mm:ss').format('YYYY/MM/DD H:mm:ss');
 		};
 	});
 
-	angular.module('ganbareFilters').filter('caculatorDate', function() {
+	angular.module('ganbareFilters').filter('caculatorDate', function()
+	{
 		return function(createDate, expireDate) {
 			var dateCreate = moment(createDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
 			var dateExpire = moment(expireDate, 'YYYY-MM-DD').format('YYYY-MM-DD');

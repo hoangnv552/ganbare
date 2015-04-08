@@ -12,7 +12,7 @@
 		var take = 5;
 
 		$scope.skip = 0;
-
+		$scope.types = TYPES;
 		$scope.totalNumber = 0;
 		$scope.checkboxesListTag = ['Sport', 'Dance', 'Music', 'Game'];
 		$scope.selectTag = ['Sport'];
@@ -31,7 +31,8 @@
 		/*
 		* Defaul load page
 		*/
-		dataGanbaru($scope.skip, take).then(function(data) {
+		$scope.listType = TYPES.listTypeHot;
+		dataGanbaru($scope.skip, take, TYPES.listTypeHot).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -160,45 +161,14 @@
 		/*
 		* List pin ganbaru
 		*/
-		$scope.listGanbaru = function() {
+		$scope.listGanbaru = function(type) {
 			$scope.showTags = false;
-			if ($scope.listType !== '') {
+			if ($scope.listType !== type) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = '';
-			dataGanbaru($scope.skip, take).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
-		* List pin ganbaru
-		*/
-		$scope.listPinGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypePin) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypePin;
-			dataGanbaru( $scope.skip, take, TYPES.listTypePin ).then(function(data) {
-				$scope.ganbaru = data.data;
-
-			});
-		};
-
-		/*
-		* List favorite ganbaru
-		*/
-		$scope.listOfFavoriteGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeFavorite) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeFavorite;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeFavorite ).then(function(data) {
+			$scope.listType = type;
+			dataGanbaru($scope.skip, take, type).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -214,36 +184,6 @@
 			}
 			$scope.listType = TYPES.listTypeUser;
 			dataGanbaru( $scope.skip, take, TYPES.listTypeUser ).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
-		* List hot ganbaru
-		*/
-		$scope.listHotGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeHot) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeHot;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeHot ).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
-		* List listExpireGanbaru ganbaru
-		*/
-		$scope.listExpireGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeExpire) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeExpire;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeExpire ).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -267,11 +207,12 @@
 						$scope.ganbaru = data.data;
 					});
 				} else {
-					if ($scope.listType !== '') {
+					if ($scope.listType !== TYPES.listTypeNew) {
 						$scope.ganbaru = [];
 						$scope.skip = 0;
 					}
-					dataGanbaru( $scope.skip, take, '' ).then(function(data) {
+					$scope.listType = TYPES.listTypeNew;
+					dataGanbaru( $scope.skip, take, TYPES.listTypeNew ).then(function(data) {
 						$scope.ganbaru = data.data;
 					});
 				}

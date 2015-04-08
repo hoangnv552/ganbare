@@ -27,13 +27,20 @@
 
 	// list types ganbaru
 	angular.module('ganbareServices').constant('TYPES', {
-		listTypePin:      1,
-		listTypeFavorite: 2,
-		listTypeUser:     3,
-		listTypeHot:      4,
-		listTypeExpire:   5,
-		listTypeTag:      6,
-		listTypeSearch:   7
+		listTypeNew       :  0,
+		listTypePin       :  1,
+		listTypeFavorite  :  2,
+		listTypeUser      :  3,
+		listTypeHot       :  4,
+		listTypeExpire    :  5,
+		listTypeTag       :  6,
+		listTypeSearch    :  7,
+		listTypeHotNew    :  8,
+		listTypeHotExpire :  9,
+		listTypeNewHot    :  10,
+		listTypeNewExpire :  11,
+		listTypeExpireNew :  12,
+		listTypeExpireHot :  13,
 	});
 
 	angular.module('ganbareServices').constant('ERROR_MSG', {
