@@ -5,14 +5,14 @@
 	/*
 	* Controller Feed for visitors
 	*/
-	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'pinGanbaru', 'favoriteGanbaru', 'dataGanbaru', 'getUtilities', 'ngDialog', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, pinGanbaru, favoriteGanbaru, dataGanbaru, getUtilities, ngDialog)
+	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'dataGanbaru', 'getUtilities', 'ngDialog', 'User', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, dataGanbaru, getUtilities, ngDialog, User)
 	{
 		var userId = $cookieStore.get('userId');
 		var ganbaruIdAndNumber = [];
 		var take = 5;
 
 		$scope.skip = 0;
-
+		$scope.types = TYPES;
 		$scope.totalNumber = 0;
 		$scope.checkboxesListTag = ['Sport', 'Dance', 'Music', 'Game'];
 		$scope.selectTag = ['Sport'];
@@ -21,6 +21,7 @@
 		$scope.length = 0;
 		$scope.totalGanbareNumber = 0;
 		$scope.countNumber = 0;
+		$scope.contentSearch;
 
 		// If user logout
 		if (!userId) {
@@ -30,7 +31,8 @@
 		/*
 		* Defaul load page
 		*/
-		dataGanbaru($scope.skip, take).then(function(data) {
+		$scope.listType = TYPES.listTypeHot;
+		dataGanbaru($scope.skip, take, TYPES.listTypeHot).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -96,7 +98,7 @@
 		* Set pin ganbaru
 		*/
 		$scope.pinGanbaru = function(item) {
-			return pinGanbaru.pin({
+			return Ganbaru.pin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function pinDone(data) {
@@ -110,7 +112,7 @@
 		* Set unpin ganbaru
 		*/
 		$scope.unPinGanbaru = function(item) {
-			return pinGanbaru.unpin({
+			return Ganbaru.unpin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function unPinDone(data) {
@@ -124,7 +126,7 @@
 		* Set favorite ganbaru
 		*/
 		$scope.addFavorite = function (item, ganbaru) {
-			return favoriteGanbaru.add({
+			return User.addFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function addDone(data) {
@@ -142,7 +144,7 @@
 		* Set remove favorite ganbaru
 		*/
 		$scope.removeFavorite = function(item, ganbaru) {
-			return favoriteGanbaru.remove({
+			return User.removeFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function unFavorite(data) {
@@ -159,45 +161,14 @@
 		/*
 		* List pin ganbaru
 		*/
-		$scope.listGanbaru = function() {
+		$scope.listGanbaru = function(type) {
 			$scope.showTags = false;
-			if ($scope.listType !== '') {
+			if ($scope.listType !== type) {
 				$scope.ganbaru = [];
 				$scope.skip = 0;
 			}
-			$scope.listType = '';
-			dataGanbaru($scope.skip, take).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
-		* List pin ganbaru
-		*/
-		$scope.listPinGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypePin) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypePin;
-			dataGanbaru( $scope.skip, take, TYPES.listTypePin ).then(function(data) {
-				$scope.ganbaru = data.data;
-
-			});
-		};
-
-		/*
-		* List favorite ganbaru
-		*/
-		$scope.listOfFavoriteGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeFavorite) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeFavorite;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeFavorite ).then(function(data) {
+			$scope.listType = type;
+			dataGanbaru($scope.skip, take, type).then(function(data) {
 				$scope.ganbaru = data.data;
 			});
 		};
@@ -218,64 +189,43 @@
 		};
 
 		/*
-		* List hot ganbaru
-		*/
-		$scope.listHotGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeHot) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeHot;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeHot ).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
-		* List listExpireGanbaru ganbaru
-		*/
-		$scope.listExpireGanbaru = function() {
-			$scope.showTags = false;
-			if ($scope.listType !== TYPES.listTypeExpire) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = TYPES.listTypeExpire;
-			dataGanbaru( $scope.skip, take, TYPES.listTypeExpire ).then(function(data) {
-				$scope.ganbaru = data.data;
-			});
-		};
-
-		/*
 		* List Tag ganbaru
 		*/
 		$scope.listTagGanbaru = function() {
 			$scope.showTags = true;
 		};
 
+		$scope.keyPress = function(keyCode){
+      		if (keyCode === 13) {
+      			if ($scope.contentSearch) {
+					if ($scope.listType !== TYPES.listTypeSearch) {
+						$scope.ganbaru = [];
+						$scope.skip = 0;
+					}
+					$scope.listType = TYPES.listTypeSearch;
+					dataGanbaru( $scope.skip, take, TYPES.listTypeSearch, $scope.contentSearch ).then(function(data) {
+						$scope.ganbaru = data.data;
+					});
+				} else {
+					if ($scope.listType !== TYPES.listTypeNew) {
+						$scope.ganbaru = [];
+						$scope.skip = 0;
+					}
+					$scope.listType = TYPES.listTypeNew;
+					dataGanbaru( $scope.skip, take, TYPES.listTypeNew ).then(function(data) {
+						$scope.ganbaru = data.data;
+					});
+				}
+      		}
+     	};
+
+
+
 		/*
 		* Search ganbaru
 		*/
 		$scope.searchGanbaru = function(contentSearch) {
-			if (contentSearch) {
-				if ($scope.listType !== TYPES.listTypeSearch) {
-					$scope.ganbaru = [];
-					$scope.skip = 0;
-				}
-				$scope.listType = TYPES.listTypeSearch;
-				dataGanbaru( $scope.skip, take, TYPES.listTypeSearch, contentSearch ).then(function(data) {
-					$scope.ganbaru = data.data;
-				});
-			} else {
-				if ($scope.listType !== '') {
-					$scope.ganbaru = [];
-					$scope.skip = 0;
-				}
-				dataGanbaru( $scope.skip, take, '' ).then(function(data) {
-					$scope.ganbaru = data.data;
-				});
-			}
+
 		};
 
 		/*

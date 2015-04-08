@@ -5,7 +5,7 @@
 	* Controller list by user
 	*/
 
-	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'dataGanbaru', '$interval', 'Ganbaru', 'getUtilities', 'pinGanbaru', '$cookieStore', 'favoriteGanbaru', function($scope, $routeParams, dataGanbaru, $interval, Ganbaru, getUtilities, pinGanbaru, $cookieStore, favoriteGanbaru)
+	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'dataGanbaru', '$interval', 'Ganbaru', 'getUtilities', '$cookieStore', 'User', function($scope, $routeParams, dataGanbaru, $interval, Ganbaru, getUtilities, $cookieStore, User)
 	{
 
 		var ganbaruIdAndNumber = [],
@@ -87,7 +87,7 @@
 		* Set pin ganbaru
 		*/
 		$scope.pinGanbaru = function(item) {
-			return pinGanbaru.pin({
+			return Ganbaru.pin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function pinDone(data) {
@@ -101,7 +101,7 @@
 		* Set unpin ganbaru
 		*/
 		$scope.unPinGanbaru = function(item) {
-			return pinGanbaru.unpin({
+			return Ganbaru.unpin({
 				userId: userId,
 				ganbaruId: item.ganbaru.ganbaruId
 			}).$promise.then(function unPinDone(data) {
@@ -115,7 +115,7 @@
 		* Set favorite ganbaru
 		*/
 		$scope.addFavorite = function (item, ganbaru) {
-			return favoriteGanbaru.add({
+			return User.addFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function addDone(data) {
@@ -133,7 +133,7 @@
 		* Set remove favorite ganbaru
 		*/
 		$scope.removeFavorite = function(item, ganbaru) {
-			return favoriteGanbaru.remove({
+			return User.removeFavorite({
 				id: userId,
 				friendId: item.user.userId
 			}).$promise.then(function unFavorite(data) {

@@ -8,7 +8,11 @@
     {
         return $resource(ApiRootPath + 'v1/ganbaru', {}, {
                 default: {
-                    method: 'GET'
+                    method: 'GET',
+                    // transformResponse: function(data, headerGetter) {
+                    //     console.log(data);
+                    //     return data;
+                    // }
                 },
                 pins: {
                     method: 'GET',

@@ -1,23 +1,28 @@
-<div class="main-left">
-    <div class="avatarUser">
-        <img src="" />
-        <p>{{user.data.username}}</p>
+<div id="sideMenu">
+    <div class="userBox">
+        <p><img src="./img/user.png" alt=""><span>あすか文明</span><br><a href="">プロフィールを編集</a></p>
     </div>
-    <div class="newGanbaru">
-        <a ng-href="#/creategb">
-            <button>New Ganbaru</button>
-            <br><br><br>
-            <a href="#/password/change">Change password</a>
-        </a>
-    </div>
-    <div class="areaGanbaru">
-        <h3>Sent ganbare number: </h3>
-        <h2>{{user.data.sentGanbareNumber + totalNumber}}</h2>
-        <h3>Received ganbare number: </h3>
-        <h2>{{user.data.receivedGanbareNumber}}</h2>
-        <h3>Favorite: </h3>
-        <h2>{{user.data.favoriteNumber}}</h2>
-        <h3>Favorited: </h3>
-        <h2>{{user.data.favoritedNumber}}</h2>
-    </div>
+    <p class="btNew"><a href="#/register"><span>新規登録</span></a></p>
+    <ul class="snsLink">
+        <li><a href=""><img src="./img/icon_twitter4.png" alt=""></a></li>
+        <li><a href=""><img src="./img/icon_facebook4.png" alt=""></a></li>
+        <li><a href=""><img src="./img/icon_google4.png" alt=""></a></li>
+    </ul>
+    <p class="btAbout"><a href="">GANBAREとは？</a></p>
+    <ul class="sideNav">
+        <li class="nav1"><span class="tit">お気に入りユーザー</span><span class="num">{{user.data.favoriteNumber}}</span></li>
+        <li class="nav2"><span class="tit">気に入られユーザー</span><span class="num">{{user.data.favoritedNumber}}</span></li>
+        <li class="nav3"><span class="tit">ピン止めした数</span><span class="num">{{user.data.sentGanbareNumber + totalNumber}}</span></li>
+        <li class="nav4"><span class="tit">ピン止めされた数</span><span class="num">{{user.data.receivedGanbareNumber}}</span></li>
+        <li class="nav5"><a href="">More Communication Here</a></li>
+        <li class="nav6">あすか文明</li>
+        <li class="nav7">-未設定-<a href="" class="bt">登録する</a></li>
+        <li class="nav8">あすか文明</li>
+    </ul>
+    <dl class="missionBox">
+        <dt><img src="./img/bt_mission.png" alt="our mission"></dt>
+        <dd>みなさんのガンバレが集まったら…<br><a href="">詳しくはこちら</a></dd>
+    </dl>
+    <p class="linkAbout"><a href="">このサイトについて</a></p>
+    <p class="copyright">CopyRight(c) ＧＡＮＢＡＲＥ All Righits Reserved.</p>
 </div>

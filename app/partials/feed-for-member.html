@@ -1,26 +1,61 @@
-<div class="content">
-    <header-directive></header-directive>
-    <div class="main">
-        <left-directive></left-directive>
-        <div class="createNew">
-        </div>
-        <div class="main-right">
-            <div class="main-search">
-                <button ng-click="listGanbaru()">LIST GANBARU</button>
-                <button ng-click="listPinGanbaru()">LIST PINNING</button>
-                <button ng-click="listOfFavoriteGanbaru()">LIST OF FAVORITE</button>
-                <button ng-click="listByUserGanbaru()">LIST BY USER</button>
-                <button ng-click="listTagGanbaru()">TAG</button>
-                <button ng-click="listHotGanbaru()">HOT</button>
-                <button ng-click="listGanbaru()">NEW</button>
-                <button ng-click="listExpireGanbaru()">EXPIRING</button><br>
-                <span ng-if="!showTags">
-                    <form class="searchForm" ng-submit="searchGanbaru(contentSearch)">
-                        Search:
-                        <input type="text" class="inputSearch" ng-model="contentSearch" />
-                        <input type="submit" class="search" value="Search" />
-                    </form>
-                </span>
+<header-directive></header-directive>
+<div id="contents">
+<div id="contMain">
+    <div class="searchBox">
+        <h2><span>がんばる検索</span></h2>
+        <div class="inner">
+            <ul>
+                <li class="fav" ng-class="listType == types.listTypeFavorite ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeFavorite)">お気に入り</a>
+                    <ul>
+                        <li class="current"><a href="">NEW!</a></li>
+                        <li><a href="">多い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                </li>
+                <li class="pin" ng-class="listType == types.listTypePin ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypePin)">ピン止め</a>
+                    <ul>
+                        <li class="current"><a href="">NEW!</a></li>
+                        <li><a href="">多い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                </li>
+                <li class="short" ng-class="(listType == types.listTypeHot || listType == types.listTypeHotNew || listType == types.listTypeHotExpire) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">HOT!</a>
+                    <ul>
+                        <li ng-class="listType == types.listTypeHotNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotNew)">NEW!</a></li>
+                        <li ng-class="listType == types.listTypeHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">多い</a></li>
+                        <li ng-class="listType == types.listTypeHotExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotExpire)">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                <li class="short" ng-class="(listType == types.listTypeNew || listType == types.listTypeNewHot || listType == types.listTypeNewExpire) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a>
+                    <ul>
+                        <li ng-class="listType == types.listTypeNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a></li>
+                        <li ng-class="listType == types.listTypeNewHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewHot)">多い</a></li>
+                        <li ng-class="listType == types.listTypeNewExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewExpire)">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                <li class="short" ng-class="(listType == types.listTypeExpire || listType == types.listTypeExpireNew || listType == types.listTypeExpireHot) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限間近</a>
+                    <ul>
+                        <li ng-class="listType == types.listTypeExpireNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireNew)">NEW!</a></li>
+                        <li ng-class="listType == types.listTypeExpireHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireHot)">多い</a></li>
+                        <li ng-class="listType == types.listTypeExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                <li class="short" ng-class="listType == types.listTypeTag ? 'current' : ''"><a href="" ng-click="listTagGanbaru()">タグクラウド</a>
+                    <ul>
+                        <li><a href="">NEW!</a></li>
+                        <li><a href="">多い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li><a href="">期限近い</a></li>
+                    </ul>
+                </li>
+                <li class="short search"><input type="text" ng-keyup="keyPress($event.keyCode)" ng-model="contentSearch"></li>
                 <span ng-if="showTags">
                     <form class="searchTag" ng-submit="searchTagGanbaru()">
                         Select Tags:
@@ -30,55 +65,45 @@
                         <input type="submit" class="search" value="Search" />
                     </form>
                 </span>
-            </div>
-            <div class="ganbaru-content">
-                <h1>{{getGanbaruError}}</h1>
-                <ul>
-                    <li ng-repeat="item in ganbaru">
-                        <span ng-init="$index = 0; totalNumber = 0"></span>
-                        <div class="img">
-                            <span ng-if="item.ganbaru.isPinning == false">
-                                <p class="pin" ng-click="pinGanbaru(item)"></p>
-                            </span>
-                            <span ng-if="item.ganbaru.isPinning == true">
-                                <p class="unpin" ng-click="unPinGanbaru(item)"></p>
-                            </span>
-                            <span ng-if="item.user.isFavoristUser == false">
-                                <p class="favorite" ng-click="addFavorite(item, ganbaru)"></p>
-                            </span>
-                            <span ng-if="item.user.isFavoristUser == true">
-                                <p class="removefavorite" ng-click="removeFavorite(item, ganbaru)"></p>
-                            </span>
-                            <p>{{item.ganbaru.ganbareNumber + $index}}</p>
-                        </div>
-                        <div class="thumbnail-img">
-                            <div class="thumbnail">
-                            </div>
-                            <div class="content">
-                                <div class="content-top">
-                                    <p>{{item.ganbaru.ganbaruContent}}</p>
-                                </div>
-                                <div class="content-bottom">
-                                    <p><a href="#/users/{{item.user.userId}}/ganbaru">{{item.user.username}}</a></p>
-                                    <p>{{item.ganbaru.createDate | dateFilter}}</p>
-                                    <p>{{item.ganbaru.expiredDate | dateFilter}}</p>
-                                </div>
-                            </div>
-                            <div class="ganbaru-dd">
-                                <a ng-click="$index = $index + 1">
-                                    <input type="button" class="" value=" + Ganbaru" ng-click="addGanbare(
-                                    item)">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <a href="#/ganbaru/{{item.ganbaru.ganbaruId}}">Detail</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <button class="more-ganpare" ng-if="length >= skip" ng-click="listMoreGanbaru()">More...</button>
+            </ul>
         </div>
     </div>
+    <div class="ganbareBox" ng-repeat="item in ganbaru">
+        <span ng-init="totalNumber = 0; $index = 0;"></span>
+        <div class="date">
+            <p class="txt1"><span>登録日</span>{{item.ganbaru.createDate | dateFilter}}</p>
+            <p class="txt2"><span>期限日</span>{{item.ganbaru.expiredDate | dateFilter}}</p>
+            <p class="txt3">残り日数 {{item.ganbaru.createDate | caculatorDate:item.ganbaru.expiredDate}}日</p>
+        </div>
+        <div class="tit">
+            <h2>{{item.user.username}}</h2>
+            <p class="counter"><span>{{(item.ganbaru.ganbareNumber + $index) | numberFilter:15}} <span>GB</span></span></p>
+        </div>
+        <p class="profIcon"><img src="./img/user2.png" alt=""></p>
+        <div class="ganbareVoice">
+            <p><span class="txt">{{item.ganbaru.ganbaruContent}}</span><span class="bg"><img src="./img/000000.png"></span></p>
+            <img src="./img/bg_fukidashi2.png" class="fukidashi" ="">
+        </div>
+        <div class="btArea">
+            <p class="btGanbare" ng-click="$index = $index + 1"><a href="" ng-click="addGanbare(item)" class="modal"><img src="./img/bt_ganbare.png" alt=""></a></p>
+            <span ng-if="item.ganbaru.isPinning == true">
+                <p class="pin" ng-click="unPinGanbaru(item)"><a href="" class="current">ピンどめする</a></p>
+            </span>
+            <span ng-if="item.ganbaru.isPinning == false">
+                <p class="pin" ng-click="pinGanbaru(item)"><a href="" class="modal">ピンどめする</a></p>
+            </span>
+            <p class="btDetail"><a href="" ng-click="ganbaruDialog(item)">詳細を見る</a></p>
+        </div>
+    </div>
+
+    <p class="moreview" ng-if="length >= skip" ng-click="listMoreGanbaru()"><a href=""><span>もっと見る</span></a></p>
+
+
+</div>
+<left-directive></left-directive>
+
+<!-- ========================   /contents   ======================== -->
 </div>
 
+<!-- ========================   /wrap   ======================== -->
+</div>
