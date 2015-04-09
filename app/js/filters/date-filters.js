@@ -11,8 +11,8 @@
 	angular.module('ganbareFilters').filter('caculatorDate', function()
 	{
 		return function(createDate, expireDate) {
-			var dateCreate = moment(createDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
-			var dateExpire = moment(expireDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+			var dateCreate = moment().format('YYYY-MM-DD H:mm:ss');
+			var dateExpire = moment(expireDate, 'YYYY-MM-DD').format('YYYY-MM-DD H:mm:ss');
 			var t = moment(dateCreate).twix(dateExpire);
 
 			return t.count("days");
