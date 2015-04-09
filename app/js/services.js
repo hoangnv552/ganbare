@@ -43,6 +43,13 @@
 		listTypeExpireHot :  13,
 	});
 
+	// list types Upload file
+	angular.module('ganbareServices').constant('TYPES_UPLOAD', {
+		avatar     : 1,
+		background : 2,
+		image      : 3
+	});
+
 	angular.module('ganbareServices').constant('ERROR_MSG', {
 		1: 'Unknown error!',
         2: 'Invalid information!',

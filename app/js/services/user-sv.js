@@ -39,7 +39,7 @@
             },
             verify: {
                 method: 'PUT'
-            }, 
+            },
             addFavorite: {
                 method: 'POST',
                 url: ApiRootPath + 'v1/users/:id/favorites'

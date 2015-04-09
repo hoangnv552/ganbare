@@ -1,50 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jslint>
 	<file name="..\..\app\js\controllers.js">
-		<issue line="4" char="5" reason="&apos;ganbareControllers&apos; is defined but never used." evidence="var ganbareControllers = angular.module(&apos;ganbareControllers&apos;," severity="W" />
+		<issue line="5" char="5" reason="Missing &quot;use strict&quot; statement." evidence="	angular.module(&apos;ganbareControllers&apos;, [&apos;angular-md5&apos;, &apos;ngCookies&apos;, &apos;angularUtils.directives.dirPagination&apos;, &apos;720kb.datepicker&apos;, &apos;geolocation&apos;, &apos;ngMap&apos;, &apos;ngTagsInput&apos;, &apos;validation.match&apos;]);" severity="E" />
 	</file>
 	<file name="..\..\app\js\controllers\create-ganbaru-ctrl.js">
-		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="var MESSAGES = {" severity="E" />
-		<issue line="19" char="45" reason="&apos;ganbaru&apos; is not defined." evidence="		$scope.ganbaru.expiredDate = moment(ganbaru.expiredDate, &apos;YYYY-MM-DD&apos;).format(&apos;YYYYMMDDHHmmss&apos;);" severity="W" />
-		<issue line="52" char="20" reason="&apos;$q&apos; is not defined." evidence="			return $q.reject();" severity="W" />
+		<issue line="7" char="107" reason="Missing semicolon." evidence="		$scope.error = &apos;*Note: According to design, this container is not originally for showing message!&apos;" severity="W" />
+		<issue line="15" char="21" reason="Expected a &apos;break&apos; statement before &apos;default&apos;." evidence="					}" severity="W" />
+		<issue line="23" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\edit-ganbaru-ctrl.js">
+		<issue line="44" char="34" reason="&apos;getGanbaruDetail&apos; was used before it was defined." evidence="		function getGanbaruDetail() {" severity="W" />
+		<issue line="70" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+		<issue line="79" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+		<issue line="95" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+		<issue line="4" char="5" reason="&apos;ganbareControllers&apos; is defined but never used." evidence="	/* global ganbareControllers:true */" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\feed-member-ctrl.js">
-		<issue line="96" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
+		<issue line="24" char="16" reason="Expected an assignment or function call and instead saw an expression." evidence="		$scope.contentSearch;" severity="W" />
+		<issue line="83" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
+		<issue line="100" char="30" reason="Strings must use singlequote." evidence="		$scope.$on(&quot;$destroy&quot;, function() {" severity="W" />
+		<issue line="284" char="46" reason="&apos;getGanbaruDetail&apos; was used before it was defined." evidence="					function getGanbaruDetail() {" severity="W" />
+		<issue line="293" char="42" reason="Empty block." evidence="								default: {" severity="W" />
+		<issue line="306" char="22" reason="Missing semicolon." evidence="					}" severity="W" />
+		<issue line="308" char="51" reason="&apos;sendRequestAddGanbare&apos; was used before it was defined." evidence="					function sendRequestAddGanbare() {" severity="W" />
+		<issue line="324" char="54" reason="&apos;calculateExpiredDuration&apos; was used before it was defined." evidence="					function calculateExpiredDuration() {" severity="W" />
+		<issue line="328" char="22" reason="Unnecessary semicolon." evidence="					};" severity="W" />
+		<issue line="333" char="10" reason="Missing semicolon." evidence="		}" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\list-by-user-ctrl.js">
-		<issue line="79" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
-	</file>
-	<file name="..\..\app\js\controllers\login-ctrl.js">
-		<issue line="14" char="2" reason="Missing semicolon." evidence="}" severity="W" />
+		<issue line="75" char="22" reason="Don&apos;t make functions within a loop." evidence="					});" severity="W" />
+		<issue line="89" char="30" reason="Strings must use singlequote." evidence="		$scope.$on(&quot;$destroy&quot;, function() {" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\my-page-ctrl.js">
-		<issue line="12" char="9" reason="&apos;userId&apos; is defined but never used." evidence="	var userId  = $cookieStore.get(&apos;userId&apos;)," severity="W" />
+		<issue line="10" char="13" reason="&apos;userId&apos; is defined but never used." evidence="    	var userId  = $cookieStore.get(&apos;userId&apos;)," severity="W" />
+	</file>
+	<file name="..\..\app\js\controllers\register-ctrl.js">
+		<issue line="37" char="10" reason="Missing semicolon." evidence="		}" severity="W" />
+		<issue line="47" char="50" reason="&apos;code&apos; is not defined." evidence="						$scope.error = ERROR_MSG[code];" severity="W" />
 	</file>
 	<file name="..\..\app\js\controllers\view-detail-ganbaru-ctrl.js">
-		<issue line="32" char="55" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="						$scope.authorized = (userId != null &amp;&amp; userId !== &apos;none&apos;);" severity="W" />
-		<issue line="109" char="29" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="				if(userId != null &amp;&amp; userId !== &apos;none&apos;) {" severity="W" />
-		<issue line="14" char="17" reason="&apos;token&apos; is defined but never used." evidence="			var token = $cookieStore.get(&apos;token&apos;);" severity="W" />
+		<issue line="30" char="55" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="						$scope.authorized = (userId != null &amp;&amp; userId !== &apos;none&apos;);" severity="W" />
+		<issue line="47" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+		<issue line="115" char="25" reason="Expected &apos;!==&apos; and instead saw &apos;!=&apos;." evidence="			if(userId != null &amp;&amp; userId !== &apos;none&apos;) {" severity="W" />
+		<issue line="144" char="19" reason="Missing semicolon." evidence="				})" severity="W" />
+		<issue line="147" char="10" reason="Unnecessary semicolon." evidence="		};" severity="W" />
+		<issue line="8" char="13" reason="&apos;token&apos; is defined but never used." evidence="		var token = $cookieStore.get(&apos;token&apos;);" severity="W" />
 	</file>
 	<file name="..\..\app\js\directives.js">
-		<issue line="4" char="5" reason="&apos;ganbareDirective&apos; is defined but never used." evidence="var ganbareDirective = angular.module(&apos;ganbareDirective&apos;, []);" severity="W" />
+		<issue line="4" char="5" reason="Missing &quot;use strict&quot; statement." evidence="	angular.module(&apos;ganbareDirective&apos;, []);" severity="E" />
 	</file>
 	<file name="..\..\app\js\directives\header-dt.js">
-		<issue line="21" char="28" reason="Empty block." evidence="					} else {" severity="W" />
+		<issue line="21" char="32" reason="Empty block." evidence="						} else {" severity="W" />
 	</file>
 	<file name="..\..\app\js\filters\date-filters.js">
-		<issue line="4" char="1" reason="Missing &quot;use strict&quot; statement." evidence="angular.module(&apos;ganbareFilters&apos;, []).filter(&apos;dateFilter&apos;," severity="E" />
+		<issue line="4" char="5" reason="Missing &quot;use strict&quot; statement." evidence="	angular.module(&apos;ganbareFilters&apos;, []).filter(&apos;dateFilter&apos;, function()" severity="E" />
+		<issue line="18" char="34" reason="Strings must use singlequote." evidence="			return t.count(&quot;days&quot;);" severity="W" />
+		<issue line="19" char="10" reason="Missing semicolon." evidence="		}" severity="W" />
 	</file>
-	<file name="..\..\app\js\services.js">
-		<issue line="4" char="5" reason="&apos;path&apos; is defined but never used." evidence="var path = &apos;http://133.242.53.250:8888/&apos;;" severity="W" />
-	</file>
-	<file name="..\..\app\js\services\get-list-ganbaru-sv.js">
-		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
-	</file>
-	<file name="..\..\app\js\services\user-sv.js">
-		<issue line="14" char="19" reason="Strings must use singlequote." evidence="    	{id: &quot;@id&quot;}," severity="W" />
-	</file>
-	<file name="..\..\app\js\services\utilities-sv.js">
-		<issue line="5" char="1" reason="&apos;path&apos; is defined but never used." evidence="/* global path:true */" severity="W" />
+	<file name="..\..\app\js\filters\number-filters.js">
+		<issue line="8" char="21" reason="&apos;len&apos; is already defined." evidence="			var len = parseInt(len, 10);" severity="W" />
+		<issue line="17" char="71" reason="Strings must use singlequote." evidence="			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, &quot;,&quot;);" severity="W" />
+		<issue line="18" char="10" reason="Missing semicolon." evidence="		}" severity="W" />
 	</file>
 </jslint>
 

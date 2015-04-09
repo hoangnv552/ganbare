@@ -97,7 +97,7 @@
 		/*
 		* Delete interval if escape scope
 		*/
-		$scope.$on("$destroy", function() {
+		$scope.$on('$destroy', function() {
 			if (idInterval) {
 				$interval.cancel(idInterval);
 			}

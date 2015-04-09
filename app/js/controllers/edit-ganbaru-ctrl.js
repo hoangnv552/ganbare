@@ -1,6 +1,8 @@
 ;(function() {
 	'use strict';
 
+	var UNABLE_CONNECT_SERVER_CODE = 50;
+
 	/* global ganbareControllers:true */
 
 	angular.module('ganbareControllers').controller('editGanbaruCtrl', ['$scope','$cookieStore', '$interval','$location', '$routeParams', 'ERROR_MSG','Ganbaru', function($scope, $cookieStore, $interval, $location, $routeParams, ERROR_MSG, Ganbaru) {
@@ -54,7 +56,7 @@
 						$scope.ganbaru = data.ganbaru;
 						$scope.ganbaruUser = data.user;
 						$scope.ganbaru.expiredDate = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYY/MM/DD');
-						
+
 						$scope.inputTags = [];
 						angular.forEach($scope.ganbaru.ganbaruTags, function(obj, key) {
 							$scope.inputTags.push({text: obj});
@@ -64,8 +66,9 @@
 					default: {
 						$scope.error = ERROR_MSG[code];
 					}
-				}}, function() {
-					$scope.error = ERROR_MSG[50];
+				}
+			}, function() {
+				$scope.error = ERROR_MSG[UNABLE_CONNECT_SERVER_CODE];
 			});
 		};
 
@@ -82,8 +85,8 @@
 			//call to service add ganbare
 			if($scope.clickNumber > 0) {
 				Ganbaru.add({
-					ganbaruId: ganbaruId, 
-					userId: ganbaruId, 
+					ganbaruId: ganbaruId,
+					userId: ganbaruId,
 					ganbareNumber: $scope.clickNumber
 				}).$promise.then(function(response) {
 					console.log(response.data);

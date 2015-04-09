@@ -4,7 +4,7 @@
 	/*
 	* Service Add Ganbare
 	*/
-	angular.module('ganbareServices').factory('dataGanbaru', ['TYPES', 'listGanbaru', '$cookieStore', function(TYPES, listGanbaru, $cookieStore )
+	angular.module('ganbareServices').factory('dataGanbaru', ['TYPES', 'Ganbaru', '$cookieStore', function(TYPES, Ganbaru, $cookieStore )
 	{
 		var userId  = $cookieStore.get('userId');
 		var timestamp = moment().format('YYYYMMDDHHmmssSSS');
@@ -37,59 +37,59 @@
 
 			switch (listType) {
 				case TYPES.listTypePin:
-				  	ganbaruPromise = listGanbaru.pins({ userId: userId, skip: skip, take: takeNumber });
+				  	ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber });
 				  	break;
 
 				case TYPES.listTypeFavorite:
-				  	ganbaruPromise = listGanbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber });
+				  	ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber });
 				  	break;
 
 				case TYPES.listTypeUser:
-				    ganbaruPromise = listGanbaru.user({ userId: userIdParam, skip: skip, take: takeNumber });
+				    ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber });
 				    break;
 
 				case TYPES.listTypeHot:
-				  	ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeHot.filter, sortType: filterSort.typeHot.sort, skip: skip, take: takeNumber });
+				  	ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeHot.filter, sortType: filterSort.typeHot.sort, skip: skip, take: takeNumber });
 				  	break;
 
 				case TYPES.listTypeExpire:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeExpire.filter, sortType: filterSort.typeExpire.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeExpire.filter, sortType: filterSort.typeExpire.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeTag:
-				  	ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeTag.filter, sortType: filterSort.typeTag.sort, tags: [selectTag], skip: skip, take: takeNumber });
+				  	ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeTag.filter, sortType: filterSort.typeTag.sort, tags: [selectTag], skip: skip, take: takeNumber });
 				  	break;
 
 				case TYPES.listTypeSearch:
-					ganbaruPromise = listGanbaru.default({ searchContent: contentSearch, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ searchContent: contentSearch, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeNew:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeNew.filter, sortType: filterSort.typeNew.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeNew.filter, sortType: filterSort.typeNew.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeHotNew:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeHotNew.filter, sortType: filterSort.typeHotNew.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeHotNew.filter, sortType: filterSort.typeHotNew.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeHotExpire:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeHotExpire.filter, sortType: filterSort.typeHotExpire.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeHotExpire.filter, sortType: filterSort.typeHotExpire.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeNewHot:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeNewHot.filter, sortType: filterSort.typeNewHot.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeNewHot.filter, sortType: filterSort.typeNewHot.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeNewExpire:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeNewExpire.filter, sortType: filterSort.typeNewExpire.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeNewExpire.filter, sortType: filterSort.typeNewExpire.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeExpireNew:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeExpireNew.filter, sortType: filterSort.typeExpireNew.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeExpireNew.filter, sortType: filterSort.typeExpireNew.sort, skip: skip, take: takeNumber });
 					break;
 
 				case TYPES.listTypeExpireHot:
-					ganbaruPromise = listGanbaru.default({ filterType: filterSort.typeExpireHot.filter, sortType: filterSort.typeExpireHot.sort, skip: skip, take: takeNumber });
+					ganbaruPromise = Ganbaru.default({ filterType: filterSort.typeExpireHot.filter, sortType: filterSort.typeExpireHot.sort, skip: skip, take: takeNumber });
 					break;
 				}
 			return ganbaruPromise.$promise;
