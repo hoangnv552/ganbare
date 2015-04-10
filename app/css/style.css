@@ -1433,6 +1433,8 @@ header {
      subMenu
 ----------------------------------------------------------*/
 #sideMenu .userBox img {
+  width: 82px;
+  height: 82px;
   float: left;
   margin-right: 10px;
   border: #ccc 1px solid; }

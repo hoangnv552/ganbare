@@ -1,6 +1,6 @@
 <div id="sideMenu">
     <div class="userBox">
-        <p><img src="./img/user.png" alt=""><span>あすか文明</span><br><a href="#/edit-my-page">プロフィールを編集</a></p>
+        <p><img src="{{user.data.avatarUrl | convertUrlImg}}" alt=""><span>あすか文明</span><br><a href="#/edit-my-page">プロフィールを編集</a></p>
         <p class="txt">{{user.data.username}}</p>
     </div>
     <p class="btNew"><a href="#/register"><span>新規登録</span></a></p>
@@ -12,17 +12,17 @@
     <p class="btAbout"><a href="">GANBAREとは？</a></p>
     <dl class="ganbareCounter">
         <dt>あすか文明さんがガンバレした数</dt>
-        <dd><div>000,024,138,641<span>GB</span></div></dd>
+        <dd><div>{{user.data.sentGanbareNumber + totalNumber}}<span>GB</span></div></dd>
     </dl>
     <dl class="ganbareCounter2">
         <dt>あすか文明さんがガンバレされた数</dt>
-        <dd><div>000,024,138,641<span>GB</span></div></dd>
+        <dd><div>{{user.data.receivedGanbareNumber}}<span>GB</span></div></dd>
     </dl>
     <ul class="sideNav">
         <li class="nav1"><span class="tit">お気に入りユーザー</span><span class="num">{{user.data.favoriteNumber}}</span></li>
         <li class="nav2"><span class="tit">気に入られユーザー</span><span class="num">{{user.data.favoritedNumber}}</span></li>
-        <li class="nav3"><span class="tit">ピン止めした数</span><span class="num">{{user.data.sentGanbareNumber + totalNumber}}</span></li>
-        <li class="nav4"><span class="tit">ピン止めされた数</span><span class="num">{{user.data.receivedGanbareNumber}}</span></li>
+        <li class="nav3"><span class="tit">ピン止めした数</span><span class="num">2</span></li>
+        <li class="nav4"><span class="tit">ピン止めされた数</span><span class="num">8</span></li>
         <li class="nav5"><a href="">More Communication Here</a></li>
         <li class="nav6">あすか文明</li>
         <li class="nav7">-未設定-<a href="" class="bt">登録する</a></li>

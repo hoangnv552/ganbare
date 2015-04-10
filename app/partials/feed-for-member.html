@@ -27,24 +27,24 @@
                     <ul>
                         <li ng-class="listType == types.listTypeHotNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotNew)">NEW!</a></li>
                         <li ng-class="listType == types.listTypeHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">多い</a></li>
-                        <li ng-class="listType == types.listTypeHotExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotExpire)">少ない</a></li>
-                        <li><a href="">期限近い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li ng-class="listType == types.listTypeHotExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotExpire)">期限近い</a></li>
                     </ul>
                 </li>
                 <li class="short" ng-class="(listType == types.listTypeNew || listType == types.listTypeNewHot || listType == types.listTypeNewExpire) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a>
                     <ul>
                         <li ng-class="listType == types.listTypeNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a></li>
                         <li ng-class="listType == types.listTypeNewHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewHot)">多い</a></li>
-                        <li ng-class="listType == types.listTypeNewExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewExpire)">少ない</a></li>
-                        <li><a href="">期限近い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li ng-class="listType == types.listTypeNewExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewExpire)">期限近い</a></li>
                     </ul>
                 </li>
                 <li class="short" ng-class="(listType == types.listTypeExpire || listType == types.listTypeExpireNew || listType == types.listTypeExpireHot) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限間近</a>
                     <ul>
                         <li ng-class="listType == types.listTypeExpireNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireNew)">NEW!</a></li>
                         <li ng-class="listType == types.listTypeExpireHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireHot)">多い</a></li>
-                        <li ng-class="listType == types.listTypeExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">少ない</a></li>
-                        <li><a href="">期限近い</a></li>
+                        <li><a href="">少ない</a></li>
+                        <li ng-class="listType == types.listTypeExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限近い</a></li>
                     </ul>
                 </li>
                 <li class="short" ng-class="listType == types.listTypeTag ? 'current' : ''"><a href="" ng-click="listTagGanbaru()">タグクラウド</a>
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="ganbareBox" ng-repeat="item in ganbaru">
-        <span ng-init="totalNumber = 0; $index = 0;"></span>
+        <span ng-init="totalNumber = 0; $index = 0; count = $index;"></span>
         <div class="date">
             <p class="txt1"><span>登録日</span>{{item.ganbaru.createDate | dateFilter}}</p>
             <p class="txt2"><span>期限日</span>{{item.ganbaru.expiredDate | dateFilter}}</p>
@@ -77,7 +77,7 @@
         </div>
         <div class="tit">
             <h2><a href="#/users/{{item.user.userId}}/ganbaru">{{item.user.username}}</a></h2>
-            <p class="counter"><span>{{(item.ganbaru.ganbareNumber + $index) | numberFilter:15}} <span>GB</span></span></p>
+            <p class="counter"><span>{{(item.ganbaru.ganbareNumber + count) | numberFilter:15}} <span>GB</span></span></p>
         </div>
         <p class="profIcon"><img src="./img/user2.png" alt=""></p>
         <div class="ganbareVoice">
@@ -85,7 +85,7 @@
             <img src="./img/bg_fukidashi2.png" class="fukidashi" ="">
         </div>
         <div class="btArea">
-            <p class="btGanbare" ng-click="$index = $index + 1"><a href="" ng-click="addGanbare(item)" class="modal"><img src="./img/bt_ganbare.png" alt=""></a></p>
+            <p class="btGanbare" ng-click="count = count + 1"><a href="" ng-click="addGanbare(item)" class="modal"><img src="./img/bt_ganbare.png" alt=""></a></p>
             <span ng-if="item.ganbaru.isPinning == true">
                 <p class="pin" ng-click="unPinGanbaru(item)"><a href="" class="current">ピンどめする</a></p>
             </span>

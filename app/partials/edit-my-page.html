@@ -1,31 +1,28 @@
-<div class="content">
-    <header-directive></header-directive>
-    <div class="main">
-        <left-directive></left-directive>
-        <div class="createNew">
-        </div>
-        <div class="main-right">
-            <div class="main-search">
-            	<h2>Edit My Page</h2>
-            </div>
-            <div class="ganbaru-content">
+<header-directive></header-directive>
+<div id="contents">
+    <div id="keyvisual"><img src="{{user.data.backgroundUrl | convertUrlImg}}" alt=""></div>
+    <div id="contMain">
+        <div class="ganbaru-content">
                 <div class="edit-my-page">
-                    <form enctype="multipart/form-data" ng-submit="updateProfile()">
+                    <form enctype="multipart/form-data">
                         Username :</br>
                         <input type="text" ng-model="user.data.username" /></br>
                         Profile :</br>
-                        <textarea rows="4" cols="50"
+                        <textarea rows="10" cols="100"
                           ng-model="user.data.userProfile">
                         </textarea><br>
                         Profile Photo :</br>
-                        <input type="file" ng-model="avatar" id="avatar" name="avatar"></br>
+                        <input type="file" file-model="avatar">
+                        <button ng-click="upload(types.avatar)">upload</button></br></br>
                         Background :</br>
-                        <input type="file" ng-model="background"></br>
-                        <input type="submit" value="Upload">
+                        <input type="file" file-model="background">
+                        <button ng-click="upload(types.background)">upload</button></br></br>
+                        <button ng-click="updateProfile()">Save</button>
                     </form>
                 </div>
             </div>
-        </div>
     </div>
-</div>
+    <left-directive></left-directive>
 
+<!-- ========================   /contents   ======================== -->
+</div>

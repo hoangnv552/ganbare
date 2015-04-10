@@ -81,7 +81,16 @@
 		/*
 		* Set interval callIntervalAddGanbare function
 		*/
-		$interval(callIntervalAddGanbare, 3000);
+		var idInterval = $interval(callIntervalAddGanbare, 3000);
+
+		/*
+		* Delete interval if escape scope
+		*/
+		$scope.$on("$destroy", function() {
+			if (idInterval) {
+				$interval.cancel(idInterval);
+			}
+		});
 
 		/*
 		* Set pin ganbaru
