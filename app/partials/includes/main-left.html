@@ -1,6 +1,6 @@
 <div id="sideMenu">
     <div class="userBox">
-        <p><img src="{{user.data.avatarUrl}}" alt=""><span>あすか文明</span><br><a href="#/edit-my-page">プロフィールを編集</a></p>
+        <p><img src="{{user.data.avatarUrl | convertUrlImg}}" alt=""><span>あすか文明</span><br><a href="#/edit-my-page">プロフィールを編集</a></p>
         <p class="txt">{{user.data.username}}</p>
     </div>
     <p class="btNew"><a href="#/register"><span>新規登録</span></a></p>
