@@ -4,7 +4,7 @@
 	/*
 	* Controller edit my page
 	*/
-	angular.module('ganbareControllers').controller('editMyPageCtrl', ['$scope', '$cookieStore', 'User', 'fileUpload', 'TYPES_UPLOAD', function($scope, $cookieStore, User, fileUpload, TYPES_UPLOAD)
+	angular.module('ganbareControllers').controller('editMyPageCtrl', ['$scope', '$cookieStore', 'User', 'fileUpload', 'TYPES_UPLOAD', '$location', function($scope, $cookieStore, User, fileUpload, TYPES_UPLOAD, $location)
 	{
 		var userId  = $cookieStore.get('userId');
 
@@ -40,7 +40,9 @@
 			delete $scope.user.code;
 
 			$scope.user.$updateUser().then(function updateDone(response) {
-				console.log(response);
+				if (response.code === 0) {
+					$location.path('/feedmb');
+				}
 			});
 		};
 
