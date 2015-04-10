@@ -33,6 +33,8 @@
     "jquery-colorbox": "~1.6.0",
     "ngDialog": "~0.3.12",
     "moment-duration-format": "~1.3.0",
-    "twix": "~0.6.2"
+    "twix": "~0.6.2",
+    "jqueryui-timepicker-addon": "~1.5.2",
+    "jquery-ui": "~1.11.4"
   }
 }
