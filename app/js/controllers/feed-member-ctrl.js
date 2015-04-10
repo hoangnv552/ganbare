@@ -270,25 +270,25 @@
 		/*
 		* Show dialog detail
 		*/
-		$scope.ganbaruDialog = function(ganbaru) {
+		$scope.ganbaruDetailDialog = function(ganbaru) {
 			ngDialog.open({
 				template: 'partials/includes/detail.html',
 
 				// Controller Detail
-				controller: ['$scope', '$interval', 'Ganbaru', function($scope, $interval, Ganbaru) {
+				controller: ['$scope', '$interval', '$route', 'Ganbaru', function($scope, $interval, $route, Ganbaru) {
 					$scope.ganbaru = ganbaru;
 					$scope.mouseClickNumber = 0;
 					getGanbaruDetail();
-					$interval(calculateExpiredDuration, 1000);
-					$interval(sendRequestAddGanbare, 3000);
 
 					function getGanbaruDetail() {
-						Ganbaru.getDetail({
+						return Ganbaru.getDetail({
 							ganbaruId: ganbaru.ganbaru.ganbaruId
 						}).$promise.then(function(response) {
 							switch(response.code) {
 								case 0: {
 									$scope.ganbaruDetail = response.data;
+									$interval(calculateExpiredDuration, 1000);
+									$interval(sendRequestAddGanbare, 3000);
 									break;
 								}
 								default: {
@@ -303,7 +303,7 @@
 					$scope.addGanbare = function() {
 						$scope.ganbaruDetail.ganbaru.ganbareNumber++;
 						$scope.mouseClickNumber++;
-						ganbaru.ganbaru.ganbareNumber++;
+						ganbaru.ganbaru.ganbareNumber++; //bind at view of main page
 					}
 
 					function sendRequestAddGanbare() {
@@ -323,15 +323,94 @@
 					}
 
 					function calculateExpiredDuration() {
-						var now = moment();
-						var expiredDate = moment($scope.ganbaruDetail.ganbaru.expiredDate, 'YYYYMMDDhhmmss');
-						$scope.ganbaruDetail.ganbaru.expiredDuration = moment.duration(expiredDate.diff(now)).format('D日 ＋ hh:mm:ss');
+						//need shorten
+						var now = moment(),
+							expiredDate = moment($scope.ganbaruDetail.ganbaru.expiredDate, 'YYYYMMDDhhmmss'),
+							duration = moment.duration(expiredDate.diff(now));
+						$scope.ganbaruDetail.ganbaru.expiredDuration = duration.format('D日 ＋ hh:mm:ss');
 					};
+
+					$scope.ganbaruEditDialog = function() {
+			        	$scope.closeThisDialog();
+			        	var ganbaruDetail = $scope.ganbaruDetail;
+
+			            ngDialog.open({
+			                template: 'partials/includes/edit.html',
+
+			                controller: ['$scope', '$location', function($scope, $location) {
+			                    $scope.ganbaruDetail = ganbaruDetail;
+			                    console.log($scope.ganbaruDetail);
+
+			                    $scope.addTag = function() {
+			                    	if($scope.tagInput) {
+			                    		var ganbaruTags = $scope.ganbaruDetail.ganbaru.ganbaruTags,
+			                    		i = 0;
+
+			                    		for(i = 0; i < ganbaruTags.length; i++) {
+			                    			if(ganbaruTags[i] === $scope.tagInput) {		                    				
+			                    				break;
+			                    			}
+			                    		}
+
+			                    		if(i === ganbaruTags.length) {
+			                    			ganbaruTags.push($scope.tagInput);
+			                    			$scope.tagInput = undefined;
+			                    		}
+			                    	}
+			                    };
+
+			                    $scope.$watch('jquerydatepicker', function() {
+			                    	if($scope.jquerydatepicker) {
+			                    		$scope.notification = '期限が設定されています';
+			                    	} else {
+			                    		$scope.notification = '期限が設定されていません';
+			                    	}
+			                    });
+
+			                    $scope.updateGanbaru = function() {
+			                    	if(!$scope.jquerydatepicker) {
+			                    		return;
+			                    	}
+
+			                    	var newGanbaru = {
+			                    		ganbaruId: ganbaruDetail.ganbaru.ganbaruId,
+			                    		ganbaruTitle: ganbaruDetail.ganbaru.ganbaruTitle,
+			                    		ganbaruContent: ganbaruDetail.ganbaru.ganbaruContent,
+			                    		ganbaruTags: ganbaruDetail.ganbaru.ganbaruTags
+			                    	};
+
+			                    	var dateString = $scope.jquerydatepicker.concat(':').concat(moment().seconds());
+			                    	newGanbaru.expiredDate = moment(dateString, 'YYYY/MM/DD HH:mm:ss').format('YYYYMMDDHHmmss');
+			                    	return updateGanbaru(newGanbaru);
+			                    };
+
+			                    function updateGanbaru(ganbaru) {
+			                    	Ganbaru.update(ganbaru).$promise.then(function(response) {
+                		           		console.log(response);
+			                    		switch(response.code) {
+			                    			case 0: {
+			                    				$scope.closeThisDialog();
+			                    				$route.reload();
+			                    				break;
+			                    			}
+			                    			default: {
+
+			                    			}
+			                    		}
+			                    	}, function() {
+			                    		//Handling error
+			                    	});
+			                    };
+			                    
+			                }],
+			                className: 'ngdialog-theme-plain',
+			                showClose: false
+			            });
+			        };
 				}],
 				className: 'ngdialog-theme-plain',
 				showClose: false
 			});
-		}
-
+		};
 	}]);
 })();

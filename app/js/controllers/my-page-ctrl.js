@@ -4,7 +4,7 @@
     /*
     * Controller my page
     */
-    angular.module('ganbareControllers').controller('myPageGanbaruCtrl', ['$scope', 'User', '$cookieStore', 'dataGanbaru', 'Ganbaru', function( $scope, User, $cookieStore, dataGanbaru, Ganbaru )
+    angular.module('ganbareControllers').controller('myPageGanbaruCtrl', ['$scope', 'ngDialog', 'User', '$cookieStore', 'dataGanbaru', 'Ganbaru', function( $scope, ngDialog, User, $cookieStore, dataGanbaru, Ganbaru )
     {
 
     	var userId  = $cookieStore.get('userId'),
@@ -45,6 +45,5 @@
                 console.log(response);
             });
         };
-
     }]);
 })();
