@@ -9,6 +9,7 @@
 		function saveGanbaru() {
 			return $scope.ganbaru.$save().then(function(response) {
 				var code = response.code;
+				console.log(response);
 				switch(code) {
 					case 0: {
 						$location.path('/feedmb');

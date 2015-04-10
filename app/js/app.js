@@ -68,19 +68,6 @@
                 redirectTo: '/feedfv'
             });
         }]);
-
-    ganbareApp.run(function($rootScope) {
-        $rootScope.errorMsg = {
-            1: 'Unknown error!',
-            2: 'Invalid information!',
-            11: 'Email has been registered before!',
-            12: 'Email not found!',
-            20: 'Invalid password!',
-            21: 'Incorrect password!',
-            40: 'Failed to get current location coordinates',
-            50: 'Cannot establish connection to server!'
-        };
-    });
 }());
 
 
