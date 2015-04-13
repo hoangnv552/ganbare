@@ -18,4 +18,27 @@
 			return t.count("days");
 		}
 	});
+
+
+	//inside ganbaru detail and ganbaru edit controller
+	angular.module('ganbareFilters').filter('serverDateFilter', function() {
+		return function(clientDateStr) {
+			return moment(clientDateStr, 'YYYY/MM/DD HH:mm:ss').format('YYYYMMDDHHmmss');
+		};
+	});
+
+	angular.module('ganbareFilters').filter('clientDateFilter', function() {
+		return function(serverDateFilter) {
+			return moment(serverDateFilter, 'YYYYMMDDHHmmss').format('YYYY/MM/DD HH:mm');
+		};
+	});
+
+	angular.module('ganbareFilters').filter('durationTimeFilter', function() {
+		return function(serverDateString) {
+			var now = moment();
+			var expiredDate = moment(serverDateString, 'YYYYMMDDHHmmss');
+			var duration = moment.duration(expiredDate.diff(now));
+			return duration.format('D日 ＋ hh:mm:ss');
+		}
+	});
 })();
