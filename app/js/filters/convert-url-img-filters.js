@@ -3,6 +3,7 @@
 
 	angular.module('ganbareFilters').filter('convertUrlImg', ['ApiRootPath', '$cookieStore', function(ApiRootPath, $cookieStore) {
 		return function (input) {
+			console.log(input);
 			var userId = $cookieStore.get('userId');
 			var parser = document.createElement('a');
 

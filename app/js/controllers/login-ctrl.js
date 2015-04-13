@@ -6,20 +6,31 @@
 /*
 * Controller Login
 */
-    angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', 'ERROR_MSG', function($scope, $cookieStore, $location, md5, Session, ERROR_MSG) {
+    angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', 'System', 'ERROR_MSG', function($scope, $cookieStore, $location, md5, Session, System, ERROR_MSG) {
+        $scope.system = new System();
         $scope.user = new Session();
+        getGanbareSum();
 
-        $scope.login = function(){
+        function getGanbareSum() { 
+            $scope.system.$ping().then(function(response) {
+                $scope.totalNumber = response.extendedInfor.totalGanbareNumber;
+            })
+        };
 
+        $scope.login = function() {
+            //modify data that cannot be directly binded
             $scope.user.password = md5.createHash($scope.user.unencryptedPassword || ''); //in case user leaves blank
             $scope.user.loginType = 1;
+            return login();
+        };
 
-            /*call service*/
-            $scope.user.$login().then(function(response) {
+        function login() {
+            return $scope.user.$login().then(function(response) {
+                console.log(response);
                 var code = response.code;
                 var data = response.data;
 
-                switch(code) {
+                switch (code) {
                     case 0: {
                         $cookieStore.put('token', data.token);
                         $cookieStore.put('userId', data.userId);

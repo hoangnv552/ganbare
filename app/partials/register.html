@@ -1,133 +1,74 @@
-<div class="container register">
-	<!--HEADER-->
-	<div>
-		<div class="header">
-			<div class="logo float-left"></div>
-			<div><h1>現在るの総ガンバレ数　０００００００</h1></div>
+<header-directive></header-directive>
+<div class="register">
+	<!--PANEL OF FORM INPUT-->
+	<div class="input-panel" ng-show="isPanel('inputPanel')">
+		<form name="registerForm" novalidate>
+			<div class="block">
+				<label class="float-left" for="username">Username</label>
+				<input type="text" name="username" ng-model="user.username" required>
+				<p class="error-input" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">User name is required!</p>
+			</div>
+
+			<div class="block">
+				<label class="float-left" for="password">Password</label>
+				<input type="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
+				<p class="error-input" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">Password is required!</p>
+				<p class="error-input" ng-show="registerForm.password.$error.minlength">Password is required to be at least 6 characters!</p>
+				<p class="error-input" ng-show="registerForm.password.$error.maxlength">Password cannot be longer than 30 characters!</p>
+			</div>
+
+			<div class="block">
+				<label class="float-left" for="email">Email</label>
+				<input type="email" name="email" ng-model="user.email" required>
+				<p class="error-input" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">Email is required!</p>
+				<p class="error-input" ng-show="registerForm.email.$dirty && registerForm.email.$error.email">Invalid email!</p>
+			</div>
+			<div class="block">
+				<label class="float-left" for="confirmEmail">Confirm email</label>
+				<input type="email" name="confirmEmail" ng-model="user.confirmEmail" match="user.email" required>
+				<p class="error-input" ng-show="registerForm.confirmEmail.$dirty && registerForm.confirmEmail.$error.match">Emails do not match!</p>
+			</div>
+			<div class="block btn-block confirm">
+				<p class="inline-block btn btn-positive" ng-click="setPanel('confirmPanel')">確認</p>
+				<p class="inline-block btn btn-negative" ng-click="">Back</p>
+			</div>
+		</form>
+	</div>
+	
+	<!--PANEL FOR CONFIRMATION-->
+	<div class="confirm-panel" ng-show="isPanel('confirmPanel')">
+		<div class="block">
+			<label class="float-left">Username</label>
+			<label class="value">{{user.username}}</label>
+		</div>
+		<div class="block">
+			<label class="float-left">Email</label>
+			<label class="value">{{user.email}}</label>
+		</div>
+		<div class="block btn-block verify">
+			<div>
+				<p class="inline-block btn btn-positive" ng-click="submitForm()">登録</p>
+				<p class="inline-block btn btn-negative" ng-click="setPanel('inputPanel')">Back</p>
+			</div>
 		</div>
 	</div>
-	<!--NAV & SECTION-->
-	<div>
-		<!--NAV-->
-		<div class="nav">
-			<div>
-				<h4>Register</h4>
-				<h4 class="arrow">&#8595;</h4>
-				<h4>Confirm</h4>
-				<h4 class="arrow">&#8595;</h4>
-				<h4>Complete</h4>
-				<h4 class="arrow">&#8595;</h4>
-				<h4>Tutorial</h4>
-				<h4 class="arrow">&#8595;</h4>
-				<h4>GANBARE!</h4>
-			</div>
-			<div class="notification">
-				<h4>&#8594;サイト利用方法</h4>
-				<h4>&#8594;お知らせ</h4>
-				<h4>&#8594;プライバシーポリシー</h4>
-				<h4>&#8594;運営会社について</h4>
-				<h4>&#8594;お間い合わせ</h4>
-				<div class="footer">
-					Copyright&#169; GANBARE All Rights Reserved.
-				</div>
-			</div>
-		</div>	
-		
-		<!--SECTION-->
-		<div class="section">
-			<!--REGISTER PANEL-->
-			<form name="registerForm" novalidate>
-				<!--USERNAME INPUT-->
-				<div class="register-panel" ng-show="isPanel('registerPanel')">
-					<div class="block">
-						<label class="float-left" for="username">Username</label>
-						<input type="text" name="username" ng-model="user.username" required>
-						<div class="error" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">
-							<p>User name is required!</p>
-						</div>
-					</div>
-					<!--PASSWORD INPUT-->
-					<div class="block">
-						<label class="float-left" for="password">Password</label>
-						<input type="password" id="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
-						<div class="error" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">
-							<p>Password is required!</p>
-						</div>
-						<div class="error" ng-show="registerForm.password.$error.minlength">
-							<p>Password is required to be at least 6 characters!</p>
-						</div>
-						<div class="error" ng-show="registerForm.password.$error.maxlength">
-							<p>Password cannot be longer than 30 characters!</p>
-						</div>
-					</div>
-					<!--EMAIL INPUT-->
-					<div class="block">
-						<label class="float-left" for="email">Email</label>
-						<input type="email" id="email" name="email" ng-model="user.email" required>
-						<div class="error" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">
-							<p>Email is required!</p>
-						</div>
-						<div class="error" ng-show="registerForm.email.$error.email">
-							<p>Invalid email!</p>
-						</div>
-					</div>
-					<!--CONFIRM EMAIL INPUT-->
-					<div class="block">
-						<label class="float-left" for="confirm-email">Confirm Email</label>
-						<input type="email" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail" match="user.email" required>
-						<div class="error" ng-show="registerForm.confirmEmail.$error.match">
-							<p>Emails do not match!</p>
-						</div>
-					</div>
-					<!--CONFIRM BUTTON-->
-					<div class="form-block button-block">
-						<button ng-click="setPanel('confirmPanel')">Confirm</button>
-					</div>	
-				</div>
-			</form>	
-			
-			<!--CONFIRM PANEL-->
-			<div class="confirm-panel" ng-show="isPanel('confirmPanel')">
-				<div class="block">
-					<label class="float-left inline-block">Username:</label>
-					<p>{{user.username}}   </p>
-				</div>
-				<div class="block">
-					<label class="float-left inline-block">Email:</label>
-					<p>{{confirmEmail}}    </p>
-				</div>
-				<div class="block button-block">
-					<button ng-click="setPanel('registerPanel')">Back</button>
-					<button ng-click="submitForm()">Register</button>
-				</div>	
-				<div class="error">
-					<p>{{error}}</p>
-				</div>
-			</div>
-			<!-- </form> -->
-			
-			<!--VERIFY PANEL-->
-			<div class="verify-panel">
-				<div class="block notification" ng-show="isPanel('verifyPanel')">
-					<p>
-						まだ登録は完了しておりません。
-						登録メールアドレスまで自動返信にてメールをお送りいたしました。
-						メール本文に記載されましたURLをクリックしていただき登録を完了させてください。
-					</p>
-					<p>
-						Cái trên nghĩa là "Chưa hoàn thành đăng ký. Vui lòng kích hoạt tài khoản qua link đính kèm trong mail vừa gửi đến". Nhưng thôi để cho nhanh, phiền bạn trẻ bấm luôn vào button dưới. 
-					</p>
-				</div>
-				<div class="block error" ng-show="isPanel('errorPanel')">
-					<p>{{error}}</p>
-				</div>
-				<div class="block verify-button">
-					<button ng-show="isPanel('verifyPanel')" ng-click="verifyUser()">Verify Register</button>
-					<button ng-show="isPanel('errorPanel')" ng-click="goTo('/register')">Back to Register</button>
-					<button ng-show="isPanel('errorPanel')" ng-click="goTo('/feedfv')">Back to Feed</button>
-				</div>
-				
-			</div>
+	
+	<!--PANEL FOR VERIFICATION-->
+	<div class="verify-panel" ng-show="isPanel('verifyPanel')">
+		<p class="block notification">
+			まだ登録は完了しておりません。
+			登録メールアドレスまで自動返信にてメールをお送りいたしました。
+			メール本文に記載されましたURLをクリックしていただき登録を完了させてください。
+			でも、今便利になるように、下のボタン押したら、登録は完了されます。
+		</p>
+		<p class="btn-positive btn btn-verify" ng-click="verifyUser()">検証</p>
+	</div>
+	
+	<div class="error-panel" ng-show="isPanel('errorPanel')">
+		<p class="error-content">{{error}}</p>
+		<div class="btn-block">
+			<p class="inline-block btn btn-negative" ng-click="goTo('/register')">Back to Register</p>
+			<p class="inline-block btn btn-negative" ng-click="goTo('/feedfv')">Back to Feed</p>
 		</div>
 	</div>
 </div>

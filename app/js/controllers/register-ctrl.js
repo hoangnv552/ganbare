@@ -1,9 +1,24 @@
 ;(function() {
 	'use strict';
 
-	angular.module('ganbareControllers').controller('registerCtrl', ['$scope', '$location', 'md5', 'User', 'ERROR_MSG', function($rootScope, $scope, $location, md5, User, ERROR_MSG) {
-		$scope.panel = 'registerPanel';
+	angular.module('ganbareControllers').controller('registerCtrl', ['$scope', '$location', '$route', 'md5', 'User', 'System', 'ERROR_MSG', function($scope, $location, $route, md5, User, System, ERROR_MSG) {
+		var panel = {
+			input: 'inputPanel',
+			confirm: 'confirmPanel',
+			verify: 'verifyPanel',
+			error: 'errorPanel'
+		};
+
+		$scope.panel = panel.input;
 		$scope.user = new User();
+		$scope.system = new System();
+		getGanbareSum();
+
+        function getGanbareSum() { 
+            $scope.system.$ping().then(function(response) {
+                $scope.totalNumber = response.extendedInfor.totalGanbareNumber;
+            })
+        };
 
 		$scope.setPanel = function(setPanel) {
 			$scope.panel = setPanel;
@@ -19,22 +34,23 @@
 			
 			return $scope.user.$register().then(function(response) {
 				var code = response.code;
-				switch(code) {
+				console.log(response);
+				switch (code) {
 					case 0: {
 						$scope.user.registeringId = response.data.userId;
-						$scope.setPanel('verifyPanel');
+						$scope.setPanel(panel.verify);
 						break;
 					}
 					default: {
-						$scope.error = $rootScope.errorMsg[code];
-						$scope.setPanel('errorPanel');
+						$scope.error = ERROR_MSG[code];
+						$scope.setPanel(panel.error);
 					}
 				}
 			}, function() {
 				$scope.error = ERROR_MSG[50];
-				$scope.setPanel('errorPanel');
+				$scope.setPanel(panel.error);
 			});
-		}
+		};
 
 		$scope.verifyUser = function() {
 			return $scope.user.$verify().then(function(response) {
@@ -45,7 +61,7 @@
 					}
 					default: {
 						$scope.error = ERROR_MSG[code];
-						$scope.setPanel('errorPanel');
+						$scope.setPanel(panel.error);
 					}
 				}
 			}, function() {
@@ -54,7 +70,11 @@
 		};
 
 		$scope.goTo = function(url) {
-			$location.path(url);
+			if (url === '/register') {
+				$route.reload();
+			} else {
+				$location.path(url);
+			}
 		};
 	}]);
 })();
