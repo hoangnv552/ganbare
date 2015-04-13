@@ -26,27 +26,27 @@
 		<h2><span>がんばる検索</span></h2>
 		<div class="inner">
 			<ul>
-				<li ng-class="(listType == types.listTypeHot || listType == types.listTypeHotNew || listType == types.listTypeHotExpire) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">HOT!</a>
+				<li ng-class="(listType == types.listTypeHot || listType == types.listTypeHotNew || listType == types.listTypeHotExpire || listType == types.listTypeHotNeglected) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">HOT!</a>
 					<ul>
 						<li ng-class="listType == types.listTypeHotNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotNew)">NEW!</a></li>
 						<li ng-class="listType == types.listTypeHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHot)">多い</a></li>
-						<li><a href="">少ない</a></li>
+						<li ng-class="listType == types.listTypeHotNeglected ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotNeglected)">少ない</a></li>
 						<li ng-class="listType == types.listTypeHotExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeHotExpire)">期限近い</a></li>
 					</ul>
 				</li>
-				<li ng-class="(listType == types.listTypeNew || listType == types.listTypeNewHot || listType == types.listTypeNewExpire) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a>
+				<li ng-class="(listType == types.listTypeNew || listType == types.listTypeNewHot || listType == types.listTypeNewExpire || listType == types.listTypeNewNeglected) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a>
 					<ul>
 						<li ng-class="listType == types.listTypeNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNew)">NEW!</a></li>
 						<li ng-class="listType == types.listTypeNewHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewHot)">多い</a></li>
-						<li><a href="">少ない</a></li>
+						<li ng-class="listType == types.listTypeNewNeglected ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewNeglected)">少ない</a></li>
 						<li ng-class="listType == types.listTypeNewExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeNewExpire)">期限近い</a></li>
 					</ul>
 				</li>
-				<li ng-class="(listType == types.listTypeExpire || listType == types.listTypeExpireNew || listType == types.listTypeExpireHot) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限間近</a>
+				<li ng-class="(listType == types.listTypeExpire || listType == types.listTypeExpireNew || listType == types.listTypeExpireHot || listType == types.listTypeExpireNeglected) ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限間近</a>
 					<ul>
 						<li ng-class="listType == types.listTypeExpireNew ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireNew)">NEW!</a></li>
 						<li ng-class="listType == types.listTypeExpireHot ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireHot)">多い</a></li>
-						<li><a href="">少ない</a></li>
+						<li ng-class="listType == types.listTypeExpireNeglected ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpireNeglected)">少ない</a></li>
 						<li ng-class="listType == types.listTypeExpire ? 'current' : ''"><a href="" ng-click="listGanbaru(types.listTypeExpire)">期限近い</a></li>
 					</ul>
 				</li>

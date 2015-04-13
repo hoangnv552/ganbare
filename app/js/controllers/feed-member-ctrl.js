@@ -70,9 +70,10 @@
 			var length = ganbaruIdAndNumber.length;
 			//Set back countNumber = 0
 			$scope.countNumber = 0;
+			var i;
 
 			if (length > 0) {
-				for (var i = 0; i < length; i++ ) {
+				for (i = 0; i < length; i++ ) {
 
 					Ganbaru.add({
 						userId: userId,
