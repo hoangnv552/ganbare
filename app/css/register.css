@@ -1,102 +1,97 @@
-/*container*/
+*:focus {
+    outline: 0;
+}
 .register {
-	width: 1000px;
+	width: 800px;
+	margin: 50px auto;
+	padding: 20px 50px;
 }
 
-.register button, 
-.register input[type="button"],
-.register input[type="submit"]{
-	cursor: pointer;
-	width: 80px;
-	margin-left: 30px;
-	margin-right: 30px;
-}
-
-/*header style*/
-.register .header {
-	margin: 20px 20px 0 20px;
-	padding-bottom: 20px;
-	border-bottom: 2px solid #000;
-	overflow: auto;	
-}
-
-.register .logo{
+.register label {
+	font-size: 16px;
 	width: 100px;
-	height: 100px;
-	background-image: url('../img/logo/coffee.jpg');
-	background-size: cover;
+	text-align: right;
+	margin-right: 40px;
+	line-height: 30px;
+}
+
+.register p {
+	text-align: center;
+}
+
+.register .block {
+	margin: 50px 40px;
+}
+
+.register input[type="text"],
+.register input[type="password"],
+.register input[type="email"] {
+	width: 70%;
+	font-size: 16px;
+	padding: 3px 5px;
+	border: 1px solid #d1cfd5;
+	border-radius: 5px; 
+}
+
+.register .btn-block {
+	text-align: center;
+}
+
+.register .input-panel .btn-block {
+	margin-left: 120px;
+}
+
+.register .btn {
+	color: #fff;
+	cursor: pointer;
+}
+
+.register .input-panel .btn,
+.register .confirm-panel .btn,
+.register .error-panel .btn {
+	padding: 7px 0;
+	margin: 20px 40px;
+	font-size: 16px;
 	border-radius: 5px;
 }
 
-.register .header h1{
-	text-align: center;
-	margin-top: 25px;
+.register .input-panel .btn,
+.register .confirm-panel .btn {
+	width: 90px;
 }
 
-/*body style*/
-/*left menu style*/
-.register .nav{
-	width: 25%;
-	padding-left: 30px;
-	padding-top: 20px;
-	border-right: 2px solid #000;
+.register .verify-panel .btn {
+	width: 200px;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 20px 0;
+	margin: 40px auto;
+	border-radius: 10px;
 }
 
-.register .arrow{
-	margin-left: 20px;
+.register .error-panel .btn {
+	width: 150px;
 }
 
-.register .nav .notification {
-	margin: 60px 0 30px 0;
+.register .btn-positive {
+	background-color: #2C90D5;
 }
 
-.register .nav .notification h4 {
+.register .btn-negative {
+	background-color: #ff0000;
+}
+
+.register .value {
 	font-weight: bold;
 }
 
-.register .footer{
-	font-size: x-small;
-	font-style: italic;
-	padding: 10px 0;
+.register .error-input {
+	color: #ff0000;
+	font-size: 14px;
+	text-align: left;
+	margin: 20px 140px;
 }
 
-/*section style*/
-.register .section{
-	margin-left: 244px;
-	padding-top: 20px;
-}
-
-/*for register section*/
-.register .block{
-	margin: 50px 0;
-}
-
-.register .block input{
-	width: 60%;
-	padding: 3px;
-	border: 1px solid #c0c0c0;
-	border-radius: 3px;
-}
-
-.register .block label{
-	text-align: right;
-	width: 20%;
-	line-height: 30px;
-	font-size: 16px;
-	margin-right: 30px;
-	margin-left: 30px;
-}
-
-.register .block h4{
-	line-height: 25px;
-}
-
-.register .button-block {
-	text-align: center;
-}
-
-
-/*Validation input transition*/
 .register .ng-invalid.ng-dirty {
 	border-color: #FA787E;
 }
@@ -104,44 +99,12 @@
 .register .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-		
-.register .error{
-	color: #e60026;
+
+.register .notification {
+	font-size: 16px;
 }
 
-.register .register-panel .error {
-	margin-top: 15px;
-	margin-left: 202px;
-}
-
-.register .confirm-panel .error {
-	width: 50%;
-	margin: auto;
-	text-align: center;
-}
-
-/*confirm panel style*/
-.register .confirm-panel .block {
-	overflow: auto;
-}
-
-.register .confirm-panel p {
-	font-size: 16px; 
-	line-height: 30px;
-}
-
-/*verify-panel-style*/
-.register .verify-panel {
-	text-align: center;
-}
-
-.register .verify-panel .notification {
-	width: 80%;
-	margin: 30px auto;
-	font-size: 18px;
-}
-
-.register .verify-panel .verify-button button{
-	width: 25%;
-	height: 80px;
+.register .error-content {
+	font-size: 16px;
+	margin: 50px 0;
 }

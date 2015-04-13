@@ -1,67 +1,57 @@
+*:focus {
+    outline: 0;
+}
 .login {
-	width: 1000px;
+	width: 800px;
+	margin: 50px auto;
+	padding: 20px 50px;
 }
 
-.login > div:nth-child(2) {
-	overflow: auto;
-}
-
-/*login-header style*/
-.login .login-header{
-	margin: 0 20px 0 20px;
-	padding: 20px 0 20px 0;
-	border-bottom: 2px solid #000;
-}
-
-.login .login-header h2 {
-	text-align: center;
-	border: 2px solid #000;
-	margin: 0 0 0 120px;
-	padding: 32px 0;
-}
-
-.login .logo{
-	float: left;
-}
-
-/*navigation style*/
-.login .login-nav{
-	padding-left: 30px;
-	min-height: 490px;
-	border-right: 2px solid #000;
-}
-
-/*section style*/
-.login .login-section{
-	margin-left: 231px;
-}
-
-.login .form-container {
-	margin-top: 50px;
-}
-
-.login .form-block {
-	display: block;
-	margin: 60px 0;
-}
-
-.login .form-block > label {
-	float: left;
+.login label {
+	font-size: 16px;
+	width: 100px;
 	text-align: right;
-	width: 15%;
-	margin: 0 30px 0 60px;
+	margin-right: 40px;
+	line-height: 30px;
 }
 
-.login .form-block > input[type="email"],
-.login .form-block > input[type="password"] {
-	width: 50%;
-}
-
-.login .button-block, 
-.login .error-block {
+.login p {
 	text-align: center;
 }
 
+.login .block {
+	margin: 50px 40px;
+}
+
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+	width: 70%;
+	font-size: 16px;
+	padding: 3px 5px;
+	border: 1px solid #d1cfd5;
+	border-radius: 5px; 
+}
+
+.login .btn-block {
+	text-align: center;
+	margin-left: 120px;
+}
+
+.login .btn {
+	color: #fff;
+	cursor: pointer;
+	padding: 7px 0;
+	margin: 70px auto;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color: #2C90D5;
+	width: 100px;
+}
+
 .login .error-block {
+	margin-left: 120px;
 	color: #ff0000;
+	font-size: 14px;
+	text-align: center;
 }
