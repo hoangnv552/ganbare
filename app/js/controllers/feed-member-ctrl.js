@@ -1,4 +1,4 @@
-;(function(){
+;(function() {
 	'use strict';
 
 
@@ -57,7 +57,6 @@
 			$scope.totalNumber++;
 			// Caculator total ganbaru number for function addGanbare
 			$scope.countNumber++;
-
 			return getUtilities.caculatorArrNumberClicked($scope, item, ganbaruIdAndNumber).then(function(response){
 				ganbaruIdAndNumber = response;
 			});
@@ -317,7 +316,7 @@
                     	}
                     });
 
-					//put tag 
+					//put tag
 					$scope.addTag = function() {
                 		if(addTag($scope.tagInput, $scope.ganbaru.ganbaruTags)) {
                 			$scope.tagInput = undefined;
@@ -345,7 +344,7 @@
 							console.log(response);
 							switch(response.code) {
 								case 0: {
-									
+
 									$scope.closeThisDialog();
                     				$route.reload();
                     				break;
@@ -495,7 +494,7 @@
 			                    		//Handling error
 			                    	});
 			                    };
-			                    
+
 			                }],
 			                className: 'ngdialog-theme-plain',
 			                showClose: false
