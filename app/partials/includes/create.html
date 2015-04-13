@@ -1,11 +1,11 @@
 <div id="ganbareModal2">
 	<div class="inner">
-		<h1><span class="tit">ガンバレ: {{ganbaruDetail.ganbaru.ganbaruTitle}}</span><span class="userid">ID: {{ganbaruDetail.user.username}}</span></h1>
+		<h1><span class="tit">ガンバレ：<input type="text" ng-model="ganbaru.ganbaruTitle"></span><span class="userid">ID: {{ganbaru.username}}</span></h1>
 		<div class="editBox"><div>
-			<textarea name="" id="" placeholder="がんばる宣言を書く" ng-model="ganbaruDetail.ganbaru.ganbaruContent"></textarea>
+			<textarea name="" id="" placeholder="がんばる宣言を書く" ng-model="ganbaru.ganbaruContent"></textarea>
 			<div class="links"><a href=""><img src="./img/icon_pin4.png" alt=""></a><a href=""><img src="./img/icon_camera.png" alt=""></a></div>
 			<div class="date">
-				<p class="entry">登録日: {{ganbaruDetail.ganbaru.createDate | dateFilter}}</p>
+				<p class="entry">登録日: {{ganbaru.createDate | dateFilter}}</p>
 				<p class="limit">期限: 
 					<input class="jquerydatepicker" type="text" ng-model="jquerydatepicker" style="width: 8.2em; border: none;">
 					<a href="" jquerydatepickertrigger>カレンダー</a>
@@ -17,13 +17,13 @@
 			<dl>
 				<dt><input type="text" placeholder="タグ作成" ng-enter="addTag()" ng-model="tagInput"></dt>
 				<dd>
-					<span ng-repeat="tags in ganbaruDetail.ganbaru.ganbaruTags">
+					<span ng-repeat="tags in ganbaru.ganbaruTags">
 						<span>{{tags}}</span><span>/</span>
 					</span>
 				</dd>
 			</dl>
 			<p class="moreBt"><a href="">↓ もっと見る</a></p>
 		</div>
-		<p class="productBt" ng-click="updateGanbaru()"><a href=""><img src="./img/bt_product.png" alt="作成"></a></p>
+		<p class="productBt" ng-click="createGanbaru()"><a href=""><img src="./img/bt_product.png" alt="作成"></a></p>
 	</div>
 </div>

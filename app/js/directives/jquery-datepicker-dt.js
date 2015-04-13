@@ -22,18 +22,17 @@
 		};
 	}]);
 
-	// angular.module('ganbareDirective').directive('jquerydatepickertrigger', [function() {
-	// 	return {
-	// 		restrict: 'AC',
-	// 		link: function(scope, element, attrs) {
-	// 			$(function() {
-	// 				element.click(function() {
-	// 					var x = $('.jquerydatepicker').datetimepicker('show');
-	// 					console.log(x);
-	// 					scope.$apply();
-	// 				});
-	// 			});
-	// 		}
-	// 	};
-	// }]);
+	angular.module('ganbareDirective').directive('jquerydatepickertrigger', [function() {
+		return {
+			restrict: 'AC',
+			link: function(scope, element, attrs) {
+				$(function() {
+					element.click(function() {
+						$('.jquerydatepicker').datetimepicker('show');
+						scope.$apply();
+					});
+				});
+			}
+		};
+	}]);
 })();

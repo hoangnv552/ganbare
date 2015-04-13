@@ -267,17 +267,114 @@
 			}
 		};
 
+		//notification message display at edit page and create page
+		var notification = {
+			set: '期限が設定されています',
+			unset: '期限が設定されていません'
+		};
+
 		/*
 		* Show dialog detail
+		*/
+		$scope.createGanbaruDialog = function() {
+			ngDialog.open({
+				template:'partials/includes/create.html',
+
+				controller: ['$scope', 'User', '$interval', '$filter', 'geolocation', '$route', function($scope, User, $interval, $filter, geolocation, $route) {
+					getUserInfo();
+					$scope.ganbaru = new Ganbaru();
+					$scope.ganbaru.ganbaruTags = [];
+					$interval(calculateCurrentTime, 1000);
+
+					function calculateCurrentTime() {
+						$scope.ganbaru.createDate = moment();
+					};
+
+					//get Username and bind on view
+					function getUserInfo() {
+						return User.getUser({
+							id: userId
+						}).$promise.then(function(response) {
+							switch(response.code) {
+								case 0: {
+									$scope.ganbaru.username = response.data.username;
+								}
+								default: {
+
+								}
+							}
+						}, function() {
+							//Handling error
+						});
+					};
+
+					$scope.$watch('jquerydatepicker', function() {
+                    	//check if user choose date from picker and notify
+                    	if($scope.jquerydatepicker) {
+                    		$scope.notification = notification.set;
+                    	} else {
+                    		$scope.notification = notification.unset;
+                    	}
+                    });
+
+					//put tag 
+					$scope.addTag = function() {
+                		if(addTag($scope.tagInput, $scope.ganbaru.ganbaruTags)) {
+                			$scope.tagInput = undefined;
+                		}
+		            };
+
+		            //event click of create Ganbaru button
+					$scope.createGanbaru = function() {
+						$scope.ganbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);
+						return getLocation($scope.ganbaru);
+					};
+
+					function getLocation(ganbaru) {
+						geolocation.getLocation().then(function(response) {
+							var coords = response.coords;
+							ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
+							return createGanbaru(ganbaru);
+						}, function() {
+							//Handling error
+						});
+					};
+
+					function createGanbaru(ganbaru) {
+						return ganbaru.$save().then(function(response) {
+							console.log(response);
+							switch(response.code) {
+								case 0: {
+									
+									$scope.closeThisDialog();
+                    				$route.reload();
+                    				break;
+								}
+								default: {
+
+								}
+							}
+						}, function() {
+							//Handling error
+						});
+					};
+				}],
+				className: 'ngdialog-theme-plain',
+				showClose: false
+			})
+		}
+
+		/*
+		* Show dialog create ganbaru
 		*/
 		$scope.ganbaruDetailDialog = function(ganbaru) {
 			ngDialog.open({
 				template: 'partials/includes/detail.html',
 
 				// Controller Detail
-				controller: ['$scope', '$interval', '$route', 'Ganbaru', function($scope, $interval, $route, Ganbaru) {
+				controller: ['$scope', '$interval', '$filter', '$route','Ganbaru', function($scope, $interval, $filter, $route, Ganbaru) {
 					$scope.ganbaru = ganbaru;
-					$scope.mouseClickNumber = 0;
+					$scope.mouseClickNumber = 0;	//click ganbare
 					getGanbaruDetail();
 
 					function getGanbaruDetail() {
@@ -323,55 +420,53 @@
 					}
 
 					function calculateExpiredDuration() {
-						//need shorten
-						var now = moment(),
-							expiredDate = moment($scope.ganbaruDetail.ganbaru.expiredDate, 'YYYYMMDDhhmmss'),
-							duration = moment.duration(expiredDate.diff(now));
-						$scope.ganbaruDetail.ganbaru.expiredDuration = duration.format('D日 ＋ hh:mm:ss');
+						var expiredDate = $scope.ganbaruDetail.ganbaru.expiredDate;
+						$scope.ganbaruDetail.ganbaru.expiredDuration = $filter('durationTimeFilter')(expiredDate);
 					};
 
+					//check authorization for edit and delete function
+					function isAuthorized() {
+						return userId === ganbaru.user.userId;
+					}
+
+					//event click of Edit
 					$scope.ganbaruEditDialog = function() {
+						if(!isAuthorized()) {
+							return;
+						}
+
 			        	$scope.closeThisDialog();
 			        	var ganbaruDetail = $scope.ganbaruDetail;
 
 			            ngDialog.open({
 			                template: 'partials/includes/edit.html',
 
-			                controller: ['$scope', '$location', function($scope, $location) {
+			                controller: ['$scope', '$location', '$filter', function($scope, $location, $filter) {
 			                    $scope.ganbaruDetail = ganbaruDetail;
-			                    console.log($scope.ganbaruDetail);
+			                    $scope.jquerydatepicker = $filter('clientDateFilter')(ganbaruDetail.ganbaru.expiredDate);
 
 			                    $scope.addTag = function() {
-			                    	if($scope.tagInput) {
-			                    		var ganbaruTags = $scope.ganbaruDetail.ganbaru.ganbaruTags,
-			                    		i = 0;
-
-			                    		for(i = 0; i < ganbaruTags.length; i++) {
-			                    			if(ganbaruTags[i] === $scope.tagInput) {		                    				
-			                    				break;
-			                    			}
-			                    		}
-
-			                    		if(i === ganbaruTags.length) {
-			                    			ganbaruTags.push($scope.tagInput);
-			                    			$scope.tagInput = undefined;
-			                    		}
-			                    	}
+		                    		if(addTag($scope.tagInput, $scope.ganbaruDetail.ganbaru.ganbaruTags)) {
+		                    			$scope.tagInput = undefined;
+		                    		}
 			                    };
 
 			                    $scope.$watch('jquerydatepicker', function() {
+			                    	//check if user choose date from picker and notify
 			                    	if($scope.jquerydatepicker) {
-			                    		$scope.notification = '期限が設定されています';
+			                    		$scope.notification = notification.set;
 			                    	} else {
-			                    		$scope.notification = '期限が設定されていません';
+			                    		$scope.notification = notification.unset;
 			                    	}
 			                    });
 
 			                    $scope.updateGanbaru = function() {
+			                    	//if user do not choose date from picker, then do nothing
 			                    	if(!$scope.jquerydatepicker) {
 			                    		return;
 			                    	}
 
+			                    	//assign property that cannot be directly binded
 			                    	var newGanbaru = {
 			                    		ganbaruId: ganbaruDetail.ganbaru.ganbaruId,
 			                    		ganbaruTitle: ganbaruDetail.ganbaru.ganbaruTitle,
@@ -379,8 +474,7 @@
 			                    		ganbaruTags: ganbaruDetail.ganbaru.ganbaruTags
 			                    	};
 
-			                    	var dateString = $scope.jquerydatepicker.concat(':').concat(moment().seconds());
-			                    	newGanbaru.expiredDate = moment(dateString, 'YYYY/MM/DD HH:mm:ss').format('YYYYMMDDHHmmss');
+			                    	newGanbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);
 			                    	return updateGanbaru(newGanbaru);
 			                    };
 
@@ -407,10 +501,52 @@
 			                showClose: false
 			            });
 			        };
+
+			   		//event click of Delete
+			        $scope.ganbaruDetele = function() {
+			        	if(!isAuthorized()) {
+			        		return;
+			        	}
+			        	Ganbaru.deleteGanbaru({
+			        		ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId
+			        	}).$promise.then(function(response) {
+			        		console.log(response);
+			        		switch(response.code) {
+			        			case 0: {
+			        				$scope.closeThisDialog();
+			        				$route.reload();
+			        				break;
+			        			}
+			        			default: {
+
+			        			}
+			        		}
+			        	}, function() {
+			        		//Handling error
+			        	});
+			        };
 				}],
 				className: 'ngdialog-theme-plain',
 				showClose: false
 			});
 		};
+
+		function addTag(tagName, tagList) {
+        	if(!tagName) {
+        		return false;
+        	}
+        	var i = 0;
+        	//do not allow dupplicated tags
+        	for(i = 0; i < tagList.length; i++) {
+        		if(tagList[i] === tagName) {
+        			return false;
+        		}
+        	}
+        	//not found in list, then add
+        	if(i === tagList.length) {
+        		tagList.push(tagName);
+        		return true;
+        	}
+        };
 	}]);
 })();
