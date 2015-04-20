@@ -1,152 +1,109 @@
-;(function() {
+(function() {
 	'use strict';
+	angular.module('ganbareControllers').controller('ganbaruDetailCtrl', ['$scope', '$cookieStore', '$interval', '$filter', '$route','Ganbaru', 'ngDialog', 'passingGanbaruService', function($scope, $cookieStore, $interval, $filter, $route, Ganbaru, ngDialog, passingGanbaruService) {
+		$scope.ganbaru = passingGanbaruService.getGanbaru();
+		$scope.mouseClickNumber = 0;	//click ganbare
+		getGanbaruDetail();
 
-	/* Controllers */
-	angular.module('ganbareControllers').controller('viewGanbareDetailCtrl', ['$scope', '$location', '$cookieStore', '$routeParams', '$interval', 'Ganbaru', 'User','ERROR_MSG', function($scope, $location, $cookieStore, $routeParams, $interval, Ganbaru, User, ERROR_MSG) {
-		
 		var userId = $cookieStore.get('userId');
-		var token = $cookieStore.get('token');
-		var ganbaruId = $routeParams.ganbaruId;
-
-		//navigation
-		$scope.goTo = function(url) {
-			$location.path(url);
-		};
+		var expiredDurationInterval = $interval(calculateExpiredDuration, 1000);
+		var addGanbareInterval = $interval(sendRequestAddGanbare, 3000);
+		
+		$scope.$on('$destroy', function() {
+			$interval.cancel(expiredDurationInterval);
+			$interval.cancel(addGanbareInterval);
+		});
 
 		function getGanbaruDetail() {
-			//call to service get ganbaru detail
 			return Ganbaru.getDetail({
-				ganbaruId: ganbaruId
+				ganbaruId: $scope.ganbaru.ganbaru.ganbaruId
 			}).$promise.then(function(response) {
-				var code = response.code;
-				var data = response.data;
-
-				switch(code) {
+				switch(response.code) {
 					case 0: {
-						$scope.ganbaru = data.ganbaru;
-						$scope.ganbaruUser = data.user;
-
-						//authorization 
-						$scope.authorized = (userId != null && userId !== 'none');
-						
-						//permission to edit ganbaru
-						$scope.modifiable = (userId === $scope.ganbaruUser.userId);
-
-						//button state
-						$scope.pinIcon = {state: $scope.ganbaru.isPinning};
-						$scope.favorIcon = {state: $scope.ganbaruUser.isFavoristUser};
+						$scope.ganbaruDetail = response.data;
 						break;
 					}
 					default: {
-						$scope.error = ERROR_MSG[code];
+
 					}
 				}
-			}, function() {
-				$scope.error = ERROR_MSG[50];
-			});
-		};
-		getGanbaruDetail();
-
-		/*Event click to pin/unpin*/
-		$scope.togglePinning = function() {
-			var logic;
-			//reverse icon state
-			$scope.pinIcon.state = !$scope.pinIcon.state;
-
-			if($scope.pinIcon.state) {
-				logic = Ganbaru.pin;
-			} else {
-				logic = Ganbaru.unpin;
-			}
-			return logic({
-				userId: userId, 
-				ganbaruId: ganbaruId
-			}).$promise.then(function(response) {
-				console.log(response);
 			}, function() {
 				//Handling error here
 			});
-		};
-
-		/*Event click to add/remove favor*/
-		$scope.toggleFavorite = function() {
-			var logic;
-			var friendId = $scope.ganbaruUser.userId;
-			//reverse icon state
-			$scope.favorIcon.state = !$scope.favorIcon.state;
-
-			if($scope.favorIcon.state) {
-				logic = User.addFavorite;
-			} else {
-				logic = User.removeFavorite;
-			}
-			return logic({
-				id: userId, 
-				friendId: friendId
-			}).$promise.then(function(response) {
-				console.log(response);
-			}, function() {
-				//Handling error
-			});
-		};
-
-		//function handling add user to list Ganbare after click 'add Ganbare'
-		function addPeopleToListGanbare(user) {
-			var found = false;
-			angular.forEach($scope.ganbaru.listGanbare, function(element, key) {
-				if(!found) {
-					if(element.userId === user.userId) {
-						found = true;
-					}
-				}
-			});
-
-			if(!found) {
-				$scope.ganbaru.listGanbare.push(user);
-			}
 		}
 
-		/*Add Ganbare event click*/
-		$scope.clickNumber = 0;	//the number of user's ganbare clicks
 		$scope.addGanbare = function() {
-			$scope.ganbaru.ganbareNumber++;
-			$scope.clickNumber++;
-
-			if(userId != null && userId !== 'none') {
-				User.getUser({
-					id: userId
-				}, function(response) {
-					var user = {
-						userId: userId, 
-						userName: response.data.username
-					};
-					addPeopleToListGanbare(user);
-				}, function() {
-					//Handling error here
-				});
-			} else {
-				//for visitors, userId still cannot be left null/undefined
-				userId = 'none';
-			}
-		};
+			$scope.ganbaruDetail.ganbaru.ganbareNumber++;
+			$scope.mouseClickNumber++;
+			$scope.ganbaru.ganbaru.ganbareNumber++;//bind at view of main page
+		}
 
 		function sendRequestAddGanbare() {
-			if($scope.clickNumber > 0) {
-				//call service add ganbare
+			if($scope.mouseClickNumber > 0) {
 				Ganbaru.add({
-					ganbaruId: ganbaruId, 
-					userId: ganbaruId, 
-					ganbareNumber: $scope.clickNumber
+					ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId,
+					ganbareNumber: $scope.mouseClickNumber,
+					userId: userId
 				}).$promise.then(function(response) {
-					console.log(response.data);
+					console.log(response);
+
 				}, function() {
 					//Handling error
-				})
+				});
 			}
-			$scope.clickNumber = 0;
+			$scope.mouseClickNumber = 0;
+		}
+
+		function calculateExpiredDuration() {
+			var expiredDate = $scope.ganbaruDetail.ganbaru.expiredDate;
+			$scope.ganbaruDetail.ganbaru.expiredDuration = $filter('durationTimeFilter')(expiredDate);
 		};
 
-		//send request to add ganbare every 3sec
-		$interval(sendRequestAddGanbare, 3000);
+		//check authorization for edit and delete function
+		function isAuthorized() {
+			return userId === $scope.ganbaru.user.userId;
+		};
+
+		//event click of Edit
+		$scope.ganbaruEditDialog = function() {
+			if(!isAuthorized()) {
+				return;
+			}
+
+        	$scope.closeThisDialog();
+        	passingGanbaruService.setGanbaru($scope.ganbaruDetail);
+
+            ngDialog.open({
+                template: 'partials/includes/edit.html',
+
+                controller: 'editGanbaruCtrl',
+                className: 'ngdialog-theme-plain',
+                showClose: false
+            });
+        };
+
+   		//event click of Delete
+        $scope.ganbaruDetele = function() {
+        	if(!isAuthorized()) {
+        		return;
+        	}
+        	Ganbaru.deleteGanbaru({
+        		ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId
+        	}).$promise.then(function(response) {
+        		console.log(response);
+        		switch(response.code) {
+        			case 0: {
+        				$scope.closeThisDialog();
+        				$route.reload();
+        				break;
+        			}
+        			default: {
+
+        			}
+        		}
+        	}, function() {
+        		//Handling error
+        	});
+        };
 	}]);
 })();

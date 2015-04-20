@@ -63,4 +63,9 @@
         40: 'Failed to get current location coordinates',
         50: 'Cannot establish connection to server!'
 	});
+
+	angular.module('ganbareServices').constant('USER_NOTIFY', {
+		dateSet: '期限が設定されています',
+		dateNotSet: '期限が設定されていません'
+	});
 })();

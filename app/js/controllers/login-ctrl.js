@@ -9,11 +9,12 @@
     angular.module('ganbareControllers').controller('loginCtrl', ['$scope', '$cookieStore','$location', 'md5', 'Session', 'System', 'ERROR_MSG', function($scope, $cookieStore, $location, md5, Session, System, ERROR_MSG) {
         $scope.system = new System();
         $scope.user = new Session();
+        $scope.totalNumber = 0;
         getGanbareSum();
 
         function getGanbareSum() { 
             $scope.system.$ping().then(function(response) {
-                $scope.totalNumber = response.extendedInfor.totalGanbareNumber;
+                $scope.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
             })
         };
 
