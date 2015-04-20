@@ -1,4 +1,4 @@
-;(function(){
+;(function() {
 	'use strict';
 
 
@@ -57,7 +57,6 @@
 			$scope.totalNumber++;
 			// Caculator total ganbaru number for function addGanbare
 			$scope.countNumber++;
-
 			return getUtilities.caculatorArrNumberClicked($scope, item, ganbaruIdAndNumber).then(function(response){
 				ganbaruIdAndNumber = response;
 			});

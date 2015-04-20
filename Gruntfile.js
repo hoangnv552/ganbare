@@ -66,6 +66,14 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		jscs: {
+			src: [
+				'app/js/controllers/feed-member-ctrl.js'
+			],
+			options: {
+				config: 'build/rules/.jscsrc'
+			}
+		},
 		cssmin: {
 			min: {
 				files: assetDef.css
@@ -132,7 +140,7 @@ module.exports = function(grunt) {
 	// load all plugins
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('verify', [ 'jshint' ]);
+	grunt.registerTask('verify', [ 'jscs' ]);
 	// grunt.registerTask('build', [ 'clean:build', 'filerev:img', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('build', [ 'clean:build', 'csslint', 'cssmin', 'uglify', 'filerev:css', 'filerev:js', 'filerev_assets', 'clean:tmp' ]);
 	grunt.registerTask('default', [ 'verify', 'build', 'copy' ]);

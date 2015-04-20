@@ -4,3 +4,4 @@
 		return $resource(ApiRootPath + 'v1/systems', {}, {ping: {method: 'GET'}});
 	}]);
 })();
+

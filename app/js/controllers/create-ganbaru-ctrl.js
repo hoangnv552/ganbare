@@ -41,11 +41,6 @@
         	}
         });
 
-		//put tag 
-		$scope.addTag = function() {
-			getUtilities.addTag($scope, $scope.ganbaru);
-		}
-
         //event click of create Ganbaru button
 		$scope.createGanbaru = function() {
 			$scope.ganbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);

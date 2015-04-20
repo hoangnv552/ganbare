@@ -4,8 +4,7 @@
 	/*
 	* Change password
 	*/
-	angular.module('ganbareControllers').controller('changePass', ['$scope', 'md5', 'User', '$location', function($scope, md5, User, $location)
-	{
+	angular.module('ganbareControllers').controller('changePass', ['$scope', 'md5', 'User', '$location', function($scope, md5, User, $location) {
 		var user = $scope.user = new User({
 			id: User.getCurrentUserId()
 		});
