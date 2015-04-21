@@ -5,7 +5,7 @@
 	/*
 	* Controller Feed for visitors
 	*/
-	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'dataGanbaru', 'getUtilities', 'ngDialog', 'User', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, dataGanbaru, getUtilities, ngDialog, User)
+	angular.module('ganbareControllers').controller('feedMemberCtrl', ['TYPES', '$scope', '$cookieStore', 'Ganbaru', '$interval', '$location', 'dataGanbaru', 'getUtilities', 'ngDialog', 'User', 'passingGanbaruService', function(TYPES, $scope, $cookieStore, Ganbaru, $interval, $location, dataGanbaru, getUtilities, ngDialog, User, passingGanbaruService)
 	{
 		var userId = $cookieStore.get('userId');
 		var ganbaruIdAndNumber = [];
@@ -228,8 +228,6 @@
       		}
      	};
 
-
-
 		/*
 		* Search ganbaru
 		*/
@@ -266,12 +264,6 @@
 			}
 		};
 
-		//notification message display at edit page and create page
-		var notification = {
-			set: '期限が設定されています',
-			unset: '期限が設定されていません'
-		};
-
 		/*
 		* Show dialog detail
 		*/
@@ -279,85 +271,7 @@
 			ngDialog.open({
 				template:'partials/includes/create.html',
 
-				controller: ['$scope', 'User', '$interval', '$filter', 'geolocation', '$route', function($scope, User, $interval, $filter, geolocation, $route) {
-					getUserInfo();
-					$scope.ganbaru = new Ganbaru();
-					$scope.ganbaru.ganbaruTags = [];
-					$interval(calculateCurrentTime, 1000);
-
-					function calculateCurrentTime() {
-						$scope.ganbaru.createDate = moment();
-					};
-
-					//get Username and bind on view
-					function getUserInfo() {
-						return User.getUser({
-							id: userId
-						}).$promise.then(function(response) {
-							switch(response.code) {
-								case 0: {
-									$scope.ganbaru.username = response.data.username;
-								}
-								default: {
-
-								}
-							}
-						}, function() {
-							//Handling error
-						});
-					};
-
-					$scope.$watch('jquerydatepicker', function() {
-                    	//check if user choose date from picker and notify
-                    	if($scope.jquerydatepicker) {
-                    		$scope.notification = notification.set;
-                    	} else {
-                    		$scope.notification = notification.unset;
-                    	}
-                    });
-
-					//put tag
-					$scope.addTag = function() {
-                		if(addTag($scope.tagInput, $scope.ganbaru.ganbaruTags)) {
-                			$scope.tagInput = undefined;
-                		}
-		            };
-
-		            //event click of create Ganbaru button
-					$scope.createGanbaru = function() {
-						$scope.ganbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);
-						return getLocation($scope.ganbaru);
-					};
-
-					function getLocation(ganbaru) {
-						geolocation.getLocation().then(function(response) {
-							var coords = response.coords;
-							ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
-							return createGanbaru(ganbaru);
-						}, function() {
-							//Handling error
-						});
-					};
-
-					function createGanbaru(ganbaru) {
-						return ganbaru.$save().then(function(response) {
-							console.log(response);
-							switch(response.code) {
-								case 0: {
-
-									$scope.closeThisDialog();
-                    				$route.reload();
-                    				break;
-								}
-								default: {
-
-								}
-							}
-						}, function() {
-							//Handling error
-						});
-					};
-				}],
+				controller: 'createGanbaruCtrl',
 				className: 'ngdialog-theme-plain',
 				showClose: false
 			})
@@ -367,185 +281,15 @@
 		* Show dialog create ganbaru
 		*/
 		$scope.ganbaruDetailDialog = function(ganbaru) {
+			passingGanbaruService.setGanbaru(ganbaru);
 			ngDialog.open({
 				template: 'partials/includes/detail.html',
 
 				// Controller Detail
-				controller: ['$scope', '$interval', '$filter', '$route','Ganbaru', function($scope, $interval, $filter, $route, Ganbaru) {
-					$scope.ganbaru = ganbaru;
-					$scope.mouseClickNumber = 0;	//click ganbare
-					getGanbaruDetail();
-
-					function getGanbaruDetail() {
-						return Ganbaru.getDetail({
-							ganbaruId: ganbaru.ganbaru.ganbaruId
-						}).$promise.then(function(response) {
-							switch(response.code) {
-								case 0: {
-									$scope.ganbaruDetail = response.data;
-									$interval(calculateExpiredDuration, 1000);
-									$interval(sendRequestAddGanbare, 3000);
-									break;
-								}
-								default: {
-
-								}
-							}
-						}, function() {
-							//Handling error here
-						});
-					}
-
-					$scope.addGanbare = function() {
-						$scope.ganbaruDetail.ganbaru.ganbareNumber++;
-						$scope.mouseClickNumber++;
-						ganbaru.ganbaru.ganbareNumber++; //bind at view of main page
-					}
-
-					function sendRequestAddGanbare() {
-						if($scope.mouseClickNumber > 0) {
-							Ganbaru.add({
-								ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId,
-								ganbareNumber: $scope.mouseClickNumber,
-								userId: userId
-							}).$promise.then(function(response) {
-								console.log(response.data);
-
-							}, function() {
-								//Handling error
-							});
-						}
-						$scope.mouseClickNumber = 0;
-					}
-
-					function calculateExpiredDuration() {
-						var expiredDate = $scope.ganbaruDetail.ganbaru.expiredDate;
-						$scope.ganbaruDetail.ganbaru.expiredDuration = $filter('durationTimeFilter')(expiredDate);
-					};
-
-					//check authorization for edit and delete function
-					function isAuthorized() {
-						return userId === ganbaru.user.userId;
-					}
-
-					//event click of Edit
-					$scope.ganbaruEditDialog = function() {
-						if(!isAuthorized()) {
-							return;
-						}
-
-			        	$scope.closeThisDialog();
-			        	var ganbaruDetail = $scope.ganbaruDetail;
-
-			            ngDialog.open({
-			                template: 'partials/includes/edit.html',
-
-			                controller: ['$scope', '$location', '$filter', function($scope, $location, $filter) {
-			                    $scope.ganbaruDetail = ganbaruDetail;
-			                    $scope.jquerydatepicker = $filter('clientDateFilter')(ganbaruDetail.ganbaru.expiredDate);
-
-			                    $scope.addTag = function() {
-		                    		if(addTag($scope.tagInput, $scope.ganbaruDetail.ganbaru.ganbaruTags)) {
-		                    			$scope.tagInput = undefined;
-		                    		}
-			                    };
-
-			                    $scope.$watch('jquerydatepicker', function() {
-			                    	//check if user choose date from picker and notify
-			                    	if($scope.jquerydatepicker) {
-			                    		$scope.notification = notification.set;
-			                    	} else {
-			                    		$scope.notification = notification.unset;
-			                    	}
-			                    });
-
-			                    $scope.updateGanbaru = function() {
-			                    	//if user do not choose date from picker, then do nothing
-			                    	if(!$scope.jquerydatepicker) {
-			                    		return;
-			                    	}
-
-			                    	//assign property that cannot be directly binded
-			                    	var newGanbaru = {
-			                    		ganbaruId: ganbaruDetail.ganbaru.ganbaruId,
-			                    		ganbaruTitle: ganbaruDetail.ganbaru.ganbaruTitle,
-			                    		ganbaruContent: ganbaruDetail.ganbaru.ganbaruContent,
-			                    		ganbaruTags: ganbaruDetail.ganbaru.ganbaruTags
-			                    	};
-
-			                    	newGanbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);
-			                    	return updateGanbaru(newGanbaru);
-			                    };
-
-			                    function updateGanbaru(ganbaru) {
-			                    	Ganbaru.update(ganbaru).$promise.then(function(response) {
-                		           		console.log(response);
-			                    		switch(response.code) {
-			                    			case 0: {
-			                    				$scope.closeThisDialog();
-			                    				$route.reload();
-			                    				break;
-			                    			}
-			                    			default: {
-
-			                    			}
-			                    		}
-			                    	}, function() {
-			                    		//Handling error
-			                    	});
-			                    };
-
-			                }],
-			                className: 'ngdialog-theme-plain',
-			                showClose: false
-			            });
-			        };
-
-			   		//event click of Delete
-			        $scope.ganbaruDetele = function() {
-			        	if(!isAuthorized()) {
-			        		return;
-			        	}
-			        	Ganbaru.deleteGanbaru({
-			        		ganbaruId: $scope.ganbaruDetail.ganbaru.ganbaruId
-			        	}).$promise.then(function(response) {
-			        		console.log(response);
-			        		switch(response.code) {
-			        			case 0: {
-			        				$scope.closeThisDialog();
-			        				$route.reload();
-			        				break;
-			        			}
-			        			default: {
-
-			        			}
-			        		}
-			        	}, function() {
-			        		//Handling error
-			        	});
-			        };
-				}],
+				controller: 'ganbaruDetailCtrl',
 				className: 'ngdialog-theme-plain',
 				showClose: false
 			});
 		};
-
-		function addTag(tagName, tagList) {
-        	if(!tagName) {
-        		return false;
-        	}
-        	var i = 0;
-        	//do not allow dupplicated tags
-        	for(i = 0; i < tagList.length; i++) {
-        		if(tagList[i] === tagName) {
-        			return false;
-        		}
-        	}
-        	//not found in list, then add
-        	if(i === tagList.length) {
-        		tagList.push(tagName);
-        		return true;
-        	}
-        };
 	}]);
 })();

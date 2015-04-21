@@ -12,11 +12,12 @@
 		$scope.panel = panel.input;
 		$scope.user = new User();
 		$scope.system = new System();
+		$scope.totalNumber = 0;
 		getGanbareSum();
 
         function getGanbareSum() { 
             $scope.system.$ping().then(function(response) {
-                $scope.totalNumber = response.extendedInfor.totalGanbareNumber;
+                $scope.totalGanbareNumber = response.extendedInfor.totalGanbareNumber;
             })
         };
 

@@ -1,65 +1,78 @@
-;(function() {
+(function() {
 	'use strict';
-
-	angular.module('ganbareControllers').controller('createGanbaruCtrl', ['$scope', '$http', '$cookieStore', '$location','geolocation', 'ERROR_MSG', 'Ganbaru', function($scope, $http, $cookieStore, $location, geolocation, ERROR_MSG, Ganbaru) {
-		$scope.createdDate = new Date();
+	angular.module('ganbareControllers').controller('createGanbaruCtrl', ['$scope', '$cookieStore', 'User', 'Ganbaru', '$interval', '$filter', 'geolocation', '$route', 'getUtilities', 'USER_NOTIFY', function($scope, $cookieStore, User, Ganbaru, $interval, $filter, geolocation, $route, getUtilities, USER_NOTIFY) {
+		getUserInfo();
 		$scope.ganbaru = new Ganbaru();
-		$scope.error = '*Note: According to design, this container is not originally for showing message!'
+		$scope.ganbaru.ganbaruTags = [];
+		
+		var calculateCurrentTime = $interval(calculateCurrentTime, 1000);
+		$scope.$on('$destroy', function() {
+			$interval.cancel(calculateCurrentTime);
+		});
 
-		function saveGanbaru() {
-			return $scope.ganbaru.$save().then(function(response) {
-				var code = response.code;
-				console.log(response);
-				switch (code) {
+		function calculateCurrentTime() {
+			$scope.ganbaru.createDate = moment();
+		};
+
+		//get Username and bind on view
+		function getUserInfo() {
+			return User.getUser({
+				id: $cookieStore.get('userId')
+			}).$promise.then(function(response) {
+				switch(response.code) {
 					case 0: {
-						$location.path('/feedmb');
+						$scope.ganbaru.username = response.data.username;
 					}
 					default: {
-						$scope.error = ERROR_MSG[code];
+
 					}
 				}
 			}, function() {
-				$scope.error = ERROR_MSG[50];
+				//Handling error
 			});
 		};
 
+		$scope.$watch('jquerydatepicker', function() {
+        	//check if user choose date from picker and notify
+        	if($scope.jquerydatepicker) {
+        		$scope.notification = USER_NOTIFY.dateSet;
+        	} else {
+        		$scope.notification = USER_NOTIFY.dateNotSet;
+        	}
+        });
+
+        //event click of create Ganbaru button
 		$scope.createGanbaru = function() {
-			//bind data from user input: title, content, expired date,tags
-			$scope.ganbaru.ganbaruTags = [];
+			$scope.ganbaru.expiredDate = $filter('serverDateFilter')($scope.jquerydatepicker);
+			return getLocation($scope.ganbaru);
+		};
 
-			//get array of tags from input
-			angular.forEach($scope.tagsInput, function(obj, objKey) {
-				angular.forEach(obj, function(value, key) {
-					$scope.ganbaru.ganbaruTags.push(value);
-				});
-			});
-
-			//bind hours, minutes, seconds
-			var now = moment(),
-				expiredDay = moment($scope.ganbaru.expiredDate, 'YYYY-MM-DD').format('YYYYMMDD'),
-				expiredHour = moment({
-				h: now.hours(),
-				m: now.minutes(),
-				s: now.seconds()
-			}).format('HHmmss');
-
-			$scope.ganbaru.expiredDate = expiredDay.concat(expiredHour);
-
-			//get Location service
+		function getLocation(ganbaru) {
 			geolocation.getLocation().then(function(response) {
 				var coords = response.coords;
-				$scope.ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
-
-				return saveGanbaru();
+				ganbaru.ganbaruLocation = [coords.latitude, coords.longitude];
+				return createGanbaru(ganbaru);
 			}, function() {
-				$scope.error = ERROR_MSG[40];
+				//Handling error
 			});
 		};
 
-		$scope.goTo = function(url) {
-			$location.path(url);
+		function createGanbaru(ganbaru) {
+			return ganbaru.$save().then(function(response) {
+				console.log(response);
+				switch(response.code) {
+					case 0: {				
+						$scope.closeThisDialog();
+        				$route.reload();
+        				break;
+					}
+					default: {
+
+					}
+				}
+			}, function() {
+				//Handling error
+			});
 		};
 	}]);
 })();
-
-

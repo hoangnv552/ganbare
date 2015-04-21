@@ -41,6 +41,25 @@
 				deferred.resolve(ganbaruIdAndNumber);
 
 				return deferred.promise;
+			},
+
+			addTag: function(scope, ganbaru) {
+				if(!scope.tagInput) {
+        		return false;
+	        	}
+	        	var i = 0;
+	        	//do not allow dupplicated tags
+	        	for(i = 0; i < ganbaru.ganbaruTags.length; i++) {
+	        		if(ganbaru.ganbaruTags[i] === scope.tagInput) {
+	        			return false;
+	        		}
+	        	}
+	        	//not found in list, then add
+	        	if(i === ganbaru.ganbaruTags.length) {
+	        		ganbaru.ganbaruTags.push(scope.tagInput);
+	        		scope.tagInput = undefined;
+	        		return true;
+	        	}
 			}
 		};
 	}]);
