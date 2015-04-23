@@ -5,10 +5,10 @@
     <div class="searchBox2">
         <h2>マイがんばる一覧</h2>
         <ul>
-            <li class="current"><a href="">NEW!</a></li>
-            <li><a href="">多い</a></li>
-            <li><a href="">少ない</a></li>
-            <li><a href="">期限近い</a></li>
+            <li ng-class="listType == types.listTypeUserNew ? 'current' : ''"><a href="#/users/{{userIdParam}}/ganbaru/new">NEW!</a></li>
+            <li ng-class="listType == types.listTypeUserHot ? 'current' : ''"><a href="#/users/{{userIdParam}}/ganbaru/hot">多い</a></li>
+            <li ng-class="listType == types.listTypeUserNeglected ? 'current' : ''"><a href="#/users/{{userIdParam}}/ganbaru/neglected">少ない</a></li>
+            <li ng-class="listType == types.listTypeUserExpire ? 'current' : ''"><a href="#/users/{{userIdParam}}/ganbaru/expire">期限近い</a></li>
         </ul>
     </div>
     <div class="ganbareBox" ng-repeat="item in ganbaru">

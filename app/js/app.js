@@ -40,7 +40,7 @@
 				templateUrl: 'partials/create-ganbaru.html',
 				controller: 'createGanbaruCtrl'
 			}).
-			when('/mypage', {
+			when('/mypage/:sort', {
 				templateUrl: 'partials/my-page.html',
 				controller: 'myPageGanbaruCtrl'
 			}).
@@ -56,7 +56,7 @@
 				templateUrl: 'partials/edit-my-page.html',
 				controller : 'editMyPageCtrl'
 			}).
-			when('/users/:userId/ganbaru', {
+			when('/users/:userId/ganbaru/:sort', {
 				templateUrl: 'partials/list-by-user.html',
 				controller : 'listByUser'
 			}).

@@ -5,27 +5,40 @@
 	* Controller list by user
 	*/
 
-	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'dataGanbaru', '$interval', 'Ganbaru', 'getUtilities', '$cookieStore', 'User', function($scope, $routeParams, dataGanbaru, $interval, Ganbaru, getUtilities, $cookieStore, User)
+	angular.module('ganbareControllers').controller('listByUser', ['$scope', '$routeParams', 'dataGanbaru', '$interval', 'Ganbaru', 'getUtilities', '$cookieStore', 'User', 'TYPES', function($scope, $routeParams, dataGanbaru, $interval, Ganbaru, getUtilities, $cookieStore, User, TYPES)
 	{
 
-		var ganbaruIdAndNumber = [],
-		userIdParam = $routeParams.userId,
-		userId  = $cookieStore.get('userId'),
-		take = 5;
+		var ganbaruIdAndNumber = [];
+		var userId  = $cookieStore.get('userId');
+		var take = 5;
 		$scope.skip = 0;
 		$scope.length = 0;
 		$scope.totalNumber = 0;
 		$scope.ganbaru = [];
 		$scope.totalGanbareNumber = 0;
 		$scope.countNumber = 0;
+		$scope.userIdParam = $routeParams.userId;
+		$scope.sort = $routeParams.sort;
+		$scope.types = TYPES;
 
-		// list by user
-		var listType = 3;
+		var sorttype = {
+			'new'       : TYPES.listTypeUserNew,
+			'hot'       : TYPES.listTypeUserHot,
+			'neglected' : TYPES.listTypeUserNeglected,
+			'expire'    : TYPES.listTypeUserExpire
+		};
+
+		angular.forEach(sorttype, function(value, key) {
+			// console.log(value, key);
+			if (key === $scope.sort) {
+				$scope.listType = value;
+			}
+		});
 
 		/*
 		* Defaul load page
 		*/
-		dataGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
+		dataGanbaru( $scope.skip, take, $scope.listType, '', '', $scope.userIdParam).then(function(data) {
 			$scope.ganbaru = data.data;
 			$scope.totalGanbareNumber = data.extendedInfor.totalGanbareNumber;
 		});
@@ -35,7 +48,7 @@
 		*/
 		$scope.listMoreGanbaru = function() {
 			$scope.skip = $scope.skip + 5;
-			dataGanbaru( $scope.skip, take, listType, '', '', userIdParam).then(function(data) {
+			dataGanbaru( $scope.skip, take, $scope.listType, '', '', $scope.userIdParam).then(function(data) {
 				$scope.ganbaru = $scope.ganbaru.concat(data.data);
 				$scope.length = $scope.ganbaru.length;
 			});

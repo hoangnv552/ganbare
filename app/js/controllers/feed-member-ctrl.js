@@ -38,6 +38,21 @@
 		});
 
 		/*
+		* List ganbaru
+		*/
+		$scope.listGanbaru = function(type) {
+			$scope.showTags = false;
+			if ($scope.listType !== type) {
+				$scope.ganbaru = [];
+				$scope.skip = 0;
+			}
+			$scope.listType = type;
+			dataGanbaru($scope.skip, take, type).then(function(data) {
+				$scope.ganbaru = data.data;
+			});
+		};
+
+		/*
 		* If list more ganbaru
 		*/
 		$scope.listMoreGanbaru = function() {
@@ -164,21 +179,6 @@
 						}
 					});
 				}
-			});
-		};
-
-		/*
-		* List pin ganbaru
-		*/
-		$scope.listGanbaru = function(type) {
-			$scope.showTags = false;
-			if ($scope.listType !== type) {
-				$scope.ganbaru = [];
-				$scope.skip = 0;
-			}
-			$scope.listType = type;
-			dataGanbaru($scope.skip, take, type).then(function(data) {
-				$scope.ganbaru = data.data;
 			});
 		};
 

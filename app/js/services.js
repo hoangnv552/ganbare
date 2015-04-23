@@ -37,13 +37,31 @@
 		listTypeSearch           :  7,
 		listTypeHotNew           :  8,
 		listTypeHotExpire        :  9,
+
 		listTypeNewHot           :  10,
 		listTypeNewExpire        :  11,
+
 		listTypeExpireNew        :  12,
 		listTypeExpireHot        :  13,
+
 		listTypeHotNeglected     :  14,
 		listTypeNewNeglected     :  15,
-		listTypeExpireNeglected  :  16
+		listTypeExpireNeglected  :  16,
+
+		listTypeFavoriteNew      :  17,
+		listTypeFavoriteHot      :  18,
+		listTypeFavoriteNeglected:  19,
+		listTypeFavoriteExpire   :  20,
+
+		listTypePinNew           :  21,
+		listTypePinHot           :  22,
+		listTypePinNeglected     :  23,
+		listTypePinExpire        :  24,
+
+		listTypeUserNew          :  25,
+		listTypeUserHot          :  26,
+		listTypeUserNeglected    :  27,
+		listTypeUserExpire       :  28
 	});
 
 	// list types Upload file

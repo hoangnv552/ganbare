@@ -25,7 +25,22 @@
             typeExpireNew       : { filter: 3, sort: 2 },
             typeExpireNeglected : { filter: 3, sort: 4 },
 
-            typeTag             : { filter: 4, sort: 1 }
+            typePinNew          : 2,
+            typePinHot          : 1,
+            typePinNeglected    : 4,
+            typePinExpire       : 3,
+
+            typeFavoriteNew          : 2,
+            typeFavoriteHot          : 1,
+            typeFavoriteNeglected    : 4,
+            typeFavoriteExpire       : 3,
+
+            typeTag             : { filter: 4, sort: 1 },
+
+            typeUserNew         : 2,
+            typeUserHot         : 1,
+            typeUserNeglected   : 4,
+            typeUserExpire      : 3
         };
 
         /*
@@ -40,18 +55,79 @@
             }
 
             switch (listType) {
+
+                /*
+                * List type Pin
+                */
                 case TYPES.listTypePin:
                     ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber });
                     break;
 
+                case TYPES.listTypePinNew:
+                    ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber, sortType: filterSort.typePinNew });
+                    break;
+
+                case TYPES.listTypePinHot:
+                    ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber, sortType: filterSort.typePinHot });
+                    break;
+
+                case TYPES.listTypePinNeglected:
+                    ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber, sortType: filterSort.typePinNeglected });
+                    break;
+
+                case TYPES.listTypePinExpire:
+                    ganbaruPromise = Ganbaru.pins({ userId: userId, skip: skip, take: takeNumber, sortType: filterSort.typePinExpire });
+                    break;
+
+                /*
+                * List type Favorite
+                */
                 case TYPES.listTypeFavorite:
                     ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber });
                     break;
 
+                case TYPES.listTypeFavoriteNew:
+                    ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber, sortType: filterSort.typeFavoriteNew });
+                    break;
+
+                case TYPES.listTypeFavoriteHot:
+                    ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber, sortType: filterSort.typeFavoriteHot });
+                    break;
+
+                case TYPES.listTypeFavoriteNeglected:
+                    ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber, sortType: filterSort.typeFavoriteNeglected });
+                    break;
+
+                case TYPES.listTypeFavoriteExpire:
+                    ganbaruPromise = Ganbaru.favorites({ userId: userId, timestamp: timestamp, take: takeNumber, sortType: filterSort.typeFavoriteExpire});
+                    break;
+
+                /*
+                * List type with user ID
+                */
                 case TYPES.listTypeUser:
                     ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber });
                     break;
 
+                case TYPES.listTypeUserNew:
+                    ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber, sortType: filterSort.typeUserNew });
+                    break;
+
+                case TYPES.listTypeUserHot:
+                    ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber, sortType: filterSort.typeUserHot });
+                    break;
+
+                case TYPES.listTypeUserNeglected:
+                    ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber, sortType: filterSort.typeUserNeglected });
+                    break;
+
+                case TYPES.listTypeUserExpire:
+                    ganbaruPromise = Ganbaru.user({ userId: userIdParam, skip: skip, take: takeNumber, sortType: filterSort.typeUserExpire });
+                    break;
+
+                /*
+                * List type
+                */
                 case TYPES.listTypeHot:
                     ganbaruParams = { filterType: filterSort.typeHot.filter, sortType: filterSort.typeHot.sort, skip: skip, take: takeNumber };
                     break;

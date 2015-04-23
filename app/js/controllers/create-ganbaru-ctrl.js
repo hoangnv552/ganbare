@@ -4,7 +4,7 @@
 		getUserInfo();
 		$scope.ganbaru = new Ganbaru();
 		$scope.ganbaru.ganbaruTags = [];
-		
+
 		var calculateCurrentTime = $interval(calculateCurrentTime, 1000);
 		$scope.$on('$destroy', function() {
 			$interval.cancel(calculateCurrentTime);
@@ -61,7 +61,7 @@
 			return ganbaru.$save().then(function(response) {
 				console.log(response);
 				switch(response.code) {
-					case 0: {				
+					case 0: {
 						$scope.closeThisDialog();
         				$route.reload();
         				break;
