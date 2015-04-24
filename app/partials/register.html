@@ -4,17 +4,17 @@
 	<div class="input-panel" ng-show="isPanel('inputPanel')">
 		<form name="registerForm" novalidate>
 			<div class="block">
-				<label class="float-left" for="username">Username</label>
+				<label class="float-left" for="username">ユーザー名</label>
 				<input type="text" name="username" ng-model="user.username" required>
-				<p class="error-input" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">User name is required!</p>
+				<p class="error-input" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">ユーザー名が必要です！</p>
 			</div>
 
 			<div class="block">
-				<label class="float-left" for="password">Password</label>
+				<label class="float-left" for="password">パスワード</label>
 				<input type="password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="30" required>
-				<p class="error-input" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">Password is required!</p>
-				<p class="error-input" ng-show="registerForm.password.$error.minlength">Password is required to be at least 6 characters!</p>
-				<p class="error-input" ng-show="registerForm.password.$error.maxlength">Password cannot be longer than 30 characters!</p>
+				<p class="error-input" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">パスワードが必要です！</p>
+				<p class="error-input" ng-show="registerForm.password.$error.minlength">Password must be at least 6 characters!</p>
+				<p class="error-input" ng-show="registerForm.password.$error.maxlength">Password must be no longer than 30 characters</p>
 			</div>
 
 			<div class="block">

@@ -47,6 +47,10 @@
 			return getLocation($scope.ganbaru);
 		};
 
+		$scope.addTag = function() {
+            getUtilities.addTag($scope, $scope.ganbaru);
+        };
+
 		function getLocation(ganbaru) {
 			geolocation.getLocation().then(function(response) {
 				var coords = response.coords;
